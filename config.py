@@ -1,7 +1,6 @@
-u = "Njg4ODA5MjkyNjM5MjQwMjAw.G2EPfH.6evbJKleMAlQFbcDETwwwrftxb9dHS-WnmKPo0"
-i = "OTM3Mjk0NTA1MDkzMjY3NTA3.G-jp-5.3wYRoooAHcM9Fsne0A7Py0Le44Nc4qF9hFpa0U"
+token = None
 settings = {
-    'token': 'OTM3Mjk0NTA1MDkzMjY3NTA3.GEdOUy.alyCGGBdpMNm1SSXmfQEL9vZIrkqCoXMEJ_4ms',
+    'token': token,
     'bot': 'Бот-Мейкеры',
     'id': 937294505093267507,
     'prefix': '.'}

@@ -1,5 +1,5 @@
 import requests
-
+import os
 
 def download_file_from_github(file_name):
   try:
@@ -10,7 +10,7 @@ def download_file_from_github(file_name):
     def download_file(url):
       local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
-        r.pass_for_status()
+        r.raise_for_status()
         with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
@@ -32,8 +32,10 @@ def update():
   #print(er)
   import time
   time.sleep(2)
-
+  return er
 
 update()
-
+with open("start.bat", "w") as outfile:
+    outfile.write(f"cd {os.getcwd()} \npython main.py")
+    pass
 print("Установка завершена!")

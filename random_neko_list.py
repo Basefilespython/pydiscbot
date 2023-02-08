@@ -1,6 +1,6 @@
 imgs = [
   "https://img3.gelbooru.com//images/82/91/82910dc03fcff238456e6249777c3bff.jpg",
-  "https://img3.gelbooru.com//samples/5b/04/sample_5b04a9e241c0d860a615f1746bf01071.jpg", 
+  "https://img3.gelbooru.com//samples/5b/04/sample_5b04a9e241c0d860a615f1746bf01071.jpg",
   "https://s3.eu-central-1.amazonaws.com/telegram.sendpulse.prod/attachments/f31fa1d35b6854a9ff0f620a944c4825/601bf3ae-0bbc-4006-bd4f-6b3793fc412c.jpg",
   "https://sun9-39.userapi.com/impf/P2qvSs7QV_AT1k5Hy-swy06w_1HbHZXB94jSkQ/ex8B1ss7A3k.jpg?size=763x1080&quality=95&sign=bde95a930e469a4fc3f997ba289df588&type=album",
   "https://sun9-65.userapi.com/impf/uB9OaNPN2IzyeRn0qeVzUmMgIc3ynj7t63Pvqg/pZ5HAFV7Db4.jpg?size=650x1080&quality=95&sign=03eb9e1dcca04223cfa844be2870cd83&type=album",
@@ -132,7 +132,7 @@ imgs = [
   "https://sun1-14.userapi.com/impg/OoEi7TgbEkB7ty3zy23TC5bHYpOh7tv2wVcqfw/tPB7N6Ruths.jpg?size=1000x1414&quality=95&sign=0343c519cfa28ebfc9d338fe75d1461b&type=album",
   "https://sun1-14.userapi.com/impg/rJlfDjvJLIyBuslc2MsRA2ajLyzo11XCo-7C5A/92zCOLJuLTk.jpg?size=811x1440&quality=95&sign=8072b5b2f7f02023062de8d5eeb226b8&type=album",
   "https://sun1-87.userapi.com/impg/3RuLyJ8XXO7WzUYj_TrUUw7D3dfMSNE8RKwQqg/hW5wvZvGQ7g.jpg?size=1381x2160&quality=96&sign=2a2a7ac029447e07274928a695bd946b&type=album",
-  "https://sun1-17.userapi.com/impg/h10Lppr96knMVZRDQr1ilgOvuq-vwhno4Vy1-A/jkuV1qkpgqA.jpg?size=1422x1600&quality=95&sign=7fa04634272bd030a81ab31a6840d1bb&type=album", 
+  "https://sun1-17.userapi.com/impg/h10Lppr96knMVZRDQr1ilgOvuq-vwhno4Vy1-A/jkuV1qkpgqA.jpg?size=1422x1600&quality=95&sign=7fa04634272bd030a81ab31a6840d1bb&type=album",
   "https://sun1-54.userapi.com/impg/f1ic9RXdJO4G6ypTNU16CqXUCpti-iPqbp7J5A/sYP93-RccWI.jpg?size=843x1600&quality=95&sign=29d221c4e40efa201fe81e5859444c01&type=album",
   "https://sun9-31.userapi.com/impg/PIROlQhvtgR0msws-sc9sLvjo0aCwj6mmoVsag/dSOGUh9JoU0.jpg?size=1159x1600&quality=95&sign=5f6f1bae29a59b30791239e351bc732d&type=album",
   "https://sun9-74.userapi.com/impg/wIbSJUMiuMVpWuPpzanzPnX1gmevkZXnu2-6Jw/5HzqHYg1FDM.jpg?size=1445x1991&quality=95&sign=b5bb4dc4eb0ad9ffeb55cabc0eebd21d&type=album",
@@ -180,8 +180,11 @@ imgs = [
   "https://sun9-6.userapi.com/impg/WdxT4gi6PAfCA2-wJtVYm3rlD9ChVHaeI-iPcQ/Mk0-0nCF60o.jpg?size=1434x2160&quality=96&sign=69935908a65d3e6b5a394e5586643fe2&type=album",
   "https://sun1-19.userapi.com/impg/2pPgkaPSBRX6wcKL43qQB6oW02wNowIIwziXBA/o6GWxMXoXMg.jpg?size=1000x1412&quality=96&sign=665b0148849d26340f1a15c3163ac3be&type=album",
   "https://sun1-25.userapi.com/impg/lXYyE6jYaUWF4d1A-dOYO8CQwTCYKmK0IpXQgQ/hadtel59Sjo.jpg?size=1234x2160&quality=96&sign=15c2ca1d56132cc6238d9049c3ce0401&type=album",
-  "https://i.imgur.com/ZELgqPi.jpg","https://w.wallhaven.cc/full/lm/wallhaven-lm28rr.jpg","https://pbs.twimg.com/media/FChe868VQAELrtF.jpg",
-  "https://i.pinimg.com/originals/95/d8/01/95d801c5ce2ece2f4c695c5d16ea99fb.jpg","https://cs13.pikabu.ru/post_img/2021/03/09/8/16152936791939656.webp",
+  "https://i.imgur.com/ZELgqPi.jpg",
+  "https://w.wallhaven.cc/full/lm/wallhaven-lm28rr.jpg",
+  "https://pbs.twimg.com/media/FChe868VQAELrtF.jpg",
+  "https://i.pinimg.com/originals/95/d8/01/95d801c5ce2ece2f4c695c5d16ea99fb.jpg",
+  "https://cs13.pikabu.ru/post_img/2021/03/09/8/16152936791939656.webp",
   "https://cs10.pikabu.ru/post_img/big/2019/07/16/11/1563303250131147987.png",
   "https://sun9-73.userapi.com/impg/Ij97TnF-fnBQUYRaIhQ0R52oFJb-uY6JwbejFw/gKWxoSLl8cY.jpg?size=336x604&quality=96&sign=6e3f2f4460e78305a3057c9a840b32ef&type=album",
   "https://sun9-82.userapi.com/impg/ZLYb_JIyN8f_6jzrPb_VII7Vs8YlotS7F6gNPg/wEYHfH4DJrE.jpg?size=1386x2000&quality=95&sign=da3bdc6da6ef764e02165ef092afee28&type=album",
@@ -196,7 +199,7 @@ imgs = [
   "https://sun9-33.userapi.com/impg/hCO7g0TzqQUzrvNSQpfkw2vWF5e7Km7axcEgnA/mLg9p8bfnX4.jpg?size=900x1600&quality=95&sign=3c337678e8a1b24add65238c43ea6f7b&type=album",
   "https://sun6-21.userapi.com/impg/kLW_LTTWGHUqw6Ej0FlpynwyvNwtlV7QD5pvUQ/fMpWXch5n6g.jpg?size=1255x1920&quality=95&sign=eaa7b73fe5d8d7336dc40c8214ca5078&type=album",
   "https://sun6-22.userapi.com/impg/w4n422QYEbaZfKaHt_5zL9xRNjKXm8KpDZ65bQ/MaAVcz2FnGU.jpg?size=1216x2048&quality=95&sign=520c6010e41332e8ba505aee11acdf08&type=album",
-  "https://sun9-68.userapi.com/impg/oL6pxgZDTfjsX8hHIvcu2w9sjpCINhkLN1P6rA/0jyBff7WvPk.jpg?size=675x1200&quality=96&sign=70c9f3f0272308a195e1cd56464e49ad&type=album"
+  "https://sun9-68.userapi.com/impg/oL6pxgZDTfjsX8hHIvcu2w9sjpCINhkLN1P6rA/0jyBff7WvPk.jpg?size=675x1200&quality=96&sign=70c9f3f0272308a195e1cd56464e49ad&type=album",
   "https://sun9-25.userapi.com/impg/74ZCSHRTNoDmQ2ynUAdFTctw-WBThSOnxMAV5w/HqunE6DZb08.jpg?size=918x1352&quality=96&sign=8dd4b794542ffd0646755210d96971d3&type=album",
   "https://sun9-4.userapi.com/impg/c4-VQK0sjPv8i5X2wMb3RybEzmqLBE-O_fc6FQ/dUbSbci8M8o.jpg?size=2560x1440&quality=96&sign=f519573a208f6754b27a65334add8127&type=album",
   "https://sun9-33.userapi.com/impg/96xWuzeLFWuH0b-k24vIVJ2x7v8NMZSRoO_mQg/dhH0bJETT2s.jpg?size=1440x2160&quality=96&sign=cc6ab3c0c8b4047133349e21ce89c127&type=album",
@@ -229,20 +232,18 @@ imgs = [
   "https://sun9-25.userapi.com/impg/eXKhD4gbbN_fXTMcp-ZHGua2-NGEv6xFcCAENA/goyF36INL5M.jpg?size=850x638&quality=95&sign=8f6d6f548814f94e90ad50bda9ca15ba&type=album",
   "https://sun9-87.userapi.com/impg/JRwABby8rN3zeIbg4GkhbFm_WAXHE5QinJ_CKg/ETWu9CWD57k.jpg?size=724x1023&quality=95&sign=812c88031b14c3b05eab707c75a76f2c&type=album",
   "https://sun9-86.userapi.com/impg/BocmiriL1Pg_6JMeHpO1-ILUBRaf7ch4XHTovw/mOmW5C2WzTI.jpg?size=850x1020&quality=95&sign=519369253f40d00f04e877a6f97ae6d9&type=album"
- 
-
-    ]
+]
 
 imgs18 = [
- "https://img3.gelbooru.com//samples/9a/ba/sample_9abab9b0edc3cee6b7a74781a5ea9736.jpg",
- "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2036.jpg",
- "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2035.jpg",
- "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2021.jpg",
- "https://gelbooru.com/index.php?page=post&s=view&id=6119361&tags=setsuna_%28kaiyari%29",
- "https://img3.gelbooru.com//samples/76/09/sample_76091b6315b4601fe87459612e326b26.jpg"
- "https://img3.gelbooru.com//images/be/75/be75775a770a3b780272d5ff99c36411.jpeg",
- "https://img3.gelbooru.com//samples/c3/45/sample_c345a7a8ab707616bff28ef7e0d4a8e9.jpg",
- "https://img3.gelbooru.com//samples/41/32/sample_41322f1e12fbc6d2265d50fafda28396.jpg",
+  "https://img3.gelbooru.com//samples/9a/ba/sample_9abab9b0edc3cee6b7a74781a5ea9736.jpg",
+  "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2036.jpg",
+  "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2035.jpg",
+  "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2021.jpg",
+  "https://gelbooru.com/index.php?page=post&s=view&id=6119361&tags=setsuna_%28kaiyari%29",
+  "https://img3.gelbooru.com//samples/76/09/sample_76091b6315b4601fe87459612e326b26.jpg"
+  "https://img3.gelbooru.com//images/be/75/be75775a770a3b780272d5ff99c36411.jpeg",
+  "https://img3.gelbooru.com//samples/c3/45/sample_c345a7a8ab707616bff28ef7e0d4a8e9.jpg",
+  "https://img3.gelbooru.com//samples/41/32/sample_41322f1e12fbc6d2265d50fafda28396.jpg",
   "https://img3.gelbooru.com//samples/1a/95/sample_1a9574536b8567d9c4339817e0244a10.jpg",
   "https://img3.gelbooru.com//samples/38/03/sample_3803c11b1d289c61debeb3cb05076097.jpg",
   "https://img3.gelbooru.com//samples/87/73/sample_87730535ab108f61a4048c2668f69d21.jpg",
@@ -281,9 +282,11 @@ imgs18 = [
   "https://sun9-83.userapi.com/impg/_LD5yzJndFlDV5uEGceq3D6WnZOYIRe26U5RxQ/aDoCCIJUilk.jpg?size=1280x775&quality=96&sign=a5226a79bd78ecf3f6d09a671dcdbce1&type=album",
   "https://sun9-87.userapi.com/impg/3MGuWj7ILz13TjLTNJOMq51M9C8A8H4mlNhnGw/UrIbrhjiudk.jpg?size=597x1080&quality=95&sign=f2508350251d036d0f48b66e9b9ff964&type=album",
   "https://cdn.truyen-hentai.com/cat-girl-maid-impregnation?interlace=1&quality=100&type=webp&url=https%3A%2F%2Fi.redd.it%2Fm7lpllwiq8i31.jpg&width=920&sign=0WZMWtgsN5suJ2sDd2ibWuzPoKkOvSY588W1iOVjkyI",
-  "https://i.redd.it/rg09gauu4ke61.jpg","https://i.redd.it/ky8aitu2ylz21.jpg","https://thumb-p8.xhcdn.com/a/OB-E0e6fgof-eo41FLAJwA/000/119/523/058_1000.jpg",
+  "https://i.redd.it/rg09gauu4ke61.jpg", "https://i.redd.it/ky8aitu2ylz21.jpg",
+  "https://thumb-p8.xhcdn.com/a/OB-E0e6fgof-eo41FLAJwA/000/119/523/058_1000.jpg",
   "https://i.pinimg.com/originals/bf/31/1f/bf311fe82c45ced428c10c2d052845ca.png",
-  "https://ei.phncdn.com/videos/202105/05/387579301/original/(m=qW2RLPWbeaAaGwObaaaa)(mh=8FI0zKtVrLoYk32y)0.jpg","https://i.imgur.com/vFY5wkR.png",
+  "https://ei.phncdn.com/videos/202105/05/387579301/original/(m=qW2RLPWbeaAaGwObaaaa)(mh=8FI0zKtVrLoYk32y)0.jpg",
+  "https://i.imgur.com/vFY5wkR.png",
   "https://img3.gelbooru.com//samples/3e/10/sample_3e10962471bf1febbb1bae84a7b176f8.jpg",
   "https://img3.gelbooru.com//samples/f5/9b/sample_f59b797b0513265431b28e885521ebc3.jpg",
   "https://img3.gelbooru.com//samples/10/8a/sample_108a8ff7ffd63f5ae2502c57b97f2646.jpg",
@@ -329,5 +332,4 @@ imgs18 = [
   "https://img3.gelbooru.com//images/a9/d9/a9d99665d5fabc2fda8cf1e0dcbd312c.jpg",
   "https://img3.gelbooru.com//images/f0/cf/f0cfc8cdc938459fcc01bd6c21d79820.jpg",
   "https://img3.gelbooru.com//samples/c9/e3/sample_c9e3addffac9d3cb4d1af4d7aaa78da0.jpg"
-
 ]

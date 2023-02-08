@@ -6,23 +6,7 @@ from os import system
 import urllib.request
 
 from urllib.request import HTTPError
-#url = "https://img3.gelbooru.com/images/e3/63/e36391877b68c4c483564abe0b6f3558.gif"
-# # r = urllib.request.urlretrieve(str(url), "file.gif")
 
-# if "mp4" in url:
-#    print("T")
-# else:
-#    print("F")
-
-# while True:
-#    pass
-# try:
-#    urllib.request.urlretrieve(str(url), "file.gif")
-# except HTTPError as err:
-#    if err.code == 403:
-#        print("403")
-#    else:
-#        raise
 
 import requests
 
@@ -36,7 +20,7 @@ def download_file_from_github(file_name):
     def download_file(url):
       local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
-        r.raise_for_status()
+        r.pass_for_status()
         with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
@@ -126,17 +110,11 @@ def main():
     i = 0
     with alive_bar(len(ur)) as bar:
       for url in ur:
-        # print(url.split("/")[-1])
-        # print(url.split("/")[-2])
-        # print(url.split("/")[-3])
-        # print(url.split("/")[-4])
-        # print(url)
-        # while True:
-        #    pass
+
         url = str(url)
 
         def ww(i):
-          #with alive_bar(len(ur)) as bar:
+
 
           if "mp4" in url:
             name_file = f"{i}.mp4"
@@ -180,9 +158,8 @@ def main():
                   f"{red}[-] {yellow}404 (не найдено): {blue}{name_file}{white}  URL: {url}"
                 )
               else:
-                #print(err_code.code, name_file)
                 pass
-                #raise
+
               err.append(f"{url}")
               break
             except urllib.error.URLError as err_code:
@@ -194,12 +171,12 @@ def main():
                 print(
                   f"{red}[-] {yellow}524 (OSE99) (TCP соеденение): {blue}{name_file}{white}  URL: {url}"
                 )
-              #if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
-            #   print(
-            #     f"{red}[-] {yellow}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
-            #   )
+              if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
+               print(
+                 f"{red}[-] {yellow}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
+                )
               else:
-                raise
+                pass
               err.append(f"{url}")
               break
 
@@ -234,6 +211,7 @@ with open("errors.json", "w") as outfile:
 
 def res_def(name_dir):
 
+
   img_resize = []
   os.chdir(f'{os.getcwd()}/{name_dir}')
   path = os.getcwd()
@@ -250,10 +228,7 @@ def res_def(name_dir):
 
       if entry.is_dir():
         pass
-        #name_dir = name_dir + str(entry.name)
-        #print(entry.name)
 
-  #print(arts_names)
   for name_file in arts_names:
     if os.getcwd() == one_path:
       os.chdir(f'{os.getcwd()}/{name_dir}')
@@ -328,7 +303,6 @@ res_def(name_dir)
 def in_the_papka(dir_pref):
   os.chdir(f'{os.getcwd()}/')
   path_one = os.getcwd()
-  print(path_one)
   try:
     name_dir = "vertical"
     os.mkdir(name_dir)
@@ -358,19 +332,17 @@ def in_the_papka(dir_pref):
       if entry.is_file():
         if entry.name.endswith(".jpg"):
           arts_names.append(entry.name)
+        if entry.name.endswith(".png"):
+          arts_names.append(entry.name)
+        if entry.name.endswith(".webp"):
+          arts_names.append(entry.name)
 
       if entry.is_dir():
         pass
-        #name_dir = name_dir + str(entry.name)
-        #print(entry.name)
 
-  #print(arts_names)
   with alive_bar(len(arts_names)) as bar:
     for name_file in arts_names:
-      #    if os.getcwd() == one_path:
-      #os.chdir(f'{os.getcwd()}{dir_pref}neko')
 
-      #os.chdir(f'{os.getcwd()}')
       im = Image.open(f'{name_file}')
       (width, height) = im.size
       im.close()
@@ -378,14 +350,6 @@ def in_the_papka(dir_pref):
       width = int(width)
       one_path = os.getcwd()
 
-      # with os.scandir(path) as listOfEntries:
-      #     for entry in listOfEntries:
-      #       # печать всех записей, являющихся файлами
-      #       if entry.is_file():
-      #         if entry.name == name_file:
-      #           os.remove(name_file)
-      #       if entry.is_dir():
-      #         pass
 
       if width > height:
         src = os.getcwd() + dir_pref + name_file
@@ -394,7 +358,6 @@ def in_the_papka(dir_pref):
           os.rename(src, dest)
         except FileExistsError as err:
           os.remove(name_file)
-          #print(FileExistsError,name_file)
           pass
         except PermissionError as err:
           print(f"PermissionError: {name_file}\nError: {err}")
@@ -407,7 +370,6 @@ def in_the_papka(dir_pref):
           os.rename(src, dest)
         except FileExistsError as err:
           os.remove(name_file)
-          #print(FileExistsError,name_file)
           pass
         except PermissionError as err:
           print(f"PermissionError: {name_file}\nError: {err}")
@@ -417,12 +379,11 @@ def in_the_papka(dir_pref):
         src = os.getcwd() + dir_pref + name_file
         os.chdir(one_path)
         dest = f'{path_square}{dir_pref}{name_file}'
-        print(dest)
+
         try:
           os.rename(src, dest)
         except FileExistsError as err:
           os.remove(name_file)
-          #print(FileExistsError,name_file)
           pass
         except PermissionError as err:
           print(f"PermissionError: {name_file}\nError: {err}")
@@ -437,12 +398,11 @@ def in_the_papka(dir_pref):
         src = os.getcwd() + dir_pref + name_file
         os.chdir(one_path)
         dest = f'error{dir_pref}{name_file}'
-        print(dest)
+        print("dest - 397",dest)
         try:
           os.rename(src, dest)
         except FileExistsError as err:
           os.remove(name_file)
-          #print(FileExistsError,name_file)
           pass
         except PermissionError as err:
           print(f"PermissionError: {name_file}\nError: {err}")
@@ -457,7 +417,7 @@ def in_the_papka(dir_pref):
         src = os.getcwd() + dir_pref + name_file
         os.chdir(one_path)
         dest = f'no_sorted{dir_pref}{name_file}'
-        print(dest)
+
         try:
           os.rename(src, dest)
         except FileExistsError as err:
@@ -466,9 +426,7 @@ def in_the_papka(dir_pref):
           print(f"PermissionError: {name_file}\nError: {err}")
           pass
 
-      #else:
-      #  print(f"Опа, это что за хуйня? ({name_file})")
-      #  pass
+
       bar()
 
 

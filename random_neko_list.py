@@ -228,7 +228,8 @@ imgs = [
   "https://sun9-36.userapi.com/impg/kE4xNZ8_2NTabCJJ6kvPzs8cf6YopcK1FlDtsA/a1oO2Quzu2U.jpg?size=850x1202&quality=95&sign=410708b7373537b7f07480c22c2a9f73&type=album",
   "https://sun9-25.userapi.com/impg/eXKhD4gbbN_fXTMcp-ZHGua2-NGEv6xFcCAENA/goyF36INL5M.jpg?size=850x638&quality=95&sign=8f6d6f548814f94e90ad50bda9ca15ba&type=album",
   "https://sun9-87.userapi.com/impg/JRwABby8rN3zeIbg4GkhbFm_WAXHE5QinJ_CKg/ETWu9CWD57k.jpg?size=724x1023&quality=95&sign=812c88031b14c3b05eab707c75a76f2c&type=album",
-  "https://sun9-86.userapi.com/impg/BocmiriL1Pg_6JMeHpO1-ILUBRaf7ch4XHTovw/mOmW5C2WzTI.jpg?size=850x1020&quality=95&sign=519369253f40d00f04e877a6f97ae6d9&type=album"
+  "https://sun9-86.userapi.com/impg/BocmiriL1Pg_6JMeHpO1-ILUBRaf7ch4XHTovw/mOmW5C2WzTI.jpg?size=850x1020&quality=95&sign=519369253f40d00f04e877a6f97ae6d9&type=album",
+  "https://psv4.userapi.com/c237331/u508939002/docs/d14/0168dafc7059/1675873852625.jpg?extra=Ke6x99wKXav9Axr29Vx5nDZ6ZsR55TTIkUj0vqJujlXudhYq0boei1TK08HlhCuBbI7ok3ObKYA3-giCKWYK-c00BPIBrqj7XlWhlL6fDH6c7DCZ6g9lfOBtau3jgjm5gWIsCrVUXh7mxbh4dpqnGPY"
  
 
     ]

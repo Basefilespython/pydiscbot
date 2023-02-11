@@ -1,4 +1,11 @@
 imgs = [
+  "https://sun9-17.userapi.com/impg/R7WoFIssj8Eltc2rlOTpufeT3qAOSvAXsEnBBQ/rlJWW3uOIGM.jpg?size=763x1080&quality=96&sign=f689d50a260aa0f2d31a631fd9ee39cb&type=album",
+  "https://sun9-21.userapi.com/impg/YZ8199Zm3EJpXYUBfGVH0FRNOYshQfEt2cClFw/Sd68MeTdgTY.jpg?size=673x1080&quality=95&sign=64dab4bb75b329ed70c82e5915127810&type=album",
+  "https://sun9-68.userapi.com/impg/_94XwT4Og03Y53ClJkYieIIT1vlYxD5tIbVbGQ/Tr0VuUWcUmk.jpg?size=668x1080&quality=95&sign=b2937ec6fcd8fd6685968dcfd1e2db16&type=album",
+  "https://sun9-66.userapi.com/impg/r2jcE67AfNRDBWcodGw6iJEHeCryOpz9JORhSg/qn3FlVTAACs.jpg?size=734x1080&quality=95&sign=ef14af4795ae3951e923754d796668e6&type=album",
+  "https://sun1-15.userapi.com/impg/i2MZGpL89fVi6R2hNiWhcWQqd8MNiNtNqhs2kg/xJiFj2tcuao.jpg?size=768x1024&quality=96&sign=f9d115fcd7e9d38a03a03985d34dad34&type=album",
+  "https://sun9-6.userapi.com/impg/NsnDplcddT8OeNYktlDLoEvEowodeVQJB8BbKQ/tBjrHHppWAA.jpg?size=741x1080&quality=95&sign=323840465523900ab8b7ee8bec661500&type=album",
+  "https://sun9-65.userapi.com/impg/lx5W4-ox37ZzAdD5TzFbmVVuAgKYCstK7zpGQg/xYMPjiWOmbs.jpg?size=1136x2160&quality=95&sign=9cbd8a9caa5f2832bec8d154510f5a14&type=album",
   "https://sun9-29.userapi.com/impg/QpYZ_7-RYFOy9zQkubOwaLgncb4J9Fv-Sb_QDg/gaWgpNtUh8A.jpg?size=764x1080&quality=95&sign=81ff99ce38e28ae7894b19ab98a3f776&type=album",
   "https://sun9-61.userapi.com/impg/nqXPfKJlhnsJIS1tVJ9gczWsu0JschVMHdcJvQ/Ge7iq4-Swbs.jpg?size=1360x1280&quality=95&sign=e72bd6c9c6c6ff407e9261c8c8960b41&type=album",
   "https://sun9-77.userapi.com/impg/XQduUnF8IZ6DNVB9HTeelcn67z0UfLg7kvou8Q/DFy1RepDwv0.jpg?size=1280x720&quality=95&sign=433ea055e7f2aca9bf3c3ba254b4ef0b&type=album",

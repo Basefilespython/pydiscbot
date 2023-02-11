@@ -263,7 +263,7 @@ def res_def(name_dir):
     json.dump(img_resize, outfile)
 
   import time
-  from progress.bar import IncrementalBar
+  #from progress.bar import IncrementalBar
   try:
     from alive_progress import alive_bar
   except ImportError:

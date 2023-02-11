@@ -44,7 +44,7 @@ def update():
   time.sleep(2)
 
 
-update()
+#update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -95,12 +95,7 @@ def main():
 
     ur = imgs
   except NameError:
-
-    window = Tk()
-    window.title('ERROR')
-    lbl = Label(window, text="База не обнаружена!")
-    lbl.grid(column=0, row=0)
-    window.mainloop()
+      print("База не обнаружена!")
 
   print("Количество изображений:", len(ur), "\n")
 
@@ -283,8 +278,9 @@ def res_def(name_dir):
         viev = str(data).split("'")[3]
 
         if viev == "vertical":
+          #pass
           (width, height) = im.size
-          new_image = img.resize((width, height))
+          new_image = img.resize((height, width))
         if viev == "horizontal":
           new_image = img.resize((7680, 4320))
         if viev == "square":
@@ -300,7 +296,7 @@ def res_def(name_dir):
 res_def(name_dir)
 
 
-def in_the_papka(dir_pref):
+def in_the_papka(dir_pref): #перемещение файлов в их папки
   os.chdir(f'{os.getcwd()}/')
   path_one = os.getcwd()
   try:

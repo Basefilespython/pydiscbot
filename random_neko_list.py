@@ -1,4 +1,6 @@
 imgs = [
+  "https://sun9-29.userapi.com/impg/QpYZ_7-RYFOy9zQkubOwaLgncb4J9Fv-Sb_QDg/gaWgpNtUh8A.jpg?size=764x1080&quality=95&sign=81ff99ce38e28ae7894b19ab98a3f776&type=album",
+  "https://sun9-61.userapi.com/impg/nqXPfKJlhnsJIS1tVJ9gczWsu0JschVMHdcJvQ/Ge7iq4-Swbs.jpg?size=1360x1280&quality=95&sign=e72bd6c9c6c6ff407e9261c8c8960b41&type=album",
   "https://sun9-77.userapi.com/impg/XQduUnF8IZ6DNVB9HTeelcn67z0UfLg7kvou8Q/DFy1RepDwv0.jpg?size=1280x720&quality=95&sign=433ea055e7f2aca9bf3c3ba254b4ef0b&type=album",
   "https://sun9-36.userapi.com/impg/90-UZTEB_-4kkjkoBJnZgTNTvvPgobCx698IRg/X3fPuk8TEjQ.jpg?size=1280x720&quality=96&sign=6ccfa3344d6e62ecf3eac96c5398707c&type=album",
   "https://sun9-21.userapi.com/impg/tIjB7_kEu0YqgnTB1NjFO4yBT_yMSxSVxuVFCg/yn0ANzgvphQ.jpg?size=893x1253&quality=95&sign=485d493f05ae8815e34d1c9c03a59ca8&type=album",

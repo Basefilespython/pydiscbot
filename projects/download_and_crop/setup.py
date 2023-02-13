@@ -1,9 +1,8 @@
-
-
 import requests
 import os
 
 name_dir = "Dand_Crop"
+first_dir = os.getcwd()
 try:
   os.mkdir(name_dir)
   os.chdir(name_dir)
@@ -11,9 +10,11 @@ try:
 except FileExistsError:
   pass
 
+
 def download_file_from_github(file_name):
   try:
     url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
+
     def download_file(url):
       local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
@@ -36,16 +37,20 @@ def update():
     er = er + "\n" + file_name + "\n" + str(
       download_file_from_github(file_name))
 
+
 #   import time
 #   time.sleep(2)
-  #return er
+#return er
 
 update()
 with open("start.bat", "w") as outfile:
-    outfile.write(f"cd {os.getcwd()} \npython main.py")
-    pass
+  outfile.write(f"cd {os.getcwd()} \npython main.py")
+  pass
 print("Установка завершена!")
 import time
 
 time.sleep(2)
+
+
+os.chdir(first_dir)
 os.remove(__file__)

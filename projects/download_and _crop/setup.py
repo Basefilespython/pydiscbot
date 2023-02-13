@@ -5,7 +5,7 @@ def download_file_from_github(file_name):
   try:
     autor = 'Basefilespython'
     dictgit = 'pydiscbot'
-    url = f"https://raw.githubusercontent.com/{autor}/{dictgit}/main/{file_name}"
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/main.py"
 
     def download_file(url):
       local_filename = url.split('/')[-1]

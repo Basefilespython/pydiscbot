@@ -1,3 +1,5 @@
+
+
 import requests
 import os
 
@@ -43,3 +45,7 @@ with open("start.bat", "w") as outfile:
     outfile.write(f"cd {os.getcwd()} \npython main.py")
     pass
 print("Установка завершена!")
+import time
+
+time.sleep(2)
+os.remove(__file__)

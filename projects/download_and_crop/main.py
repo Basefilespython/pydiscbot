@@ -13,9 +13,8 @@ import requests
 
 def download_file_from_github(file_name):
   try:
-    autor = 'Basefilespython'
-    dictgit = 'pydiscbot'
-    url = f"https://raw.githubusercontent.com/{autor}/{dictgit}/main/{file_name}"
+
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
 
     def download_file(url):
       local_filename = url.split('/')[-1]
@@ -33,7 +32,7 @@ def download_file_from_github(file_name):
 
 
 def update():
-  file_names = ['random_neko_list.py', 'main.py']
+  file_names = ['random_neko_list.py', 'main.py','setup.py']
   er = ''
   for file_name in file_names:
     er = er + "\n" + file_name + "\n" + str(
@@ -44,7 +43,7 @@ def update():
   time.sleep(2)
 
 
-#update()
+update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -259,7 +258,7 @@ def res_def(name_dir):
 360p  : 640 x 360
 240p  : 426 x 240'''
 
-  with open("sample.json", "w") as outfile:
+  with open("sizes.json", "w") as outfile:
     json.dump(img_resize, outfile)
 
   import time
@@ -273,21 +272,23 @@ def res_def(name_dir):
     for data in img_resize:
 
       try:
-        img = Image.open(str(data).split("'")[1])
+        #img = Image.open(str(data).split("'")[1])
 
         viev = str(data).split("'")[3]
 
         if viev == "vertical":
           #pass
           (width, height) = im.size
-          new_image = img.resize((height, width))
+          #new_image = img.resize((height, width))
         if viev == "horizontal":
-          new_image = img.resize((7680, 4320))
+          pass
+          #new_image = img.resize((7680, 4320))
         if viev == "square":
-          new_image = img.resize((7680, 7680))
+          pass
+          #new_image = img.resize((7680, 7680))
 
-        new_image.save(str(str(data).split("'")[1]))
-        img.close()
+        #new_image.save(str(str(data).split("'")[1]))
+        #img.close()
       except PIL.UnidentifiedImageError:
         pass
       bar()

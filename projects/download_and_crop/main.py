@@ -91,7 +91,7 @@ with requests.get(url, stream=True, allow_redirects=True) as r:
   with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
-  print(local_filename, "скачан!")
+  #print(local_filename, "скачан!")
 
   
   
@@ -106,6 +106,9 @@ def main():
     ur = imgs
   except NameError:
       print("База не обнаружена!")
+      import time
+      time.sleep(15)
+      raise SystemExit
 
   print("Количество изображений:", len(ur), "\n")
 

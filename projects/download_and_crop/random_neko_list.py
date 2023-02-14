@@ -323,7 +323,7 @@ imgs18 = [
  "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2035.jpg",
  "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2021.jpg",
  "https://gelbooru.com/index.php?page=post&s=view&id=6119361&tags=setsuna_%28kaiyari%29",
- "https://img3.gelbooru.com//samples/76/09/sample_76091b6315b4601fe87459612e326b26.jpg"
+ "https://img3.gelbooru.com//samples/76/09/sample_76091b6315b4601fe87459612e326b26.jpg",
  "https://img3.gelbooru.com//images/be/75/be75775a770a3b780272d5ff99c36411.jpeg",
  "https://img3.gelbooru.com//samples/c3/45/sample_c345a7a8ab707616bff28ef7e0d4a8e9.jpg",
  "https://img3.gelbooru.com//samples/41/32/sample_41322f1e12fbc6d2265d50fafda28396.jpg",

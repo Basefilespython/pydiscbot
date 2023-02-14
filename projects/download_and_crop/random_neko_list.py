@@ -52,12 +52,6 @@ imgs = [
   "https://sun9-3.userapi.com/impg/eepNVdNCUJUhim-koAC9s05giQ0V-pNpE4UfmA/2wMgjFFFBnI.jpg?size=825x1313&quality=95&sign=d4b07065beed264375dfeeffc15691e0&type=album",  
   "https://sun9-57.userapi.com/impg/SGr1CKvKBckTBb2Qp1qHXEWLWtbowHy5CGC2YQ/bv6skvGqq34.jpg?size=1141x2160&quality=95&sign=0e809f53ed2ce0ffa2fa72889de4ae00&type=album",  
   "https://sun9-38.userapi.com/impg/CB-bMZNkw8KYUdTr-KgI7tG9tGSpbkFjQC7VIA/2WPEl3bLxzM.jpg?size=1299x2139&quality=95&sign=4d5cdadd3ec0673281ac51942cb8182c&type=album",  
-  "",  
-  "",  
-  "",  
-  "",  
-  "",  
-  "",
   "https://sun1-13.userapi.com/impg/8x4gXayTDiwelmcKZElY6-9aTil-U-CbYdHSDA/flI_M4aDu6g.jpg?size=800x1200&quality=95&sign=97a4db6372d580ee4f2df7fedf742ff6&type=album",
   "https://sun1-20.userapi.com/impg/XXI_O-jhSkJ965vEPCY10jnHpWH_lDSUOPEMVA/yg1FHVq8RLU.jpg?size=768x1080&quality=95&sign=d18aa41a6d4b0f026acb794e9f25c35c&type=album",
   "https://sun1-54.userapi.com/impg/3I73fL9P-6IlJ1_cJ-vKThky8lUITURQBeqVfQ/3c4KRnX_7b0.jpg?size=996x2160&quality=95&sign=175b92bb65f529b59c3b7fb47996d69f&type=album",
@@ -307,12 +301,23 @@ imgs = [
   "https://sun9-25.userapi.com/impg/eXKhD4gbbN_fXTMcp-ZHGua2-NGEv6xFcCAENA/goyF36INL5M.jpg?size=850x638&quality=95&sign=8f6d6f548814f94e90ad50bda9ca15ba&type=album",
   "https://sun9-87.userapi.com/impg/JRwABby8rN3zeIbg4GkhbFm_WAXHE5QinJ_CKg/ETWu9CWD57k.jpg?size=724x1023&quality=95&sign=812c88031b14c3b05eab707c75a76f2c&type=album",
   "https://sun9-86.userapi.com/impg/BocmiriL1Pg_6JMeHpO1-ILUBRaf7ch4XHTovw/mOmW5C2WzTI.jpg?size=850x1020&quality=95&sign=519369253f40d00f04e877a6f97ae6d9&type=album",
-  "https://psv4.userapi.com/c237331/u508939002/docs/d14/0168dafc7059/1675873852625.jpg?extra=Ke6x99wKXav9Axr29Vx5nDZ6ZsR55TTIkUj0vqJujlXudhYq0boei1TK08HlhCuBbI7ok3ObKYA3-giCKWYK-c00BPIBrqj7XlWhlL6fDH6c7DCZ6g9lfOBtau3jgjm5gWIsCrVUXh7mxbh4dpqnGPY"
- 
+  "https://psv4.userapi.com/c237331/u508939002/docs/d14/0168dafc7059/1675873852625.jpg?extra=Ke6x99wKXav9Axr29Vx5nDZ6ZsR55TTIkUj0vqJujlXudhYq0boei1TK08HlhCuBbI7ok3ObKYA3-giCKWYK-c00BPIBrqj7XlWhlL6fDH6c7DCZ6g9lfOBtau3jgjm5gWIsCrVUXh7mxbh4dpqnGPY",
+  "https://pbs.twimg.com/media/Fk64-L6agAAufnh.jpg","https://img3.gelbooru.com//samples/97/3f/sample_973f749992b0e510e2d3235acc31f0b6.jpg","https://img3.gelbooru.com//samples/7c/9c/sample_7c9ca7d518d57630a973c6a64280b3dd.jpg",
+
 
     ]
 
 imgs18 = [
+ "https://img2.rule34.us/images/88/87/88875ba504765e51c20cb6ca562a4985.png",
+ "https://img3.gelbooru.com//samples/ab/4e/sample_ab4e2607c9c56361b1efa8e2890ad87c.jpg",
+ "https://img3.gelbooru.com//samples/14/a8/sample_14a8fea1d1876d2050e54287c10ede22.jpg",
+ "https://img3.gelbooru.com//samples/ad/ac/sample_adac3c51c9e3b5b2bf7da7ddbf47b16f.jpg",
+ "https://img3.gelbooru.com//samples/67/3b/sample_673b5bce4bb6f87b059a565ee0448a75.jpg",
+ "https://img3.gelbooru.com//samples/ec/05/sample_ec0554e597aa46fb1f2e5b21aa4ae01f.jpg",
+ "https://img3.gelbooru.com//samples/97/44/sample_9744755c9e087417af6a6b1772b17e7a.jpg",
+ "https://img3.gelbooru.com//samples/cb/71/sample_cb7149384d6c9b9ed72c1805c6357ecd.jpg",
+ "https://img3.gelbooru.com//samples/66/1f/sample_661fd8f1f3fc20f245152eeb12089f99.jpg",
+ "https://img3.gelbooru.com//samples/d2/95/sample_d295cf52b397aee66859c2310d5a9948.jpg",
  "https://img3.gelbooru.com//samples/9a/ba/sample_9abab9b0edc3cee6b7a74781a5ea9736.jpg",
  "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2036.jpg",
  "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2035.jpg",

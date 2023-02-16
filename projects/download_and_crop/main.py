@@ -108,7 +108,7 @@ def main():
       print("База не обнаружена!")
       import time
       time.sleep(15)
-      raise SystemExit
+      raise SystemExit("База не обнаружена!")
 
   print("Количество изображений:", len(ur), "\n")
 
@@ -122,8 +122,6 @@ def main():
         url = str(url)
 
         def ww(i):
-
-
           if "mp4" in url:
             name_file = f"{i}.mp4"
           else:
@@ -226,7 +224,6 @@ def res_def(name_dir):
   arts_names = []
   with os.scandir(path) as listOfEntries:
     for entry in listOfEntries:
-      # печать всех записей, являющихся файлами
       if entry.is_file():
         filename, file_extension = os.path.splitext(entry.name)
         if entry.name.endswith(".jpg"):
@@ -262,15 +259,15 @@ def res_def(name_dir):
       img_resize.append({f'{name_file}': 'error'})
 
   import json
-  e = '''
-4320p : 7680 x 4320
-2160p : 3840 x 2160
-1440p : 2560 x 1440
-1080p : 1920 x 1080
-720p  : 1280 x 720
-480p  : 854 x 480
-360p  : 640 x 360
-240p  : 426 x 240'''
+#   e = '''
+# 4320p : 7680 x 4320
+# 2160p : 3840 x 2160
+# 1440p : 2560 x 1440
+# 1080p : 1920 x 1080
+# 720p  : 1280 x 720
+# 480p  : 854 x 480
+# 360p  : 640 x 360
+# 240p  : 426 x 240'''
 
   with open("sizes.json", "w") as outfile:
     json.dump(img_resize, outfile)
@@ -290,16 +287,16 @@ def res_def(name_dir):
 
         viev = str(data).split("'")[3]
 
-        if viev == "vertical":
+        #if viev == "vertical":
           #pass
-          (width, height) = im.size
-          #new_image = img.resize((height, width))
-        if viev == "horizontal":
-          pass
-          #new_image = img.resize((7680, 4320))
-        if viev == "square":
-          pass
-          #new_image = img.resize((7680, 7680))
+          #(width, height) = im.size
+          #new_image = img.resize((height*4, width*4))
+        #if viev == "horizontal":
+          #pass
+          #new_image = img.resize((height*4, width*4))
+        #if viev == "square":
+          #pass
+        new_image = img.resize((height*4, width*4))
 
         #new_image.save(str(str(data).split("'")[1]))
         #img.close()
@@ -409,7 +406,6 @@ def in_the_papka(dir_pref): #перемещение файлов в их пап�
         src = os.getcwd() + dir_pref + name_file
         os.chdir(one_path)
         dest = f'error{dir_pref}{name_file}'
-        print("dest - 397",dest)
         try:
           os.rename(src, dest)
         except FileExistsError as err:

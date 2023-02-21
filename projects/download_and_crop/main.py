@@ -13,13 +13,14 @@ import requests
 
 def download_file_from_github(file_name):
   try:
-
-    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
+    autor = 'Basefilespython'
+    dictgit = 'pydiscbot'
+    url = f"https://raw.githubusercontent.com/{autor}/{dictgit}/main/{file_name}"
 
     def download_file(url):
       local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
-        r.raise_for_status()
+        r.pass_for_status()
         with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
@@ -43,7 +44,7 @@ def update():
   time.sleep(2)
 
 
-update()
+#update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -84,17 +85,6 @@ if str(os.name) == 'nt':
 else:
   dir_pref = "//"
 
-url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/random_neko_list.py"
-local_filename = url.split('/')[-1]
-with requests.get(url, stream=True, allow_redirects=True) as r:
-  r.raise_for_status()
-  with open(local_filename, 'wb') as f:
-          for chunk in r.iter_content(chunk_size=8192):
-            f.write(chunk)
-  #print(local_filename, "скачан!")
-
-  
-  
 from random_neko_list import *
 import PIL
 from PIL import Image
@@ -103,12 +93,9 @@ from PIL import Image
 def main():
   try:
 
-    ur = imgs
+    ur = imgs18
   except NameError:
       print("База не обнаружена!")
-      import time
-      time.sleep(15)
-      raise SystemExit("База не обнаружена!")
 
   print("Количество изображений:", len(ur), "\n")
 
@@ -122,6 +109,8 @@ def main():
         url = str(url)
 
         def ww(i):
+
+
           if "mp4" in url:
             name_file = f"{i}.mp4"
           else:
@@ -224,6 +213,7 @@ def res_def(name_dir):
   arts_names = []
   with os.scandir(path) as listOfEntries:
     for entry in listOfEntries:
+      # печать всех записей, являющихся файлами
       if entry.is_file():
         filename, file_extension = os.path.splitext(entry.name)
         if entry.name.endswith(".jpg"):
@@ -259,17 +249,17 @@ def res_def(name_dir):
       img_resize.append({f'{name_file}': 'error'})
 
   import json
-#   e = '''
-# 4320p : 7680 x 4320
-# 2160p : 3840 x 2160
-# 1440p : 2560 x 1440
-# 1080p : 1920 x 1080
-# 720p  : 1280 x 720
-# 480p  : 854 x 480
-# 360p  : 640 x 360
-# 240p  : 426 x 240'''
+  e = '''
+4320p : 7680 x 4320
+2160p : 3840 x 2160
+1440p : 2560 x 1440
+1080p : 1920 x 1080
+720p  : 1280 x 720
+480p  : 854 x 480
+360p  : 640 x 360
+240p  : 426 x 240'''
 
-  with open("sizes.json", "w") as outfile:
+  with open("sample.json", "w") as outfile:
     json.dump(img_resize, outfile)
 
   import time
@@ -283,23 +273,21 @@ def res_def(name_dir):
     for data in img_resize:
 
       try:
-        #img = Image.open(str(data).split("'")[1])
+        img = Image.open(str(data).split("'")[1])
 
-        viev = str(data).split("'")[3]
+        #viev = str(data).split("'")[3]
 
         #if viev == "vertical":
           #pass
           #(width, height) = im.size
-          #new_image = img.resize((height*4, width*4))
+          #new_image = img.resize((height, width))
         #if viev == "horizontal":
-          #pass
-          #new_image = img.resize((height*4, width*4))
+          #new_image = img.resize((7680, 4320))
         #if viev == "square":
-          #pass
-        new_image = img.resize((height*4, width*4))
+          #new_image = img.resize((7680, 7680))
 
         #new_image.save(str(str(data).split("'")[1]))
-        #img.close()
+        img.close()
       except PIL.UnidentifiedImageError:
         pass
       bar()
@@ -406,6 +394,7 @@ def in_the_papka(dir_pref): #перемещение файлов в их пап�
         src = os.getcwd() + dir_pref + name_file
         os.chdir(one_path)
         dest = f'error{dir_pref}{name_file}'
+        print("dest - 397",dest)
         try:
           os.rename(src, dest)
         except FileExistsError as err:

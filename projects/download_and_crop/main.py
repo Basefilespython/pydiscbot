@@ -44,7 +44,7 @@ def update():
   time.sleep(2)
 
 
-update()
+#update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -88,7 +88,7 @@ else:
 from random_neko_list import *
 import PIL
 from PIL import Image
-
+import http
 
 def main():
   try:
@@ -155,6 +155,12 @@ def main():
               else:
                 pass
 
+              err.append(f"{url}")
+              break
+            except http.client.RemoteDisconnected:
+              print(
+                  f"{red}[-] {yellow}401 (не авторизован): {blue}{name_file}{white}  URL: {url}"
+                )
               err.append(f"{url}")
               break
             except urllib.error.URLError as err_code:
@@ -329,92 +335,97 @@ def in_the_papka(dir_pref): #перемещение файлов в их пап�
 
   with alive_bar(len(arts_names)) as bar:
     for name_file in arts_names:
-
-      im = Image.open(f'{name_file}')
-      (width, height) = im.size
-      im.close()
-      height = int(height)
-      width = int(width)
-      one_path = os.getcwd()
-
-
-      if width > height:
-        src = os.getcwd() + dir_pref + name_file
-        dest = f'{path_hori}{dir_pref}{name_file}'
-        try:
-          os.rename(src, dest)
-        except FileExistsError as err:
-          os.remove(name_file)
-          pass
-        except PermissionError as err:
-          print(f"PermissionError: {name_file}\nError: {err}")
-          pass
-      elif width < height:
-
-        src = os.getcwd() + dir_pref + name_file
-        dest = f'{path_vert}{dir_pref}{name_file}'
-        try:
-          os.rename(src, dest)
-        except FileExistsError as err:
-          os.remove(name_file)
-          pass
-        except PermissionError as err:
-          print(f"PermissionError: {name_file}\nError: {err}")
-          pass
-
-      elif width == height:
-        src = os.getcwd() + dir_pref + name_file
-        os.chdir(one_path)
-        dest = f'{path_square}{dir_pref}{name_file}'
-
-        try:
-          os.rename(src, dest)
-        except FileExistsError as err:
-          os.remove(name_file)
-          pass
-        except PermissionError as err:
-          print(f"PermissionError: {name_file}\nError: {err}")
-          pass
-
-      elif width == "error":
-        try:
-          name_dir = "error"
-          os.mkdir(name_dir)
-        except FileExistsError:
-          pass
-        src = os.getcwd() + dir_pref + name_file
-        os.chdir(one_path)
-        dest = f'error{dir_pref}{name_file}'
-        print("dest - 397",dest)
-        try:
-          os.rename(src, dest)
-        except FileExistsError as err:
-          os.remove(name_file)
-          pass
-        except PermissionError as err:
-          print(f"PermissionError: {name_file}\nError: {err}")
-          pass
-
-      else:
-        try:
-          name_dir = "no_sorted"
-          os.mkdir(name_dir)
-        except FileExistsError:
-          pass
-        src = os.getcwd() + dir_pref + name_file
-        os.chdir(one_path)
-        dest = f'no_sorted{dir_pref}{name_file}'
-
-        try:
-          os.rename(src, dest)
-        except FileExistsError as err:
-          pass
-        except PermissionError as err:
-          print(f"PermissionError: {name_file}\nError: {err}")
-          pass
+      try:
+        im = Image.open(f'{name_file}')
+        
+        (width, height) = im.size
+        im.close()
+        height = int(height)
+        width = int(width)
+        one_path = os.getcwd()
 
 
-      bar()
+        if width > height:
+          src = os.getcwd() + dir_pref + name_file
+          dest = f'{path_hori}{dir_pref}{name_file}'
+          try:
+            os.rename(src, dest)
+          except FileExistsError as err:
+            os.remove(name_file)
+            pass
+          except PermissionError as err:
+            print(f"PermissionError: {name_file}\nError: {err}")
+            pass
+        elif width < height:
+
+          src = os.getcwd() + dir_pref + name_file
+          dest = f'{path_vert}{dir_pref}{name_file}'
+          try:
+            os.rename(src, dest)
+          except FileExistsError as err:
+            os.remove(name_file)
+            pass
+          except PermissionError as err:
+            print(f"PermissionError: {name_file}\nError: {err}")
+            pass
+
+        elif width == height:
+          src = os.getcwd() + dir_pref + name_file
+          os.chdir(one_path)
+          dest = f'{path_square}{dir_pref}{name_file}'
+
+          try:
+            os.rename(src, dest)
+          except FileExistsError as err:
+            os.remove(name_file)
+            pass
+          except PermissionError as err:
+            print(f"PermissionError: {name_file}\nError: {err}")
+            pass
+
+        elif width == "error":
+          try:
+            name_dir = "error"
+            os.mkdir(name_dir)
+          except FileExistsError:
+            pass
+          src = os.getcwd() + dir_pref + name_file
+          os.chdir(one_path)
+          dest = f'error{dir_pref}{name_file}'
+          print("dest - 397",dest)
+          try:
+            os.rename(src, dest)
+          except FileExistsError as err:
+            os.remove(name_file)
+            pass
+          except PermissionError as err:
+            print(f"PermissionError: {name_file}\nError: {err}")
+            pass
+
+        else:
+          try:
+            name_dir = "no_sorted"
+            os.mkdir(name_dir)
+          except FileExistsError:
+            pass
+          src = os.getcwd() + dir_pref + name_file
+          os.chdir(one_path)
+          dest = f'no_sorted{dir_pref}{name_file}'
+
+          try:
+            os.rename(src, dest)
+          except FileExistsError as err:
+            pass
+          except PermissionError as err:
+            print(f"PermissionError: {name_file}\nError: {err}")
+            pass
+
+
+        bar()
+      except PIL.UnidentifiedImageError:
+        bar()
+        os.remove(name_file)
+        
 
 
 in_the_papka(dir_pref)

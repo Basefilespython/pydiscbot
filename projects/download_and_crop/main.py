@@ -20,7 +20,7 @@ def download_file_from_github(file_name):
     def download_file(url):
       local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
-        r.pass_for_status()
+        r.raise_for_status()
         with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
@@ -44,7 +44,7 @@ def update():
   time.sleep(2)
 
 
-#update()
+update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -249,15 +249,6 @@ def res_def(name_dir):
       img_resize.append({f'{name_file}': 'error'})
 
   import json
-  e = '''
-4320p : 7680 x 4320
-2160p : 3840 x 2160
-1440p : 2560 x 1440
-1080p : 1920 x 1080
-720p  : 1280 x 720
-480p  : 854 x 480
-360p  : 640 x 360
-240p  : 426 x 240'''
 
   with open("sample.json", "w") as outfile:
     json.dump(img_resize, outfile)

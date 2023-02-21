@@ -44,7 +44,7 @@ def update():
   time.sleep(2)
 
 
-#update()
+update()
 
 black = "\033[30m"
 red = "\033[31m"

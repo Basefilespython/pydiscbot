@@ -20,7 +20,7 @@ def download_file_from_github(file_name):
     def download_file(url):
       local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
-        r.raise_for_status()
+        r.pass_for_status()
         with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
@@ -33,7 +33,7 @@ def download_file_from_github(file_name):
 
 
 def update():
-  file_names = ['random_neko_list.py', 'main.py','setup.py']
+  file_names = ['random_neko_list.py', 'main.py']
   er = ''
   for file_name in file_names:
     er = er + "\n" + file_name + "\n" + str(
@@ -44,7 +44,7 @@ def update():
   time.sleep(2)
 
 
-update()
+#update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -74,10 +74,15 @@ name_dir = "NeKo_18+"
 one_path = os.getcwd()
 try:
   os.mkdir(name_dir)
+  name_dir = name_dir
+  perm_error = False
 except FileExistsError:
   pass
+except PermissionError:
+  perm_error = True
+  name_dir = ''
+  pass
 
-#one_path = os.getcwd()
 print("Работающий каталог:", os.getcwd())
 
 if str(os.name) == 'nt':
@@ -88,12 +93,12 @@ else:
 from random_neko_list import *
 import PIL
 from PIL import Image
-import http
+
 
 def main():
   try:
 
-    ur = imgs18
+    ur = imgs
   except NameError:
       print("База не обнаружена!")
 
@@ -155,12 +160,6 @@ def main():
               else:
                 pass
 
-              err.append(f"{url}")
-              break
-            except http.client.RemoteDisconnected:
-              print(
-                  f"{red}[-] {yellow}401 (не авторизован): {blue}{name_file}{white}  URL: {url}"
-                )
               err.append(f"{url}")
               break
             except urllib.error.URLError as err_code:
@@ -255,6 +254,15 @@ def res_def(name_dir):
       img_resize.append({f'{name_file}': 'error'})
 
   import json
+  e = '''
+4320p : 7680 x 4320
+2160p : 3840 x 2160
+1440p : 2560 x 1440
+1080p : 1920 x 1080
+720p  : 1280 x 720
+480p  : 854 x 480
+360p  : 640 x 360
+240p  : 426 x 240'''
 
   with open("sample.json", "w") as outfile:
     json.dump(img_resize, outfile)
@@ -272,18 +280,18 @@ def res_def(name_dir):
       try:
         img = Image.open(str(data).split("'")[1])
 
-        #viev = str(data).split("'")[3]
+        viev = str(data).split("'")[3]
 
-        #if viev == "vertical":
+        if viev == "vertical":
           #pass
-          #(width, height) = im.size
-          #new_image = img.resize((height, width))
-        #if viev == "horizontal":
-          #new_image = img.resize((7680, 4320))
-        #if viev == "square":
-          #new_image = img.resize((7680, 7680))
+          (width, height) = im.size
+          new_image = img.resize((height, width))
+        if viev == "horizontal":
+          new_image = img.resize((7680, 4320))
+        if viev == "square":
+          new_image = img.resize((7680, 7680))
 
-        #new_image.save(str(str(data).split("'")[1]))
+        new_image.save(str(str(data).split("'")[1]))
         img.close()
       except PIL.UnidentifiedImageError:
         pass
@@ -335,97 +343,92 @@ def in_the_papka(dir_pref): #перемещение файлов в их пап�
 
   with alive_bar(len(arts_names)) as bar:
     for name_file in arts_names:
-      try:
-        im = Image.open(f'{name_file}')
-        
-        (width, height) = im.size
-        im.close()
-        height = int(height)
-        width = int(width)
-        one_path = os.getcwd()
+
+      im = Image.open(f'{name_file}')
+      (width, height) = im.size
+      im.close()
+      height = int(height)
+      width = int(width)
+      one_path = os.getcwd()
 
 
-        if width > height:
-          src = os.getcwd() + dir_pref + name_file
-          dest = f'{path_hori}{dir_pref}{name_file}'
-          try:
-            os.rename(src, dest)
-          except FileExistsError as err:
-            os.remove(name_file)
-            pass
-          except PermissionError as err:
-            print(f"PermissionError: {name_file}\nError: {err}")
-            pass
-        elif width < height:
+      if width > height:
+        src = os.getcwd() + dir_pref + name_file
+        dest = f'{path_hori}{dir_pref}{name_file}'
+        try:
+          os.rename(src, dest)
+        except FileExistsError as err:
+          os.remove(name_file)
+          pass
+        except PermissionError as err:
+          print(f"PermissionError: {name_file}\nError: {err}")
+          pass
+      elif width < height:
 
-          src = os.getcwd() + dir_pref + name_file
-          dest = f'{path_vert}{dir_pref}{name_file}'
-          try:
-            os.rename(src, dest)
-          except FileExistsError as err:
-            os.remove(name_file)
-            pass
-          except PermissionError as err:
-            print(f"PermissionError: {name_file}\nError: {err}")
-            pass
+        src = os.getcwd() + dir_pref + name_file
+        dest = f'{path_vert}{dir_pref}{name_file}'
+        try:
+          os.rename(src, dest)
+        except FileExistsError as err:
+          os.remove(name_file)
+          pass
+        except PermissionError as err:
+          print(f"PermissionError: {name_file}\nError: {err}")
+          pass
 
-        elif width == height:
-          src = os.getcwd() + dir_pref + name_file
-          os.chdir(one_path)
-          dest = f'{path_square}{dir_pref}{name_file}'
+      elif width == height:
+        src = os.getcwd() + dir_pref + name_file
+        os.chdir(one_path)
+        dest = f'{path_square}{dir_pref}{name_file}'
 
-          try:
-            os.rename(src, dest)
-          except FileExistsError as err:
-            os.remove(name_file)
-            pass
-          except PermissionError as err:
-            print(f"PermissionError: {name_file}\nError: {err}")
-            pass
+        try:
+          os.rename(src, dest)
+        except FileExistsError as err:
+          os.remove(name_file)
+          pass
+        except PermissionError as err:
+          print(f"PermissionError: {name_file}\nError: {err}")
+          pass
 
-        elif width == "error":
-          try:
-            name_dir = "error"
-            os.mkdir(name_dir)
-          except FileExistsError:
-            pass
-          src = os.getcwd() + dir_pref + name_file
-          os.chdir(one_path)
-          dest = f'error{dir_pref}{name_file}'
-          print("dest - 397",dest)
-          try:
-            os.rename(src, dest)
-          except FileExistsError as err:
-            os.remove(name_file)
-            pass
-          except PermissionError as err:
-            print(f"PermissionError: {name_file}\nError: {err}")
-            pass
+      elif width == "error":
+        try:
+          name_dir = "error"
+          os.mkdir(name_dir)
+        except FileExistsError:
+          pass
+        src = os.getcwd() + dir_pref + name_file
+        os.chdir(one_path)
+        dest = f'error{dir_pref}{name_file}'
+        print("dest - 397",dest)
+        try:
+          os.rename(src, dest)
+        except FileExistsError as err:
+          os.remove(name_file)
+          pass
+        except PermissionError as err:
+          print(f"PermissionError: {name_file}\nError: {err}")
+          pass
 
-        else:
-          try:
-            name_dir = "no_sorted"
-            os.mkdir(name_dir)
-          except FileExistsError:
-            pass
-          src = os.getcwd() + dir_pref + name_file
-          os.chdir(one_path)
-          dest = f'no_sorted{dir_pref}{name_file}'
+      else:
+        try:
+          name_dir = "no_sorted"
+          os.mkdir(name_dir)
+        except FileExistsError:
+          pass
+        src = os.getcwd() + dir_pref + name_file
+        os.chdir(one_path)
+        dest = f'no_sorted{dir_pref}{name_file}'
 
-          try:
-            os.rename(src, dest)
-          except FileExistsError as err:
-            pass
-          except PermissionError as err:
-            print(f"PermissionError: {name_file}\nError: {err}")
-            pass
+        try:
+          os.rename(src, dest)
+        except FileExistsError as err:
+          pass
+        except PermissionError as err:
+          print(f"PermissionError: {name_file}\nError: {err}")
+          pass
 
 
-        bar()
-      except PIL.UnidentifiedImageError:
-        bar()
-        os.remove(name_file)
-        
+      bar()
 
 
 in_the_papka(dir_pref)

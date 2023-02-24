@@ -28,7 +28,7 @@ def module(inp):
             print(err)
 
 
-    def opredelit_materik(inp = None) -> str:
+    def opredelit_materik(inp = 'Mahe') -> str:
         inp = inp.title()
         try:
             from countryinfo import countries
@@ -44,22 +44,25 @@ def module(inp):
         
             if len(str(co['timezones']).split(',')) > 1:
                 for qw in str(co['timezones']).split(','):
-                    
-
                     if inp in str(qw):
                         qwr.append(qw)
 
-        if len(qwr) == 0:
-            print('Ничего не было найдено. Было заменено значение!\n')
-            asd = 'Europe/Moscow'
+            if len(str(co['timezones']).split(',')) == 1:
+                if inp in str(str(co['timezones']).split(',')[0]): 
+                    qwr.append(str(str(co['timezones']).split(',')[0]))
+        
         if len(qwr) > 0:
-            asd = ''
             for qer in qwr:
                 asd = str(qer).replace("'","").replace("[","").replace("]","").replace(" ","")
             #print(asd)
+        else:
+            print('Ничего не было найдено. Было заменено значение!\n')
+            asd = 'Europe/Moscow'
         return asd
     return opredelit_materik(inp)
-#znachenie = module(input('Введите свой город >>>'))
 
-    
-#print(f'z: {znachenie}')
+
+if '__main__'  in __name__:
+    z = module(input('Введите свой город >>> '))
+    #z = module('Omsk')
+    print(z)

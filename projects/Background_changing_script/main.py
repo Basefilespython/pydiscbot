@@ -139,7 +139,7 @@ else:
     pass
 
 
-timezone = module(input('Введите ближайший к вам крупный город >>> '))
+timezone = module(input('Введите ближайший к вам крупный город  по часовому поясу >>> '))
 
 
 import tkinter

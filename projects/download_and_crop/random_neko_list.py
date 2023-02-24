@@ -406,7 +406,6 @@ imgs18 = [
   "https://sun9-west.userapi.com/sun9-53/s/v1/ig2/F1bTeGD3mwnRGUp77PMf3Bfhau674k2eeSOPyHLqcJVxKJzQY5b3Xp0HAFlii9ucbKIKRd3nwAaUmghNdRc6-HWf.jpg?size=850x478&quality=95&type=album",
   "https://sun9-west.userapi.com/sun9-55/s/v1/ig2/XMR_jbKNxzc5eL0HK9GnsRRk8Wi6nQ1ghOvU-2ZWwRH2NykCDxMD7KAti0UvDBgRIeJC7c5PbpbcVwJQ1hPrzl0H.jpg?size=850x478&quality=95&type=album",
   "https://sun9-east.userapi.com/sun9-25/s/v1/ig2/e24uCwXBk4Pfks7d53e3wUFUeDmD-WgNmhd5NPmMMjV5scLpClvGFw60CCWZnIWY47zaxQb9QKRNUTPm61k5kfsv.jpg?size=850x528&quality=95&type=album",
-  "https://img3.gelbooru.com//images/9a/42/9a4203fa410c6a1579baa9ba1bf38baa.png",
   "https://sun9-west.userapi.com/sun9-61/s/v1/ig2/3rKgnP0X4g3pGEHxzDzMRc5rPAoVP_cesugSdMcJdu0A8XnaF_rOLZBaA1vvrbstp6u0PM69TjxpvSZ73FJQdsqY.jpg?size=850x478&quality=95&type=album",
   "https://sun9-west.userapi.com/sun9-48/s/v1/ig2/Dpv7A0p0HFyiim__Z4v0wCqZ_a_NoPtKB8VPJ0fxrBNUUC65aDNSwUGDFTty6-ENWu1R05g7MB00HAhy2YYjYkVp.jpg?size=850x478&quality=95&type=album",
   "https://sun9-west.userapi.com/sun9-37/s/v1/ig2/7w5eFtp9jB16r1vzOj622b_plXoZrU7Hn2Fd_gWEIyqIzHE71OblPKatsUt2WUaRXS0_eWnXy56_8BtFJOX4LLs2.jpg?size=812x1080&quality=95&type=album",

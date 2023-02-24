@@ -51,6 +51,5 @@ import time
 
 time.sleep(2)
 
+raise Install("Установка завершена!")
 
-os.chdir(first_dir)
-os.remove(__file__)

@@ -4,9 +4,7 @@ from io import BytesIO
 import requests
 import os
 first_path = os.getcwd()
-# print(first_path)
-# while True:
-#     pass
+
 import pytz
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
@@ -52,15 +50,49 @@ def download_from_github(url):
 download_from_github('https://gist.githubusercontent.com/mjrulesamrat/0c1f7de951d3c508fb3a20b4b0b33a98/raw/f5f9db4f1b287804fd07ffb3296ed0036292bc7a/countryinfo.py')
 
 
+def download_file_from_github(file_name):
+  try:
+    
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/Background_changing_script/{file_name}"
+    
+    def download_file(url):
+      local_filename = url.split('/')[-1]
+      with requests.get(url, stream=True, allow_redirects=True) as r:
+        r.raise_for_status()
+        with open(local_filename, 'wb') as f:
+          for chunk in r.iter_content(chunk_size=8192):
+            f.write(chunk)
+      return local_filename
+
+    file_name = download_file(url)
+    pass
+  except Exception as err:
+    return err
+
+
+def update():
+  file_names = ['main.py', 'setup.py', 'module_py.py']
+  er = ''
+  for file_name in file_names:
+    er = er + "\n" + file_name + "\n" + str(
+      download_file_from_github(file_name))
+    #er = download_file_from_github(file_name)
+  #print(er)
+  import time
+  time.sleep(2)
+
+
+update()
+
 
 def time_gh():
-    year = str(str((str(datetime.now(pytz.timezone('Europe/Moscow')))).split()[0]).replace("-", ".")).split(".")[0]
-    month  = str(str((str(datetime.now(pytz.timezone('Europe/Moscow')))).split()[0]).replace("-", ".")).split(".")[1]
-    day = str(str((str(datetime.now(pytz.timezone('Europe/Moscow')))).split()[0]).replace("-", ".")).split(".")[2]
+    year = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[0]).replace("-", ".")).split(".")[0]
+    month  = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[0]).replace("-", ".")).split(".")[1]
+    day = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[0]).replace("-", ".")).split(".")[2]
       
-    s = str(str((str(datetime.now(pytz.timezone('Europe/Moscow')))).split()[1]).split(".")[0]).split(":")[2]
-    m = str(str((str(datetime.now(pytz.timezone('Europe/Moscow')))).split()[1]).split(".")[0]).split(":")[1]
-    h =str(str((str(datetime.now(pytz.timezone('Europe/Moscow')))).split()[1]).split(".")[0]).split(":")[0]
+    s = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[1]).split(".")[0]).split(":")[2]
+    m = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[1]).split(".")[0]).split(":")[1]
+    h =str(str((str(datetime.now(pytz.timezone(timezone)))).split()[1]).split(".")[0]).split(":")[0]
     times = f"{s}s : {m}m : {h}h"
     times2 = f"{day}.{month}.{year}"
     return times,times2

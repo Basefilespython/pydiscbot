@@ -313,6 +313,17 @@ imgs = [
 
 
 imgs18 = [
+    "https://cdn.donmai.us/original/9b/c0/9bc00a871100659ac57c0f9417bef721.jpg",
+    "https://cdn.donmai.us/original/76/40/76401da94b13b66ad4cfb4ebeca1c1f7.jpg",
+    "https://cdn.donmai.us/original/51/84/51849e60bd98e2ed5a73b66bc448a88b.jpg",
+    "https://cdn.donmai.us/original/45/4b/454bbeac5a22a273aa1cb685de9cd57e.jpg",
+    "https://cdn.donmai.us/original/bd/2a/bd2abdba18e2c0f654dd4670e1b7c245.jpg",
+    "https://cdn.donmai.us/original/b4/9e/b49e33a0d632f20bac9527922e1a6533.jpg",
+    "https://cdn.donmai.us/original/96/a6/96a6636055e3d248accbb8e1c7bc4a45.jpg",
+    "https://cdn.donmai.us/original/bc/44/bc44de161bbc4eb4756b89b2a99f5f78.jpg",
+    "https://cdn.donmai.us/original/61/15/6115d6ed41571114401bc5ed06c2070c.jpg",
+    "https://cdn.donmai.us/original/5c/5e/5c5ea09481ac0a2f3dae6446490b6b3c.jpg",
+    "https://cdn.donmai.us/original/fa/da/fadadec69abe17596fb78a7396c837da.jpg",
     "https://cdn.truyen-hentai.com/cat-girl-maid-impregnation?interlace=1&quality=100&type=webp&url=https%3A%2F%2Fi.redd.it%2Fm7lpllwiq8i31.jpg&width=920&sign=0WZMWtgsN5suJ2sDd2ibWuzPoKkOvSY588W1iOVjkyI",
     "https://ei.phncdn.com/videos/202105/05/387579301/original/(m=qW2RLPWbeaAaGwObaaaa)(mh=8FI0zKtVrLoYk32y)0.jpg",
     "https://i.imgur.com/vFY5wkR.png",

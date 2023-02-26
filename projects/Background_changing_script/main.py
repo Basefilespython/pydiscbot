@@ -112,6 +112,12 @@ def changing(name_file):
   #image.paste(Image.open("1676478803967.png"))
   drawer = ImageDraw.Draw(image)
   times,times2 = time_gh()
+  try:
+    import psutil
+    text =str (psutil.sensors_battery().percent)
+  except:
+    text = "[ERR]"
+  drawer.text((int((85 * w)/100),210), f"{text}%", font=font, fill='white')  
   drawer.text((int((80 * w)/100),80), f"{times2}", font=font, fill='white')
   drawer.text((int((80 * w)/100), 155), f"{times}", font=font, fill='white')
   os.chdir(first_path)

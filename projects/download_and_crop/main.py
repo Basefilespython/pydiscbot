@@ -7,7 +7,7 @@ from urllib.request import HTTPError
 import requests
 
 s_version = "2.1.5"
-n_version = '0.1.6'
+
 
 
 def download_file_from_github(file_name):
@@ -43,7 +43,7 @@ def update():
   time.sleep(2)
 
 
-#update()
+update()
 
 black = "\033[30m"
 red = "\033[31m"

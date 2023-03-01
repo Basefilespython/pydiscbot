@@ -31,7 +31,7 @@ def download_file_from_github(file_name):
 
 
 def update():
-  file_names = ['random_neko_list.py', 'main.py', 'setup.py']
+  file_names = ['random_neko_list.py', 'main.py', 'setup.py','keep_module.py']
   er = ''
   for file_name in file_names:
     er = er + "\n" + file_name + "\n" + str(

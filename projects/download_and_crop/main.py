@@ -2,13 +2,12 @@
 
 #https://replit.com/@BSNIKYT/CheerfulPrestigiousHashfunction.zip
 from os import system
-
 import urllib.request
-
 from urllib.request import HTTPError
-
-
 import requests
+
+s_version = "2.1.5"
+n_version = '0.1.6'
 
 
 def download_file_from_github(file_name):
@@ -62,13 +61,44 @@ except:
   import PIL
 import os
 import shutil
+import json
+
+
+def check_version(sversion):
+  nversion = json.loads(
+    requests.get(
+      "https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json"
+    ).text)['ver']
+  print(f'NEW_VERSION - {nversion}, OLD_VERSION - {sversion}')
+  s1 = str(sversion).split('.')[0]
+  s2 = str(sversion).split('.')[1]
+  s3 = str(sversion).split('.')[2]
+
+  n1 = str(nversion).split('.')[0]
+  n2 = str(nversion).split('.')[1]
+  n3 = str(nversion).split('.')[2]
+  if (s1 == n1) and (s2 == n2) and (s3 == n3):
+    print(
+      f"{green}[*]У вас установлена самая актуальная версия скрипта!{white}")
+  if (s1 > n1) or ((s1 <= n1) and (s2 > n2)) or (((s1 <= n1) and (s2 <= n2)) and (s3 > n3)):
+    print(f"{blue}[*]У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
+  # if (s3 >= n3):
+  #   if s2 >= n2:
+  #     if s1 >= s1:
+  #       print(f"{blue}[*]У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
+  else:
+    print(f"{yellow}[*]У вас установлена устаревшая версия скрипта!{white}")
+  #if  n1 <
+  #else:
+  #print(f"{red}[ VERSION ERROR ]{white} \n n1-{n1}, n2-{n2}, n3-{n3}\n s1-{s1}, s2-{s2}, s3-{s3}")
+
+
+check_version(s_version)
 
 try:
   from alive_progress import alive_bar
 except ImportError:
   system("pip install alive-progress")
-
-
 
 name_dir = "NeKo_18+"
 one_path = os.getcwd()
@@ -100,7 +130,7 @@ def main():
 
     ur = imgs
   except NameError:
-      print("База не обнаружена!")
+    print("База не обнаружена!")
 
   print("Количество изображений:", len(ur), "\n")
 
@@ -114,7 +144,6 @@ def main():
         url = str(url)
 
         def ww(i):
-
 
           if "mp4" in url:
             name_file = f"{i}.mp4"
@@ -172,8 +201,8 @@ def main():
                   f"{red}[-] {yellow}524 (OSE99) (TCP соеденение): {blue}{name_file}{white}  URL: {url}"
                 )
               if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
-               print(
-                 f"{red}[-] {yellow}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
+                print(
+                  f"{red}[-] {yellow}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
                 )
               else:
                 pass
@@ -210,7 +239,6 @@ with open("errors.json", "w") as outfile:
 
 
 def res_def(name_dir):
-
 
   img_resize = []
   os.chdir(f'{os.getcwd()}/{name_dir}')
@@ -301,7 +329,7 @@ def res_def(name_dir):
 res_def(name_dir)
 
 
-def in_the_papka(dir_pref): #перемещение файлов в их папки
+def in_the_papka(dir_pref):  #перемещение файлов в их папки
   os.chdir(f'{os.getcwd()}/')
   path_one = os.getcwd()
   try:
@@ -351,7 +379,6 @@ def in_the_papka(dir_pref): #перемещение файлов в их пап�
       width = int(width)
       one_path = os.getcwd()
 
-
       if width > height:
         src = os.getcwd() + dir_pref + name_file
         dest = f'{path_hori}{dir_pref}{name_file}'
@@ -399,7 +426,7 @@ def in_the_papka(dir_pref): #перемещение файлов в их пап�
         src = os.getcwd() + dir_pref + name_file
         os.chdir(one_path)
         dest = f'error{dir_pref}{name_file}'
-        print("dest - 397",dest)
+        print("dest - 397", dest)
         try:
           os.rename(src, dest)
         except FileExistsError as err:
@@ -426,7 +453,6 @@ def in_the_papka(dir_pref): #перемещение файлов в их пап�
         except PermissionError as err:
           print(f"PermissionError: {name_file}\nError: {err}")
           pass
-
 
       bar()
 

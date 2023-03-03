@@ -6,38 +6,40 @@ import urllib.request
 from urllib.request import HTTPError
 import requests
 
-s_version = "2.1.6"
+s_version = "2.1.2"
 
 
 def download_file_from_github(file_name):
-  try:
 
     url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
-
-
-    def download_file(url):
-      local_filename = url.split('/')[-1]
+    local_filename = url.split('/')[-1]
+    try:
       with requests.get(url, stream=True, allow_redirects=True) as r:
         r.raise_for_status()
         with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
-      return local_filename
-
-    file_name = download_file(url)
-    pass
-  except Exception as err:
-    return err
+      return 'ok'
+    except Exception as err:
+       return "err",err
+      
+def check(file_name):
+    er= ""
+    out = download_file_from_github(file_name)
+    if "err" in out:
+      out = out.remove('err','')
+      er = err + f"{red}[-] DownloadingFileError: {file_name}{white}\n"
+      #er = er + "\n" + file_name + "\n" + out
+    #er = download_file_from_github(file_name)
+    print(er)
 
 
 def update():
   file_names = ['random_neko_list.py', 'main.py']
-  er = ''
+
   for file_name in file_names:
-    er = er + "\n" + file_name + "\n" + str(
-      download_file_from_github(file_name))
-    #er = download_file_from_github(file_name)
-  #print(er)
+        check(file_name)
+                
   import time
   time.sleep(2)
 
@@ -85,9 +87,10 @@ def check_version(sversion):
     pass
   else:
     print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
-    ch = input("Установить новую версию? (Y/N)")
+    ch = input(f"{green}[!] Установить новую версию? (Y/N) >>> ")
     if ch == "Y":
-        download_file_from_github('main.py')
+        check("main.py")
+        raise SystemError("")
     else:
       pass
 
@@ -125,7 +128,7 @@ try:
   from random_neko_list import *
 except ModuleNotFoundError:
     path_1 = os.getcwd() + dir_pref + 'Dand_Crop'
-    print(path_1)
+    print("126",path_1)
     #os.chdir(path_1)
     print(os.getcwd())
 

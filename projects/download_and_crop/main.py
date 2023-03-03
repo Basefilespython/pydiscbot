@@ -115,12 +115,19 @@ except PermissionError:
   name_dir = ''
   pass
 
-print(f"{green}[*]Работающий каталог:", os.getcwd(),f'{white}')
+print(f"{green}[*] Работающий каталог:", os.getcwd(),f'{white}')
 
 if str(os.name) == 'nt':
   dir_pref = "\\"
 else:
-  dir_pref = "//"
+  dir_pref = "/"
+
+def logo():
+	colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
+	color1 = random.choice(colors)
+	colors.remove(color1)
+	color2 = random.choice(colors)
+	print(color1+"████████████████████████████████████\n█▄─▄▄─█▄─▄▄▀█─▄▄─█▄─▀─▄█▄─▄▄─█▄─▄▄▀█\n██─▄▄▄██─▄─▄█─██─██▀─▀███─▄█▀██─▄─▄█\n█▄▄▄███▄▄█▄▄█▄▄▄▄█▄▄█▄▄█▄▄▄▄▄█▄▄█▄▄█\n███████████"+color2+" by FSystem88 "+color1+"███████████\n████████████████████████████████████\n"+Style.RESET_ALL)
 
 
 import os
@@ -128,9 +135,19 @@ try:
   from random_neko_list import *
 except ModuleNotFoundError:
     path_1 = os.getcwd() + dir_pref + 'Dand_Crop'
-    print("126",path_1)
-    #os.chdir(path_1)
-    print(os.getcwd())
+    #print("126",path_1)
+    os.chdir(path_1)
+    #print(os.getcwd())
+    try:
+      import sys
+
+      sys.path.insert(1, '../Dand_Crop')
+      from random_neko_list import *
+      #from "Dand_crop/random_neko_list"  import *
+      #from random_neko_list import *
+    except ImportError:
+      raise SystemExit('\n[!] База не обнаружена!')
+      
 
 import PIL
 from PIL import Image
@@ -143,9 +160,9 @@ def main():
     
     ur = imgs
   except NameError:
+    pass
     
-    
-    raise SystemExit('База не обнаружена!')
+    #raise SystemExit('База не обнаружена!')
 
   
   print("Количество изображений:", len(ur), "\n")

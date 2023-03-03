@@ -9,12 +9,11 @@ import requests
 s_version = "2.1.5"
 
 
-
 def download_file_from_github(file_name):
   try:
-    autor = 'Basefilespython'
-    dictgit = 'pydiscbot'
-    url = f"https://raw.githubusercontent.com/{autor}/{dictgit}/main/{file_name}"
+
+    url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
+
 
     def download_file(url):
       local_filename = url.split('/')[-1]
@@ -43,7 +42,7 @@ def update():
   time.sleep(2)
 
 
-update()
+#update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -54,6 +53,9 @@ violet = "\033[35m"
 turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
+
+print(f"{violet}[*] VERSION: {s_version}")
+
 try:
   import PIL
 except:
@@ -65,11 +67,8 @@ import json
 
 
 def check_version(sversion):
-  nversion = json.loads(
-    requests.get(
-      "https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json"
-    ).text)['ver']
-  print(f'NEW_VERSION - {nversion}, OLD_VERSION - {sversion}')
+  nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
+  #print(f'NEW_VERSION - {nversion}, OLD_VERSION - {sversion}')
   s1 = str(sversion).split('.')[0]
   s2 = str(sversion).split('.')[1]
   s3 = str(sversion).split('.')[2]
@@ -79,18 +78,18 @@ def check_version(sversion):
   n3 = str(nversion).split('.')[2]
   if (s1 == n1) and (s2 == n2) and (s3 == n3):
     print(
-      f"{green}[*]У вас установлена самая актуальная версия скрипта!{white}")
-  if (s1 > n1) or ((s1 <= n1) and (s2 > n2)) or (((s1 <= n1) and (s2 <= n2)) and (s3 > n3)):
-    print(f"{blue}[*]У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
-  # if (s3 >= n3):
-  #   if s2 >= n2:
-  #     if s1 >= s1:
-  #       print(f"{blue}[*]У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
+      f"{green}[*] У вас установлена самая актуальная версия скрипта!{white}")
+    pass
+  elif (s1 > n1) or ((s1 <= n1) and (s2 > n2)) or (((s1 <= n1) and (s2 <= n2)) and (s3 > n3)):
+    print(f"{blue}[*] У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
+    pass
   else:
-    print(f"{yellow}[*]У вас установлена устаревшая версия скрипта!{white}")
-  #if  n1 <
-  #else:
-  #print(f"{red}[ VERSION ERROR ]{white} \n n1-{n1}, n2-{n2}, n3-{n3}\n s1-{s1}, s2-{s2}, s3-{s3}")
+    print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
+    ch = input("Установить новую версию? (Y/N)")
+    if ch == "Y"
+        download_file_from_github('main.py')
+    else:
+      pass
 
 
 check_version(s_version)
@@ -120,18 +119,32 @@ if str(os.name) == 'nt':
 else:
   dir_pref = "//"
 
-from random_neko_list import *
+
+import os
+try:
+  from random_neko_list import *
+except ModuleNotFoundError:
+    path_1 = os.getcwd() + dir_pref + 'Dand_Crop'
+    print(path_1)
+    #os.chdir(path_1)
+    print(os.getcwd())
+
 import PIL
 from PIL import Image
 
+import os
+one_path_1 =  os.getcwd()
 
 def main():
   try:
-
+    
     ur = imgs
   except NameError:
-    print("База не обнаружена!")
+    
+    
+    raise SystemExit('База не обнаружена!')
 
+  
   print("Количество изображений:", len(ur), "\n")
 
   err = []
@@ -230,10 +243,13 @@ def main():
   download()
   return err
 
+try:
+  err_count = main()
+except SystemExit as err:
+  print(f"{red}[-] Error:{violet}",err)
+  while True:
+    pass
 
-err_count = main()
-
-import json
 with open("errors.json", "w") as outfile:
   json.dump(err_count, outfile)
 

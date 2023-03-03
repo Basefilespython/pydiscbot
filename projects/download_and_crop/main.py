@@ -86,7 +86,7 @@ def check_version(sversion):
   else:
     print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
     ch = input("Установить новую версию? (Y/N)")
-    if ch == "Y"
+    if ch == "Y":
         download_file_from_github('main.py')
     else:
       pass

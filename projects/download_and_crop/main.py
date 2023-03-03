@@ -6,7 +6,7 @@ import urllib.request
 from urllib.request import HTTPError
 import requests
 
-s_version = "2.1.5"
+s_version = "2.1.6"
 
 
 def download_file_from_github(file_name):
@@ -112,7 +112,7 @@ except PermissionError:
   name_dir = ''
   pass
 
-print("Работающий каталог:", os.getcwd())
+print(f"{green}[*]Работающий каталог:", os.getcwd(),f'{white}')
 
 if str(os.name) == 'nt':
   dir_pref = "\\"

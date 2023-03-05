@@ -2,44 +2,44 @@
 
 #https://replit.com/@BSNIKYT/CheerfulPrestigiousHashfunction.zip
 from os import system
-import urllib.request
-from urllib.request import HTTPError
-import requests
 
-s_version = "2.1.2"
+import urllib.request
+
+from urllib.request import HTTPError
+
+
+import requests
 
 
 def download_file_from_github(file_name):
+  try:
+    autor = 'Basefilespython'
+    dictgit = 'pydiscbot'
+    url = f"https://raw.githubusercontent.com/{autor}/{dictgit}/main/{file_name}"
 
-    url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
-    local_filename = url.split('/')[-1]
-    try:
+    def download_file(url):
+      local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
         r.raise_for_status()
         with open(local_filename, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192):
             f.write(chunk)
-      return 'ok'
-    except Exception as err:
-       return "err",err
-      
-def check(file_name):
-    er= ""
-    out = download_file_from_github(file_name)
-    if "err" in out:
-      out = out.remove('err','')
-      er = err + f"{red}[-] DownloadingFileError: {file_name}{white}\n"
-      #er = er + "\n" + file_name + "\n" + out
-    #er = download_file_from_github(file_name)
-    print(er)
+      return local_filename
+
+    file_name = download_file(url)
+    pass
+  except Exception as err:
+    return err
 
 
 def update():
   file_names = ['random_neko_list.py', 'main.py']
-
+  er = ''
   for file_name in file_names:
-        check(file_name)
-                
+    er = er + "\n" + file_name + "\n" + str(
+      download_file_from_github(file_name))
+    #er = download_file_from_github(file_name)
+  #print(er)
   import time
   time.sleep(2)
 
@@ -55,9 +55,6 @@ violet = "\033[35m"
 turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
-
-print(f"{violet}[*] VERSION: {s_version}")
-
 try:
   import PIL
 except:
@@ -65,42 +62,13 @@ except:
   import PIL
 import os
 import shutil
-import json
-
-
-def check_version(sversion):
-  nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
-  #print(f'NEW_VERSION - {nversion}, OLD_VERSION - {sversion}')
-  s1 = str(sversion).split('.')[0]
-  s2 = str(sversion).split('.')[1]
-  s3 = str(sversion).split('.')[2]
-
-  n1 = str(nversion).split('.')[0]
-  n2 = str(nversion).split('.')[1]
-  n3 = str(nversion).split('.')[2]
-  if (s1 == n1) and (s2 == n2) and (s3 == n3):
-    print(
-      f"{green}[*] У вас установлена самая актуальная версия скрипта!{white}")
-    pass
-  elif (s1 > n1) or ((s1 <= n1) and (s2 > n2)) or (((s1 <= n1) and (s2 <= n2)) and (s3 > n3)):
-    print(f"{blue}[*] У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
-    pass
-  else:
-    print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
-    ch = input(f"{green}[!] Установить новую версию? (Y/N) >>> ")
-    if ch == "Y":
-        check("main.py")
-        raise SystemError("")
-    else:
-      pass
-
-
-check_version(s_version)
 
 try:
   from alive_progress import alive_bar
 except ImportError:
   system("pip install alive-progress")
+
+
 
 name_dir = "NeKo_18+"
 one_path = os.getcwd()
@@ -115,56 +83,25 @@ except PermissionError:
   name_dir = ''
   pass
 
-print(f"{green}[*] Работающий каталог:", os.getcwd(),f'{white}')
+print("Работающий каталог:", os.getcwd())
 
 if str(os.name) == 'nt':
   dir_pref = "\\"
 else:
-  dir_pref = "/"
+  dir_pref = "//"
 
-def logo():
-	colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
-	color1 = random.choice(colors)
-	colors.remove(color1)
-	color2 = random.choice(colors)
-	print(color1+"████████████████████████████████████\n█▄─▄▄─█▄─▄▄▀█─▄▄─█▄─▀─▄█▄─▄▄─█▄─▄▄▀█\n██─▄▄▄██─▄─▄█─██─██▀─▀███─▄█▀██─▄─▄█\n█▄▄▄███▄▄█▄▄█▄▄▄▄█▄▄█▄▄█▄▄▄▄▄█▄▄█▄▄█\n███████████"+color2+" by FSystem88 "+color1+"███████████\n████████████████████████████████████\n"+Style.RESET_ALL)
-
-
-import os
-try:
-  from random_neko_list import *
-except ModuleNotFoundError:
-    path_1 = os.getcwd() + dir_pref + 'Dand_Crop'
-    #print("126",path_1)
-    os.chdir(path_1)
-    #print(os.getcwd())
-    try:
-      import sys
-
-      sys.path.insert(1, '../Dand_Crop')
-      from random_neko_list import *
-      #from "Dand_crop/random_neko_list"  import *
-      #from random_neko_list import *
-    except ImportError:
-      raise SystemExit('\n[!] База не обнаружена!')
-      
-
+from random_neko_list import *
 import PIL
 from PIL import Image
 
-import os
-one_path_1 =  os.getcwd()
 
 def main():
   try:
-    
+
     ur = imgs
   except NameError:
-    pass
-    
-    #raise SystemExit('База не обнаружена!')
+      print("База не обнаружена!")
 
-  
   print("Количество изображений:", len(ur), "\n")
 
   err = []
@@ -177,6 +114,7 @@ def main():
         url = str(url)
 
         def ww(i):
+
 
           if "mp4" in url:
             name_file = f"{i}.mp4"
@@ -234,8 +172,8 @@ def main():
                   f"{red}[-] {yellow}524 (OSE99) (TCP соеденение): {blue}{name_file}{white}  URL: {url}"
                 )
               if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
-                print(
-                  f"{red}[-] {yellow}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
+               print(
+                 f"{red}[-] {yellow}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
                 )
               else:
                 pass
@@ -263,18 +201,16 @@ def main():
   download()
   return err
 
-try:
-  err_count = main()
-except SystemExit as err:
-  print(f"{red}[-] Error:{violet}",err)
-  while True:
-    pass
 
+err_count = main()
+
+import json
 with open("errors.json", "w") as outfile:
   json.dump(err_count, outfile)
 
 
 def res_def(name_dir):
+
 
   img_resize = []
   os.chdir(f'{os.getcwd()}/{name_dir}')
@@ -365,7 +301,7 @@ def res_def(name_dir):
 res_def(name_dir)
 
 
-def in_the_papka(dir_pref):  #перемещение файлов в их папки
+def in_the_papka(dir_pref): #перемещение файлов в их папки
   os.chdir(f'{os.getcwd()}/')
   path_one = os.getcwd()
   try:
@@ -415,6 +351,7 @@ def in_the_papka(dir_pref):  #перемещение файлов в их пап
       width = int(width)
       one_path = os.getcwd()
 
+
       if width > height:
         src = os.getcwd() + dir_pref + name_file
         dest = f'{path_hori}{dir_pref}{name_file}'
@@ -462,7 +399,7 @@ def in_the_papka(dir_pref):  #перемещение файлов в их пап
         src = os.getcwd() + dir_pref + name_file
         os.chdir(one_path)
         dest = f'error{dir_pref}{name_file}'
-        print("dest - 397", dest)
+        print("dest - 397",dest)
         try:
           os.rename(src, dest)
         except FileExistsError as err:
@@ -489,6 +426,7 @@ def in_the_papka(dir_pref):  #перемещение файлов в их пап
         except PermissionError as err:
           print(f"PermissionError: {name_file}\nError: {err}")
           pass
+
 
       bar()
 

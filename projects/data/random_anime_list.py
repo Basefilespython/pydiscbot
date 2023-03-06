@@ -1,0 +1,32 @@
+imgs = [ #https://www.arknights.global/fankit
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery08.b13617cf.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery01.4cb3b7cf.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery02.620443bc.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery03.c3f43fce.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery04.ce1b088c.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery05.1126cc33.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery06.ae4a85ec.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery07.4153c8e9.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery09.fa1398c1.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery11.ec00e4b6.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery12.2ead4e4c.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery13.bc4d0dbf.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery14.5c5bf760.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery15.bb0d6d03.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery16.1e18ab4c.jpg",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/166928402096118471/f414a8cb50d1cbd0e1b5121fe14ca930.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/166746597437316197/3e1aaf3f7ea64ee4064b7c13848420b3.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/166737981841413914/91e491cda468acd3bb3514d1fe738dd0.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/166660891884810990/9e606e7b57d913d15a47d82a8f7728e9.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/166392063545413686/173ee65cc0bdfacd94cc59c579ee6786.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/166089723158611295/044b1ffd2277706ad1dc9d5817a70f48.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/165967168740210463/cf0bb7ba3a399ff3d242f62aa2281333.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/165760919141110781/1dfcc822b67f8850a577496df396382c.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/164880607709217061/828cedfa244ec3f5340b928af0cd712b.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/162996439739411133/fbfe9cd1ce98f5afe9f949dbba47ff51.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/162487377961417973/812cb9bc425cfdb889fe5fde220018d9.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/162037698267016109/ba6f54cab7c30ce2956de0e82dee7b69.jpg?x-oss-process=image/resize,w_900",
+   "https://webusstatic.yo-star.com/ark_us_web/assets/161830578848812426/91babc83480642f42b8b6ea66eedf50d.jpg?x-oss-process=image/resize,w_900"
+
+
+]

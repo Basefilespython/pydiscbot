@@ -307,7 +307,8 @@ imgs = [
     "https://sun9-9.userapi.com/impg/A4oylf7q-AyBwzmTNAM6sS-XRVsXFL4Cef3o4w/cW4wrB9jaXA.jpg?size=1877x2160&quality=96&sign=76cc4abd146cba39f9d1735a94c33e1d&type=album",
     "https://sun9-9.userapi.com/impg/xkBzkYtMIaU0KUjz51vE4C1ZepEUr14y1h9mUg/wjBI6EnpRoc.jpg?size=1603x2160&quality=96&sign=f53400a377a3a2c1a96644f6d9ddfda8&type=album",
     "https://sun9-9.userapi.com/impg/zQ947rMqti03NeDD69y2dbXXrJGlvcamlDrLrg/rSfuhmjWT0U.jpg?size=1011x1266&quality=95&sign=45744d4b2ec2392d419afa35b55c927d&type=album",
-    "https://w.wallhaven.cc/full/lm/wallhaven-lm28rr.jpg"
+    "https://w.wallhaven.cc/full/lm/wallhaven-lm28rr.jpg",
+    "https://cdn.cloudflare.steamstatic.com/steam/apps/2022180/extras/wmm-01-min.gif?t=1675931045"
 ]
 
 

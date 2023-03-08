@@ -1,28 +1,39 @@
-#from random_neko_list import *
-#https://replit.com/@BSNIKYT/CheerfulPrestigiousHashfunction.zip
+s_version = "2.1.10"
+
 from os import system
 import urllib.request
 from urllib.request import HTTPError
 import requests
+
 try:
   from colorama import Fore,Style,Back
 except ModuleNotFoundError:
   system('pip install colorama')
+  from colorama import Fore,Style,Back
 
-s_version = "2.1.9"
+
+try:
+  from alive_progress import alive_bar
+except ImportError:
+  system("pip install alive-progress")
+  from alive_progress import alive_bar
+
+try:
+  import PIL
+except:
+  system("pip install Pillow")
+  import PIL
+
 
 
 
 import os
 from os import system
 
-#setup
-# try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
-# except: pass
+try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
+except: pass
 
 
-import urllib.request
-from urllib.request import HTTPError
 
 
 black = "\033[30m"
@@ -37,10 +48,12 @@ st = "\033[37"
 
 
 if '/content' in os.getcwd():
-   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive. А очнее в папку где сохранен данный файл.{white}")
+   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive. А точнее в подпапку где сохранен данный файл.{white}")
    from google.colab import drive
    drive.mount('/content/MyDrive')
    os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
+   os.mkdir('Dand_Crop')
+   os.chdir(os.getcwd() + '/' + 'Dand_Crop')
    system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
 
 
@@ -74,11 +87,11 @@ def check(file_name):
     er= ""
     out = download_file_from_github(file_name)
     if "err" in out:
-      out = out.remove('err','')
-      er = err + f"{red}[-] DownloadingFileError: {file_name}{white}\n"
-      #er = er + "\n" + file_name + "\n" + out
-    #er = download_file_from_github(file_name)
+      out = out.replace('err','')
+      er = er + f"{red}[-] DownloadingFileError: {file_name}{white}\n"
     print(er)
+
+
 def update():
   file_names = ['random_neko_list.py', 'main.py']
   for file_name in file_names:
@@ -293,7 +306,7 @@ err_count = main()
 
 import json
 with open("errors.json", "w") as outfile:
-  json.dump(err_count, outfile)
+  json.dump(err_count, outfile, indent = 4)
 
 
 def res_def(name_dir):
@@ -341,18 +354,10 @@ def res_def(name_dir):
       img_resize.append({f'{name_file}': 'error'})
 
   import json
-  e = '''
-4320p : 7680 x 4320
-2160p : 3840 x 2160
-1440p : 2560 x 1440
-1080p : 1920 x 1080
-720p  : 1280 x 720
-480p  : 854 x 480
-360p  : 640 x 360
-240p  : 426 x 240'''
 
-  with open("sample.json", "w") as outfile:
-    json.dump(img_resize, outfile)
+
+  with open("baza.json", "w") as outfile:
+    json.dump(img_resize, outfile, indent = 4)
 
   import time
   #from progress.bar import IncrementalBar

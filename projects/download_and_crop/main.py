@@ -29,6 +29,7 @@ except:
 
 import os
 from os import system
+do = os.getcwd()
 
 try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
 except: pass
@@ -48,11 +49,14 @@ st = "\033[37"
 
 
 if '/content' in os.getcwd():
-   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive. А точнее в подпапку где сохранен данный файл.{white}")
+   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться в ваш Google Drive. А точнее в подпапку где сохранен данный файл.{white}")
    from google.colab import drive
    drive.mount('/content/MyDrive')
    os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
-   os.mkdir('Dand_Crop')
+   try:
+    os.mkdir('Dand_Crop')
+   except FileExistsError:
+     pass
    os.chdir(os.getcwd() + '/' + 'Dand_Crop')
    system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
 
@@ -75,10 +79,19 @@ def download_file_from_github(file_name):
 try:
   from random_neko_list import *
 except ModuleNotFoundError:
-    download_file_from_github('random_neko_list')
+    posle = os.getcwd()
+    os.chdir(do)
+    download_file_from_github('random_neko_list.py')
+    os.chdir(posle)
     try:
-      sys.path.insert(1, '../Dand_Crop')
-      from random_neko_list import *
+      try:
+        sys.path.insert(1, '../Dand_Crop')
+        from random_neko_list import *
+      except NameError:
+        try:
+          from random_neko_list import *
+        except:
+          raise SystemExit('\n[!] База не обнаружена!')
     except ImportError:
       raise SystemExit('\n[!] База не обнаружена!')
 
@@ -111,45 +124,40 @@ violet = "\033[35m"
 turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
-print(f"{violet}[*] VERSION: {s_version}")
-try:
-  import PIL
-except:
-  system("pip install Pillow")
-  import PIL
-import os
-import shutil
+
+
+
+
 import json
 def check_version(sversion):
   nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
-  #print(f'NEW_VERSION - {nversion}, OLD_VERSION - {sversion}')
-  s1 = str(sversion).split('.')[0]
-  s2 = str(sversion).split('.')[1]
-  s3 = str(sversion).split('.')[2]
-  n1 = str(nversion).split('.')[0]
-  n2 = str(nversion).split('.')[1]
-  n3 = str(nversion).split('.')[2]
+
+  s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split('.')[1], str(sversion).split('.')[2], str(nversion).split('.')[0], str(nversion).split('.')[1], str(nversion).split('.')[2]
+
   if (s1 == n1) and (s2 == n2) and (s3 == n3):
+    print(f"{violet}[*] VERSION: {s_version}")
     print(
       f"{green}[*] У вас установлена самая актуальная версия скрипта!{white}")
     pass
   elif (s1 > n1) or ((s1 <= n1) and (s2 > n2)) or (((s1 <= n1) and (s2 <= n2)) and (s3 > n3)):
+    print(f"{violet}[*] VERSION: {s_version}")
     print(f"{blue}[*] У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
     pass
   else:
+    print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
     print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
-    ch = input(f"{green}[!] Установить новую версию? (Y/N) >>> ")
+    ch = input(f"{green}[!]{white} Установить новую версию? (Y/N) >>> ")
     if ch == "Y":
         check("main.py")
         raise SystemError("")
     else:
       pass
+
 check_version(s_version)
 print("\n")
-try:
-  from alive_progress import alive_bar
-except ImportError:
-  system("pip install alive-progress")
+
+
+
 name_dir = "NeKo_18+"
 one_path = os.getcwd()
 try:

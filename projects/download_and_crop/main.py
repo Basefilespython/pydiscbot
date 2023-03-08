@@ -1,50 +1,28 @@
 #from random_neko_list import *
-
 #https://replit.com/@BSNIKYT/CheerfulPrestigiousHashfunction.zip
 from os import system
+import urllib.request
+from urllib.request import HTTPError
+import requests
+try:
+  from colorama import Fore,Style,Back
+except ModuleNotFoundError:
+  system('pip install colorama')
+
+s_version = "2.1.7"
+
+
+
+import os
+from os import system
+
+try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
+except: pass
+
 
 import urllib.request
-
 from urllib.request import HTTPError
 
-
-import requests
-
-
-def download_file_from_github(file_name):
-  try:
-    autor = 'Basefilespython'
-    dictgit = 'pydiscbot'
-    url = f"https://raw.githubusercontent.com/{autor}/{dictgit}/main/{file_name}"
-
-    def download_file(url):
-      local_filename = url.split('/')[-1]
-      with requests.get(url, stream=True, allow_redirects=True) as r:
-        r.raise_for_status()
-        with open(local_filename, 'wb') as f:
-          for chunk in r.iter_content(chunk_size=8192):
-            f.write(chunk)
-      return local_filename
-
-    file_name = download_file(url)
-    pass
-  except Exception as err:
-    return err
-
-
-def update():
-  file_names = ['random_neko_list.py', 'main.py']
-  er = ''
-  for file_name in file_names:
-    er = er + "\n" + file_name + "\n" + str(
-      download_file_from_github(file_name))
-    #er = download_file_from_github(file_name)
-  #print(er)
-  import time
-  time.sleep(2)
-
-
-#update()
 
 black = "\033[30m"
 red = "\033[31m"
@@ -55,6 +33,60 @@ violet = "\033[35m"
 turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
+
+
+if '/content' in os.getcwd():
+   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive.{white}")
+   from google.colab import drive
+   drive.mount('/content/MyDrive')
+   os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
+   system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
+
+
+
+
+def download_file_from_github(file_name):
+    url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
+    local_filename = url.split('/')[-1]
+    try:
+      with requests.get(url, stream=True, allow_redirects=True) as r:
+        r.raise_for_status()
+        with open(local_filename, 'wb') as f:
+          for chunk in r.iter_content(chunk_size=8192):
+            f.write(chunk)
+      return 'ok'
+    except Exception as err:
+       return "err",err
+      
+def check(file_name):
+    er= ""
+    out = download_file_from_github(file_name)
+    if "err" in out:
+      out = out.remove('err','')
+      er = err + f"{red}[-] DownloadingFileError: {file_name}{white}\n"
+      #er = er + "\n" + file_name + "\n" + out
+    #er = download_file_from_github(file_name)
+    print(er)
+def update():
+  file_names = ['random_neko_list.py', 'main.py']
+  for file_name in file_names:
+        check(file_name)
+                
+  import time
+  time.sleep(2)
+#update()
+
+
+black = "\033[30m"
+red = "\033[31m"
+green = "\033[32m"
+yellow = "\033[33m"
+blue = "\033[34m"
+violet = "\033[35m"
+turquoise = "\033[36m"
+white = "\033[37m"
+st = "\033[37"
+print(f"{violet}[*] VERSION: {s_version}")
 try:
   import PIL
 except:
@@ -62,14 +94,37 @@ except:
   import PIL
 import os
 import shutil
-
+import json
+def check_version(sversion):
+  nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
+  #print(f'NEW_VERSION - {nversion}, OLD_VERSION - {sversion}')
+  s1 = str(sversion).split('.')[0]
+  s2 = str(sversion).split('.')[1]
+  s3 = str(sversion).split('.')[2]
+  n1 = str(nversion).split('.')[0]
+  n2 = str(nversion).split('.')[1]
+  n3 = str(nversion).split('.')[2]
+  if (s1 == n1) and (s2 == n2) and (s3 == n3):
+    print(
+      f"{green}[*] У вас установлена самая актуальная версия скрипта!{white}")
+    pass
+  elif (s1 > n1) or ((s1 <= n1) and (s2 > n2)) or (((s1 <= n1) and (s2 <= n2)) and (s3 > n3)):
+    print(f"{blue}[*] У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
+    pass
+  else:
+    print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
+    ch = input(f"{green}[!] Установить новую версию? (Y/N) >>> ")
+    if ch == "Y":
+        check("main.py")
+        raise SystemError("")
+    else:
+      pass
+check_version(s_version)
+print("\n")
 try:
   from alive_progress import alive_bar
 except ImportError:
   system("pip install alive-progress")
-
-
-
 name_dir = "NeKo_18+"
 one_path = os.getcwd()
 try:
@@ -83,15 +138,42 @@ except PermissionError:
   name_dir = ''
   pass
 
-print("Работающий каталог:", os.getcwd())
+
+print(f"{green}[*] Работающий каталог:", os.getcwd(),f'{white}')
 
 if str(os.name) == 'nt':
   dir_pref = "\\"
 else:
-  dir_pref = "//"
+  dir_pref = "/"
 
-from random_neko_list import *
-import PIL
+
+import random
+def logo():
+	colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
+	color1 = random.choice(colors)
+	colors.remove(color1)
+	color2 = random.choice(colors)
+	print(color1+"████████████████████████████████████\n█▄─▄▄─█▄─▄▄▀█─▄▄─█▄─▀─▄█▄─▄▄─█▄─▄▄▀█\n██─▄▄▄██─▄─▄█─██─██▀─▀███─▄█▀██─▄─▄█\n█▄▄▄███▄▄█▄▄█▄▄▄▄█▄▄█▄▄█▄▄▄▄▄█▄▄█▄▄█\n███████████"+color2+" by FSystem88 "+color1+"███████████\n████████████████████████████████████\n"+Style.RESET_ALL)
+
+import sys
+import os
+
+try:
+    from alive_progress import alive_bar
+except ImportError:
+    system("pip install alive-progress")
+    from alive_progress import alive_bar
+
+
+try:
+  from random_neko_list import *
+except ModuleNotFoundError:
+    try:
+      sys.path.insert(1, '../Dand_Crop')
+      from random_neko_list import *
+    except ImportError:
+      raise SystemExit('\n[!] База не обнаружена!')
+
 from PIL import Image
 
 

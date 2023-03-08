@@ -9,7 +9,7 @@ try:
 except ModuleNotFoundError:
   system('pip install colorama')
 
-s_version = "2.1.7"
+s_version = "2.1.8"
 
 
 
@@ -36,7 +36,7 @@ st = "\033[37"
 
 
 if '/content' in os.getcwd():
-   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive.{white}")
+   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive.\nТочнее в папку где сохранен данный файл.{white}")
    from google.colab import drive
    drive.mount('/content/MyDrive')
    os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
@@ -57,6 +57,17 @@ def download_file_from_github(file_name):
       return 'ok'
     except Exception as err:
        return "err",err
+
+try:
+  from random_neko_list import *
+except ModuleNotFoundError:
+    download_file_from_github('random_neko_list')
+    try:
+      sys.path.insert(1, '../Dand_Crop')
+      from random_neko_list import *
+    except ImportError:
+      raise SystemExit('\n[!] База не обнаружена!')
+
       
 def check(file_name):
     er= ""
@@ -165,14 +176,7 @@ except ImportError:
     from alive_progress import alive_bar
 
 
-try:
-  from random_neko_list import *
-except ModuleNotFoundError:
-    try:
-      sys.path.insert(1, '../Dand_Crop')
-      from random_neko_list import *
-    except ImportError:
-      raise SystemExit('\n[!] База не обнаружена!')
+
 
 from PIL import Image
 

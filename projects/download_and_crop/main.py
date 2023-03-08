@@ -4,6 +4,7 @@ from os import system
 import urllib.request
 from urllib.request import HTTPError
 import requests
+import json
 
 try:
   from colorama import Fore,Style,Back
@@ -126,24 +127,7 @@ white = "\033[37m"
 st = "\033[37"
 
 
-
-
-import json
-def check_version(sversion):
-  nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
-
-  s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split('.')[1], str(sversion).split('.')[2], str(nversion).split('.')[0], str(nversion).split('.')[1], str(nversion).split('.')[2]
-
-  if (s1 == n1) and (s2 == n2) and (s3 == n3):
-    print(f"{violet}[*] VERSION: {s_version}")
-    print(
-      f"{green}[*] У вас установлена самая актуальная версия скрипта!{white}")
-    pass
-  elif (s1 > n1) or ((s1 <= n1) and (s2 > n2)) or (((s1 <= n1) and (s2 <= n2)) and (s3 > n3)):
-    print(f"{violet}[*] VERSION: {s_version}")
-    print(f"{blue}[*] У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
-    pass
-  else:
+def old(nversion):
     print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
     print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
     ch = input(f"{green}[!]{white} Установить новую версию? (Y/N) >>> ")
@@ -152,6 +136,49 @@ def check_version(sversion):
         raise SystemError("")
     else:
       pass
+
+
+
+def check_version(sversion):
+  nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
+
+  s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split('.')[1], str(sversion).split('.')[2], str(nversion).split('.')[0], str(nversion).split('.')[1], str(nversion).split('.')[2]
+
+#   if (s1 == n1) and (s2 == n2) and (s3 == n3):
+#     print(f'''{violet}[*] VERSION: {s_version}
+# {green}[*] У вас установлена самая актуальная версия скрипта!{white}''')
+#     pass
+  print(f'''
+  s1 - {s1} n1 - {n1}
+  s2 - {s2} n2 - {n2}
+  s3 - {s3} n3 - {n3}
+  ''')
+  if s1 >= n1:
+    if s2 >= n2:
+      if s3 >= n3:
+        print(f'''{violet}[*] VERSION: {s_version}''')
+        print(f'''{green}[*] У вас установлена самая актуальная версия скрипта!{white}''')
+        
+      else:
+        old(nversion)
+    else:
+        old(nversion)
+  else:
+    old(nversion)
+  # if True:
+  #   print(f"{violet}[*] VERSION: {s_version}")
+  #   print(f"{blue}[*] У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
+
+  #   pass
+  # if True:
+  #   print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
+  #   print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
+  #   ch = input(f"{green}[!]{white} Установить новую версию? (Y/N) >>> ")
+  #   if ch == "Y":
+  #       check("main.py")
+  #       raise SystemError("")
+  #   else:
+  #     pass
 
 check_version(s_version)
 print("\n")

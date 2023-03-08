@@ -9,15 +9,16 @@ try:
 except ModuleNotFoundError:
   system('pip install colorama')
 
-s_version = "2.1.8"
+s_version = "2.1.9"
 
 
 
 import os
 from os import system
 
-try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
-except: pass
+#setup
+# try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
+# except: pass
 
 
 import urllib.request
@@ -36,7 +37,7 @@ st = "\033[37"
 
 
 if '/content' in os.getcwd():
-   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive.\nТочнее в папку где сохранен данный файл.{white}")
+   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive. А очнее в папку где сохранен данный файл.{white}")
    from google.colab import drive
    drive.mount('/content/MyDrive')
    os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')

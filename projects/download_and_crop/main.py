@@ -1,33 +1,12 @@
 #from random_neko_list import *
 
 #https://replit.com/@BSNIKYT/CheerfulPrestigiousHashfunction.zip
-
-
-
-import os
 from os import system
 
-try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
-except: pass
-
-
 import urllib.request
+
 from urllib.request import HTTPError
 
-
-black = "\033[30m"
-red = "\033[31m"
-green = "\033[32m"
-yellow = "\033[33m"
-blue = "\033[34m"
-violet = "\033[35m"
-turquoise = "\033[36m"
-white = "\033[37m"
-st = "\033[37"
-
-
-if '/content' in os.getcwd():
-   print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться на ваш Google Drive.{white}")
 
 import requests
 
@@ -67,6 +46,15 @@ def update():
 
 #update()
 
+black = "\033[30m"
+red = "\033[31m"
+green = "\033[32m"
+yellow = "\033[33m"
+blue = "\033[34m"
+violet = "\033[35m"
+turquoise = "\033[36m"
+white = "\033[37m"
+st = "\033[37"
 try:
   import PIL
 except:
@@ -79,7 +67,6 @@ try:
   from alive_progress import alive_bar
 except ImportError:
   system("pip install alive-progress")
-  from alive_progress import alive_bar
 
 
 

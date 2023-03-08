@@ -50,8 +50,3 @@ cd <расположение файла> && python setup.py
 
 
 Канал с новостями о разработке в Vkontakte: [Бот-Мейкеры](https://vk.com/serving_antifem).
-
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/crinny/b0mb3r.svg)](https://starchart.cc/crinny/b0mb3r)

@@ -3,18 +3,32 @@ import os
 
 name_dir = "Dand_Crop"
 first_dir = os.getcwd()
+
 try:
   os.mkdir(name_dir)
-  os.chdir(name_dir)
-  one_path = os.getcwd()
 except FileExistsError:
   pass
 
+os.chdir(name_dir)
+one_path = os.getcwd()
 
-def download_file_from_github(file_name):
+
+file_names      = ['random_neko_list.py', 'main.py', 'setup.py','keep_module.py']
+file_names_main = ['LICENSE', 'README.md']
+
+
+
+
+def download_file_from_github(url_id,file_name):
+  url_main  = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/{file_name}"
+  url_files = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
+  
+  if url_id == 0:
+     url = url_files
+  if url_id == 1:
+     url = file_names_main
+      
   try:
-    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
-
     def download_file(url):
       local_filename = url.split('/')[-1]
       with requests.get(url, stream=True, allow_redirects=True) as r:
@@ -31,26 +45,27 @@ def download_file_from_github(file_name):
 
 
 def update():
-  file_names = ['random_neko_list.py', 'main.py', 'setup.py','keep_module.py']
   er = ''
   for file_name in file_names:
-    er = er + "\n" + file_name + "\n" + str(
-      download_file_from_github(file_name))
-
-
-#   import time
-#   time.sleep(2)
-#return er
-
+    er = er + "\n" + file_name + "\n" + str(download_file_from_github(0, file_name))
+  er = ''
+  for file_name in file_names_main:
+    er = er + "\n" + file_name + "\n" + str(download_file_from_github(1, file_name))
+  print(er)  
 update()
+
+
+
 with open("start.bat", "w") as outfile:
-  outfile.write(f"cd {os.getcwd()} \npython main.py")
+  outfile.write(f"python main.py")
   pass
 print("Установка завершена!")
 import time
 
-time.sleep(2)
-
 
 os.chdir(first_dir)
-os.remove(__file__)
+try:
+  time.sleep(2)
+  os.remove(__file__)
+except:
+  pass

@@ -32,8 +32,7 @@ import os
 from os import system
 do = os.getcwd()
 
-try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
-except: pass
+
 
 
 
@@ -50,6 +49,8 @@ st = "\033[37"
 
 
 if '/content' in os.getcwd():
+   try:system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
+   except: pass
    print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться в ваш Google Drive. А точнее в подпапку где сохранен данный файл.{white}")
    from google.colab import drive
    drive.mount('/content/MyDrive')
@@ -144,15 +145,8 @@ def check_version(sversion):
 
   s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split('.')[1], str(sversion).split('.')[2], str(nversion).split('.')[0], str(nversion).split('.')[1], str(nversion).split('.')[2]
 
-#   if (s1 == n1) and (s2 == n2) and (s3 == n3):
-#     print(f'''{violet}[*] VERSION: {s_version}
-# {green}[*] У вас установлена самая актуальная версия скрипта!{white}''')
-#     pass
-  print(f'''
-  s1 - {s1} n1 - {n1}
-  s2 - {s2} n2 - {n2}
-  s3 - {s3} n3 - {n3}
-  ''')
+
+
   if s1 >= n1:
     if s2 >= n2:
       if s3 >= n3:
@@ -165,20 +159,7 @@ def check_version(sversion):
         old(nversion)
   else:
     old(nversion)
-  # if True:
-  #   print(f"{violet}[*] VERSION: {s_version}")
-  #   print(f"{blue}[*] У вас установлена НОВЕЙШАЯ версия скрипта!{white}")
 
-  #   pass
-  # if True:
-  #   print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
-  #   print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
-  #   ch = input(f"{green}[!]{white} Установить новую версию? (Y/N) >>> ")
-  #   if ch == "Y":
-  #       check("main.py")
-  #       raise SystemError("")
-  #   else:
-  #     pass
 
 check_version(s_version)
 print("\n")
@@ -213,7 +194,7 @@ def logo():
 	color1 = random.choice(colors)
 	colors.remove(color1)
 	color2 = random.choice(colors)
-	print(color1+"████████████████████████████████████\n█▄─▄▄─█▄─▄▄▀█─▄▄─█▄─▀─▄█▄─▄▄─█▄─▄▄▀█\n██─▄▄▄██─▄─▄█─██─██▀─▀███─▄█▀██─▄─▄█\n█▄▄▄███▄▄█▄▄█▄▄▄▄█▄▄█▄▄█▄▄▄▄▄█▄▄█▄▄█\n███████████"+color2+" by FSystem88 "+color1+"███████████\n████████████████████████████████████\n"+Style.RESET_ALL)
+  print(color1+"████████████████████████████████████\n█▄─▄▄─█▄─▄▄▀█─▄▄─█▄─▀─▄█▄─▄▄─█▄─▄▄▀█\n██─▄▄▄██─▄─▄█─██─██▀─▀███─▄█▀██─▄─▄█\n█▄▄▄███▄▄█▄▄█▄▄▄▄█▄▄█▄▄█▄▄▄▄▄█▄▄█▄▄█\n███████████"+color2+" by FSystem88 "+color1+"███████████\n████████████████████████████████████\n"+Style.RESET_ALL)
 
 import sys
 import os
@@ -232,7 +213,6 @@ from PIL import Image
 
 def main():
   try:
-
     ur = imgs
   except NameError:
       print("База не обнаружена!")
@@ -274,23 +254,23 @@ def main():
             except HTTPError as err_code:
               if err_code.code == 400:
                 print(
-                  f"{red}[-] {yellow}400 (некорректный запрос): {blue}{name_file}{white}  URL: {url}"
+                  f"{red}[-] {red}400 (некорректный запрос): {blue}{name_file}{white}  URL: {url}"
                 )
               if err_code.code == 401:
                 print(
-                  f"{red}[-] {yellow}401 (не авторизован): {blue}{name_file}{white}  URL: {url}"
+                  f"{red}[-] {red}401 (не авторизован): {blue}{name_file}{white}  URL: {url}"
                 )
               if err_code.code == 402:
                 print(
-                  f"{red}[-] {yellow}402 (необходима оплата): {blue}{name_file}{white}  URL: {url}"
+                  f"{red}[-] {red}402 (необходима оплата): {blue}{name_file}{white}  URL: {url}"
                 )
               if err_code.code == 403:
                 print(
-                  f"{red}[-] {yellow}403 (запрещено): {blue}{name_file}{white}  URL: {url}"
+                  f"{red}[-] {red}403 (запрещено): {blue}{name_file}{white}  URL: {url}"
                 )
               if err_code.code == 404:
                 print(
-                  f"{red}[-] {yellow}404 (не найдено): {blue}{name_file}{white}  URL: {url}"
+                  f"{red}[-] {red}404 (не найдено): {blue}{name_file}{white}  URL: {url}"
                 )
               else:
                 pass
@@ -300,15 +280,15 @@ def main():
             except urllib.error.URLError as err_code:
               if "[WinError 10054]" in str(err_code):
                 print(
-                  f"{red}[-] {yellow}522 (WE10054) (соединение не отвечает): {blue}{name_file}{white}  URL: {url}"
+                  f"{red}[-] {red}522 (WE10054) (соединение не отвечает): {blue}{name_file}{white}  URL: {url}"
                 )
               if "[Errno 99]" in str(err_code):
                 print(
-                  f"{red}[-] {yellow}524 (OSE99) (TCP соеденение): {blue}{name_file}{white}  URL: {url}"
+                  f"{red}[-] {red}524 (OSE99) (TCP соеденение): {blue}{name_file}{white}  URL: {url}"
                 )
               if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
                print(
-                 f"{red}[-] {yellow}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
+                 f"{red}[-] {red}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
                 )
               else:
                 pass

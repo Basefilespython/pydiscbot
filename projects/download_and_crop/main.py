@@ -1,4 +1,4 @@
-s_version = "2.1.10"
+s_version = "2.1.11"
 
 from os import system
 import urllib.request
@@ -53,7 +53,11 @@ if '/content' in os.getcwd():
    except: pass
    print(f"{red}[!] WARNING: ваша OS похожа на Colab. Все скачанные файлы будут скачиваться в ваш Google Drive. А точнее в подпапку где сохранен данный файл.{white}")
    from google.colab import drive
-   drive.mount('/content/MyDrive')
+   print(f'{green}[.] Connecting to drive...{white}')
+   try:
+      drive.mount('/content/MyDrive')
+   except:
+     raise SystemError(f'{red}[!] Error to connecting to drive...{white}')
    os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
    try:
     os.mkdir('Dand_Crop')
@@ -317,8 +321,10 @@ def main():
   download()
   return err
 
-
-err_count = main()
+try:
+  err_count = main()
+except KeyboardInterrupt:
+  print(f'{red}[!] Вы прервали выполнение кода...')
 
 import json
 with open("errors.json", "w") as outfile:

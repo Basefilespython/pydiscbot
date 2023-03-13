@@ -6,11 +6,7 @@ from urllib.request import HTTPError
 import requests
 import json
 
-try:
-  from colorama import Fore,Style,Back
-except ModuleNotFoundError:
-  system('pip install colorama')
-  from colorama import Fore,Style,Back
+
 
 
 try:
@@ -25,7 +21,10 @@ except:
   system("pip install Pillow")
   import PIL
 
+import os
+from os import system
 
+os.system('start cmd /k python.exe -m pip install --upgrade pip')
 
 
 import os
@@ -184,7 +183,7 @@ except PermissionError:
   pass
 
 
-print(f"{green}[*] Работающий каталог:", os.getcwd(),f'{white}')
+print(f"{green}[*] Работающий каталог:", os.getcwd(),f'{white}\n\n')
 
 if str(os.name) == 'nt':
   dir_pref = "\\"
@@ -194,12 +193,25 @@ else:
 
 import random
 def logo():
-	colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
-	color1 = random.choice(colors)
-	colors.remove(color1)
-	color2 = random.choice(colors)
 
+  try:
+    from colorama import Fore
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
+  except:
+    print(f'{red}[!] ModuleImportError: colorama.{white}')
+    colors = [red, green, yellow, blue, violet, turquoise, white]
 
+  color1 = random.choice(colors)
+  colors.remove(color1)
+  color2 = random.choice(colors)  
+  print(f'''{color1}
+[--------------------------------]
+    [------------------------]    
+        [----------------]        
+            [----------]            
+  {white}''')
+
+logo()
   
 import sys
 import os
@@ -214,6 +226,7 @@ except ImportError:
 
 
 from PIL import Image
+
 
 
 def main():
@@ -332,6 +345,29 @@ with open("errors.json", "w") as outfile:
 
 
 def res_def(name_dir):
+  
+  os.chdir(f'{os.getcwd()}/')
+  path_one = os.getcwd()
+  try:
+    name_dir = "vertical"
+    os.mkdir(name_dir)
+  except FileExistsError:
+    pass
+  path_vert = f'{os.getcwd()}{dir_pref}vertical'
+
+  try:
+    name_dir = "horizontal"
+    os.mkdir(name_dir)
+  except FileExistsError:
+    pass
+  path_hori = f'{os.getcwd()}{dir_pref}horizontal'
+
+  try:
+    name_dir = "square"
+    os.mkdir(name_dir)
+  except FileExistsError:
+    pass
+  path_square = f'{os.getcwd()}{dir_pref}square'
 
 
   img_resize = []
@@ -393,51 +429,25 @@ def res_def(name_dir):
 
       try:
         img = Image.open(str(data).split("'")[1])
-
-        viev = str(data).split("'")[3]
-
-        if viev == "vertical":
-          #pass
-          (width, height) = im.size
-          new_image = img.resize((height, width))
-        if viev == "horizontal":
-          new_image = img.resize((7680, 4320))
-        if viev == "square":
-          new_image = img.resize((7680, 7680))
-
+        (width, height) = im.size
+        new_image = img.resize((height*4, width*4))
         new_image.save(str(str(data).split("'")[1]))
         img.close()
       except PIL.UnidentifiedImageError:
         pass
       bar()
 
+if input(f'\n{red}[!] Откадрировать изображения в базе? (Y/n) >>> ') == 'Y':
+  res_def(name_dir)
+else:
+  pass
 
-res_def(name_dir)
-
+print(f"\n{white}")
 
 def in_the_papka(dir_pref): #перемещение файлов в их папки
   os.chdir(f'{os.getcwd()}/')
   path_one = os.getcwd()
-  try:
-    name_dir = "vertical"
-    os.mkdir(name_dir)
-  except FileExistsError:
-    pass
-  path_vert = f'{os.getcwd()}{dir_pref}vertical'
-
-  try:
-    name_dir = "horizontal"
-    os.mkdir(name_dir)
-  except FileExistsError:
-    pass
-  path_hori = f'{os.getcwd()}{dir_pref}horizontal'
-
-  try:
-    name_dir = "square"
-    os.mkdir(name_dir)
-  except FileExistsError:
-    pass
-  path_square = f'{os.getcwd()}{dir_pref}square'
+  
 
   path = os.getcwd()
   arts_names = []

@@ -3,9 +3,15 @@ import time
 from io import BytesIO
 import requests
 import os
+from os import system
+
 first_path = os.getcwd()
 
-import pytz
+try:
+    import pytz
+except:
+    system("pip install pytz")
+    import pytz
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from module_py import module

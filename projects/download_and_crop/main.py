@@ -24,7 +24,7 @@ except:
 import os
 from os import system
 
-os.system('start cmd /k python.exe -m pip install --upgrade pip')
+
 
 
 import os

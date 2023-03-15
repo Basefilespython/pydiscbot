@@ -97,10 +97,7 @@ if '/content' in os.getcwd():
       os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
       per2 = os.getcwd()
     except OSError as err:
-      if "[Errno 107]" in str(err):
-         per1 = per2 = '[OSERR107]'
-    print(f'''{red}[*] Работающий каталог до: {per1}''')
-    print(f'''{green}[*] Работающий каталог после: {per2}''')
+        raise OSError(f'{red}[!] ПЕРЕЗАПУСТИТЕ СРЕДУ ВЫПОЛНЕНИЯ СКИПТА.')
     try:
         os.mkdir('Dand_Crop')
     except FileExistsError:

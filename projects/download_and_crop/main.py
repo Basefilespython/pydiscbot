@@ -8,7 +8,7 @@ from urllib.request import HTTPError
 import urllib.request
 from os import system
 import random
-s_version = "2.1.11"
+s_version = "2.1.13"
 
 
 black = "\033[30m"
@@ -34,12 +34,12 @@ def logo():
     color1 = random.choice(colors)
     colors.remove(color1)
     color2 = random.choice(colors)
-    print(f'''{color1}
-[--------------------------------]
-    [------------------------]    
-        [----------------]        
-            [----------]            
-  {white}''')
+    #print(f'''{color1}
+#[--------------------------------]
+#    [------------------------]    
+#        [----------------]        
+#            [----------]            
+#  {white}''')
 
 
 logo()
@@ -70,8 +70,10 @@ except:
     system("pip install Pillow")
     import PIL
 
-
-do = os.getcwd()
+try:
+  do = os.getcwd()
+except OSError:
+     raise OSError(f'{red}[!] ПЕРЕЗАПУСТИТЕ СРЕДУ ВЫПОЛНЕНИЯ СКИПТА.')
 
 
 if '/content' in os.getcwd():
@@ -82,14 +84,23 @@ if '/content' in os.getcwd():
     print(f'''{white}{'='*15}- {red}WARNING!{white} -{'='*15}''')
     print(f"{red}Ваша OS похожа на Colab. Все скачанные файлы будут скачиваться в ваш Google Drive. А точнее в подпапку где сохранен данный файл.{white}")
     from google.colab import drive
-    print(f'{green}[.] Connecting to drive...{white}')
     try:
-        drive.mount('/content/MyDrive')
+        print(f'''{white}{'='*15}- {green}Connecting...{white} -{'='*15}''')
+        drive.mount("/content/MyDrive", force_remount=True)
     except:
+        print(f'''{white}{'='*15}- {red}Connecting Failed...{white} -{'='*15}''')
         raise SystemError(f'{red}[!] Error to connecting to drive...{white}')
-    print(f'''{red}[*] Работающий каталог до: {os.getcwd()}''')
-    os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
-    print(f'''{green}[*] Работающий каталог после: {os.getcwd()}''')
+    print(f'''{white}{'='*15}- {green}Connecting OK...{white} -{'='*15}''')
+
+    try:
+      per1 = os.getcwd()
+      os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
+      per2 = os.getcwd()
+    except OSError as err:
+      if "[Errno 107]" in str(err):
+         per1 = per2 = '[OSERR107]'
+    print(f'''{red}[*] Работающий каталог до: {per1}''')
+    print(f'''{green}[*] Работающий каталог после: {per2}''')
     try:
         os.mkdir('Dand_Crop')
     except FileExistsError:

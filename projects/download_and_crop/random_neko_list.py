@@ -131,7 +131,6 @@ imgs = [
     "https://i.imgur.com/ZELgqPi.jpg",
     "https://i.pinimg.com/originals/95/d8/01/95d801c5ce2ece2f4c695c5d16ea99fb.jpg",
     "https://pbs.twimg.com/media/FChe868VQAELrtF.jpg",
-    "https://psv4.userapi.com/c237331/u508939002/docs/d14/0168dafc7059/1675873852625.jpg?extra=Ke6x99wKXav9Axr29Vx5nDZ6ZsR55TTIkUj0vqJujlXudhYq0boei1TK08HlhCuBbI7ok3ObKYA3-giCKWYK-c00BPIBrqj7XlWhlL6fDH6c7DCZ6g9lfOBtau3jgjm5gWIsCrVUXh7mxbh4dpqnGPY",
     "https://s3.eu-central-1.amazonaws.com/telegram.sendpulse.prod/attachments/f31fa1d35b6854a9ff0f620a944c4825/601bf3ae-0bbc-4006-bd4f-6b3793fc412c.jpg",
     "https://sun1-13.userapi.com/impg/8x4gXayTDiwelmcKZElY6-9aTil-U-CbYdHSDA/flI_M4aDu6g.jpg?size=800x1200&quality=95&sign=97a4db6372d580ee4f2df7fedf742ff6&type=album",
     "https://sun1-14.userapi.com/impg/OoEi7TgbEkB7ty3zy23TC5bHYpOh7tv2wVcqfw/tPB7N6Ruths.jpg?size=1000x1414&quality=95&sign=0343c519cfa28ebfc9d338fe75d1461b&type=album",

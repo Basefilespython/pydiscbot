@@ -53,9 +53,10 @@ def update():
 
 update()
 
-with open("start.bat", "w") as outfile:
-  outfile.write(f"python main.py")
-  pass
+if os.name != 'posix':
+  with open("start.bat", "w") as outfile:
+    outfile.write(f"python main.py")
+    pass
 
 print("Установка завершена!")
 import time

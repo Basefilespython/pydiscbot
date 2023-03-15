@@ -1,9 +1,49 @@
 s_version = "2.1.11"
 
+
+black = "\033[30m"
+red = "\033[31m"
+green = "\033[32m"
+yellow = "\033[33m"
+blue = "\033[34m"
+violet = "\033[35m"
+turquoise = "\033[36m"
+white = "\033[37m"
+st = "\033[37"
+
+import random
+def logo():
+  try:
+    from colorama import Fore
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
+  except:
+    print(f'{red}[!] ModuleImportError: colorama.{white}')
+    colors = [red, green, yellow, blue, violet, turquoise, white]
+
+  color1 = random.choice(colors)
+  colors.remove(color1)
+  color2 = random.choice(colors)
+  print(f'''{color1}
+[--------------------------------]
+    [------------------------]    
+        [----------------]        
+            [----------]            
+  {white}''')
+
+logo()
+
+
+
+
+
 from os import system
 import urllib.request
 from urllib.request import HTTPError
-import requests
+try:
+  import requests
+except:
+  system("pip install requests")
+  import requests
 import json
 
 
@@ -11,9 +51,15 @@ import json
 
 try:
   from alive_progress import alive_bar
-except ImportError:
+  alive_a = True
+except:
   system("pip install alive-progress")
-  from alive_progress import alive_bar
+  try:
+    from alive_progress import alive_bar
+    alive_a = True
+  except ModuleNotFoundError:
+    alive_a = False
+    print(f'{red}[!] ModuleNotFoundError: alive_progress.{white}')
 
 try:
   import PIL
@@ -36,15 +82,7 @@ do = os.getcwd()
 
 
 
-black = "\033[30m"
-red = "\033[31m"
-green = "\033[32m"
-yellow = "\033[33m"
-blue = "\033[34m"
-violet = "\033[35m"
-turquoise = "\033[36m"
-white = "\033[37m"
-st = "\033[37"
+
 
 
 if '/content' in os.getcwd():
@@ -142,6 +180,7 @@ def old(nversion):
       pass
 
 
+print(f'''{yellow}[*] OS Name: {os.name}{white}''')
 
 def check_version(sversion):
   nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
@@ -191,36 +230,12 @@ else:
   dir_pref = "/"
 
 
-import random
-def logo():
 
-  try:
-    from colorama import Fore
-    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
-  except:
-    print(f'{red}[!] ModuleImportError: colorama.{white}')
-    colors = [red, green, yellow, blue, violet, turquoise, white]
 
-  color1 = random.choice(colors)
-  colors.remove(color1)
-  color2 = random.choice(colors)  
-  print(f'''{color1}
-[--------------------------------]
-    [------------------------]    
-        [----------------]        
-            [----------]            
-  {white}''')
-
-logo()
   
 import sys
 import os
 
-try:
-    from alive_progress import alive_bar
-except ImportError:
-    system("pip install alive-progress")
-    from alive_progress import alive_bar
 
 
 
@@ -241,13 +256,104 @@ def main():
 
   def download():
     i = 0
-    with alive_bar(len(ur)) as bar:
+    if alive_a == True:
+      with alive_bar(len(ur)) as bar:
+
+       for url in ur:
+
+          url = str(url)
+
+          def ww(i):
+
+
+            if "mp4" in url:
+              name_file = f"{i}.mp4"
+            else:
+              if "gif" in url:
+                name_file = f"{i}.gif"
+              else:
+                if "jpg" in url:
+                  name_file = f"{i}.jpg"
+                else:
+                  if "webp" in url:
+                    name_file = f"{i}.webp"
+                  else:
+                    name_file = f"{i}.png"
+
+            while not os.path.exists(name_file):
+              try:
+                urllib.request.urlretrieve(str(url), name_file)
+                print(
+                  f"{green}[+] 200 (обработан): {blue}{name_file}{white}  URL: {url}"
+                )
+              except HTTPError as err_code:
+                if err_code.code == 400:
+                  print(
+                    f"{red}[-] {red}400 (некорректный запрос): {blue}{name_file}{white}  URL: {url}"
+                  )
+                if err_code.code == 401:
+                  print(
+                    f"{red}[-] {red}401 (не авторизован): {blue}{name_file}{white}  URL: {url}"
+                  )
+                if err_code.code == 402:
+                  print(
+                    f"{red}[-] {red}402 (необходима оплата): {blue}{name_file}{white}  URL: {url}"
+                  )
+                if err_code.code == 403:
+                  print(
+                    f"{red}[-] {red}403 (запрещено): {blue}{name_file}{white}  URL: {url}"
+                  )
+                if err_code.code == 404:
+                  print(
+                    f"{red}[-] {red}404 (не найдено): {blue}{name_file}{white}  URL: {url}"
+                  )
+                else:
+                  pass
+
+                err.append(f"{url}")
+                break
+              except urllib.error.URLError as err_code:
+                if "[WinError 10054]" in str(err_code):
+                  print(
+                    f"{red}[-] {red}522 (WE10054) (соединение не отвечает): {blue}{name_file}{white}  URL: {url}"
+                  )
+                if "[Errno 99]" in str(err_code):
+                  print(
+                    f"{red}[-] {red}524 (OSE99) (TCP соеденение): {blue}{name_file}{white}  URL: {url}"
+                  )
+                if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
+                 print(
+                   f"{red}[-] {red}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
+                  )
+                else:
+                  pass
+                err.append(f"{url}")
+                break
+
+            if url not in err:
+              src = one_path + dir_pref + name_file
+              os.chdir(one_path)
+              dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
+              try:
+                os.rename(src, dest)
+              except FileExistsError:
+                os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
+                os.remove(name_file)
+                os.chdir(one_path)
+                os.rename(src, dest)
+              except FileNotFoundError:
+                pass
+            bar()
+
+          ww(i)
+          i = i + 1
+    if alive_a == False:
+
       for url in ur:
 
         url = str(url)
 
         def ww(i):
-
 
           if "mp4" in url:
             name_file = f"{i}.mp4"
@@ -305,8 +411,8 @@ def main():
                   f"{red}[-] {red}524 (OSE99) (TCP соеденение): {blue}{name_file}{white}  URL: {url}"
                 )
               if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
-               print(
-                 f"{red}[-] {red}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
+                print(
+                  f"{red}[-] {red}526 (недействительный SSL): {blue}{name_file}{white}  URL: {url}"
                 )
               else:
                 pass
@@ -326,11 +432,9 @@ def main():
               os.rename(src, dest)
             except FileNotFoundError:
               pass
-          bar()
 
         ww(i)
         i = i + 1
-
   download()
   return err
 

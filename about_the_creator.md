@@ -12,7 +12,7 @@
 
 <h2 class="code-line" data-line-start=9 data-line-end=10 ><a id="Features_9"></a>Features</h2>
 
-<p class="has-line-data" data-line-start="12" data-line-end="14">Version: <a href="https://www.python.org/downloads/">История изменений</a><br>
+<p class="has-line-data" data-line-start="12" data-line-end="14">Version: <a href="https://github.com/Basefilespython/pydiscbot/commit/main">История изменений</a><br>
 Mail: <a href="mailto:hentai7maker@gmail.com">hentai7maker@gmail.com</a></p>
 
 <h2 class="code-line" data-line-start=18 data-line-end=19 ><a id="Community_Translators_18"></a>Community Translators</h2>

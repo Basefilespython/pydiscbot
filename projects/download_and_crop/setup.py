@@ -13,7 +13,7 @@ os.chdir(name_dir)
 one_path = os.getcwd()
 
 file_names = ['random_neko_list.py', 'main.py', 'setup.py', 'keep_module.py']
-file_names_main = ['LICENSE', 'README.md']
+file_names_main = ['LICENSE', 'README.md','about_the_creator.md']
 
 
 def download_file_from_github(url_id, file_name):

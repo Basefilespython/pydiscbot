@@ -288,9 +288,20 @@ def main():
                                         name_file = f"{i}.png"
 
                         while not os.path.exists(name_file):
+                            if '?size=' in url:
+                              ind =  url.find('?size=')
+                            else:
+                                if '?extra=' in url:
+                                   ind =  url.find('?extra=') 
+                                else:
+                                    ind = len(url)  
+    
+                             
+
+
                             try:
                                 urllib.request.urlretrieve(str(url), name_file)
-                                print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url}")
+                                print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
                             except HTTPError as err_code:
                                 #if err_code.code == 400:print(f"{red}[-] {red}400: {blue}{name_file}{white}  URL: {url}")
                                 #if err_code.code == 401:print(f"{red}[-] {red}401: {blue}{name_file}{white}  URL: {url}")
@@ -299,7 +310,7 @@ def main():
                                 #if err_code.code == 404:print(f"{red}[-] {red}404: {blue}{name_file}{white}  URL: {url}")
                                 #else:                   print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url}")
                                 #  pass
-                                print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url}")
+                                print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}")
 
                                 err.append(f"{url}")
                                 err_info.append({f'{name_file}': f'{err_code.code}'})
@@ -308,13 +319,13 @@ def main():
                             
                             except urllib.error.URLError as err_code:
                                 if "[WinError 10054]" in str(err_code):
-                                  print(f"{red}[-] {red}522 : {blue}{name_file}{white}  URL: {url}")
+                                  print(f"{red}[-] {red}522 : {blue}{name_file}{white}  URL: {url[0:ind]}")
                                   err_info.append({f'{name_file}': "522"})
                                 if "[Errno 99]" in str(err_code):
-                                    print(f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url}")
+                                    print(f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}")
                                     err_info.append({f'{name_file}': "524"})
                                 if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
-                                    print(f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url}")
+                                    print(f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}")
                                     err_info.append({f'{name_file}': "526"})
                                 else:pass
 

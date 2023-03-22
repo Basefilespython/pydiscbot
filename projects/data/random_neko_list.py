@@ -443,7 +443,15 @@ imgs = [
 
 
 imgs18 = [
-    
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-1.discordapp.net%2Fexternal%2FtaLZ3385sQ6UwZiah7VnMGScFWkMA6U3WBSKK-e-qtI%2Fhttps%2Fcdn.nekobot.xyz%2F9%2F0%2Fb%2F2058151a8e9f77f62af7d9d709db7.gif&cc_key=",
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-2.discordapp.net%2Fexternal%2FXUALchDUsg9FygTAy3XkdBKXDVCcPdOxxyACeiI-S4A%2Fhttps%2Fi0.nekobot.xyz%2F2%2F7%2Fb%2F55e07947592c79bf9975e130c37d6.png&cc_key=",
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-1.discordapp.net%2Fexternal%2FE0J8aa__SBwOvc_otuCt5_UMVA0F0hfjtzndMKuSdKo%2Fhttps%2Fcdn.nekobot.xyz%2Fc%2Fc%2Fb%2Fdf6312f6cc3ecbf960bd216dda6f5.png&cc_key=",
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-1.discordapp.net%2Fexternal%2FoL_ikDBrED6WT9UJFXgfJUop8OCB7MNID_5VEdgja0w%2Fhttps%2Fcdn.nekobot.xyz%2Fb%2F0%2Fa%2Fd4f4df31702e7f79d1bf25f312948.png&cc_key=",
+    "https://sun9-12.userapi.com/impg/7yJDEwZbq3iZfpV0l1GGAkMkJRV8U_pmay14Dg/Fue9IMz30Vo.jpg?size=811x1137&quality=96&sign=4b7e3843bd2d92373e9204890f07677b&type=album",
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-2.discordapp.net%2Fexternal%2FLknN9-JDK94c3XQ2Ei3yLyO8j3rdZYwi2Q-NfesSQeo%2Fhttps%2Fi0.nekobot.xyz%2F8%2F1%2F8%2F4290a66f11a20f506e51a256f89b0.png&cc_key=",
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-1.discordapp.net%2Fexternal%2FfrjeUogzfrEdZ2iqTgP0KGCNbttIioUjHsQeywksVSU%2Fhttps%2Fi0.nekobot.xyz%2F3%2F9%2Fc%2F609188637cc52a714b5f440b0b546.jpg&cc_key=",
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-1.discordapp.net%2Fexternal%2FYXmX0BY8ZwCl-SCfPSZY-EU70jV_xnCu8sgSwvBLwxc%2Fhttps%2Fcdn.nekobot.xyz%2Ff%2F4%2F5%2F96023ee1afc336f3f7e8f1e79c092.jpg&cc_key=",
+    "https://vk.com/away.php?to=https%3A%2F%2Fimages-ext-2.discordapp.net%2Fexternal%2Fz0MrNCIY5PWQ5Cxdbl80X6pJ_e1SbdO6Fo14143sTFo%2Fhttps%2Fcdn.nekobot.xyz%2Fe%2F1%2Ff%2F027f8497e516371edda52bb46b446.jpg&cc_key=",
     "https://sun9-20.userapi.com/impg/ozS7xeDodaSHq7ByybVVez06tQy83LDC1nfaQw/egk-5Rwv-Wg.jpg?size=772x1080&quality=96&sign=72dd653b77b9c3874e934d1ea548ebb3&type=album",
     "https://sun9-10.userapi.com/impg/ViYbEuKDwWOxGwWOpsjNuT-kKCG95jNm9gynBQ/b-5xa5Oa6Bw.jpg?size=772x1080&quality=96&sign=bf1c882a10c85353951d757c7522df8e&type=album",
     "https://sun9-28.userapi.com/impg/-2hrGBO-9k9gXc1O7fTYypiEUS_LIqGw-guijw/wROK6rAQieA.jpg?size=764x1080&quality=95&sign=3436942840a05cdc5acc96d0e4bf6c32&type=album",

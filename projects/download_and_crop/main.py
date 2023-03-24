@@ -1,13 +1,37 @@
+import subprocess
+from os import system
+try:
+  subprocess.call("clear") # linux/mac
+except:
+  subprocess.call("cls", shell=True)
+
+
 from time import sleep
 import http
-from PIL import Image
+
+try:
+    from PIL import Image
+except ModuleNotFoundError:
+    system('pip install Pillow')
+    from PIL import Image
+
 import sys
 import os
 import json
 from urllib.request import HTTPError
 import urllib.request
-from os import system
+
 import random
+
+
+
+try:
+    import requests
+except:
+    system("pip install requests")
+    import requests
+
+
 s_version = "2.1.13"
 
 
@@ -22,14 +46,34 @@ white = "\033[37m"
 st = "\033[37"
 
 
+try:
+    from alive_progress import alive_bar
+    alive_a = True
+except:
+    system("pip3 install alive-progress")
+    try:
+        from alive_progress import alive_bar
+        alive_a = True
+    except ModuleNotFoundError:
+        alive_a = False
+        print(f'{red}[!] ModuleNotFoundError: alive_progress.{white}')
+
+
 def logo():
     try:
         from colorama import Fore
         colors = [Fore.RED, Fore.GREEN, Fore.YELLOW,
                   Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
     except:
-        print(f'{red}[!] ModuleImportError: colorama.{white}')
-        colors = [red, green, yellow, blue, violet, turquoise, white]
+        system('pip install colorama')
+        try:
+            from colorama import Fore
+            colors = [Fore.RED, Fore.GREEN, Fore.YELLOW,
+                      Fore.BLUE, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
+        except:
+            print(f'{red}[!] ModuleImportError: colorama.{white}')
+            colors = [red, green, yellow, blue, violet, turquoise, white]
+
 
     color1 = random.choice(colors)
     colors.remove(color1)
@@ -45,24 +89,11 @@ def logo():
 logo()
 
 
-try:
-    import requests
-except:
-    system("pip install requests")
-    import requests
 
 
-try:
-    from alive_progress import alive_bar
-    alive_a = True
-except:
-    system("pip install alive-progress")
-    try:
-        from alive_progress import alive_bar
-        alive_a = True
-    except ModuleNotFoundError:
-        alive_a = False
-        print(f'{red}[!] ModuleNotFoundError: alive_progress.{white}')
+
+
+
 
 try:
     import PIL
@@ -182,7 +213,7 @@ def old(nversion):
     else:
         pass
 
-print(f'''{'='*15}- OS -{'='*15}
+print(f'''{'='*15}- OS -{'='*15} #NT / POSIX
 {yellow}[*] OS Name: {os.name.upper()}{white}''')
 
 
@@ -254,7 +285,7 @@ print(f'''{white}{'='*15}- PATH -{'='*15}
 
 def main():
     
-    ur = imgs18
+    ur = imgs
 
     print(f'''{white}{'='*15}- Количество изображений - {len(ur)} -{'='*15}''')
 
@@ -295,8 +326,6 @@ def main():
                                    ind =  url.find('?extra=') 
                                 else:
                                     ind = len(url)  
-    
-                             
 
 
                             try:
@@ -377,13 +406,7 @@ def main():
                                 urllib.request.urlretrieve(str(url), name_file)
                                 print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url}")
                             except HTTPError as err_code:
-                                #if err_code.code == 400:print(f"{red}[-] {red}400: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 401:print(f"{red}[-] {red}401: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 402:print(f"{red}[-] {red}402: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 403:print(f"{red}[-] {red}403: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 404:print(f"{red}[-] {red}404: {blue}{name_file}{white}  URL: {url}")
-                                #else:                   print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url}")
-                                #  pass
+
                                 print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url}")
 
                                 err.append(f"{url}")

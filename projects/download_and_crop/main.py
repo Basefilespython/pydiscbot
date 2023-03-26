@@ -1,5 +1,41 @@
 import subprocess
+import os
 from os import system
+import time
+import logging
+
+if str(os.name) == 'nt':
+    dir_pref = "\\"
+else:
+    dir_pref = "/"
+
+do = os.getcwd()
+
+
+def set_logger_settings():
+    py_logger = logging.getLogger(__name__)
+    py_logger.setLevel(logging.INFO)
+    py_handler = logging.FileHandler(f"{__name__}.log", mode='w') 
+    py_handler.setFormatter(logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s"))
+    py_logger.addHandler(py_handler)
+    os.chdir(do)
+    py_logger.info(f"{'='*15}- STARTing script in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}] -{'='*15}")
+    return py_logger
+
+try:
+    os.mkdir('logging')
+    os.chdir(f'{do + dir_pref + "logging"}')
+    py_logger = set_logger_settings()
+except FileExistsError:
+    py_logger = set_logger_settings()
+    pass
+except PermissionError:
+    py_logger = set_logger_settings()
+    pass
+
+
+
+
 try:
   subprocess.call("clear") # linux/mac
 except:
@@ -11,12 +47,13 @@ import http
 
 try:
     from PIL import Image
+    py_logger.info(f"[Import module from PIL] successfully.")
 except ModuleNotFoundError:
     system('pip install Pillow')
     from PIL import Image
+    py_logger.info(f"[Import module from PIL] failed -> [Import module from PIL] successfully.")
 
 import sys
-import os
 import json
 from urllib.request import HTTPError
 import urllib.request
@@ -24,15 +61,19 @@ import urllib.request
 import random
 
 
+print(f'''{'='*15}- TIME -{'='*15}
+{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}''')
 
 try:
     import requests
+    py_logger.info(f"Import module [requests] successfully.")
 except:
     system("pip install requests")
     import requests
+    py_logger.info(f"Import module [requests] failed -> Import module [requests] successfully.")
 
 
-s_version = "2.1.13"
+s_version = "2.1.15"
 
 
 black = "\033[30m"
@@ -49,14 +90,17 @@ st = "\033[37"
 try:
     from alive_progress import alive_bar
     alive_a = True
+    py_logger.info(f"[Import alive_bar from alive_progress] successfully.")
 except:
     system("pip3 install alive-progress")
     try:
         from alive_progress import alive_bar
         alive_a = True
+        py_logger.info(f"[Import module from PIL] failed -> [Import module from PIL] successfully.")
     except ModuleNotFoundError:
         alive_a = False
         print(f'{red}[!] ModuleNotFoundError: alive_progress.{white}')
+        py_logger.info(f"[Import module from PIL] failed.")
 
 
 def logo():
@@ -104,10 +148,12 @@ except:
 try:
   do = os.getcwd()
 except OSError:
-     raise OSError(f'{red}[!] ПЕРЕЗАПУСТИТЕ СРЕДУ ВЫПОЛНЕНИЯ СКИПТА.')
+    py_logger.critical(f"Unable to get a working directory.")
+    raise OSError(f'{red}[!] ПЕРЕЗАПУСТИТЕ СРЕДУ ВЫПОЛНЕНИЯ СКИПТА.')
 
 
 if '/content' in os.getcwd():
+    py_logger.info(f"Colab platform found.")
     try:
         system('!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py')
     except:
@@ -120,6 +166,7 @@ if '/content' in os.getcwd():
         drive.mount("/content/MyDrive", force_remount=True)
     except:
         print(f'''{white}{'='*15}- {red}Connecting Failed...{white} -{'='*15}''')
+        py_logger.critical(f"Unable to connect to Google Collab")
         raise SystemError(f'{red}[!] Error to connecting to drive...{white}')
     print(f'''{white}{'='*15}- {green}Connecting OK...{white} -{'='*15}''')
 
@@ -127,6 +174,7 @@ if '/content' in os.getcwd():
       per1 = os.getcwd()
       os.chdir('/content/MyDrive/MyDrive/Colab Notebooks')
       per2 = os.getcwd()
+      py_logger.info(f"[Directory change] {per1} -> {per2}")
     except OSError as err:
         raise OSError(f'{red}[!] ПЕРЕЗАПУСТИТЕ СРЕДУ ВЫПОЛНЕНИЯ СКИПТА.')
     try:
@@ -141,6 +189,7 @@ def download_file_from_github(file_name):
     url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
     local_filename = url.split('/')[-1]
     try:
+        py_logger.info(f"[Downloading file] Name: {file_name}")
         with requests.get(url, stream=True, allow_redirects=True) as r:
             r.raise_for_status()
             with open(local_filename, 'wb') as f:
@@ -153,7 +202,9 @@ def download_file_from_github(file_name):
 
 try:
     from random_neko_list import *
+    py_logger.info("The database has been successfully imported!")
 except ModuleNotFoundError:
+    py_logger.warning(f"Database not found! Trying to download database...")
     posle = os.getcwd()
     os.chdir(do)
     download_file_from_github('random_neko_list.py')
@@ -163,12 +214,16 @@ except ModuleNotFoundError:
             # import sys
             sys.path.insert(1, '../Dand_Crop')
             from random_neko_list import *
+            py_logger.info("The database has been successfully imported!")
         except NameError:
             try:
                 from random_neko_list import *
+                py_logger.info("The database has been successfully imported!")
             except:
+                py_logger.critical(f"Database not found!")
                 raise SystemExit('\n[!] База не обнаружена!')
     except ImportError:
+        py_logger.critical(f"Database not found!")
         raise SystemExit('\n[!] База не обнаружена!')
 
 
@@ -203,6 +258,7 @@ st = "\033[37"
 
 
 def old(nversion):
+    py_logger.warning(f"An obsolete version of the script has been found!")
     print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
     print(
         f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
@@ -213,45 +269,61 @@ def old(nversion):
     else:
         pass
 
-print(f'''{'='*15}- OS -{'='*15} #NT / POSIX
+
+#NT / POSIX
+
+
+
+print(f'''{'='*15}- OS -{'='*15}
 {yellow}[*] OS Name: {os.name.upper()}{white}''')
 
 
 
 def check_version(sversion):
-    nversion = json.loads(requests.get(
+    try:
+        nversion = json.loads(requests.get(
         "https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json").text)['ver']
+    except:
+        nversion = None
+    if nversion != None:
+        s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split('.')[1], str(sversion).split(
+            '.')[2], str(nversion).split('.')[0], str(nversion).split('.')[1], str(nversion).split('.')[2]
+        print(f'''{'='*15}- VERSION -{'='*15}''')
+        if s1 >= n1:
+            if s2 >= n2:
+                if s3 >= n3:
+                    py_logger.info(f"The current version of the script has been found!")
+                    print(f'''{violet}[*] VERSION: {s_version}''')
+                    print(
+                        f'''{green}[*] У вас установлена самая актуальная версия скрипта!{white}''')
 
-    s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split('.')[1], str(sversion).split(
-        '.')[2], str(nversion).split('.')[0], str(nversion).split('.')[1], str(nversion).split('.')[2]
-    print(f'''{'='*15}- VERSION -{'='*15}''')
-    if s1 >= n1:
-        if s2 >= n2:
-            if s3 >= n3:
-                print(f'''{violet}[*] VERSION: {s_version}''')
-                print(
-                    f'''{green}[*] У вас установлена самая актуальная версия скрипта!{white}''')
-
+                else:
+                    old(nversion)
             else:
                 old(nversion)
         else:
             old(nversion)
     else:
-        old(nversion)
+        py_logger.warning(f"Version check failed.")
+        print(f'''{red}[!] Проверка версии не удалась!
+{violet}[*] VERSION: {s_version}''')
 
 
 check_version(s_version)
 
 
-name_dir = "NeKo_18+"
+name_dir = "data"
 one_path = os.getcwd()
 try:
     os.mkdir(name_dir)
     name_dir = name_dir
     perm_error = False
+    py_logger.info(f"Created a new directory named [{name_dir}], perm_error = False.")
 except FileExistsError:
+    py_logger.warning(f"A directory with the same name [{name_dir}] was found.")
     pass
 except PermissionError:
+    py_logger.warning("An error occurred while creating a new directory.")
     perm_error = True
     name_dir = ''
     pass
@@ -268,28 +340,34 @@ print(f'''{'='*15}- Статусы соединения -{'='*15}
 {white}{'='*10} TIMEOUT ERROR CODEs: {'='*10}
 {red}- 522 - Соединение не отвечает (может РКН заблокал). 
 - 524 - TCP соеденение провалено. (внутренние ошибки OS).
-- 526 - Блокировка сертификата/ом (скорее разное время, или родительский контроль)''')
+- 526 - Блокировка сертификата/ом (скорее разное время, или родительский контроль)
+{white}{'='*10} ПРОЧЕЕ: {'='*10}
+{violet}- 101 - Вы отключены от сети Internet.
+- 102 - Ошибка связанная с обработкой URL.{white}''')
 
 
-if str(os.name) == 'nt':
-    dir_pref = "\\"
-else:
-    dir_pref = "/"
 
+
+
+py_logger.info(f"Dir_pref = {dir_pref}")
 print(f'''{white}{'='*15}- PATH -{'='*15}
 {green}[*] Работающий каталог: {os.getcwd()}
 [*] Скачивание в :      {os.getcwd() + dir_pref +str(name_dir)}''')
+      
+py_logger.info(f'''{'='*15}- PATH -{'='*15}''')
+py_logger.info(f"[*] Working Directory: {os.getcwd()}")
+py_logger.info(f'''[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}''')
 
 
 
 
 def main():
     
-    ur = imgs
+    ur = imgs18
 
     print(f'''{white}{'='*15}- Количество изображений - {len(ur)} -{'='*15}''')
 
-    err = []
+    err_dict = []
     vk_403_err = []
     err_info = []
     def download():
@@ -316,7 +394,10 @@ def main():
                                     if "webp" in url:
                                         name_file = f"{i}.webp"
                                     else:
-                                        name_file = f"{i}.png"
+                                        if "webm" in url:
+                                            name_file = f"{i}.webm"
+                                        else:
+                                            name_file = f"{i}.png"
 
                         while not os.path.exists(name_file):
                             if '?size=' in url:
@@ -331,38 +412,47 @@ def main():
                             try:
                                 urllib.request.urlretrieve(str(url), name_file)
                                 print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
+                                py_logger.info(f'''File with name {name_file} and link ({url}) was downloaded successfully.''')
                             except HTTPError as err_code:
-                                #if err_code.code == 400:print(f"{red}[-] {red}400: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 401:print(f"{red}[-] {red}401: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 402:print(f"{red}[-] {red}402: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 403:print(f"{red}[-] {red}403: {blue}{name_file}{white}  URL: {url}")
-                                #if err_code.code == 404:print(f"{red}[-] {red}404: {blue}{name_file}{white}  URL: {url}")
-                                #else:                   print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url}")
-                                #  pass
+
                                 print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}")
 
-                                err.append(f"{url}")
+                                err_dict.append(f"{url}")
                                 err_info.append({f'{name_file}': f'{err_code.code}'})
                                 if 'userapi.com' in url and err_code.code == 403:vk_403_err.append(f'{url}')
+                                py_logger.warning(f'''File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}''')
                                 break
                             
                             except urllib.error.URLError as err_code:
                                 if "[WinError 10054]" in str(err_code):
-                                  print(f"{red}[-] {red}522 : {blue}{name_file}{white}  URL: {url[0:ind]}")
+                                  print(f"{red}[-] {red}522: {blue}{name_file}{white}  URL: {url[0:ind]}")
+                                  py_logger.warning(f'''File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response.''')
                                   err_info.append({f'{name_file}': "522"})
                                 if "[Errno 99]" in str(err_code):
                                     print(f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}")
                                     err_info.append({f'{name_file}': "524"})
+                                    py_logger.warning(f'''File with name {name_file} and link ({url}) was NOT downloaded due to connection failure.''')
                                 if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
                                     print(f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}")
                                     err_info.append({f'{name_file}': "526"})
+                                    py_logger.warning(f'''The file with name {name_file} and link ({url}) was NOT downloaded due to mismatch of security certificate or parental controls.''')
                                 else:pass
 
-                                err.append(f"{url}")
+                                err_dict.append(f"{url}")
                                 if 'userapi.com' in url:vk_403_err.append(f'{url}')
                                 break
+                            except http.client.RemoteDisconnected:
+                                print(f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
+                                err_info.append({f'{name_file}': "101"})
+                                py_logger.warning(f'''The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet.''')
+                                break
+                            except ValueError as err:
+                                print(f"{violet}[?] 102: {blue}{name_file}{white}  URL: {url[0:ind]}")
+                                err_info.append({f'{name_file}': f"{err}"})
+                                py_logger.warning(f'''File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link.''')
+                                break
 
-                        if url not in err:
+                        if url not in err_dict:
                             src = one_path + dir_pref + name_file
                             os.chdir(one_path)
                             dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
@@ -448,21 +538,31 @@ def main():
                     ww2(i)
                     i = i + 1
     download()
-    return err, vk_403_err,err_info
+    return err_dict, vk_403_err,err_info
 
 
 try:
     err_count, vk_403_err,err_info = main()
 except KeyboardInterrupt:
+    py_logger.critical(f'''The user aborted code execution.''')
     print(f'{red}[!] Вы прервали выполнение кода...')
 
 try:
-  with open("errors.json", "w") as outfile:
-      json.dump(err_count, outfile, indent=4)
-  with open("vk403.json", "w") as outfile:
-      json.dump(vk_403_err, outfile, indent=4)
-  with open("vk403.json", "w") as outfile:
-      json.dump(err_info, outfile, indent=4)
+  if len(err_count) != 0:
+    with open("errors.json", "w") as outfile:
+        json.dump(err_count, outfile, indent=4)
+    py_logger.info(f'''File created [errors.json]''')
+
+  if len(vk_403_err) != 0:      
+    with open("vk403.json", "w") as outfile:
+        json.dump(vk_403_err, outfile, indent=4)
+    py_logger.info(f'''File created [vk403.json]''')
+
+  if len(err_info) != 0:
+    with open("err_info.json", "w") as outfile:
+        json.dump(err_info, outfile, indent=4)
+    py_logger.info(f'''File created [err_info.json]''')
+
 except NameError:
     pass
 
@@ -554,6 +654,8 @@ def res_def(name_dir):
             except PIL.UnidentifiedImageError:
                 pass
             bar()
+
+py_logger.info(f'''The database download was completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]''')
 
 
 if input(f'\n{red}[!] Откадрировать изображения в базе? (Y/n) >>> ') == 'Y':

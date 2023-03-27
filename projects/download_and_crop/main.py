@@ -15,8 +15,9 @@ do = os.getcwd()
 def set_logger_settings():
     py_logger = logging.getLogger(__name__)
     py_logger.setLevel(logging.INFO)
-    py_handler = logging.FileHandler(f"{__name__}.log", mode='w') 
-    py_handler.setFormatter(logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s"))
+    py_handler = logging.FileHandler(f"loger.log", mode='w') 
+    #py_handler.setFormatter(logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s"))
+    py_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
     py_logger.addHandler(py_handler)
     os.chdir(do)
     py_logger.info(f"{'='*15}- STARTing script in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}] -{'='*15}")
@@ -73,7 +74,7 @@ except:
     py_logger.info(f"Import module [requests] failed -> Import module [requests] successfully.")
 
 
-s_version = "2.1.15"
+s_version = "2.1.18"
 
 
 black = "\033[30m"
@@ -204,27 +205,32 @@ try:
     from random_neko_list import *
     py_logger.info("The database has been successfully imported!")
 except ModuleNotFoundError:
-    py_logger.warning(f"Database not found! Trying to download database...")
-    posle = os.getcwd()
-    os.chdir(do)
-    download_file_from_github('random_neko_list.py')
-    os.chdir(posle)
     try:
+        from modules.random_neko_list import *
+    except ModuleNotFoundError:   
+        py_logger.warning(f"Database not found! Trying to download database...")
+        posle = os.getcwd()
+        do_1212 = os.getcwd() + dir_pref + 'modules' + dir_pref + 'random_neko_list.py'
+        os.chdir(do_1212)
+        download_file_from_github('random_neko_list.py')
+        os.chdir(posle)
         try:
-            # import sys
-            sys.path.insert(1, '../Dand_Crop')
-            from random_neko_list import *
-            py_logger.info("The database has been successfully imported!")
-        except NameError:
             try:
+                # import sys
+                sys.path.insert(1, '../Dand_Crop')
                 from random_neko_list import *
                 py_logger.info("The database has been successfully imported!")
-            except:
-                py_logger.critical(f"Database not found!")
-                raise SystemExit('\n[!] База не обнаружена!')
-    except ImportError:
-        py_logger.critical(f"Database not found!")
-        raise SystemExit('\n[!] База не обнаружена!')
+            except NameError:
+                try:
+                    
+                    from modules.random_neko_list import *
+                    py_logger.info("The database has been successfully imported!")
+                except:
+                    py_logger.critical(f"Database not found!")
+                    raise SystemExit('\n[!] База не обнаружена!')
+        except ImportError:
+            py_logger.critical(f"Database not found!")
+            raise SystemExit('\n[!] База не обнаружена!')
 
 
 def check(file_name):

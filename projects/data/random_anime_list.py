@@ -1,4 +1,5 @@
 imgs = [ #https://www.arknights.global/fankit
+   "https://i.ytimg.com/vi/iXq7FYZdNng/maxresdefault.jpg",
    "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery08.b13617cf.jpg",
    "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery01.4cb3b7cf.jpg",
    "https://webusstatic.yo-star.com/ark_us_web/pc/img/gallery02.620443bc.jpg",

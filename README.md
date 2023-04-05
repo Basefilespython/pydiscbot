@@ -8,6 +8,9 @@
 
 </p>
 
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot?ref=badge_large)
+
 ## 🚀 Установка
 
 1. Установите Python версии не ниже 3.7. Сделать это можно так:
@@ -15,6 +18,7 @@
     <h3>Для Windows</h3>
 
     Скачайте установщик с [официального сайта](https://www.python.org/downloads/) и запустите его. Убедитесь, что при установке отметили галочку ![Add Python to PATH](https://user-images.githubusercontent.com/42045258/69171091-557d2780-0b0c-11ea-8adf-7f819357f041.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot?ref=badge_shield)
 
     <h3>Для Android</h3>
 

@@ -28,18 +28,24 @@ os.chdir(name_dir)
 one_path = os.getcwd()
 
 # , 'keep_module.py']
-file_names = ['random_neko_list.py', 'main.py', 'setup.py']
+file_names = ['random_neko_list.py', 'main.py', 'setup.py','exctensions_module.py']
 file_names_main = ['LICENSE', 'README.md', 'about_the_creator.md']
+file_nme_loc = ['RU.py', 'EN.py']
 
 
 def download_file_from_github(url_id, file_name):
     url_main = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/{file_name}"
     url_files = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
+    url_local = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}'
 
     if url_id == 0:
         url = url_files
+
     if url_id == 1:
         url = url_main
+
+    if url_id == 2:
+        url = url_local
 
     try:
 
@@ -64,6 +70,8 @@ def update():
         download_file_from_github(0, file_name)
     for file_name in file_names_main:
         download_file_from_github(1, file_name)
+    for file_name in file_nme_loc:
+        download_file_from_github(2, file_name)
 
 
 update()
@@ -79,6 +87,7 @@ with os.scandir(os.getcwd()) as listOfEntries:
     os.mkdir('LICENSE')
     os.mkdir('about')
     os.mkdir('modules')
+    os.mkdir('localization')
     for entry in listOfEntries:
         if entry.is_file():
             if entry.name == 'about_the_creator.md':
@@ -101,10 +110,16 @@ with os.scandir(os.getcwd()) as listOfEntries:
                             'about' + dir_pref + 'README.md')
                 os.rename(do, posle)
 
-            if (entry.name == 'random_neko_list.py') or (entry.name == 'setup.py'):
+            if (entry.name == 'random_neko_list.py') or (entry.name == 'setup.py') or (entry.name == 'exctensions_module.py'):
                 do = str(str(os.getcwd()) + str(dir_pref) + entry.name)
                 posle = str(os.getcwd() + dir_pref +
                             'modules' + dir_pref + entry.name)
+                os.rename(do, posle)
+
+            if entry.name in file_nme_loc:
+                # try:
+                do = str(str(os.getcwd()) + str(dir_pref) + f'{entry.name}')
+                posle = str(os.getcwd() + dir_pref + 'localization' + dir_pref + f'{entry.name}')
                 os.rename(do, posle)
 
 

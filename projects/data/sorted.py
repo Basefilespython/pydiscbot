@@ -25,7 +25,7 @@ except:
 
 def cls():
   try:
-    subprocess.call("clear")  # linux/mac
+    subprocess.call("clear")
   except:
     subprocess.call("cls", shell=True)
 
@@ -33,11 +33,10 @@ cls()
 
 print(f'┌{"-"*10} Sorting starting \n╎')
 
-#https://en.wikipedia.org/wiki/Box-drawing_character#DOS
-#https://symbl.cc/ru/unicode/blocks/box-drawing/
+
 
 try:
-  #print(f"IMGS_1: {len(imgs_1)}, IMGS18_1: {len(imgs18_1)}")
+  
   ee = '├ Module: one.py'
   try:
     import one
@@ -47,12 +46,11 @@ try:
   try:
     from one import imgs as imgs_1
     ee = ee + f'\n╎ IMGS_1: {green}OK{white}'
-    #ee = ee + f"IMGS_1: {len(imgs_1)}"
+
     for url in imgs_1:
       if 'gelbooru.com' in url:
         gelb.append(url)
       if url not in semnad:
-        if 'gelbooru.com' not in url or '.mp4' in url:
           semnad.append(url)
   except ImportError:
     ee = ee + f'\n╎ IMGS_1: {red}ImportError{white}'
@@ -60,13 +58,12 @@ try:
   try:
     from one import imgs18 as imgs18_1
     ee = ee + f'\n╎ Status: IMGS18_1  ─ {green}OK{white}'
-    #ee =  ee + f"IMGS18_1: {len(imgs18_1)}"
+
     for url in imgs18_1:
       if 'gelbooru.com' in url:
         gelb.append(url)
       if url not in vosem:
-        #print(f'URL({url}) -> vosem')
-        if 'gelbooru.com' not in url or '.mp4' in url:
+
           vosem.append(url)
   except ImportError:
     ee = ee + f'\n╎ IMGS18_1: {red}ImportError{white}'
@@ -87,40 +84,39 @@ try:
   
   try:
     from two import imgs as imgs_2
+
     ee = ee + f'\n╎ Status: IMGS_2  ─ {green}OK{white}'
-    #ee = ee + f"IMGS_2: {len(imgs_2)}"
+
     for url in imgs_2:
       if 'gelbooru.com' in url:
         gelb.append(url)
+
       if url not in semnad:
-        #print(f'URL({url}) -> semnad')
-        if 'gelbooru.com' not in url or '.mp4' in url:
           semnad.append(url)
   except ImportError:
     ee = ee + f"\n╎ IMGS_2: {red}ImportError{white}"
     pass
-  #print(ee)
+
 
   try:
 
     from two import imgs18 as imgs18_2
     ee = ee + f'\n╎ Status: IMGS18_2  ─ {green}OK{white}'
-    #ee =  ee + f", IMGS18_2: {len(imgs18_2)}"
+
     for url in imgs18_2:
       if 'gelbooru.com' in url:
         gelb.append(url)
       if url not in vosem:
-        #print(f'URL({url}) -> vosem')
-        if 'gelbooru.com' not in url or '.mp4' in url:
+
           vosem.append(url)
   except ImportError:
     ee = ee + f'\n╎ IMGS18_2: {red}ImportError{white}'
-    #ee =  ee + f", IMGS18_2: ImportError"
+
     pass
   print(ee)
 except Exception as err:
   print(err)
-#  print(err)
+
 
 try:
   ee = '╎\n├ Module: tree.py'
@@ -137,12 +133,11 @@ try:
       if 'gelbooru.com' in url:
         gelb.append(url)
       if url not in semnad:
-        #print(f'URL({url}) -> semnad')
-        if 'gelbooru.com' not in url or '.mp4' in url:
+
           semnad.append(url)
   except ImportError:
     ee = ee + f'\n╎ Status: IMGS_3  ─ {red}Error{white}'
-    #ee =  ee + f", IMGS18_2: ImportError"
+
     pass
 
   try:
@@ -151,41 +146,16 @@ try:
     for url in imgs18_3:
       if 'gelbooru.com' in url:
         gelb.append(url)
+
       if url not in vosem:
-        #print(f'URL({url}) -> vosem')
-        if 'gelbooru.com' not in url or '.mp4' in url:
           vosem.append(url)
+
   except ImportError:
      ee = ee + f'\n╎ Status: IMGS18_3  ─ {red}Error{white}'
   print(ee)
 
 except Exception:
   pass
-
-# try:
-#   from four import imgs as imgs_4
-#   from four import imgs18 as imgs18_4
-
-#   for url in imgs_4:
-#     if 'gelbooru.com' in url:
-#       gelb.append(url)
-#     if url not in semnad:
-#       #print(f'URL({url}) -> semnad')
-#       if 'gelbooru.com' not in url or '.mp4' in url:
-#         semnad.append(url)
-
-#   for url in imgs18_4:
-#     if 'gelbooru.com' in url:
-#       gelb.append(url)
-#     if url not in vosem:
-#       #print(f'URL({url}) -> vosem')
-#       if 'gelbooru.com' not in url or '.mp4' in url:
-#         vosem.append(url)
-
-# except Exception:
-#   pass
-
-
 
 
 try:
@@ -202,13 +172,13 @@ try:
     for url in imgs_4:
       if 'gelbooru.com' in url:
         gelb.append(url)
+        
       if url not in semnad:
-        #print(f'URL({url}) -> semnad')
-        if 'gelbooru.com' not in url or '.mp4' in url:
+
           semnad.append(url)
   except ImportError:
     ee = ee + f'\n╎ Status: IMGS_4  ─ {red}Error{white}'
-    #ee =  ee + f", IMGS18_2: ImportError"
+
     pass
 
   try:
@@ -217,10 +187,10 @@ try:
     for url in imgs18_4:
       if 'gelbooru.com' in url:
         gelb.append(url)
+
       if url not in vosem:
-        #print(f'URL({url}) -> vosem')
-        if 'gelbooru.com' not in url or '.mp4' in url:
           vosem.append(url)
+
   except ImportError:
      ee = ee + f'\n╎ Status: IMGS18_4  ─ {red}Error{white}'
   print(ee)
@@ -246,12 +216,9 @@ try:
       if 'gelbooru.com' in url:
         gelb.append(url)
       if url not in semnad:
-        #print(f'URL({url}) -> semnad')
-        if 'gelbooru.com' not in url or '.mp4' in url:
           semnad.append(url)
   except ImportError:
     ee = ee + f'\n╎ Status: IMGS_5  ─ {red}Error{white}'
-    #ee =  ee + f", IMGS18_2: ImportError"
     pass
 
   try:
@@ -261,8 +228,6 @@ try:
       if 'gelbooru.com' in url:
         gelb.append(url)
       if url not in vosem:
-        #print(f'URL({url}) -> vosem')
-        if 'gelbooru.com' not in url or '.mp4' in url:
           vosem.append(url)
   except ImportError:
      ee = ee + f'\n╎ Status: IMGS18_5  ─ {red}Error{white}'

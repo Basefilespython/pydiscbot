@@ -1,6 +1,6 @@
 # <---------------------->
 
-s_version = "2.1.18"
+s_version = "2.1.20"
 
 # <---------------------->
 black = "\033[30m"
@@ -172,9 +172,14 @@ except:
     py_logger.info(f"[Import alive_bar from alive_progress] failed.")
 
 
-def download_file_from_github(file_name):
-  url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
+
+def download_file_from_github(ind,file_name):
+  if ind == 0:
+    url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
+  if ind == 1:
+    url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}'
   local_filename = url.split('/')[-1]
+  #def l(file_name):
   try:
     py_logger.info(f"[Downloading file] Name: {file_name}")
     with requests.get(url, stream=True, allow_redirects=True) as r:
@@ -183,27 +188,43 @@ def download_file_from_github(file_name):
         for chunk in r.iter_content(chunk_size=8192):
           f.write(chunk)
     return 'ok'
+  #return l(file_name)
+  except requests.exceptions.HTTPError as err:
+    print(err)
+    if '404' in str(err):
+      return "errне найдено"
   except Exception as err:
     return "err", err
 
 
-localization = input('Выберите локализацию >>> ')
+def check(ind,file_name):
+  er = ""
+  out = download_file_from_github( ind, file_name)
+  if "err" in out:
+    out = str(out).replace('err', '')
+    er = er + f"{red}[-] DownloadingFileError ({out}): {file_name}{white}\n"
+  print(er)
+
+
+
+localization = input('Выберите локализацию >>> ').upper()
 if localization == 'RU':
   try:
     from RU import ru_loc as loc
   except ModuleNotFoundError:
     loc = en_loc_reserve
     try:
-      from localizaton.RU import *
+      from localization.RU import *
     except ModuleNotFoundError:
       py_logger.warning(
         f"Localization for the Russian language was not found. Trying to download Localization..."
       )
       posle = os.getcwd()
       do_1212 = os.getcwd(
-      ) + dir_pref + 'localizaton' + dir_pref  #+ 'random_neko_list.py'
+      ) + dir_pref + 'localization' + dir_pref # + 'RU.py'
       os.chdir(do_1212)
-      download_file_from_github('RU.py')
+      check(1, 'RU.py')
+      #download_file_from_github('RU.py')
       os.chdir(posle)
       try:
         try:
@@ -211,18 +232,18 @@ if localization == 'RU':
           sys.path.insert(1, '../Dand_Crop')
           from random_neko_list import *
           py_logger.info(
-            "The localizaton for the Russian language has been successfully imported!"
+            "The localization for the Russian language has been successfully imported!"
           )
         except NameError:
           try:
 
-            from localizaton.RU import *
+            from localization.RU import *
             py_logger.info(
-              "The localizaton for the Russian language has been successfully imported!"
+              "The localization for the Russian language has been successfully imported!"
             )
           except:
             py_logger.critical(
-              f"Localizaton for the Russian language was not found!")
+              f"localization for the Russian language was not found!")
             print(f'\n[!] {loc["17"]}')
             print(
               'Локализация была изменена на английскую, из-за отсутствия файла конфигурации.\nThe localization has been changed to English, due to the missing configuration file.'
@@ -230,7 +251,7 @@ if localization == 'RU':
             #raise SystemExit(f'\n[!] {loc["17"]}')
       except ImportError:
         py_logger.critical(
-          f"Localizaton for the Russian language was not found!")
+          f"localization for the Russian language was not found!")
         print(f'\n[!] {loc["17"]}')
         print(
           'Локализация была изменена на английскую, из-за отсутствия файла конфигурации.\nThe localization has been changed to English, due to the missing configuration file.'
@@ -242,16 +263,16 @@ if localization == 'EN':
   except ModuleNotFoundError:
     loc = en_loc_reserve
     try:
-      from localizaton.RU import *
+      from localization.RU import *
     except ModuleNotFoundError:
       py_logger.warning(
         f"English localization was not found. Trying to download Localization..."
       )
       posle = os.getcwd()
       do_1212 = os.getcwd(
-      ) + dir_pref + 'localizaton' + dir_pref  #+ 'random_neko_list.py'
+      ) + dir_pref + 'localization' + dir_pref  #+ 'random_neko_list.py'
       os.chdir(do_1212)
-      download_file_from_github('RU.py')
+      download_file_from_github(0,'RU.py')
       os.chdir(posle)
       try:
         try:
@@ -263,17 +284,20 @@ if localization == 'EN':
         except NameError:
           try:
 
-            from localizaton.RU import *
+            from localization.RU import *
             py_logger.info(
               "English localization has been successfully imported!")
           except:
             py_logger.critical(
-              f"Localizaton for the English language was not found!")
+              f"localization for the English language was not found!")
             raise SystemExit(f'\n[!] {loc["17"]}')
       except ImportError:
         py_logger.critical(
-          f"Localizaton for the English language was not found!")
+          f"localization for the English language was not found!")
         raise SystemExit(f'\n[!] {loc["17"]}')
+
+
+#print(loc)
 
 
 def logo():
@@ -365,7 +389,7 @@ except ModuleNotFoundError:
     do_1212 = os.getcwd(
     ) + dir_pref + 'modules' + dir_pref + 'random_neko_list.py'
     os.chdir(do_1212)
-    download_file_from_github('random_neko_list.py')
+    download_file_from_github(0,'random_neko_list.py')
     os.chdir(posle)
     try:
       try:
@@ -386,13 +410,7 @@ except ModuleNotFoundError:
       raise SystemExit(f'\n[!] {loc["8"]}')
 
 
-def check(file_name):
-  er = ""
-  out = download_file_from_github(file_name)
-  if "err" in out:
-    out = out.replace('err', '')
-    er = er + f"{red}[-] DownloadingFileError: {file_name}{white}\n"
-  print(er)
+
 
 
 def update():
@@ -487,7 +505,7 @@ except PermissionError:
   name_dir = ''
   pass
 
-print(f'''{loc["0"]}''')
+#print(f'''{loc["0"]}''')
 
 py_logger.info(f"Dir_pref = {dir_pref}")
 print(f'''{white}{'='*15}- PATH -{'='*15}
@@ -776,6 +794,8 @@ except KeyboardInterrupt:
   py_logger.critical(f'''The user aborted code execution.''')
   print(f'{red}[!] {loc["15"]}...')
 
+
+
 try:
   if len(err_count) != 0:
     with open("errors.json", "w") as outfile:
@@ -792,12 +812,24 @@ try:
       json.dump(err_info, outfile, indent=4)
     py_logger.info(f'''File created [err_info.json]''')
 
+  if ('errors.json' in str(os.path.exists(os.getcwd()))):# or ('vk403.json' in os.path.exists(os.getcwd())) or ('err_info.json' in os.path.exists(os.getcwd())):  
+    if 'config.json' not in os.path.exists(os.getcwd()):
+      if input(fr'\n{green}[*] Создавать в дальнейших запусках скрипта файлы с ошибками? (Y\n)>>> ') == 'Y':
+        with open('config.json', 'a', encoding='utf-8') as f:
+          f.write('{"save files with error information" : True}')
 except NameError:
   pass
+
+
+
+
 
 py_logger.info(
   f'''The database download was completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]'''
 )
+
+
+
 
 try:
   from module_res_def import res_def

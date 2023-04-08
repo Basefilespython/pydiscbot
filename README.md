@@ -3,7 +3,7 @@
     Открытый GUTHUB репозиторий. 
     <br /><br />
     <img alt="Made with Python" src="https://img.shields.io/badge/Made%20with-Python-%23FFD242?logo=python&logoColor=white">
-    <img alt="https://app.fossa.com" src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot.svg?type=small">
+
     <img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
 
 </p>
@@ -12,7 +12,7 @@
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot?ref=badge_large)
 
-=======
+
 <p align="center">
     <img alt="License" src="https://img.shields.io/badge/License%3A-GNU%20Affero%20General%20Public%20License%20v3.0-brightgreen">
 </p>

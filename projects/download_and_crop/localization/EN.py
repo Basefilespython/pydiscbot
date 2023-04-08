@@ -8,8 +8,8 @@ turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
 
-en_loc = {
-  '0': f'''{'='*15}- Connection statuses -{'='*15}
+ru_loc = {
+   '0': f'''{'='*15}- Connection statuses -{'='*15}
 {green}- 200 - Success!{white}
 {'='*10} HTTP ERROR CODEs: {'='*10}
 {red}- 400 - The script was unable to parse the URL.
@@ -20,25 +20,27 @@ en_loc = {
 {white}{'='*10} TIMEOUT ERROR CODEs: {'='*10}
 {red}- 522 - The connection is not responding (maybe ILV blocked).
 - 524 - TCP connection failed. (internal OS errors).
-- 526 - Certificate blocking (rather different times, or parental control)
+- 526 - Certificate blocking / ohm (rather different times, or parental control)
 {white}{'='*10} OTHER: {'='*10}
 {violet}- 101 - You are disconnected from the Internet.
 - 102 - Error processing URL.{white}''',
-  '1': 'Time',
-  '2': 'Operating system',
-  '3': 'Version',
-  '4': 'You have the latest version of the script installed!',
-  '5': 'Failed to get working directory.',
-  '6':
-  'Your OS is similar to Colab. All downloaded files will be downloaded to your Google Drive. Or rather, to the subfolder where this file is saved.',
-  '7': 'RESTART THE SKIP RUNNING ENVIRONMENT.',
-  '8': 'Base not found!',
-  '9': 'You have an outdated version of the script installed!',
-  '10': 'Install new version?',
-  '11': 'Version check failed!',
-  '12': 'Working directory',
-  '13': 'Download to',
-  '14': 'Number of images',
-  '15': 'You aborted code execution',
-  '16': 'Crop images in database?',
+   '1': 'Time',
+   '2': 'Operating system',
+   '3': 'Version',
+   '4': 'You have the latest version of the script installed!',
+   '5': 'Failed to get working directory.',
+   '6':
+   'Your OS is like Colab. All downloaded files will be downloaded to your Google Drive. Or rather, to the subfolder where this file is saved.',
+   '7': 'RESTART THE SKIP RUNNING ENVIRONMENT.',
+   '8': 'Base not found!',
+   '9': 'You have an outdated version of the script installed!',
+   '10': 'Install new version?',
+   '11': 'Version check failed!',
+   '12': 'Working directory',
+   '13': 'Download to',
+   '14': 'Number of images',
+   '15': 'You aborted code execution',
+   '16': 'Crop images in database?',
+   '17': 'Directory',
+   '18': 'Update version check failed!'
 }

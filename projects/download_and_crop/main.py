@@ -1,26 +1,102 @@
+# <---------------------->
+
+s_version = "2.1.18"
+
+# <---------------------->
+black = "\033[30m"
+red = "\033[31m"
+green = "\033[32m"
+yellow = "\033[33m"
+blue = "\033[34m"
+violet = "\033[35m"
+turquoise = "\033[36m"
+white = "\033[37m"
+st = "\033[37"
+
 import subprocess
 import os
 from os import system
 import time
 import logging
+# <-------------------->
+import sys
+import json
+from urllib.request import HTTPError
+import urllib.request
+from time import sleep
+import http
+import random
+from datetime import datetime
 
 if str(os.name) == 'nt':
   dir_pref = "\\"
 else:
   dir_pref = "/"
 
+
+def cls():
+
+  try:
+    subprocess.call("clear")  # linux/mac
+  except:
+    subprocess.call("cls", shell=True)
+
+
 do = os.getcwd()
 
+# <-------------------------->
+
+en_loc_reserve = {
+  '0': f'''{'='*15}- Connection statuses -{'='*15}
+{green}- 200 - Success!{white}
+{'='*10} HTTP ERROR CODEs: {'='*10}
+{red}- 400 - The script was unable to parse the URL.
+- 401 - Authorization is needed ... you need to download it manually.
+- 402 - Similar to 401, access after payment.
+- 403 - Site/Browser/Anti-Virus denied you access to access this URL (perhaps VPN).
+- 404 - Not found, or this is an outdated link.
+{white}{'='*10} TIMEOUT ERROR CODEs: {'='*10}
+{red}- 522 - The connection is not responding (maybe ILV blocked).
+- 524 - TCP connection failed. (internal OS errors).
+- 526 - Certificate blocking (rather different times, or parental control)
+{white}{'='*10} OTHER: {'='*10}
+{violet}- 101 - You are disconnected from the Internet.
+- 102 - Error processing URL.{white}''',
+  '1': 'Time',
+  '2': 'Operating system',
+  '3': 'Version',
+  '4': 'You have the latest version of the script installed!',
+  '5': 'Failed to get working directory.',
+  '6':
+  'Your OS is similar to Colab. All downloaded files will be downloaded to your Google Drive. Or rather, to the subfolder where this file is saved.',
+  '7': 'RESTART THE SKIP RUNNING ENVIRONMENT.',
+  '8': 'Base not found!',
+  '9': 'You have an outdated version of the script installed!',
+  '10': 'Install new version?',
+  '11': 'Version check failed!',
+  '12': 'Working directory',
+  '13': 'Download to',
+  '14': 'Number of images',
+  '15': 'You aborted code execution',
+  '16': 'Crop images in database?',
+  '17': 'Localization file was not found!'
+}
+
+# <------------------------->
 
 
 def set_logger_settings():
   py_logger = logging.getLogger(__name__)
   py_logger.setLevel(logging.INFO)
-  py_handler = logging.FileHandler(f"loger.log", mode='w')
+
+  s = str(str((str(datetime.now())).split()[1]).split(".")[0]).split(":")[2]
+  m = str(str((str(datetime.now())).split()[1]).split(".")[0]).split(":")[1]
+  h = str(str((str(datetime.now())).split()[1]).split(".")[0]).split(":")[0]
+
+  py_handler = logging.FileHandler(f"{s}-{m}-{h}.log", mode='w')
   #py_handler.setFormatter(logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s"))
-  #py_handler.setFormatter(logging.Formatter("[%(asctime)s] - [%(levelname)s] - [%(message)s]"))
   py_handler.setFormatter(
-    logging.Formatter(f"[{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}] - [%(levelname)s] - [%(message)s]"))
+    logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
   py_logger.addHandler(py_handler)
   os.chdir(do)
   py_logger.info(
@@ -40,66 +116,50 @@ except PermissionError:
   py_logger = set_logger_settings()
   pass
 
-
-def cls():
-
+try:
+  import requests
+  py_logger.info(f"Import module [requests] successfully.")
+except:
+  system("pip install requests")
   try:
-    subprocess.call("clear")  # linux/mac
-  except:
-    subprocess.call("cls", shell=True)
+    import requests
+    py_logger.info(
+      f"Import module [requests] failed -> Import module [requests] successfully."
+    )
+  except ModuleNotFoundError:
+    py_logger.error("Import module [requests] failed.")
 
-
-cls()
-
-from time import sleep
-import http
+try:
+  import PIL
+  py_logger.info(f"Import module [PIL] successfully.")
+except:
+  system("pip install Pillow")
+  try:
+    import PIL
+    py_logger.info(
+      f"Import module [PIL] failed -> Import module [PIL] successfully.")
+  except ModuleNotFoundError:
+    py_logger.error("Import module [PIL] failed.")
 
 try:
   from PIL import Image
   py_logger.info(f"[Import module from PIL] successfully.")
 except ModuleNotFoundError:
   system('pip install Pillow')
-  from PIL import Image
-  py_logger.info(
-    f"[Import module from PIL] failed -> [Import module from PIL] successfully."
-  )
-
-import sys
-import json
-from urllib.request import HTTPError
-import urllib.request
-
-import random
-
-try:
-  import requests
-  py_logger.info(f"Import module [requests] successfully.")
-except:
-  system("pip install requests")
-  import requests
-  py_logger.info(
-    f"Import module [requests] failed -> Import module [requests] successfully."
-  )
-
-s_version = "2.1.18"
-
-black = "\033[30m"
-red = "\033[31m"
-green = "\033[32m"
-yellow = "\033[33m"
-blue = "\033[34m"
-violet = "\033[35m"
-turquoise = "\033[36m"
-white = "\033[37m"
-st = "\033[37"
+  try:
+    from PIL import Image
+    py_logger.info(
+      f"[Import module from PIL] failed -> [Import module from PIL] successfully."
+    )
+  except ModuleNotFoundError:
+    py_logger.error("[Import module from PIL] failed.")
 
 try:
   from alive_progress import alive_bar
   alive_a = True
   py_logger.info(f"[Import alive_bar from alive_progress] successfully.")
 except:
-  system("pip install alive-progress")
-  #system("pip3 install alive-progress")
+  system("pip3 install alive-progress")
   try:
     from alive_progress import alive_bar
     alive_a = True
@@ -109,7 +169,111 @@ except:
   except ModuleNotFoundError:
     alive_a = False
     print(f'{red}[!] ModuleNotFoundError: alive_progress.{white}')
-    py_logger.info(f"[Import module from PIL] failed.")
+    py_logger.info(f"[Import alive_bar from alive_progress] failed.")
+
+
+def download_file_from_github(file_name):
+  url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
+  local_filename = url.split('/')[-1]
+  try:
+    py_logger.info(f"[Downloading file] Name: {file_name}")
+    with requests.get(url, stream=True, allow_redirects=True) as r:
+      r.raise_for_status()
+      with open(local_filename, 'wb') as f:
+        for chunk in r.iter_content(chunk_size=8192):
+          f.write(chunk)
+    return 'ok'
+  except Exception as err:
+    return "err", err
+
+
+localization = input('Выберите локализацию >>> ')
+if localization == 'RU':
+  try:
+    from RU import ru_loc as loc
+  except ModuleNotFoundError:
+    loc = en_loc_reserve
+    try:
+      from localizaton.RU import *
+    except ModuleNotFoundError:
+      py_logger.warning(
+        f"Localization for the Russian language was not found. Trying to download Localization..."
+      )
+      posle = os.getcwd()
+      do_1212 = os.getcwd(
+      ) + dir_pref + 'localizaton' + dir_pref  #+ 'random_neko_list.py'
+      os.chdir(do_1212)
+      download_file_from_github('RU.py')
+      os.chdir(posle)
+      try:
+        try:
+          # import sys
+          sys.path.insert(1, '../Dand_Crop')
+          from random_neko_list import *
+          py_logger.info(
+            "The localizaton for the Russian language has been successfully imported!"
+          )
+        except NameError:
+          try:
+
+            from localizaton.RU import *
+            py_logger.info(
+              "The localizaton for the Russian language has been successfully imported!"
+            )
+          except:
+            py_logger.critical(
+              f"Localizaton for the Russian language was not found!")
+            print(f'\n[!] {loc["17"]}')
+            print(
+              'Локализация была изменена на английскую, из-за отсутствия файла конфигурации.\nThe localization has been changed to English, due to the missing configuration file.'
+            )
+            #raise SystemExit(f'\n[!] {loc["17"]}')
+      except ImportError:
+        py_logger.critical(
+          f"Localizaton for the Russian language was not found!")
+        print(f'\n[!] {loc["17"]}')
+        print(
+          'Локализация была изменена на английскую, из-за отсутствия файла конфигурации.\nThe localization has been changed to English, due to the missing configuration file.'
+        )
+
+if localization == 'EN':
+  try:
+    from EN import en_loc as loc
+  except ModuleNotFoundError:
+    loc = en_loc_reserve
+    try:
+      from localizaton.RU import *
+    except ModuleNotFoundError:
+      py_logger.warning(
+        f"English localization was not found. Trying to download Localization..."
+      )
+      posle = os.getcwd()
+      do_1212 = os.getcwd(
+      ) + dir_pref + 'localizaton' + dir_pref  #+ 'random_neko_list.py'
+      os.chdir(do_1212)
+      download_file_from_github('RU.py')
+      os.chdir(posle)
+      try:
+        try:
+          # import sys
+          sys.path.insert(1, '../Dand_Crop')
+          from random_neko_list import *
+          py_logger.info(
+            "English localization has been successfully imported!")
+        except NameError:
+          try:
+
+            from localizaton.RU import *
+            py_logger.info(
+              "English localization has been successfully imported!")
+          except:
+            py_logger.critical(
+              f"Localizaton for the English language was not found!")
+            raise SystemExit(f'\n[!] {loc["17"]}')
+      except ImportError:
+        py_logger.critical(
+          f"Localizaton for the English language was not found!")
+        raise SystemExit(f'\n[!] {loc["17"]}')
 
 
 def logo():
@@ -130,6 +294,7 @@ def logo():
     except:
       print(f'{red}[!] ModuleImportError: colorama.{white}')
       colors = [red, green, yellow, blue, violet, turquoise, white]
+      py_logger.info(f"[Import Fore from colorama] failed.")
 
   color1 = random.choice(colors)
   colors.remove(color1)
@@ -145,17 +310,12 @@ def logo():
 
 logo()
 
-try:
-  import PIL
-except:
-  system("pip install Pillow")
-  import PIL
-
+#cls()
 try:
   do = os.getcwd()
 except OSError:
   py_logger.critical(f"Unable to get a working directory.")
-  raise OSError(f'{red}[!] ПЕРЕЗАПУСТИТЕ СРЕДУ ВЫПОЛНЕНИЯ СКИПТА.')
+  raise OSError(f'{red}[!] {loc["7"]}')
 
 if '/content' in os.getcwd():
   py_logger.info(f"Colab platform found.")
@@ -166,9 +326,9 @@ if '/content' in os.getcwd():
   except:
     pass
   print(f'''{white}{'='*15}- {red}WARNING!{white} -{'='*15}''')
-  print(
-    f"{red}Ваша OS похожа на Colab. Все скачанные файлы будут скачиваться в ваш Google Drive. А точнее в подпапку где сохранен данный файл.{white}"
-  )
+  dd = loc["6"]
+  print(f"{red} {dd} {white}")
+
   from google.colab import drive
   try:
     print(f'''{white}{'='*15}- {green}Connecting...{white} -{'='*15}''')
@@ -185,29 +345,13 @@ if '/content' in os.getcwd():
     per2 = os.getcwd()
     py_logger.info(f"[Directory change] {per1} -> {per2}")
   except OSError as err:
-    raise OSError(f'{red}[!] ПЕРЕЗАПУСТИТЕ СРЕДУ ВЫПОЛНЕНИЯ СКИПТА.')
+    raise OSError(f'{red}[!] {loc["7"]}')
   try:
     os.mkdir('Dand_Crop')
   except FileExistsError:
     pass
   os.chdir(os.getcwd() + '/' + 'Dand_Crop')
   system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
-
-
-def download_file_from_github(file_name):
-  url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}'
-  local_filename = url.split('/')[-1]
-  try:
-    py_logger.info(f"[Downloading file] Name: {file_name}")
-    with requests.get(url, stream=True, allow_redirects=True) as r:
-      r.raise_for_status()
-      with open(local_filename, 'wb') as f:
-        for chunk in r.iter_content(chunk_size=8192):
-          f.write(chunk)
-    return 'ok'
-  except Exception as err:
-    return "err", err
-
 
 try:
   from random_neko_list import *
@@ -218,7 +362,8 @@ except ModuleNotFoundError:
   except ModuleNotFoundError:
     py_logger.warning(f"Database not found! Trying to download database...")
     posle = os.getcwd()
-    do_1212 = os.getcwd() + dir_pref + 'modules' + dir_pref
+    do_1212 = os.getcwd(
+    ) + dir_pref + 'modules' + dir_pref + 'random_neko_list.py'
     os.chdir(do_1212)
     download_file_from_github('random_neko_list.py')
     os.chdir(posle)
@@ -235,10 +380,10 @@ except ModuleNotFoundError:
           py_logger.info("The database has been successfully imported!")
         except:
           py_logger.critical(f"Database not found!")
-          raise SystemExit('\n[!] База не обнаружена!')
+          raise SystemExit(f'\n[!] {loc["8"]}')
     except ImportError:
       py_logger.critical(f"Database not found!")
-      raise SystemExit('\n[!] База не обнаружена!')
+      raise SystemExit(f'\n[!] {loc["8"]}')
 
 
 def check(file_name):
@@ -261,17 +406,17 @@ def update():
 
 # update()
 
-cls()
-
 print(f'''{'='*15}- TIME -{'='*15}{turquoise}
 {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}{white}''')
 
 
 def old(nversion):
-  py_logger.warning(f"An obsolete version of the script has been found!")
+  py_logger.warning(
+    f"An obsolete version of the script has been found (NEW-{nversion}, OLD-{s_version})!"
+  )
   print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
-  print(f'''{yellow}[*] У вас установлена устаревшая версия скрипта!{white}''')
-  ch = input(f"{green}[!]{white} Установить новую версию? (Y/N) >>> ")
+  print(f'''{yellow}[*] {loc["4"]}{white}''')
+  ch = input(f"{green}[!]{white} {loc['10']} (Y/N) >>> ")
   if ch == "Y":
     check("main.py")
     raise SystemError("")
@@ -283,6 +428,9 @@ def old(nversion):
 
 print(f'''{'='*15}- OS -{'='*15}
 {yellow}[*] OS Name: {os.name.upper()}{white}''')
+
+py_logger.info(f'''{'='*15}- OS -{'='*15}''')
+py_logger.info(f'''[*] OS Name: {os.name.upper()}''')
 
 
 def check_version(sversion):
@@ -301,10 +449,11 @@ def check_version(sversion):
     if s1 >= n1:
       if s2 >= n2:
         if s3 >= n3:
-          py_logger.info(f"The current version of the script has been found!")
+          py_logger.info(
+            f"The current version of the script has been found ({s_version})!")
           print(f'''{violet}[*] VERSION: {s_version}''')
           print(
-            f'''{green}[*] У вас установлена самая актуальная версия скрипта!{white}'''
+            f'''{green}[*] {loc["4"]}{white}'''
           )
 
         else:
@@ -338,36 +487,61 @@ except PermissionError:
   name_dir = ''
   pass
 
-print(f'''{'='*15}- Статусы соединения -{'='*15}
-{green}- 200 - Успешно!{white}
-{'='*10} HTTP ERROR CODEs: {'='*10}
-{red}- 400 - Скрипт не смог обработать URL.
-- 401 - Нужна авторизация...надо скачивать ручками.
-- 402 - Аналогично 401, доступ после оплаты.
-- 403 - Сайт/Браузер/Антивирус запретил вам доступ обращаться по этому URL (возможно дело в VPN).
-- 404 - Не найдено, или это устаревшая ссылка.
-{white}{'='*10} TIMEOUT ERROR CODEs: {'='*10}
-{red}- 522 - Соединение не отвечает (может РКН заблокал). 
-- 524 - TCP соеденение провалено. (внутренние ошибки OS).
-- 526 - Блокировка сертификата/ом (скорее разное время, или родительский контроль)
-{white}{'='*10} ПРОЧЕЕ: {'='*10}
-{violet}- 101 - Вы отключены от сети Internet.
-- 102 - Ошибка связанная с обработкой URL.
-- ___ - Неизвестная ошибка.{white}''')
+print(f'''{loc["0"]}''')
 
-py_logger.info(f"Dir_pref = [ {dir_pref} ]")
+py_logger.info(f"Dir_pref = {dir_pref}")
 print(f'''{white}{'='*15}- PATH -{'='*15}
-{green}[*] Работающий каталог: {os.getcwd()}
-[*] Скачивание в :      {os.getcwd() + dir_pref +str(name_dir)}''')
+{green}[*] {loc["12"]}: {os.getcwd()}
+[*] {loc["13"]} :      {os.getcwd() + dir_pref +str(name_dir)}''')
 
 py_logger.info(f'''{'='*15}- PATH -{'='*15}''')
-py_logger.info(f"Working Directory: {os.getcwd()}")
-py_logger.info(f''' Download in:      {os.getcwd() + dir_pref +str(name_dir)}''')
+py_logger.info(f"[*] Working Directory: {os.getcwd()}")
+py_logger.info(
+  f'''[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}''')
 
 
+def main():
 
+  ur = imgs
 
-def download_function(url,name_file, err_dict, err_info, vk_403_err):
+  print(f'''{white}{'='*15}- {loc['14']} - {len(ur)} -{'='*15}''')
+
+  py_logger.info(f'''{'='*15}- Downloading Info -{'='*15}''')
+
+  err_dict = []
+  vk_403_err = []
+  err_info = []
+
+  def download():
+    i = 1
+    if alive_a == True:
+      with alive_bar(len(ur)) as bar:
+
+        for url in ur:
+
+          url = str(url)
+          url = url.replace(" ", "%20")
+
+          def ww1(i):
+
+            if "mp4" in url:
+              name_file = f"{i}.mp4"
+            else:
+              if "gif" in url:
+                name_file = f"{i}.gif"
+              else:
+                if "jpg" in url:
+                  name_file = f"{i}.jpg"
+                else:
+                  if "webp" in url:
+                    name_file = f"{i}.webp"
+                  else:
+                    if "webm" in url:
+                      name_file = f"{i}.webm"
+                    else:
+                      name_file = f"{i}.png"
+
+            while not os.path.exists(name_file):
               if '?size=' in url:
                 ind = url.find('?size=')
               else:
@@ -378,11 +552,12 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
 
               try:
                 urllib.request.urlretrieve(str(url), name_file)
-                #print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
+                print(
+                  f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}"
+                )
                 py_logger.info(
                   f'''File with name {name_file} and link ({url}) was downloaded successfully.'''
                 )
-                return '200', err_dict, err_info, vk_403_err
               except HTTPError as err_code:
 
                 print(
@@ -396,7 +571,7 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
                 py_logger.warning(
                   f'''File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}'''
                 )
-                return f'{err_code.code}', err_dict, err_info, vk_403_err
+                break
 
               except urllib.error.URLError as err_code:
                 if "[WinError 10054]" in str(err_code):
@@ -407,7 +582,6 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
                     f'''File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response.'''
                   )
                   err_info.append({f'{name_file}': "522"})
-                  return f'522', err_dict, err_info, vk_403_err
                 if "[Errno 99]" in str(err_code):
                   print(
                     f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -416,7 +590,6 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
                   py_logger.warning(
                     f'''File with name {name_file} and link ({url}) was NOT downloaded due to connection failure.'''
                   )
-                  return f'524', err_dict, err_info, vk_403_err
                 if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
                   print(
                     f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -425,13 +598,12 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
                   py_logger.warning(
                     f'''The file with name {name_file} and link ({url}) was NOT downloaded due to mismatch of security certificate or parental controls.'''
                   )
-                  return f'526', err_dict, err_info, vk_403_err
                 else:
                   pass
 
                 err_dict.append(f"{url}")
                 if 'userapi.com' in url: vk_403_err.append(f'{url}')
-
+                break
               except http.client.RemoteDisconnected:
                 print(
                   f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -440,18 +612,7 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
                 py_logger.warning(
                   f'''The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet.'''
                 )
-                return f'101', err_dict, err_info, vk_403_err
-
-              except ConnectionResetError:
-                print(
-                  f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}"
-                )
-                err_info.append({f'{name_file}': "101"})
-                py_logger.warning(
-                  f'''The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet.'''
-                )
-                return f'101', err_dict, err_info, vk_403_err
-
+                break
               except ValueError as err:
                 print(
                   f"{violet}[?] 102: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -460,73 +621,7 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
                 py_logger.warning(
                   f'''File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link.'''
                 )
-                return f'102', err_dict, err_info, vk_403_err
-              except Exception as err:
-                print(
-                  f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}"
-                )
-                err_info.append({f'{name_file}': f"{err}"})
-                py_logger.warning(
-                  f'''File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}.'''
-                )
-                return f'___', err_dict, err_info, vk_403_err
-
-
-
-chosing_directory = imgs18
-
-from exctensions_module import sizing_dict
-dict_size = sizing_dict(chosing_directory)
-
-print(f"{white}")
-
-def main():
-
-  ur = chosing_directory = dict_size
-
-  print(f'''{white}{'='*15}- Количество изображений - {len(ur)} -{'='*15}''')
-
-  py_logger.info(f'''{'='*15}- Downloading Info -{'='*15}''')
-
-  err_dict = []
-  vk_403_err = []
-  err_info = []
-
-  name_file_and_ext = []
-
-  def download():
-    i = 0
-
-
-    if alive_a == True:
-      with alive_bar(len(ur)) as bar:
-
-        for zn in ur:
-          #print("512", zn[f"{list(zn.keys())[0]}"])
-          # {'https://sun9-48.userapi.com/impg/0B8_GiHN8UAPS4c4V2VhL1qVijnEMugYiYAprg/fVytxCYhXWI.jpg?size=768x512&quality=95&sign=3e76087ea05610fea034e2b4df1bd24a&type=album': '.jpg'}
-          url = list(zn.keys())[0]
-          #print(list((zn)))
-          exten = zn[f"{list(zn.keys())[0]}"]
-          #print(url, exten)
-          #raise
-
-          def ww1(i, url, err_dict, err_info, vk_403_err, exten):
-
-
-
-
-            name_file = f"{i}{exten}"
-            while not os.path.exists(name_file):
-                #print(name_file, url)
-                #print(download_function(url,name_file, err_dict, err_info, vk_403_err))
-                status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
-                #print(status)
-                if status != '200':
-                  break
-                else:
-                  pass
-
-
+                break
 
             if url not in err_dict:
               src = one_path + dir_pref + name_file
@@ -543,63 +638,143 @@ def main():
                 pass
             bar()
 
-          ww1(i,url, err_dict, err_info, vk_403_err, exten)
+          ww1(i)
           i = i + 1
     if alive_a == False:
-       
-        for zn in ur:
-          #print("512", zn[f"{list(zn.keys())[0]}"])
-          # {'https://sun9-48.userapi.com/impg/0B8_GiHN8UAPS4c4V2VhL1qVijnEMugYiYAprg/fVytxCYhXWI.jpg?size=768x512&quality=95&sign=3e76087ea05610fea034e2b4df1bd24a&type=album': '.jpg'}
-          url = list(zn.keys())[0]
-          #print(list((zn)))
-          exten = zn[f"{list(zn.keys())[0]}"]
-          #print(url, exten)
-          #raise
 
-          def ww2(i, url, err_dict, err_info, vk_403_err, exten):
+      for url in ur:
 
+        url = str(url)
+        url = url.replace(" ", "%20")
 
+        def ww2(i):
 
-
-            name_file = f"{i}{exten}"
-            while not os.path.exists(name_file):
-                #print(name_file, url)
-                #print(download_function(url,name_file, err_dict, err_info, vk_403_err))
-                status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
-                #print(status)
-                if status != '200':
-                  break
+          if "mp4" in url:
+            name_file = f"{i}.mp4"
+          else:
+            if "gif" in url:
+              name_file = f"{i}.gif"
+            else:
+              if "jpg" in url:
+                name_file = f"{i}.jpg"
+              else:
+                if "webp" in url:
+                  name_file = f"{i}.webp"
                 else:
-                  pass
+                  if "webm" in url:
+                    name_file = f"{i}.webm"
+                  else:
+                    name_file = f"{i}.png"
 
+          while not os.path.exists(name_file):
+            if '?size=' in url:
+              ind = url.find('?size=')
+            else:
+              if '?extra=' in url:
+                ind = url.find('?extra=')
+              else:
+                ind = len(url)
 
+            try:
+              urllib.request.urlretrieve(str(url), name_file)
+              print(
+                f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
+              py_logger.info(
+                f'''File with name {name_file} and link ({url}) was downloaded successfully.'''
+              )
+            except HTTPError as err_code:
 
-            if url not in err_dict:
-              src = one_path + dir_pref + name_file
-              os.chdir(one_path)
-              dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
-              try:
-                os.rename(src, dest)
-              except FileExistsError:
-                os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
-                os.remove(name_file)
-                os.chdir(one_path)
-                os.rename(src, dest)
-              except FileNotFoundError:
+              print(
+                f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}"
+              )
+
+              err_dict.append(f"{url}")
+              err_info.append({f'{name_file}': f'{err_code.code}'})
+              if 'userapi.com' in url and err_code.code == 403:
+                vk_403_err.append(f'{url}')
+              py_logger.warning(
+                f'''File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}'''
+              )
+              break
+
+            except urllib.error.URLError as err_code:
+              if "[WinError 10054]" in str(err_code):
+                print(
+                  f"{red}[-] {red}522: {blue}{name_file}{white}  URL: {url[0:ind]}"
+                )
+                py_logger.warning(
+                  f'''File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response.'''
+                )
+                err_info.append({f'{name_file}': "522"})
+              if "[Errno 99]" in str(err_code):
+                print(
+                  f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}"
+                )
+                err_info.append({f'{name_file}': "524"})
+                py_logger.warning(
+                  f'''File with name {name_file} and link ({url}) was NOT downloaded due to connection failure.'''
+                )
+              if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
+                print(
+                  f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}"
+                )
+                err_info.append({f'{name_file}': "526"})
+                py_logger.warning(
+                  f'''The file with name {name_file} and link ({url}) was NOT downloaded due to mismatch of security certificate or parental controls.'''
+                )
+              else:
                 pass
 
+              err_dict.append(f"{url}")
+              if 'userapi.com' in url: vk_403_err.append(f'{url}')
+              break
+            except http.client.RemoteDisconnected:
+              print(
+                f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}"
+              )
+              err_info.append({f'{name_file}': "101"})
+              py_logger.warning(
+                f'''The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet.'''
+              )
+              break
+            except ValueError as err:
+              print(
+                f"{violet}[?] 102: {blue}{name_file}{white}  URL: {url[0:ind]}"
+              )
+              err_info.append({f'{name_file}': f"{err}"})
+              py_logger.warning(
+                f'''File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link.'''
+              )
+              break
 
-          ww2(i,url, err_dict, err_info, vk_403_err, exten)
-          i = i + 1
+          if url not in err_dict:
+            src = one_path + dir_pref + name_file
+            os.chdir(one_path)
+            dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
+            try:
+              os.rename(src, dest)
+            except FileExistsError:
+              os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
+              os.remove(name_file)
+              os.chdir(one_path)
+              os.rename(src, dest)
+            except FileNotFoundError:
+              pass
 
+        ww2(i)
+        i = i + 1
+
+  download()
   return err_dict, vk_403_err, err_info
 
 
 try:
   err_count, vk_403_err, err_info = main()
+  py_logger.info(f'''{'='*15}- Downloading OK -{'='*15}''')
 except KeyboardInterrupt:
+  py_logger.info(f'''{'='*15}- Downloading KeyboardInterrupt -{'='*15}''')
   py_logger.critical(f'''The user aborted code execution.''')
-  print(f'{red}[!] Вы прервали выполнение кода...')
+  print(f'{red}[!] {loc["15"]}...')
 
 try:
   if len(err_count) != 0:
@@ -626,13 +801,14 @@ py_logger.info(
 
 try:
   from module_res_def import res_def
-  ch = input(f'\n{red}[!] Откадрировать изображения в базе? (Y/n) >>> {white}')
+  ch = input(f'\n{red}[!] {loc["16"]} (Y/n) >>> {white}')
+  py_logger.info(
+    f'''The meaning of calling the image processing function:  {ch}.''')
+
   if ch == 'Y':
     res_def(name_dir)
   else:
     pass
-  py_logger.info(
-    f'''The meaning of calling the image processing function:  {ch}.''')
 except KeyboardInterrupt:
   py_logger.info(
     f'''The user has canceled an image encoding call request (KeyboardInterrupt).'''
@@ -640,8 +816,6 @@ except KeyboardInterrupt:
 except Exception as err:
   py_logger.info(
     f'''The script has canceled an image encoding call request ({err}).''')
-
-
 
 try:
   from module_in_the_papka import in_the_papka

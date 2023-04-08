@@ -436,7 +436,7 @@ def old(nversion):
   print(f'''{yellow}[*] {loc["9"]}{white}''')
   ch = input(f"{green}[!]{white} {loc['10']} (Y/N) >>> ")
   if ch == "Y":
-    check("main.py")
+    check(0,"main.py")
     raise SystemError("")
   else:
     pass

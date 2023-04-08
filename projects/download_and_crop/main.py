@@ -13,12 +13,13 @@ turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
 
+# <-------------------->
+
 import subprocess
 import os
 from os import system
 import time
 import logging
-# <-------------------->
 import sys
 import json
 from urllib.request import HTTPError
@@ -28,11 +29,14 @@ import http
 import random
 from datetime import datetime
 
+# <-------------------->
+
 if str(os.name) == 'nt':
   dir_pref = "\\"
 else:
   dir_pref = "/"
 
+# <-------------------->
 
 def cls():
 
@@ -116,6 +120,8 @@ except PermissionError:
   py_logger = set_logger_settings()
   pass
 
+# <-------------------->
+
 try:
   import requests
   py_logger.info(f"Import module [requests] successfully.")
@@ -171,7 +177,7 @@ except:
     print(f'{red}[!] ModuleNotFoundError: alive_progress.{white}')
     py_logger.info(f"[Import alive_bar from alive_progress] failed.")
 
-
+# <-------------------->
 
 def download_file_from_github(ind,file_name):
   if ind == 0:
@@ -205,7 +211,7 @@ def check(ind,file_name):
     er = er + f"{red}[-] DownloadingFileError ({out}): {file_name}{white}\n"
   print(er)
 
-
+# <-------------------->
 
 localization = input('Выберите локализацию >>> ').upper()
 if localization == 'RU':
@@ -214,7 +220,7 @@ if localization == 'RU':
   except ModuleNotFoundError:
     loc = en_loc_reserve
     try:
-      from localization.RU import *
+      from localization.RU import ru_loc as loc
     except ModuleNotFoundError:
       py_logger.warning(
         f"Localization for the Russian language was not found. Trying to download Localization..."
@@ -230,18 +236,19 @@ if localization == 'RU':
         try:
           # import sys
           sys.path.insert(1, '../Dand_Crop')
-          from random_neko_list import *
+          from localization.RU import ru_loc as loc
           py_logger.info(
             "The localization for the Russian language has been successfully imported!"
           )
         except NameError:
           try:
 
-            from localization.RU import *
+            from localization.RU import ru_loc as loc
             py_logger.info(
               "The localization for the Russian language has been successfully imported!"
             )
           except:
+            loc = en_loc_reserve
             py_logger.critical(
               f"localization for the Russian language was not found!")
             print(f'\n[!] {loc["17"]}')
@@ -250,6 +257,7 @@ if localization == 'RU':
             )
             #raise SystemExit(f'\n[!] {loc["17"]}')
       except ImportError:
+        loc = en_loc_reserve
         py_logger.critical(
           f"localization for the Russian language was not found!")
         print(f'\n[!] {loc["17"]}')
@@ -272,19 +280,19 @@ if localization == 'EN':
       do_1212 = os.getcwd(
       ) + dir_pref + 'localization' + dir_pref  #+ 'random_neko_list.py'
       os.chdir(do_1212)
-      download_file_from_github(0,'RU.py')
+      download_file_from_github(0,'EN.py')
       os.chdir(posle)
       try:
         try:
           # import sys
           sys.path.insert(1, '../Dand_Crop')
-          from random_neko_list import *
+          from localization.EN import en_loc as loc
           py_logger.info(
             "English localization has been successfully imported!")
         except NameError:
           try:
 
-            from localization.RU import *
+            from localization.EN import en_loc as loc
             py_logger.info(
               "English localization has been successfully imported!")
           except:
@@ -297,7 +305,7 @@ if localization == 'EN':
         raise SystemExit(f'\n[!] {loc["17"]}')
 
 
-#print(loc)
+# <-------------------->
 
 
 def logo():
@@ -334,7 +342,6 @@ def logo():
 
 logo()
 
-#cls()
 try:
   do = os.getcwd()
 except OSError:
@@ -424,7 +431,7 @@ def update():
 
 # update()
 
-print(f'''{'='*15}- TIME -{'='*15}{turquoise}
+print(f'''{'='*15}- {loc['1']} -{'='*15}{turquoise}
 {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}{white}''')
 
 
@@ -436,7 +443,7 @@ def old(nversion):
   print(f'''{yellow}[*] {loc["9"]}{white}''')
   ch = input(f"{green}[!]{white} {loc['10']} (Y/N) >>> ")
   if ch == "Y":
-    check(0,"main.py")
+    check("main.py")
     raise SystemError("")
   else:
     pass
@@ -444,7 +451,7 @@ def old(nversion):
 
 #NT / POSIX
 
-print(f'''{'='*15}- OS -{'='*15}
+print(f'''{'='*15}- {loc['2']} -{'='*15}
 {yellow}[*] OS Name: {os.name.upper()}{white}''')
 
 py_logger.info(f'''{'='*15}- OS -{'='*15}''')
@@ -463,13 +470,13 @@ def check_version(sversion):
     s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split(
       '.')[1], str(sversion).split('.')[2], str(nversion).split('.')[0], str(
         nversion).split('.')[1], str(nversion).split('.')[2]
-    print(f'''{'='*15}- VERSION -{'='*15}''')
+    print(f'''{'='*15}- {loc['3']} -{'='*15}''')
     if s1 >= n1:
       if s2 >= n2:
         if s3 >= n3:
           py_logger.info(
             f"The current version of the script has been found ({s_version})!")
-          print(f'''{violet}[*] VERSION: {s_version}''')
+          print(f'''{violet}[*] {loc['3']}: {s_version}''')
           print(
             f'''{green}[*] {loc["4"]}{white}'''
           )
@@ -490,6 +497,9 @@ check_version(s_version)
 
 name_dir = "data"
 one_path = os.getcwd()
+
+print(f"{loc['0']}")
+
 try:
   os.mkdir(name_dir)
   name_dir = name_dir
@@ -508,14 +518,14 @@ except PermissionError:
 #print(f'''{loc["0"]}''')
 
 py_logger.info(f"Dir_pref = {dir_pref}")
-print(f'''{white}{'='*15}- PATH -{'='*15}
+print(f'''{white}{'='*15}- {loc['17']} -{'='*15}
 {green}[*] {loc["12"]}: {os.getcwd()}
 [*] {loc["13"]} :      {os.getcwd() + dir_pref +str(name_dir)}''')
 
 py_logger.info(f'''{'='*15}- PATH -{'='*15}''')
 py_logger.info(f"[*] Working Directory: {os.getcwd()}")
-py_logger.info(
-  f'''[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}''')
+py_logger.info(f'''[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}''')
+
 
 
 def main():

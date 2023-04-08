@@ -433,7 +433,7 @@ def old(nversion):
     f"An obsolete version of the script has been found (NEW-{nversion}, OLD-{s_version})!"
   )
   print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
-  print(f'''{yellow}[*] {loc["4"]}{white}''')
+  print(f'''{yellow}[*] {loc["9"]}{white}''')
   ch = input(f"{green}[!]{white} {loc['10']} (Y/N) >>> ")
   if ch == "Y":
     check("main.py")

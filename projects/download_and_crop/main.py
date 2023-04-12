@@ -13,13 +13,12 @@ turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
 
-# <-------------------->
-
 import subprocess
 import os
 from os import system
 import time
 import logging
+# <-------------------->
 import sys
 import json
 from urllib.request import HTTPError
@@ -29,14 +28,11 @@ import http
 import random
 from datetime import datetime
 
-# <-------------------->
-
 if str(os.name) == 'nt':
   dir_pref = "\\"
 else:
   dir_pref = "/"
 
-# <-------------------->
 
 def cls():
 
@@ -114,13 +110,12 @@ try:
   os.chdir(f'{do + dir_pref + "logging"}')
   py_logger = set_logger_settings()
 except FileExistsError:
+  os.chdir(f'{do + dir_pref + "logging"}')
   py_logger = set_logger_settings()
   pass
 except PermissionError:
   py_logger = set_logger_settings()
   pass
-
-# <-------------------->
 
 try:
   import requests
@@ -177,7 +172,7 @@ except:
     print(f'{red}[!] ModuleNotFoundError: alive_progress.{white}')
     py_logger.info(f"[Import alive_bar from alive_progress] failed.")
 
-# <-------------------->
+
 
 def download_file_from_github(ind,file_name):
   if ind == 0:
@@ -211,16 +206,22 @@ def check(ind,file_name):
     er = er + f"{red}[-] DownloadingFileError ({out}): {file_name}{white}\n"
   print(er)
 
-# <-------------------->
 
-localization = input('Выберите локализацию >>> ').upper()
+
+
+
+localization = input(f'Выберите локализацию (ru) / Select localization (en) >>> ').upper()
+
 if localization == 'RU':
+  
   try:
     from RU import ru_loc as loc
+    #loc_tag = 'ru'
   except ModuleNotFoundError:
     loc = en_loc_reserve
     try:
       from localization.RU import ru_loc as loc
+      #loc_tag = 'ru'
     except ModuleNotFoundError:
       py_logger.warning(
         f"Localization for the Russian language was not found. Trying to download Localization..."
@@ -237,6 +238,7 @@ if localization == 'RU':
           # import sys
           sys.path.insert(1, '../Dand_Crop')
           from localization.RU import ru_loc as loc
+          #loc_tag = 'ru'
           py_logger.info(
             "The localization for the Russian language has been successfully imported!"
           )
@@ -244,10 +246,12 @@ if localization == 'RU':
           try:
 
             from localization.RU import ru_loc as loc
+            #loc_tag = 'ru'
             py_logger.info(
               "The localization for the Russian language has been successfully imported!"
             )
           except:
+            #loc_tag = 'en'
             loc = en_loc_reserve
             py_logger.critical(
               f"localization for the Russian language was not found!")
@@ -257,6 +261,7 @@ if localization == 'RU':
             )
             #raise SystemExit(f'\n[!] {loc["17"]}')
       except ImportError:
+        #loc_tag = 'en'
         loc = en_loc_reserve
         py_logger.critical(
           f"localization for the Russian language was not found!")
@@ -268,6 +273,7 @@ if localization == 'RU':
 if localization == 'EN':
   try:
     from EN import en_loc as loc
+    #loc_tag = 'en'
   except ModuleNotFoundError:
     loc = en_loc_reserve
     try:
@@ -287,12 +293,14 @@ if localization == 'EN':
           # import sys
           sys.path.insert(1, '../Dand_Crop')
           from localization.EN import en_loc as loc
+          #loc_tag = 'en'
           py_logger.info(
             "English localization has been successfully imported!")
         except NameError:
           try:
 
             from localization.EN import en_loc as loc
+            #loc_tag = 'en'
             py_logger.info(
               "English localization has been successfully imported!")
           except:
@@ -305,7 +313,7 @@ if localization == 'EN':
         raise SystemExit(f'\n[!] {loc["17"]}')
 
 
-# <-------------------->
+#print(loc)
 
 
 def logo():
@@ -342,6 +350,7 @@ def logo():
 
 logo()
 
+#cls()
 try:
   do = os.getcwd()
 except OSError:
@@ -489,13 +498,13 @@ def check_version(sversion):
       old(nversion)
   else:
     py_logger.warning(f"Version check failed.")
-    print(f'''{red}[!] Проверка версии не удалась!
+    print(f'''{red}[!] {loc['18']}
 {violet}[*] VERSION: {s_version}''')
 
 
 check_version(s_version)
 
-name_dir = "data"
+name_dir = "data_2"
 one_path = os.getcwd()
 
 print(f"{loc['0']}")
@@ -530,7 +539,7 @@ py_logger.info(f'''[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}
 
 def main():
 
-  ur = imgs
+  ur = imgs18
 
   print(f'''{white}{'='*15}- {loc['14']} - {len(ur)} -{'='*15}''')
 
@@ -866,4 +875,11 @@ except Exception as err:
   pass
 
 print("DONE")
+
+if input('Скрипт завершил работу... Запустить бесконечный цикл выполнения? (Y/N) >>> ') == 'Y':
+  while True:
+    cls()
+    main()
+else:
+  pass
 sleep(30)

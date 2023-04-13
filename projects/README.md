@@ -5,5 +5,4 @@
 ### P.P.S нет блять генштаб
 
 
-### SetupFile Dand_Crop
-[!](https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/exe/setup.exe)
+### EXE - файл установщика скрипта Dand_Crop -> [SetupFile](https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/exe/setup.exe)

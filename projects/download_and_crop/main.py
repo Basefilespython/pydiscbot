@@ -1,6 +1,6 @@
 # <---------------------->
 
-s_version = "2.1.20"
+s_version = "2.1.21"
 
 # <---------------------->
 black = "\033[30m"
@@ -26,7 +26,7 @@ import urllib.request
 from time import sleep
 import http
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 
 if str(os.name) == 'nt':
   dir_pref = "\\"
@@ -537,48 +537,21 @@ py_logger.info(f'''[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}
 
 
 
-def main():
 
-  ur = imgs18
 
-  print(f'''{white}{'='*15}- {loc['14']} - {len(ur)} -{'='*15}''')
 
-  py_logger.info(f'''{'='*15}- Downloading Info -{'='*15}''')
+chosing_directory = imgs
+try:
+  from exctensions_module import sizing_dict
+  dict_size = sizing_dict(chosing_directory)
+except:
+  dict_size = None
+  pass
 
-  err_dict = []
-  vk_403_err = []
-  err_info = []
 
-  def download():
-    i = 1
-    if alive_a == True:
-      with alive_bar(len(ur)) as bar:
 
-        for url in ur:
+def download_function(url,name_file, err_dict, err_info, vk_403_err):
 
-          url = str(url)
-          url = url.replace(" ", "%20")
-
-          def ww1(i):
-
-            if "mp4" in url:
-              name_file = f"{i}.mp4"
-            else:
-              if "gif" in url:
-                name_file = f"{i}.gif"
-              else:
-                if "jpg" in url:
-                  name_file = f"{i}.jpg"
-                else:
-                  if "webp" in url:
-                    name_file = f"{i}.webp"
-                  else:
-                    if "webm" in url:
-                      name_file = f"{i}.webm"
-                    else:
-                      name_file = f"{i}.png"
-
-            while not os.path.exists(name_file):
               if '?size=' in url:
                 ind = url.find('?size=')
               else:
@@ -589,18 +562,19 @@ def main():
 
               try:
                 urllib.request.urlretrieve(str(url), name_file)
+                #print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
                 print(
                   f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}"
                 )
                 py_logger.info(
                   f'''File with name {name_file} and link ({url}) was downloaded successfully.'''
                 )
+                return '200', err_dict, err_info, vk_403_err
               except HTTPError as err_code:
 
                 print(
                   f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}"
                 )
-
                 err_dict.append(f"{url}")
                 err_info.append({f'{name_file}': f'{err_code.code}'})
                 if 'userapi.com' in url and err_code.code == 403:
@@ -608,7 +582,8 @@ def main():
                 py_logger.warning(
                   f'''File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}'''
                 )
-                break
+                return f'{err_code.code}', err_dict, err_info, vk_403_err
+                
 
               except urllib.error.URLError as err_code:
                 if "[WinError 10054]" in str(err_code):
@@ -619,6 +594,7 @@ def main():
                     f'''File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response.'''
                   )
                   err_info.append({f'{name_file}': "522"})
+                  return f'522', err_dict, err_info, vk_403_err
                 if "[Errno 99]" in str(err_code):
                   print(
                     f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -627,6 +603,7 @@ def main():
                   py_logger.warning(
                     f'''File with name {name_file} and link ({url}) was NOT downloaded due to connection failure.'''
                   )
+                  return f'524', err_dict, err_info, vk_403_err
                 if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
                   print(
                     f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -635,12 +612,14 @@ def main():
                   py_logger.warning(
                     f'''The file with name {name_file} and link ({url}) was NOT downloaded due to mismatch of security certificate or parental controls.'''
                   )
+                  return f'526', err_dict, err_info, vk_403_err
                 else:
                   pass
 
                 err_dict.append(f"{url}")
                 if 'userapi.com' in url: vk_403_err.append(f'{url}')
-                break
+
+                
               except http.client.RemoteDisconnected:
                 print(
                   f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -649,7 +628,19 @@ def main():
                 py_logger.warning(
                   f'''The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet.'''
                 )
-                break
+                return f'101', err_dict, err_info, vk_403_err
+
+              except ConnectionResetError:
+                print(
+                  f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}"
+                )
+                err_info.append({f'{name_file}': "101"})
+                py_logger.warning(
+                  f'''The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet.'''
+                )
+                return f'101', err_dict, err_info, vk_403_err
+
+                
               except ValueError as err:
                 print(
                   f"{violet}[?] 102: {blue}{name_file}{white}  URL: {url[0:ind]}"
@@ -658,7 +649,75 @@ def main():
                 py_logger.warning(
                   f'''File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link.'''
                 )
-                break
+                return f'102', err_dict, err_info, vk_403_err
+              except Exception as err:
+                print(
+                  f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}"
+                )
+                err_info.append({f'{name_file}': f"{err}"})
+                py_logger.warning(
+                  f'''File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}.'''
+                )
+                return f'___', err_dict, err_info, vk_403_err
+
+
+
+
+
+startTime = time.time()
+
+
+
+def main():
+  if dict_size == None:
+    ur = chosing_directory
+  else:
+    ur  = dict_size
+
+  print(f'''{white}{'='*15}- {loc['14']} - {len(ur)} -{'='*15}''')
+
+  py_logger.info(f'''{'='*15}- Downloading Info -{'='*15}''')
+
+  err_dict = []
+  vk_403_err = []
+  err_info = []
+
+  name_file_and_ext = []
+
+  def download():
+    i = 0
+
+
+    if alive_a == True:
+      with alive_bar(len(ur)) as bar:
+
+        for zn in ur:
+          #print("512", zn[f"{list(zn.keys())[0]}"])
+          # {'https://sun9-48.userapi.com/impg/0B8_GiHN8UAPS4c4V2VhL1qVijnEMugYiYAprg/fVytxCYhXWI.jpg?size=768x512&quality=95&sign=3e76087ea05610fea034e2b4df1bd24a&type=album': '.jpg'}
+          url = list(zn.keys())[0]
+          #print(list((zn)))
+          exten = zn[f"{list(zn.keys())[0]}"]
+          #print(url, exten)
+          #raise
+
+          def ww1(i, url, err_dict, err_info, vk_403_err, exten):
+
+
+
+
+            name_file = f"{i}{exten}"
+            while not os.path.exists(name_file):
+                #print(name_file, url)
+                #print(download_function(url,name_file, err_dict, err_info, vk_403_err))
+                status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
+                #print(status)
+                if status != '200':
+                  break
+                else:
+                  pass
+
+
+                
 
             if url not in err_dict:
               src = one_path + dir_pref + name_file
@@ -675,144 +734,83 @@ def main():
                 pass
             bar()
 
-          ww1(i)
+          ww1(i,url, err_dict, err_info, vk_403_err, exten)
+          #ww1(i)
           i = i + 1
     if alive_a == False:
+      for zn in ur:
+          #print("512", zn[f"{list(zn.keys())[0]}"])
+          # {'https://sun9-48.userapi.com/impg/0B8_GiHN8UAPS4c4V2VhL1qVijnEMugYiYAprg/fVytxCYhXWI.jpg?size=768x512&quality=95&sign=3e76087ea05610fea034e2b4df1bd24a&type=album': '.jpg'}
+          url = list(zn.keys())[0]
+          #print(list((zn)))
+          exten = zn[f"{list(zn.keys())[0]}"]
+          #print(url, exten)
+          #raise
 
-      for url in ur:
 
-        url = str(url)
-        url = url.replace(" ", "%20")
 
-        def ww2(i):
-
-          if "mp4" in url:
-            name_file = f"{i}.mp4"
-          else:
-            if "gif" in url:
-              name_file = f"{i}.gif"
-            else:
-              if "jpg" in url:
-                name_file = f"{i}.jpg"
-              else:
-                if "webp" in url:
-                  name_file = f"{i}.webp"
+          def ww2(i, url, err_dict, err_info, vk_403_err, exten):
+            name_file = f"{i}{exten}"
+            while not os.path.exists(name_file):
+                #print(name_file, url)
+                #print(download_function(url,name_file, err_dict, err_info, vk_403_err))
+                status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
+                #print(status)
+                if status != '200':
+                  break
                 else:
-                  if "webm" in url:
-                    name_file = f"{i}.webm"
-                  else:
-                    name_file = f"{i}.png"
-
-          while not os.path.exists(name_file):
-            if '?size=' in url:
-              ind = url.find('?size=')
-            else:
-              if '?extra=' in url:
-                ind = url.find('?extra=')
-              else:
-                ind = len(url)
-
-            try:
-              urllib.request.urlretrieve(str(url), name_file)
-              print(
-                f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
-              py_logger.info(
-                f'''File with name {name_file} and link ({url}) was downloaded successfully.'''
-              )
-            except HTTPError as err_code:
-
-              print(
-                f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}"
-              )
-
-              err_dict.append(f"{url}")
-              err_info.append({f'{name_file}': f'{err_code.code}'})
-              if 'userapi.com' in url and err_code.code == 403:
-                vk_403_err.append(f'{url}')
-              py_logger.warning(
-                f'''File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}'''
-              )
-              break
-
-            except urllib.error.URLError as err_code:
-              if "[WinError 10054]" in str(err_code):
-                print(
-                  f"{red}[-] {red}522: {blue}{name_file}{white}  URL: {url[0:ind]}"
-                )
-                py_logger.warning(
-                  f'''File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response.'''
-                )
-                err_info.append({f'{name_file}': "522"})
-              if "[Errno 99]" in str(err_code):
-                print(
-                  f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}"
-                )
-                err_info.append({f'{name_file}': "524"})
-                py_logger.warning(
-                  f'''File with name {name_file} and link ({url}) was NOT downloaded due to connection failure.'''
-                )
-              if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
-                print(
-                  f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}"
-                )
-                err_info.append({f'{name_file}': "526"})
-                py_logger.warning(
-                  f'''The file with name {name_file} and link ({url}) was NOT downloaded due to mismatch of security certificate or parental controls.'''
-                )
-              else:
+                  pass
+            if url not in err_dict:
+              src = one_path + dir_pref + name_file
+              os.chdir(one_path)
+              dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
+              try:
+                os.rename(src, dest)
+              except FileExistsError:
+                os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
+                os.remove(name_file)
+                os.chdir(one_path)
+                os.rename(src, dest)
+              except FileNotFoundError:
                 pass
 
-              err_dict.append(f"{url}")
-              if 'userapi.com' in url: vk_403_err.append(f'{url}')
-              break
-            except http.client.RemoteDisconnected:
-              print(
-                f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}"
-              )
-              err_info.append({f'{name_file}': "101"})
-              py_logger.warning(
-                f'''The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet.'''
-              )
-              break
-            except ValueError as err:
-              print(
-                f"{violet}[?] 102: {blue}{name_file}{white}  URL: {url[0:ind]}"
-              )
-              err_info.append({f'{name_file}': f"{err}"})
-              py_logger.warning(
-                f'''File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link.'''
-              )
-              break
 
-          if url not in err_dict:
-            src = one_path + dir_pref + name_file
-            os.chdir(one_path)
-            dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
-            try:
-              os.rename(src, dest)
-            except FileExistsError:
-              os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
-              os.remove(name_file)
-              os.chdir(one_path)
-              os.rename(src, dest)
-            except FileNotFoundError:
-              pass
 
-        ww2(i)
-        i = i + 1
+          ww2(i,url, err_dict, err_info, vk_403_err, exten)
+          i = i + 1
+
 
   download()
   return err_dict, vk_403_err, err_info
 
 
+
+
+
+
+
+
+
+
+
 try:
   err_count, vk_403_err, err_info = main()
+
+
   py_logger.info(f'''{'='*15}- Downloading OK -{'='*15}''')
 except KeyboardInterrupt:
   py_logger.info(f'''{'='*15}- Downloading KeyboardInterrupt -{'='*15}''')
   py_logger.critical(f'''The user aborted code execution.''')
   print(f'{red}[!] {loc["15"]}...')
 
+endTime = time.time()
+
+#n = endTime - startTime
+
+#from datetime import datetime
+
+
+print(f"Время выполнения скрипта / Script execution time: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}")
 
 
 try:
@@ -874,7 +872,7 @@ try:
 except Exception as err:
   pass
 
-print("DONE")
+
 
 if input('Скрипт завершил работу... Запустить бесконечный цикл выполнения? (Y/N) >>> ') == 'Y':
   while True:

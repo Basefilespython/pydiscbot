@@ -1,8 +1,8 @@
 #Зачем ты это читаешь?
 
 
-## P.S. это база
-### P.P.S нет блять генштаб
 
+## Dand_Crop
+Setup.EXE  -> [SetupFile](https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/exe/setup.exe) 
 
-### EXE - файл установщика скрипта Dand_Crop -> [SetupFile](https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/exe/setup.exe)
+Резерв [Mega-ссылка](https://mega.nz/file/wINHGBpI#NRSz-9ZOX4rICHdxXfjHNUVpNZJ4Re4aUcKPjCqPmM0)

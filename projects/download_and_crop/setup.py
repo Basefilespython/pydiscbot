@@ -28,24 +28,22 @@ os.chdir(name_dir)
 one_path = os.getcwd()
 
 # , 'keep_module.py']
-file_names = ['random_neko_list.py', 'main.py', 'setup.py','exctensions_module.py']
+file_names      = ['random_neko_list.py', 'main.py', 'setup.py','exctensions_module.py']
 file_names_main = ['LICENSE', 'README.md', 'about_the_creator.md']
-file_nme_loc = ['RU.py', 'EN.py']
+file_names_loc  = ['EN.py', 'RU.py']
 
 
 def download_file_from_github(url_id, file_name):
-    url_main = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/{file_name}"
+    url_main  = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/{file_name}"
     url_files = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
-    url_local = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}'
+    url_loc   = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}'
 
     if url_id == 0:
         url = url_files
-
     if url_id == 1:
         url = url_main
-
     if url_id == 2:
-        url = url_local
+        url = url_loc
 
     try:
 
@@ -68,9 +66,11 @@ def update():
 
     for file_name in file_names:
         download_file_from_github(0, file_name)
+
     for file_name in file_names_main:
         download_file_from_github(1, file_name)
-    for file_name in file_nme_loc:
+
+    for file_name in file_names_loc:
         download_file_from_github(2, file_name)
 
 
@@ -84,46 +84,34 @@ os.rename('LICENSE', 'LICENSE.txt')
 
 
 with os.scandir(os.getcwd()) as listOfEntries:
-    os.mkdir('LICENSE')
     os.mkdir('about')
+    os.mkdir('LICENSE')
     os.mkdir('modules')
     os.mkdir('localization')
     for entry in listOfEntries:
         if entry.is_file():
-            if entry.name == 'about_the_creator.md':
+            if entry.name != 'main.py':
+                if (entry.name == 'about_the_creator.md') or (entry.name == 'README.md'):
+                    dir_name = 'about'
 
-                do = str(os.getcwd() + dir_pref + 'about_the_creator.md')
-                posle = str(os.getcwd() + dir_pref + 'about' +
-                            dir_pref + 'about_the_creator.md')
+                if (entry.name == 'random_neko_list.py') or (entry.name == 'setup.py') or (entry.name == 'exctensions_module.py'):
+                    dir_name = 'modules'
 
-                os.rename(do, posle)
-            if entry.name == 'LICENSE.txt':
-                do = str(str(os.getcwd()) + str(dir_pref) + 'LICENSE.txt')
-                posle = str(os.getcwd() + dir_pref +
-                            'LICENSE' + dir_pref + 'LICENSE.txt')
+                
+                if (entry.name =='EN.py') or (entry.name =='RU.py'):
+                    dir_name = 'localization'
 
-                os.rename(do, posle)
-            if entry.name == 'README.md':
-                # try:
-                do = str(str(os.getcwd()) + str(dir_pref) + 'README.md')
-                posle = str(os.getcwd() + dir_pref +
-                            'about' + dir_pref + 'README.md')
-                os.rename(do, posle)
+                if entry.name == 'LICENSE.txt':
+                    dir_name = 'LICENSE'
 
-            if (entry.name == 'random_neko_list.py') or (entry.name == 'setup.py') or (entry.name == 'exctensions_module.py'):
                 do = str(str(os.getcwd()) + str(dir_pref) + entry.name)
-                posle = str(os.getcwd() + dir_pref +
-                            'modules' + dir_pref + entry.name)
+                posle = str(os.getcwd() + dir_pref + dir_name + dir_pref + entry.name)
                 os.rename(do, posle)
-
-            if entry.name in file_nme_loc:
-                # try:
-                do = str(str(os.getcwd()) + str(dir_pref) + f'{entry.name}')
-                posle = str(os.getcwd() + dir_pref + 'localization' + dir_pref + f'{entry.name}')
-                os.rename(do, posle)
+            else:
+                pass
 
 
-if os.name != 'posix':
+if os.name == 'nt':
     with open("start.bat", "w") as outfile:
         outfile.write(f"python main.py")
         pass

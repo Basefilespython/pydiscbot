@@ -726,29 +726,34 @@ def main():
             while not os.path.exists(name_file):
                 #print(name_file, url)
                 #print(download_function(url,name_file, err_dict, err_info, vk_403_err))
+              try:
                 status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
                 #print(status)
                 if status != '200':
                   break
                 else:
                   pass
+              except:
+                break
 
 
                 
-
-            if url not in err_dict:
-              src = one_path + dir_pref + name_file
-              os.chdir(one_path)
-              dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
-              try:
-                os.rename(src, dest)
-              except FileExistsError:
-                os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
-                os.remove(name_file)
+            try:
+              if url not in err_dict:
+                src = one_path + dir_pref + name_file
                 os.chdir(one_path)
-                os.rename(src, dest)
-              except FileNotFoundError:
-                pass
+                dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
+                try:
+                  os.rename(src, dest)
+                except FileExistsError:
+                  os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
+                  os.remove(name_file)
+                  os.chdir(one_path)
+                  os.rename(src, dest)
+                except FileNotFoundError:
+                  pass
+            except:
+              pass
             bar()
 
           ww1(i,url, err_dict, err_info, vk_403_err, exten)

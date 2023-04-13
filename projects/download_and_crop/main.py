@@ -692,13 +692,30 @@ def main():
       with alive_bar(len(ur)) as bar:
 
         for zn in ur:
-          #print("512", zn[f"{list(zn.keys())[0]}"])
-          # {'https://sun9-48.userapi.com/impg/0B8_GiHN8UAPS4c4V2VhL1qVijnEMugYiYAprg/fVytxCYhXWI.jpg?size=768x512&quality=95&sign=3e76087ea05610fea034e2b4df1bd24a&type=album': '.jpg'}
-          url = list(zn.keys())[0]
-          #print(list((zn)))
-          exten = zn[f"{list(zn.keys())[0]}"]
-          #print(url, exten)
-          #raise
+          try:
+            url = list(zn.keys())[0]
+            exten = zn[f"{list(zn.keys())[0]}"]
+          except AttributeError:
+            url = zn
+            if "mp4" in url:
+              exten = f".mp4"
+            else:
+              if "gif" in url:
+                exten = f".gif"
+              else:
+                if "jpg" in url:
+                  exten = f".jpg"
+                else:
+                  if "webp" in url:
+                    exten = f".webp"
+                  else:
+                    if "webm" in url:
+                      exten = f".webm"
+                    else:
+                      exten = f".png"
+
+            
+
 
           def ww1(i, url, err_dict, err_info, vk_403_err, exten):
 

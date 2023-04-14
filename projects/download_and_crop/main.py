@@ -194,7 +194,7 @@ def download_file_from_github(ind,file_name):
   if ind == 1:
     url = f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}'
   local_filename = url.split('/')[-1]
-  #def l(file_name):
+
   try:
     py_logger.info(f"[Downloading file] Name: {file_name}")
     with requests.get(url, stream=True, allow_redirects=True) as r:
@@ -203,7 +203,7 @@ def download_file_from_github(ind,file_name):
         for chunk in r.iter_content(chunk_size=8192):
           f.write(chunk)
     return 'ok'
-  #return l(file_name)
+
   except requests.exceptions.HTTPError as err:
     print(err)
     if '404' in str(err):
@@ -221,10 +221,41 @@ def check(ind,file_name):
   print(er)
 
 
+conf_file = []
+try:
+  with open('config.json', 'r') as file:
+    data = file.read()
+
+    #print(data)
+    localization = str(str(data)).replace(' ', '').replace('\n', "").replace('"', '').replace('[', '').replace(']', '').replace('{','').replace('}','').split(':')[1]
+
+    #print('231', localization)
+    #while True:
+      #pass
+
+    if (localization != 'ru') or (localization != 'en'):
+      localization == 'en'
+
+    qqwq = str(rf'''{"localization" : '{localization}'}''')
+    conf_file.append(qqwq)
+    localization = localization.upper()
+    
+except Exception as err:
+  print(err)
+  localization = input(f'Выберите локализацию (ru) / Select localization (en) >>> ').upper()
+  if (localization != 'RU') or (localization != 'EN'):
+    localization = 'EN'
+
+  zn = str(localization).lower().replace(" ", "")
+  ebat = {"localization" : zn}
+  qqwq = ebat# = str(ebat)
+
+  conf_file.append(qqwq)
 
 
 
-localization = input(f'Выберите локализацию (ru) / Select localization (en) >>> ').upper()
+
+localization = localization.upper()
 
 if localization == 'RU':
   
@@ -242,17 +273,17 @@ if localization == 'RU':
       )
       posle = os.getcwd()
       do_1212 = os.getcwd(
-      ) + dir_pref + 'localization' + dir_pref # + 'RU.py'
+      ) + dir_pref + 'localization' + dir_pref  
       os.chdir(do_1212)
       check(1, 'RU.py')
-      #download_file_from_github('RU.py')
+
       os.chdir(posle)
       try:
         try:
-          # import sys
+
           sys.path.insert(1, '../Dand_Crop')
           from localization.RU import ru_loc as loc
-          #loc_tag = 'ru'
+
           py_logger.info(
             "The localization for the Russian language has been successfully imported!"
           )
@@ -260,12 +291,12 @@ if localization == 'RU':
           try:
 
             from localization.RU import ru_loc as loc
-            #loc_tag = 'ru'
+
             py_logger.info(
               "The localization for the Russian language has been successfully imported!"
             )
           except:
-            #loc_tag = 'en'
+
             loc = en_loc_reserve
             py_logger.critical(
               f"localization for the Russian language was not found!")
@@ -273,9 +304,9 @@ if localization == 'RU':
             print(
               'Локализация была изменена на английскую, из-за отсутствия файла конфигурации.\nThe localization has been changed to English, due to the missing configuration file.'
             )
-            #raise SystemExit(f'\n[!] {loc["17"]}')
+
       except ImportError:
-        #loc_tag = 'en'
+
         loc = en_loc_reserve
         py_logger.critical(
           f"localization for the Russian language was not found!")
@@ -287,47 +318,13 @@ if localization == 'RU':
 if localization == 'EN':
   try:
     from EN import en_loc as loc
-    #loc_tag = 'en'
-  except ModuleNotFoundError:
+
+  except Exception as err:
     loc = en_loc_reserve
-    try:
-      from localization.RU import *
-    except ModuleNotFoundError:
-      py_logger.warning(
-        f"English localization was not found. Trying to download Localization..."
-      )
-      posle = os.getcwd()
-      do_1212 = os.getcwd(
-      ) + dir_pref + 'localization' + dir_pref  #+ 'random_neko_list.py'
-      os.chdir(do_1212)
-      download_file_from_github(0,'EN.py')
-      os.chdir(posle)
-      try:
-        try:
-          # import sys
-          sys.path.insert(1, '../Dand_Crop')
-          from localization.EN import en_loc as loc
-          #loc_tag = 'en'
-          py_logger.info(
-            "English localization has been successfully imported!")
-        except NameError:
-          try:
-
-            from localization.EN import en_loc as loc
-            #loc_tag = 'en'
-            py_logger.info(
-              "English localization has been successfully imported!")
-          except:
-            py_logger.critical(
-              f"localization for the English language was not found!")
-            raise SystemExit(f'\n[!] {loc["17"]}')
-      except ImportError:
-        py_logger.critical(
-          f"localization for the English language was not found!")
-        raise SystemExit(f'\n[!] {loc["17"]}')
+    #print(err)
 
 
-#print(loc)
+cls()
 
 
 def logo():
@@ -374,7 +371,7 @@ def logo():
 
 logo()
 
-#cls()
+
 try:
   do = os.getcwd()
 except OSError:
@@ -435,7 +432,7 @@ except ModuleNotFoundError:
     os.chdir(posle)
     try:
       try:
-        # import sys
+
         sys.path.insert(1, '../Dand_Crop')
         from random_neko_list import *
         py_logger.info("The database has been successfully imported!")
@@ -462,7 +459,7 @@ def update():
 
   import time
   time.sleep(2)
-#update()
+
 
 
 print(f'''{'='*15}- {loc['1']} -{'='*15}{turquoise}
@@ -483,7 +480,6 @@ def old(nversion):
     pass
 
 
-#NT / POSIX
 
 print(f'''{'='*15}- {loc['2']} -{'='*15}
 {yellow}[*] OS Name: {os.name.upper()}{white}''')
@@ -565,6 +561,7 @@ py_logger.info(f'''[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}
 
 
 chosing_directory = imgs
+#chosing_directory = ['lol']
 try:
   from exctensions_module import sizing_dict
   dict_size = sizing_dict(chosing_directory)
@@ -743,7 +740,7 @@ def main():
             while not os.path.exists(name_file):
               try:
                 status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
-                #print(status)
+
                 if status != '200':
                   break
                 else:
@@ -807,7 +804,7 @@ def main():
             while not os.path.exists(name_file):
               try:
                 status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
-                #print(status)
+
                 if status != '200':
                   break
                 else:
@@ -877,15 +874,38 @@ try:
       json.dump(err_info, outfile, indent=4)
     py_logger.info(f'''File created [err_info.json]''')
 
-  if ('errors.json' in str(os.path.exists(os.getcwd()))):# or ('vk403.json' in os.path.exists(os.getcwd())) or ('err_info.json' in os.path.exists(os.getcwd())):  
-    if 'config.json' not in os.path.exists(os.getcwd()):
-      if input(fr'\n{green}[*] Создавать в дальнейших запусках скрипта файлы с ошибками? (Y\n)>>> ') == 'Y':
-        with open('config.json', 'a', encoding='utf-8') as f:
-          f.write('{"save files with error information" : True}')
+  # if os.path.exists('err_info.json'):
+  #   print(f'err_info.json in ({os.getcwd()})')
+  #   if os.path.exists('config.json'):
+  #     try:
+  #       ch = data['save_files_with_error_information'].lower()
+  #       if ch == 'True':
+  #         pass
+  #       else:
+  #         if input(fr'{violet}[*] Создавать в дальнейших запусках скрипта файлы с ошибками? (Y\n)>>> ') == 'Y':
+  #             qqwq = str(rf'''{"save_files_with_error_information" : 'True'}''')
+  #             conf_file.append(qqwq)
+  #         else:
+  #             qqwq = str(rf'''{"save_files_with_error_information" : 'False'}''')
+  #             conf_file.append(qqwq)
+
+  #     except:
+  #       if input(fr'{violet}[*] Создавать в дальнейших запусках скрипта файлы с ошибками? (Y\n)>>> ') == 'Y':
+  #             qqwq = str(rf'''{"save_files_with_error_information" : 'True'}''')
+  #             conf_file.append(qqwq)
+  #       else:
+  #             qqwq = str(rf'''{"save_files_with_error_information" : 'False'}''')
+  #             conf_file.append(qqwq)
+
+  #   print(white)
+  # else:
+  #   print(f'err_info.json not in ({os.getcwd()})')
 except NameError:
   pass
 
-
+with open("config.json", "w") as outfile:
+    json.dump(conf_file, outfile, indent=4)
+    py_logger.info(f'''File created [config.json]''')
 
 
 

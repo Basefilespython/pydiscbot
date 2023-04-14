@@ -1,5 +1,19 @@
 # <---------------------->
 
+# ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
+# ▐░░███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░░░░░░░░░▌
+# ▐░█░░░█░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░▌
+# ▐░█░░░░█░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
+# ▐░█░░░░█░░░███░░░███░░░░████░░░░░░░░░░░█░░░░░░░█░███░░░░████░░░░████░░▌
+# ▐░█░░░░█░░█░░█░░░█░░█░░█░░░█░░░░░░░░░░░█░░░░░░░██░░░█░░█░░░░█░░█░░░░█░▌
+# ▐░█░░░█░░░█░░█░░░█░░█░░█░░░█░░░░░░░░░░░█░░░░█░░█░░░░░░░█░░░░█░░█░░░░█░▌
+# ▐░████░░░░░██░█░░█░░█░░░███░█░░█████░░░░████░░░█░░░░░░░░████░░░█████░░▌
+# ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░▌
+# ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░▌
+# ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
+# ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
+
+
 s_version = "2.1.21"
 
 # <---------------------->
@@ -339,14 +353,24 @@ def logo():
   color1 = random.choice(colors)
   colors.remove(color1)
   color2 = random.choice(colors)
-  #print(f'''{color1}
+  print(f'''{color1}
+{color2}▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
+{color2}▐{color1}░░{color2}███{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}████{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}▌
+{color2}▐{color1}░{color2}█{color1}░░░{color2}█{color1}░░░░░░░░░░░░░░░░░░░░░{color2}█{color1}░░░░░░░░░░{color2}█{color1}░░░░{color2}█{color1}░░░░░░░░░░░░░░░░░░░░░░░░░{color2}▌
+{color2}▐{color1}░{color2}█{color1}░░░░{color2}█{color1}░░░░░░░░░░░░░░░░░░░░{color2}█{color1}░░░░░░░░░░{color2}█{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}▌
+{color2}▐{color1}░{color2}█{color1}░░░░{color2}█{color1}░░░{color2}███{color1}░░░{color2}███{color1}░░░░{color2}████{color1}░░░░░░░░░░░{color2}█{color1}░░░░░░░{color2}█{color1}░{color2}███{color1}░░░░{color2}████{color1}░░░░{color2}████{color1}░░{color2}▌
+{color2}▐{color1}░{color2}█{color1}░░░░{color2}█{color1}░░{color2}█{color1}░░{color2}█{color1}░░░{color2}█{color1}░░{color2}█{color1}░░{color2}█{color1}░░░{color2}█{color1}░░░░░░░░░░░{color2}█{color1}░░░░░░░{color2}██{color1}░░░{color2}█{color1}░░{color2}█{color1}░░░░{color2}█{color1}░░{color2}█{color1}░░░░{color2}█{color1}░{color2}▌
+{color2}▐{color1}░{color2}█{color1}░░░{color2}█{color1}░░░{color2}█{color1}░░{color2}█{color1}░░░{color2}█{color1}░░{color2}█{color1}░░{color2}█{color1}░░░{color2}█{color1}░░░░░░░░░░░{color2}█{color1}░░░░{color2}█{color1}░░{color2}█{color1}░░░░░░░{color2}█{color1}░░░░{color2}█{color1}░░{color2}█{color1}░░░░{color2}█{color1}░{color2}▌
+{color2}▐{color1}░{color2}████{color1}░░░░░{color2}██{color1}░{color2}█{color1}░░{color2}█{color1}░░{color2}█{color1}░░░{color2}███{color1}░{color2}█{color1}░░{color2}█████{color1}░░░░{color2}████{color1}░░░{color2}█{color1}░░░░░░░░{color2}████{color1}░░░{color2}█████{color1}░░{color2}▌
+{color2}▐{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}█{color1}░░░░░░{color2}▌
+{color2}▐{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}█{color1}░░░░░░{color2}▌
+{color2}▐{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}▌
+{color2}▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌{white}''')
 
 
-#[--------------------------------]
-#    [------------------------]
-#        [----------------]
-#            [----------]
-#  {white}''')
+
+
+
 
 logo()
 
@@ -393,6 +417,8 @@ if '/content' in os.getcwd():
   os.chdir(os.getcwd() + '/' + 'Dand_Crop')
   system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
 
+
+
 try:
   from random_neko_list import *
   py_logger.info("The database has been successfully imported!")
@@ -436,9 +462,8 @@ def update():
 
   import time
   time.sleep(2)
+#update()
 
-
-# update()
 
 print(f'''{'='*15}- {loc['1']} -{'='*15}{turquoise}
 {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}{white}''')
@@ -475,10 +500,9 @@ def check_version(sversion):
       ).text)['ver']
   except:
     nversion = None
+
   if nversion != None:
-    s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split(
-      '.')[1], str(sversion).split('.')[2], str(nversion).split('.')[0], str(
-        nversion).split('.')[1], str(nversion).split('.')[2]
+    s1, s2, s3, n1, n2, n3 = str(sversion).split('.')[0], str(sversion).split('.')[1], str(sversion).split('.')[2], str(nversion).split('.')[0], str(nversion).split('.')[1], str(nversion).split('.')[2]
     print(f'''{'='*15}- {loc['3']} -{'='*15}''')
     if s1 >= n1:
       if s2 >= n2:
@@ -524,7 +548,7 @@ except PermissionError:
   name_dir = ''
   pass
 
-#print(f'''{loc["0"]}''')
+
 
 py_logger.info(f"Dir_pref = {dir_pref}")
 print(f'''{white}{'='*15}- {loc['17']} -{'='*15}
@@ -551,6 +575,8 @@ except:
 
 
 def download_function(url,name_file, err_dict, err_info, vk_403_err):
+              
+              url = url.replace(" ", "%20")
 
               if '?size=' in url:
                 ind = url.find('?size=')
@@ -562,10 +588,8 @@ def download_function(url,name_file, err_dict, err_info, vk_403_err):
 
               try:
                 urllib.request.urlretrieve(str(url), name_file)
-                #print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
-                print(
-                  f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}"
-                )
+
+                print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
                 py_logger.info(
                   f'''File with name {name_file} and link ({url}) was downloaded successfully.'''
                 )
@@ -714,18 +738,9 @@ def main():
                     else:
                       exten = f".png"
 
-            
-
-
           def ww1(i, url, err_dict, err_info, vk_403_err, exten):
-
-
-
-
             name_file = f"{i}{exten}"
             while not os.path.exists(name_file):
-                #print(name_file, url)
-                #print(download_function(url,name_file, err_dict, err_info, vk_403_err))
               try:
                 status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
                 #print(status)
@@ -757,46 +772,66 @@ def main():
             bar()
 
           ww1(i,url, err_dict, err_info, vk_403_err, exten)
-          #ww1(i)
           i = i + 1
-    if alive_a == False:
-      for zn in ur:
-          #print("512", zn[f"{list(zn.keys())[0]}"])
-          # {'https://sun9-48.userapi.com/impg/0B8_GiHN8UAPS4c4V2VhL1qVijnEMugYiYAprg/fVytxCYhXWI.jpg?size=768x512&quality=95&sign=3e76087ea05610fea034e2b4df1bd24a&type=album': '.jpg'}
-          url = list(zn.keys())[0]
-          #print(list((zn)))
-          exten = zn[f"{list(zn.keys())[0]}"]
-          #print(url, exten)
-          #raise
 
+    if alive_a == False:
+      
+        for zn in ur:
+          try:
+            url = list(zn.keys())[0]
+            exten = zn[f"{list(zn.keys())[0]}"]
+          except AttributeError:
+            url = zn
+            if "mp4" in url:
+              exten = f".mp4"
+            else:
+              if "gif" in url:
+                exten = f".gif"
+              else:
+                if "jpg" in url:
+                  exten = f".jpg"
+                else:
+                  if "webp" in url:
+                    exten = f".webp"
+                  else:
+                    if "webm" in url:
+                      exten = f".webm"
+                    else:
+                      exten = f".png"
+
+            
 
 
           def ww2(i, url, err_dict, err_info, vk_403_err, exten):
             name_file = f"{i}{exten}"
             while not os.path.exists(name_file):
-                #print(name_file, url)
-                #print(download_function(url,name_file, err_dict, err_info, vk_403_err))
+              try:
                 status, err_dict, err_info, vk_403_err = download_function(url,name_file, err_dict, err_info, vk_403_err)
                 #print(status)
                 if status != '200':
                   break
                 else:
                   pass
-            if url not in err_dict:
-              src = one_path + dir_pref + name_file
-              os.chdir(one_path)
-              dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
-              try:
-                os.rename(src, dest)
-              except FileExistsError:
-                os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
-                os.remove(name_file)
+              except:
+                break
+                
+            try:
+              if url not in err_dict:
+                src = one_path + dir_pref + name_file
                 os.chdir(one_path)
-                os.rename(src, dest)
-              except FileNotFoundError:
-                pass
-
-
+                dest = f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}'
+                try:
+                  os.rename(src, dest)
+                except FileExistsError:
+                  os.chdir(f'{os.getcwd()}{dir_pref}{name_dir}{dir_pref}')
+                  os.remove(name_file)
+                  os.chdir(one_path)
+                  os.rename(src, dest)
+                except FileNotFoundError:
+                  pass
+            except:
+              pass
+            bar()
 
           ww2(i,url, err_dict, err_info, vk_403_err, exten)
           i = i + 1
@@ -804,13 +839,6 @@ def main():
 
   download()
   return err_dict, vk_403_err, err_info
-
-
-
-
-
-
-
 
 
 
@@ -827,9 +855,7 @@ except KeyboardInterrupt:
 
 endTime = time.time()
 
-#n = endTime - startTime
 
-#from datetime import datetime
 
 
 print(f"Время выполнения скрипта / Script execution time: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}")

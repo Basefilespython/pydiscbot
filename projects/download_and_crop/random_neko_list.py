@@ -580,6 +580,7 @@ imgs18 = [
     "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2021.jpg",
     "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2035.jpg",
     "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2036.jpg",
+    "https://sun1-98.userapi.com/impg/b5TyIOhDwUcVQxXJ3UZfa97pqRvSA5YNC3bgbg/jA6QJIgIqW4.jpg?size=811x1398&quality=96&sign=1acffb7d2252a9c74631161082aab3ed&type=album",
     "https://sun1-18.userapi.com/impg/tTxze0qnOQFm6v5AwQObhz3cKJYeEUP7EvhqZA/bgGm40LH0SI.jpg?size=1240x1753&quality=96&sign=7f0723f74e0632638fc5acb3a4b19572&type=album",
     "https://sun1-24.userapi.com/impg/nY_CaWghfs9c2TXcO5YBeXrbDdflQGNpFxjUEA/aRcacnyWvQ8.jpg?size=720x1080&quality=96&sign=b76812669717e55ff6e7c4a3ec099ce4&type=album",
     "https://sun1-24.userapi.com/impg/rO9iZZpmxlgwwDau8m_c-4sKDd_7F-8I1t3UtA/BpLtpFv6ako.jpg?size=1280x720&quality=96&sign=97c46e97e7348452be0ca94a81d3bf4e&type=album",

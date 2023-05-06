@@ -569,6 +569,7 @@ check_version(s_version)
 
 name_dir = "data_2"
 one_path = os.getcwd()
+ext_list = list()
 
 print(f"{loc['0']}")
 
@@ -612,16 +613,34 @@ except:
     pass
 
 
+_200 = []
+
+_400 = []
+_401 = []
+_402 = []
+_403 = []
+_404 = []
+
+_522 = []
+_524 = []
+_526 = []
+
+_000 = []
+_101 = []
+_102 = []
+_unc = []
+
+
 def download_function(url, name_file, err_dict, err_info, vk_403_err):
     if 'imgs' in url:
         pythonanywhere_key = False
-    else:
-        pythonanywhere_key = True
+    
 
     if 'imgs18' in url:
+        
         pythonanywhere_key = True
-    else:
-        pythonanywhere_key = False
+    #else:
+    #    pythonanywhere_key = False
 
     url = url.replace(" ", "%20")
 
@@ -640,6 +659,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
         py_logger.info(
             f"""File with name {name_file} and link ({url}) was downloaded successfully."""
         )
+        
         return "200", err_dict, err_info, vk_403_err
     except HTTPError as err_code:
 
@@ -677,12 +697,20 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
                 f"""The file with name {name_file} and link ({url}) was NOT downloaded due to mismatch of security certificate or parental controls."""
             )
             return f"526", err_dict, err_info, vk_403_err
+        if "[Errno 11001]" in str(err_code):
+            print(f"{red}[-] {red}000: {blue}{name_file}{white}  URL: {url[0:ind]}")
+            err_info.append({f"{name_file}": "000"})
+            py_logger.warning(
+                f"""The file with name {name_file} and link ({url}) was NOT downloaded due not connected to Enternet."""
+            )
+            return f"000", err_dict, err_info, vk_403_err
         else:
+            print(err_code)
             pass
 
         err_dict.append(f"{url}")
-        if "userapi.com" in url:
-            vk_403_err.append(f"{url}")
+        # if "userapi.com" in url:
+        #     vk_403_err.append(f"{url}")
 
     except http.client.RemoteDisconnected:
         print(f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
@@ -707,14 +735,16 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
             f"""File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link."""
         )
         return f"102", err_dict, err_info, vk_403_err
-    except Exception as err:
-        print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
-        err_info.append({f"{name_file}": f"{err}"})
-        py_logger.warning(
-            f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
-        )
-        return f"___", err_dict, err_info, vk_403_err
-
+    # except Exception as err:
+    #     print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
+    #     err_info.append({f"{name_file}": f"{err}"})
+    #     py_logger.warning(
+    #         f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
+    #     )
+    #     return f"___", err_dict, err_info, vk_403_err
+    # finally:
+    #     return f"KAVO", err_dict, err_info, vk_403_err
+          
 
 startTime = time.time()
 
@@ -766,20 +796,47 @@ def main():
                         name_file = f"{i}{exten}"
                         while not os.path.exists(name_file):
                             try:
-                                (
-                                    status,
-                                    err_dict,
-                                    err_info,
-                                    vk_403_err,
-                                ) = download_function(
-                                    url, name_file, err_dict, err_info, vk_403_err
-                                )
+                                status, err_dict, err_info, vk_403_err = (download_function(url, name_file, err_dict, err_info, vk_403_err))
+                                #    )
+                                #status = '000'
+                                #print((download_function(url, name_file, err_dict, err_info, vk_403_err)))
+
+                                if status == '200':
+                                    _200.append({f'{name_file}' : f'{url}'})
+                                elif status == '000':
+                                    _000.append({f'{name_file}' : f'{url}'})
+                                elif status == '101':
+                                    _101.append({f'{name_file}' : f'{url}'})
+                                elif status == '102':
+                                    _102.append({f'{name_file}' : f'{url}'})
+                                elif status == '400':
+                                    _400.append({f'{name_file}' : f'{url}'})
+                                elif status == '401':
+                                    _401.append({f'{name_file}' : f'{url}'})
+                                elif status == '402':
+                                    _102.append({f'{name_file}' : f'{url}'})
+                                elif status == '403':
+                                    _403.append({f'{name_file}' : f'{url}'})
+                                elif status == '404':
+                                    _404.append({f'{name_file}' : f'{url}'})
+                                elif status == '522':
+                                    _522.append({f'{name_file}' : f'{url}'})
+                                elif status == '524':
+                                    _524.append({f'{name_file}' : f'{url}'})
+                                elif status == '526':
+                                    _526.append({f'{name_file}' : f'{url}'})
+                                elif status == '___':
+                                    _unc.append({f'{name_file}' : f'{url}'})
+                                else:
+                                    pass
 
                                 if status != "200":
+                                    
                                     break
                                 else:
                                     pass
-                            except:
+                            except Exception as err:
+                                print(err)
                                 break
 
                         try:
@@ -834,9 +891,41 @@ def main():
                     name_file = f"{i}{exten}"
                     while not os.path.exists(name_file):
                         try:
-                            status, err_dict, err_info, vk_403_err = download_function(
-                                url, name_file, err_dict, err_info, vk_403_err
-                            )
+                            #status, err_dict, err_info, vk_403_err = \
+                            print(download_function(url, name_file, err_dict, err_info, vk_403_err))
+                            status = '000'
+
+                            if status == '200':
+                                    _200.append({f'{name_file}' : f'{url}'})
+                            elif status == '101':
+                                    _101.append({f'{name_file}' : f'{url}'})
+                            elif status == '102':
+                                    _102.append({f'{name_file}' : f'{url}'})
+                            elif status == '400':
+                                    _400.append({f'{name_file}' : f'{url}'})
+                            elif status == '401':
+                                    _401.append({f'{name_file}' : f'{url}'})
+                            elif status == '402':
+                                    _102.append({f'{name_file}' : f'{url}'})
+                            elif status == '403':
+                                    _403.append({f'{name_file}' : f'{url}'})
+                            elif status == '404':
+                                    _404.append({f'{name_file}' : f'{url}'})
+                            elif status == '522':
+                                    _522.append({f'{name_file}' : f'{url}'})
+                            elif status == '524':
+                                    _524.append({f'{name_file}' : f'{url}'})
+                            elif status == '526':
+                                    _526.append({f'{name_file}' : f'{url}'})
+                            elif status == '___':
+                                    _unc.append({f'{name_file}' : f'{url}'})
+                            else:
+                                _unc.append({f'{name_file}' : f'{url}'})
+                                pass
+
+
+
+
 
                             if status != "200":
                                 break
@@ -865,7 +954,34 @@ def main():
 
                 ww2(i, url, err_dict, err_info, vk_403_err, exten)
                 i = i + 1
-
+        # for code in [101,102,200,400,401,402,403,404,522,524,526]:
+        #    ext_list.append({f'{code}': _[code]})
+        if len(_000) != 0:
+            ext_list.append({f'000': _000})
+        if len(_101) != 0:
+            ext_list.append({f'101': _101})
+        if len(_102) != 0:
+            ext_list.append({f'102': _102})
+        if len(_200) != 0:
+            ext_list.append({f'200': _200})
+        if len(_400) != 0:
+           ext_list.append({f'400': _400})
+        if len(_401) != 0:
+           ext_list.append({f'401': _401})
+        if len(_402) != 0:
+           ext_list.append({f'402': _402})
+        if len(_403) != 0:
+           ext_list.append({f'403': _403})
+        if len(_404) != 0:
+           ext_list.append({f'404': _404})
+        if len(_522) != 0:
+           ext_list.append({f'522': _522})
+        if len(_524) != 0:
+           ext_list.append({f'524': _524})
+        if len(_526) != 0:
+            ext_list.append({f'526': _526})
+        if len(_unc) != 0:
+            ext_list.append({f'UNC': _unc})
     download()
     return err_dict, vk_403_err, err_info
 
@@ -876,8 +992,10 @@ try:
         try:
             from modules.pythonanywhere import pythonanywhere_def
             pythonanywhere_def()
-        except:
-            py_logger.critical(f"""pythonanywhere_def не найдено.""")
+            print('pythonanywhere_def успешно!')
+        except Exception as err:
+            print(f"""pythonanywhere_def не найдено ({err}).""")
+            py_logger.critical(f"""pythonanywhere_def не найдено ({err}).""")
 
     py_logger.info(f"""{'='*15}- Downloading OK -{'='*15}""")
 except KeyboardInterrupt:
@@ -906,6 +1024,11 @@ try:
         with open(f"{file_name_err_info}", "w") as outfile:
             json.dump(err_info, outfile, indent=4)
         py_logger.info(f"""File created [{file_name_err_info}]""")
+
+    if len(ext_list) != 0:
+        with open('info.json','w') as file:
+            json.dump(ext_list, file, indent=4)
+        py_logger.info(f"""File created [info.json]""")
 
     # if os.path.exists('err_info.json'):
     #   print(f'err_info.json in ({os.getcwd()})')

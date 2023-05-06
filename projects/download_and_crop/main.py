@@ -605,7 +605,7 @@ pythonanywhere_key = False
 chosing_directory = imgs18
 # chosing_directory = ['lol']
 try:
-    from exctensions_module import sizing_dict
+    from modules.exctensions_module import sizing_dict
 
     dict_size = sizing_dict(chosing_directory)
 except:
@@ -676,6 +676,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
         return f"{err_code.code}", err_dict, err_info, vk_403_err
 
     except urllib.error.URLError as err_code:
+        err_dict.append(f"{url}")
         if "[WinError 10054]" in str(err_code):
             print(f"{red}[-] {red}522: {blue}{name_file}{white}  URL: {url[0:ind]}")
             py_logger.warning(
@@ -706,11 +707,14 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
             return f"000", err_dict, err_info, vk_403_err
         else:
             print(err_code)
-            pass
+            print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
+            err_info.append({f"{name_file}": f"{err}"})
+            py_logger.warning(
+                f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
+            )
+            return f"___", err_dict, err_info, vk_403_err
 
-        err_dict.append(f"{url}")
-        # if "userapi.com" in url:
-        #     vk_403_err.append(f"{url}")
+
 
     except http.client.RemoteDisconnected:
         print(f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
@@ -735,13 +739,13 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
             f"""File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link."""
         )
         return f"102", err_dict, err_info, vk_403_err
-    # except Exception as err:
-    #     print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
-    #     err_info.append({f"{name_file}": f"{err}"})
-    #     py_logger.warning(
-    #         f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
-    #     )
-    #     return f"___", err_dict, err_info, vk_403_err
+    except Exception as err:
+        print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
+        err_info.append({f"{name_file}": f"{err}"})
+        py_logger.warning(
+            f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
+        )
+        return f"___", err_dict, err_info, vk_403_err
     # finally:
     #     return f"KAVO", err_dict, err_info, vk_403_err
           

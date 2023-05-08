@@ -503,8 +503,8 @@ imgs = [
 ]
 
 
-imgs18 = [
-    {"imgs" : { "gif": {"https://lh3.googleusercontent.com/drive-viewer/AAOQEOT0E-WqJpWKAot2otbAevoMyojQkrYWNo6jaCy44B0_MoqHlULiJxG1aXEFO7dSw2eY_HiKQVmkDyTJ_wMUrYGh-ppa2w=w1606-h1009"
+imgs18 = [ 
+    {"imgs" : { "gif": {""
                         ,"2_link_imgs_gif_1"
                         },
                 "mp4": {"https://media-cdn.lawlietbot.xyz/media/danbooru/07/93/07934b2903a44886d150fe6498aa970e.mp4?s=cdn"
@@ -555,7 +555,7 @@ imgs18 = [
     "https://cdn.nekobot.xyz/c/c/b/df6312f6cc3ecbf960bd216dda6f5.png",
     "https://cdn.nekobot.xyz/e/1/f/027f8497e516371edda52bb46b446.jpg",
     "https://cdn.nekobot.xyz/f/4/5/96023ee1afc336f3f7e8f1e79c092.jpg",
-    "https://ei.phncdn.com/videos/202105/05/387579301/original/(m=qW2RLPWbeaAaGwObaaaa)(mh=8FI0zKtVrLoYk32y)0.jpg",
+    "",
     "https://i.imgur.com/vFY5wkR.png",
     "https://i.pinimg.com/originals/bf/31/1f/bf311fe82c45ced428c10c2d052845ca.png",
     "https://i.redd.it/ky8aitu2ylz21.jpg",
@@ -570,7 +570,7 @@ imgs18 = [
     "https://i0.nekobot.xyz/8/2/1/19f283635cbc3f478d5082d8dc0dd.jpg",
     "https://i0.nekobot.xyz/8/3/a/f78c46bda43765ffb313be7d1b166.gif",
     "https://i0.nekobot.xyz/8/c/9/c616ec74631d4244e7a9f9ccb83cc.jpeg",
-    "https://img3.gelbooru.com//images/05/c4/05c4202d0dcae8482dadf590430de934.gif",
+    "",
     "https://lh3.googleusercontent.com/k6h-IWppmW5CURSzvUVv-9fmKOgpzi5yC7iewy9gc9rZI_iJ4qHcbnt10ioS_M_pWxI-ZYSBSqx0AVW7DmbdDwclEsoSAwjbt6FYvCFNqAQ2nrDWoffiRrWTJfocQ1yRNETr1Gzi9icC72jPJq6T1hHeaurC85ZpgZYQ3K64IDZTwhZGPJbvg55UygyXAOs221MqGiUqp6mHdQraXn2Zh7MPL1A-DqY_TUOpd13REI4CNT-idIi5MLYPtBawVKVxxUt95w39WksADzkZarUiG4HaY_LSzoFFN2gq0w2BgOWmzHFqZWtCuFq8bjYCWaHLEhdEMGtIFRMPJ9RpVAFSeulpqfgdULxhlvjkW0k_rZiCgs3x1tVQNCJEVZC0g1QqsA0G0hPYb-jGpfXP1QCMSRu-h-nqRhrvW31zhs0cH96AFb0NA_q8p1acy2MDJuDGcV0uuJOolADXHyXYrtWceBc6lbio5VACjnBuPa8PdD32c1IL8Sd5ElvXWrtrWj7RA_H5H7g7zZlhszSdh4DUHrIy9hfLTs45exVX6MIY8TFFer0cIU1E_RcJxKwkTceYhgOqXQOKLD3r5UyLKtPo4qM4tTjnBj1GBJmYWFyFaKeauwsPPkotPHvV36brS5iZfQ2ltz8Yyuseg5Royg6yhsfZ--lSZOageTLSW4a4uN-XAo7oiRmCTt0MqJdbazUXOxPO54yH7lyYEBDF5lE4Af5XK4x8C3_mRJCmdEkJQynjmf61_GWFh8P_01nJTCUXH2oVhkTld5INkZ31yd67e_Bafsjzb9UjX2WrXUmvR86o2vrsKh3YXY5fP9_OcTdImozAS38nsJOqkOu9rd1G-qeEtwC9g4KJikSQWK3i7B3GLmi3KZtYi0lAQeIy3msfhgQYPTdLCEFTfBDVxxWPCXx6knnLz-QWo1-xFnYH1KU=w636-h992-s-no?authuser=0",
     "https://lh3.googleusercontent.com/pw/AJFCJaUiKktw5452lzNt6qexVyOttQmjDEsccZRFnGG3EPoz38181Rpgr2grBc1663H73BRu36aMaqpszznQHebWrZRlzHMf78-lrpQWg1JmKEwphLyMDhnStBOTnQdgsIJAd-jMRmuTnSn6z8w_VOgQdN1RxWBLbxPUF-lWD3AYgHKRBvfJuqi9-yOJ2A9XTxfFnpjsWI_MSUfjV7X4oj_iMapfheOdsg82df0DlHC854I9AzHvjg4cgkcM5e5XmWjQ5JAexZruB-8tq_FI2h1Xn2fRZ-uwUl-kZfkV_t__Hb3wVKLpkKEp7nVxMPQ2HoPi78GluGFopM8NMt_gW1hIaL9hVxnjlsrkjxzZVgprPIfvUYpOV8eUg0smrrcg1yH-uooa2Gk2Y2N8EgJLOocIs6uOyLOaercySXpdiwJ2nNKqmeYwLvrPkaE4j6j1-A0eh0gzqvqDYZmfpy1g4E5iWMU75NkD3br5Nvl2JVMS_kakIqWFXurvfcPm9qEnRKujs4Lwjhx0uZFTfIWq7UTblYU_yX5MV82GkyRLD-KITuA4ZhY-D3ridHAE1-DMqDnOh08pBczYBUBFpgTOB-Mmrw-6auKDXpfMTTaEUrowBvOIMfq3kOxpqKNGBsw8kD_SWrUnMqEseXHOJ4Gpe3UE1rqvO-5V55Ny0icn7NLjHPiMnvBav4o88M2hloxEkztuENh0A0HoZVgVe9CbrUqAVqXY57383-SCWfRctkwaZdbBGfTfn9Y5R7aKqWinm1-jMCLjY3co8f9pRteKwVtOQ25e8BuXL3QqwSYDEySVhstkELssZxyRSed0uxmcnOIR86hnjrSpe4bqRoJe6PFBbBBSjNX62lm7ZfzDRgu-NDOdW-JBCH1qSjPFgdKZ9qgL9Gq3Y86P1U8aWHJtgcATvA=w1149-h819-s-no?authuser=0",
     "https://media-cdn.lawlietbot.xyz/media/danbooru/e7/13/e713de898692e6f7a3c68549260fbe46.webm?s=cdn",
@@ -580,6 +580,7 @@ imgs18 = [
     "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2021.jpg",
     "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2035.jpg",
     "https://randomc.net/image/Kaifuku%20Jutsushi%20no%20Yarinaoshi/Kaifuku%20Jutsushi%20no%20Yarinaoshi%20-%2004%20-%20Large%2036.jpg",
+    "https://sun1-98.userapi.com/impg/b5TyIOhDwUcVQxXJ3UZfa97pqRvSA5YNC3bgbg/jA6QJIgIqW4.jpg?size=811x1398&quality=96&sign=1acffb7d2252a9c74631161082aab3ed&type=album",
     "https://sun1-18.userapi.com/impg/tTxze0qnOQFm6v5AwQObhz3cKJYeEUP7EvhqZA/bgGm40LH0SI.jpg?size=1240x1753&quality=96&sign=7f0723f74e0632638fc5acb3a4b19572&type=album",
     "https://sun1-24.userapi.com/impg/nY_CaWghfs9c2TXcO5YBeXrbDdflQGNpFxjUEA/aRcacnyWvQ8.jpg?size=720x1080&quality=96&sign=b76812669717e55ff6e7c4a3ec099ce4&type=album",
     "https://sun1-24.userapi.com/impg/rO9iZZpmxlgwwDau8m_c-4sKDd_7F-8I1t3UtA/BpLtpFv6ako.jpg?size=1280x720&quality=96&sign=97c46e97e7348452be0ca94a81d3bf4e&type=album",

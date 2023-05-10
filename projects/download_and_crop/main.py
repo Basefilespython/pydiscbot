@@ -526,7 +526,7 @@ def check_version(sversion):
     try:
         nversion = json.loads(
             requests.get(
-                "https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/version.json"
+                "https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json"
             ).text
         )["ver"]
     except:

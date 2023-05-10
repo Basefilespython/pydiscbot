@@ -8,7 +8,7 @@ turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
 
-ru_loc = {
+en_loc = {
    '0': f'''{'='*15}- Connection statuses -{'='*15}
 {green}- 200 - Success!{white}
 {'='*10} HTTP ERROR CODEs: {'='*10}
@@ -42,5 +42,16 @@ ru_loc = {
    '15': 'You aborted code execution',
    '16': 'Crop images in database?',
    '17': 'Directory',
-   '18': 'Update version check failed!'
+   '18': 'Update version check failed!',
+   "19": "Reload script.",
+   "20": "The text below triggers a script termination notification.",
+   "21": "Script completed",
+   "22": "Done!",
+   "23": "Start an endless loop",
+   "24": "Downloading additional data",
+   "25": "Main Script Version",
+   "26": "Data Baze Version",
+   "27": "Not Found",
+   "28": "Script execution time",
+   "29": "Start downloading additional data"
 }

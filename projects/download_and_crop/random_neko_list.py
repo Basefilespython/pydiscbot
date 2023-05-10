@@ -1,3 +1,7 @@
+version= '1.1.0'
+
+### https://github.com/Basefilespython/pydiscbot/tree/main/projects/download_and_crop
+
 imgs = [
     "https://cdn.donmai.us/sample/df/3c/__original_drawn_by_mathew_srmmk_mce__sample-df3c8647a59443b7634d09845c61bbb1.jpg",
     "https://cs10.pikabu.ru/post_img/big/2019/07/16/11/1563303250131147987.png",

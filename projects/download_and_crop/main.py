@@ -64,6 +64,34 @@ do = os.getcwd()
 
 # <-------------------------->
 
+def update_():
+  from time import sleep
+  from win11toast import notify, update_progress, toast
+
+#   notify(progress={
+#       'title': 'YouTube',
+#       'status': 'Downloading...',
+#       'value': '0',
+#       'valueStringOverride': '0/15 videos'
+#   })
+
+#   for i in range(1, 15+1):
+#       sleep(1)
+#       update_progress({'value': i/15, 'valueStringOverride': f'{i}/15 videos'})
+
+#   update_progress({'status': 'Completed!'})
+
+
+#   toast('Music Player', 'Download Finished', buttons=[
+#     {'activationType': 'protocol', 'arguments': 'C:\Windows\Media\Alarm01.wav', 'content': 'Play'},
+#     {'activationType': 'protocol', 'arguments': 'file:///C:/Windows/Media', 'content': 'Open Folder'}
+# ])
+
+
+update_()
+
+# <-------------------------->
+
 
 def download_file_from_github(ind, file_name):
     if ind == 0:
@@ -613,6 +641,11 @@ except:
     pass
 
 
+
+
+
+
+
 _200 = []
 
 _400 = []
@@ -758,6 +791,8 @@ def main():
         ur = chosing_directory
     else:
         ur = dict_size
+        
+    notify(progress={'title': 'YouTube','status': 'Downloading...','value': '0','valueStringOverride': f'0/{len(ur)} videos'})
 
     print(f"""{white}{'='*15}- {loc['14']} - {len(ur)} -{'='*15}""")
 
@@ -798,6 +833,7 @@ def main():
 
                     def ww1(i, url, err_dict, err_info, vk_403_err, exten):
                         name_file = f"{i}{exten}"
+                        update_progress({'value': i/{len(ur)}, 'valueStringOverride': f'{i}/{len(ur)} videos'})
                         while not os.path.exists(name_file):
                             try:
                                 status, err_dict, err_info, vk_403_err = (download_function(url, name_file, err_dict, err_info, vk_403_err))
@@ -1096,6 +1132,8 @@ try:
     in_the_papka(dir_pref)
 except Exception as err:
     pass
+
+toast('Готово!', 'Скрипт завершил работу...')
 
 if (
     input("Скрипт завершил работу... Запустить бесконечный цикл выполнения? (Y/N) >>> ")

@@ -17,6 +17,8 @@ s_version = "2.1.23"
 
 # <---------------------->
 
+# https://drive.google.com/file/d/1rn7lK4XinNVys86vtX3bsxZCXT8Ro8MN/view
+
 black = "\033[30m"
 red = "\033[31m"
 green = "\033[32m"
@@ -62,33 +64,7 @@ def cls():
 
 do = os.getcwd()
 
-# <-------------------------->
 
-def update_():
-  from time import sleep
-  from win11toast import notify, update_progress, toast
-
-#   notify(progress={
-#       'title': 'YouTube',
-#       'status': 'Downloading...',
-#       'value': '0',
-#       'valueStringOverride': '0/15 videos'
-#   })
-
-#   for i in range(1, 15+1):
-#       sleep(1)
-#       update_progress({'value': i/15, 'valueStringOverride': f'{i}/15 videos'})
-
-#   update_progress({'status': 'Completed!'})
-
-
-#   toast('Music Player', 'Download Finished', buttons=[
-#     {'activationType': 'protocol', 'arguments': 'C:\Windows\Media\Alarm01.wav', 'content': 'Play'},
-#     {'activationType': 'protocol', 'arguments': 'file:///C:/Windows/Media', 'content': 'Open Folder'}
-# ])
-
-
-update_()
 
 # <-------------------------->
 
@@ -220,6 +196,28 @@ except:
     except ModuleNotFoundError:
         py_logger.error("Import module [requests] failed.")
 
+
+
+try:
+    from win11toast import notify, update_progress, toast
+
+    py_logger.info(f"Import module [requests] successfully.")
+    val_toast = True
+except:
+    system("pip install win11toast")
+    try:
+        from win11toast import notify, update_progress, toast
+
+        py_logger.info(
+            f"[Import notify, update_progress, toast from win11toast] failed -> [Import notify, update_progress, toast from win11toast] successfully."
+        )
+        val_toast = True
+    except ModuleNotFoundError:
+        py_logger.error("[Import notify, update_progress, toast from win11toast] failed.")
+        val_toast = False
+
+
+
 try:
     import PIL
 
@@ -294,30 +292,15 @@ class ForcedRebootException(Exception):
 conf_file = []
 try:
     with open("config.json", "r") as file:
-        data = file.read()
+        data = json.loads(file.read())
+        localization = data[0]['localization']
 
-        # print(data)
-        localization = (
-            str(str(data))
-            .replace(" ", "")
-            .replace("\n", "")
-            .replace('"', "")
-            .replace("[", "")
-            .replace("]", "")
-            .replace("{", "")
-            .replace("}", "")
-            .split(":")[1]
-        )
 
-        if (localization != "ru") or (localization != "en"):
-            localization == "en"
-
-        qqwq = str(rf"""{"localization" : '{localization}'}""")
-        conf_file.append(qqwq)
-        localization = localization.upper()
+        conf_file.append({"localization" : f'{localization}'})
+        #localization = localization.upper()
 
 except Exception as err:
-    # print(err)
+    print(err)
     localization = input(
         f"Выберите локализацию (ru) / Select localization (en) >>> "
     ).upper()
@@ -616,10 +599,11 @@ except PermissionError:
     pass
 
 py_logger.info(f"Dir_pref = {dir_pref}")
+download_to = os.getcwd() + dir_pref +str(name_dir)
 print(
     f"""{white}{'='*15}- {loc['17']} -{'='*15}
 {green}[*] {loc["12"]}: {os.getcwd()}
-[*] {loc["13"]} :      {os.getcwd() + dir_pref +str(name_dir)}"""
+[*] {loc["13"]} :      {download_to}"""
 )
 
 py_logger.info(f"""{'='*15}- PATH -{'='*15}""")
@@ -664,14 +648,15 @@ _102 = []
 _unc = []
 
 
-def download_function(url, name_file, err_dict, err_info, vk_403_err):
+def download_function(url, name_file, err_dict, err_info, vk_403_err, pythonanywhere_key):
     if 'imgs' in url:
         pythonanywhere_key = False
-    
+
 
     if 'imgs18' in url:
-        
+
         pythonanywhere_key = True
+    print(pythonanywhere_key)
     #else:
     #    pythonanywhere_key = False
 
@@ -692,8 +677,8 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
         py_logger.info(
             f"""File with name {name_file} and link ({url}) was downloaded successfully."""
         )
+        status = '200'
         
-        return "200", err_dict, err_info, vk_403_err
     except HTTPError as err_code:
 
         print(
@@ -706,7 +691,8 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
         py_logger.warning(
             f"""File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}"""
         )
-        return f"{err_code.code}", err_dict, err_info, vk_403_err
+        status = f'{err_code.code}'
+        
 
     except urllib.error.URLError as err_code:
         err_dict.append(f"{url}")
@@ -716,28 +702,32 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
                 f"""File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response."""
             )
             err_info.append({f"{name_file}": "522"})
-            return f"522", err_dict, err_info, vk_403_err
+            status = f'522'
+            
         if "[Errno 99]" in str(err_code):
             print(f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}")
             err_info.append({f"{name_file}": "524"})
             py_logger.warning(
                 f"""File with name {name_file} and link ({url}) was NOT downloaded due to connection failure."""
             )
-            return f"524", err_dict, err_info, vk_403_err
+            status = f'524'
+            
         if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
             print(f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}")
             err_info.append({f"{name_file}": "526"})
             py_logger.warning(
                 f"""The file with name {name_file} and link ({url}) was NOT downloaded due to mismatch of security certificate or parental controls."""
             )
-            return f"526", err_dict, err_info, vk_403_err
+            status = f'526'
+            
         if "[Errno 11001]" in str(err_code):
             print(f"{red}[-] {red}000: {blue}{name_file}{white}  URL: {url[0:ind]}")
             err_info.append({f"{name_file}": "000"})
             py_logger.warning(
                 f"""The file with name {name_file} and link ({url}) was NOT downloaded due not connected to Enternet."""
             )
-            return f"000", err_dict, err_info, vk_403_err
+            status = f'000'
+            
         else:
             print(err_code)
             print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
@@ -745,7 +735,8 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
             py_logger.warning(
                 f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
             )
-            return f"___", err_dict, err_info, vk_403_err
+            status = f'___'
+            
 
 
 
@@ -755,7 +746,8 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
         py_logger.warning(
             f"""The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet."""
         )
-        return f"101", err_dict, err_info, vk_403_err
+        status = f'101'
+        
 
     except ConnectionResetError:
         print(f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
@@ -763,7 +755,8 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
         py_logger.warning(
             f"""The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet."""
         )
-        return f"101", err_dict, err_info, vk_403_err
+        status = f'101'
+        
 
     except ValueError as err:
         print(f"{violet}[?] 102: {blue}{name_file}{white}  URL: {url[0:ind]}")
@@ -771,28 +764,37 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err):
         py_logger.warning(
             f"""File with name {name_file} and link ({url}) was NOT downloaded due to unformatted link."""
         )
-        return f"102", err_dict, err_info, vk_403_err
+        status = f'102'
+        
     except Exception as err:
         print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
         err_info.append({f"{name_file}": f"{err}"})
         py_logger.warning(
             f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
         )
-        return f"___", err_dict, err_info, vk_403_err
+        status = f'___'
+
+    return status, err_dict, err_info, vk_403_err, pythonanywhere_key
     # finally:
     #     return f"KAVO", err_dict, err_info, vk_403_err
-          
+
 
 startTime = time.time()
 
 
-def main():
+def main(pythonanywhere_key):
     if dict_size == None:
         ur = chosing_directory
     else:
         ur = dict_size
-        
-    notify(progress={'title': 'YouTube','status': 'Downloading...','value': '0','valueStringOverride': f'0/{len(ur)} videos'})
+
+
+    if val_toast == True:
+       err_name_file = 'НЕ НАЙДЕНО'
+       notify(progress={'title': f'Последняя ошибка: {err_name_file}','status': f'Downloading...','value': '0','valueStringOverride': f'0/{len(ur)} objects.'})
+    else:
+        pass
+
 
     print(f"""{white}{'='*15}- {loc['14']} - {len(ur)} -{'='*15}""")
 
@@ -802,7 +804,7 @@ def main():
     vk_403_err = []
     err_info = []
 
-    def download():
+    def download(err_name_file, pythonanywhere_key):
         i = 0
 
         if alive_a == True:
@@ -831,12 +833,14 @@ def main():
                                         else:
                                             exten = f".png"
 
-                    def ww1(i, url, err_dict, err_info, vk_403_err, exten):
+                    def ww1(i, url, err_dict, err_info, vk_403_err, exten,err_name_file, pythonanywhere_key):
                         name_file = f"{i}{exten}"
-                        update_progress({'value': i/{len(ur)}, 'valueStringOverride': f'{i}/{len(ur)} videos'})
+                        if val_toast == True: update_progress({'value': f'{i}/{len(ur)}', 'valueStringOverride': f'{i}/{len(ur)} objects','title': f'Последняя ошибка: {err_name_file}'})
+                        else:pass
+
                         while not os.path.exists(name_file):
                             try:
-                                status, err_dict, err_info, vk_403_err = (download_function(url, name_file, err_dict, err_info, vk_403_err))
+                                status, err_dict, err_info, vk_403_err, pythonanywhere_key = (download_function(url, name_file, err_dict, err_info, vk_403_err, pythonanywhere_key))
                                 #    )
                                 #status = '000'
                                 #print((download_function(url, name_file, err_dict, err_info, vk_403_err)))
@@ -871,13 +875,16 @@ def main():
                                     pass
 
                                 if status != "200":
-                                    
+                                    err_name_file = name_file
+                                    update_progress({'title': f'Последняя ошибка: {err_name_file}'})
                                     break
                                 else:
+                                    update_progress({'title': f'Последняя ошибка: {err_name_file}'})
                                     pass
                             except Exception as err:
                                 print(err)
                                 break
+                        
 
                         try:
                             if url not in err_dict:
@@ -893,13 +900,19 @@ def main():
                                     os.remove(name_file)
                                     os.chdir(one_path)
                                     os.rename(src, dest)
-                                except FileNotFoundError:
+                                    
+                            else:pass
+                        
+                        except FileNotFoundError:
                                     pass
                         except:
                             pass
+                        
                         bar()
+                        return err_name_file, pythonanywhere_key
 
-                    ww1(i, url, err_dict, err_info, vk_403_err, exten)
+                    err_d,pythonanywhere_key = ww1(i, url, err_dict, err_info, vk_403_err, exten, err_name_file, pythonanywhere_key)
+                    err_name_file = err_d
                     i = i + 1
 
         if alive_a == False:
@@ -929,11 +942,13 @@ def main():
 
                 def ww2(i, url, err_dict, err_info, vk_403_err, exten):
                     name_file = f"{i}{exten}"
+                    if val_toast == True: update_progress({'value': f'{i}/{len(ur)}', 'valueStringOverride': f'{i}/{len(ur)} videos'})
+                    else:pass
+
                     while not os.path.exists(name_file):
                         try:
-                            #status, err_dict, err_info, vk_403_err = \
-                            print(download_function(url, name_file, err_dict, err_info, vk_403_err))
-                            status = '000'
+                            status, err_dict, err_info, vk_403_err = download_function(url, name_file, err_dict, err_info, vk_403_err)
+                            
 
                             if status == '200':
                                     _200.append({f'{name_file}' : f'{url}'})
@@ -994,8 +1009,7 @@ def main():
 
                 ww2(i, url, err_dict, err_info, vk_403_err, exten)
                 i = i + 1
-        # for code in [101,102,200,400,401,402,403,404,522,524,526]:
-        #    ext_list.append({f'{code}': _[code]})
+
         if len(_000) != 0:
             ext_list.append({f'000': _000})
         if len(_101) != 0:
@@ -1022,13 +1036,18 @@ def main():
             ext_list.append({f'526': _526})
         if len(_unc) != 0:
             ext_list.append({f'UNC': _unc})
-    download()
-    return err_dict, vk_403_err, err_info
+
+        return pythonanywhere_key
+
+
+    pythonanywhere_key = download(err_name_file, pythonanywhere_key)
+    return err_dict, vk_403_err, err_info, pythonanywhere_key
 
 
 try:
-    err_count, vk_403_err, err_info = main()
+    err_count, vk_403_err, err_info,pythonanywhere_key  = main(pythonanywhere_key)
     if pythonanywhere_key == True:
+        py_logger.info(f"""pythonanywhere_def = True""")
         try:
             from modules.pythonanywhere import pythonanywhere_def
             pythonanywhere_def()
@@ -1036,6 +1055,9 @@ try:
         except Exception as err:
             print(f"""pythonanywhere_def не найдено ({err}).""")
             py_logger.critical(f"""pythonanywhere_def не найдено ({err}).""")
+    else:
+        print('pythonanywhere_def = False')
+        py_logger.info(f"""pythonanywhere_def = False""")
 
     py_logger.info(f"""{'='*15}- Downloading OK -{'='*15}""")
 except KeyboardInterrupt:
@@ -1045,9 +1067,7 @@ except KeyboardInterrupt:
 
 endTime = time.time()
 
-print(
-    f"Время выполнения скрипта / Script execution time: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}"
-)
+print(f"Время выполнения скрипта / Script execution time: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}")
 
 try:
     if len(err_count) != 0:
@@ -1070,32 +1090,6 @@ try:
             json.dump(ext_list, file, indent=4)
         py_logger.info(f"""File created [info.json]""")
 
-    # if os.path.exists('err_info.json'):
-    #   print(f'err_info.json in ({os.getcwd()})')
-    #   if os.path.exists('config.json'):
-    #     try:
-    #       ch = data['save_files_with_error_information'].lower()
-    #       if ch == 'True':
-    #         pass
-    #       else:
-    #         if input(fr'{violet}[*] Создавать в дальнейших запусках скрипта файлы с ошибками? (Y\n)>>> ') == 'Y':
-    #             qqwq = str(rf'''{"save_files_with_error_information" : 'True'}''')
-    #             conf_file.append(qqwq)
-    #         else:
-    #             qqwq = str(rf'''{"save_files_with_error_information" : 'False'}''')
-    #             conf_file.append(qqwq)
-
-    #     except:
-    #       if input(fr'{violet}[*] Создавать в дальнейших запусках скрипта файлы с ошибками? (Y\n)>>> ') == 'Y':
-    #             qqwq = str(rf'''{"save_files_with_error_information" : 'True'}''')
-    #             conf_file.append(qqwq)
-    #       else:
-    #             qqwq = str(rf'''{"save_files_with_error_information" : 'False'}''')
-    #             conf_file.append(qqwq)
-
-    #   print(white)
-    # else:
-    #   print(f'err_info.json not in ({os.getcwd()})')
 except NameError:
     pass
 
@@ -1103,45 +1097,34 @@ with open("config.json", "w") as outfile:
     json.dump(conf_file, outfile, indent=4)
     py_logger.info(f"""File created [config.json]""")
 
-py_logger.info(
-    f"""The database download was completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]"""
-)
+py_logger.info(f"""The database download was completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]""")
 
 try:
     from module_res_def import res_def
-
     ch = input(f'\n{red}[!] {loc["16"]} (Y/n) >>> {white}')
     py_logger.info(f"""The meaning of calling the image processing function:  {ch}.""")
-
-    if ch == "Y":
-        res_def(name_dir)
-    else:
-        pass
-except KeyboardInterrupt:
-    py_logger.info(
-        f"""The user has canceled an image encoding call request (KeyboardInterrupt)."""
-    )
-except Exception as err:
-    py_logger.info(
-        f"""The script has canceled an image encoding call request ({err})."""
-    )
+    if ch == "Y":res_def(name_dir)
+    else:pass
+except KeyboardInterrupt:py_logger.info(f"""The user has canceled an image encoding call request (KeyboardInterrupt).""")
+except Exception as err:py_logger.info(f"""The script has canceled an image encoding call request ({err}).""")
 
 try:
     from module_in_the_papka import in_the_papka
-
     in_the_papka(dir_pref)
 except Exception as err:
     pass
 
-toast('Готово!', 'Скрипт завершил работу...')
 
-if (
-    input("Скрипт завершил работу... Запустить бесконечный цикл выполнения? (Y/N) >>> ")
-    == "Y"
-):
+
+if val_toast == True:
+    print(f'{blue}[.]{white} Текст снизу вызывает уведомление об завершении работы скрипта.')
+    toast('Готово!', 'Скрипт завершил работу...',buttons = [{'activationType': 'protocol', 'arguments': f'file:///{download_to}', 'content': 'Open Folder'}])
+else:pass
+
+if (input("Скрипт завершил работу... Запустить бесконечный цикл выполнения? (Y/N) >>> ")== "Y"):
     while True:
         cls()
         main()
-else:
-    pass
+else:pass
+
 sleep(30)

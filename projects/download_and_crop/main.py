@@ -13,7 +13,7 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-s_version = "2.1.23"
+main_script_version = "2.1.24"
 
 # <---------------------->
 
@@ -105,7 +105,7 @@ def check(ind, file_name):
 # <-------------------------->
 
 en_loc_reserve = {
-    "0": f"""{'='*15}- Connection statuses -{'='*15}
+   '0': f'''{'='*15}- Connection statuses -{'='*15}
 {green}- 200 - Success!{white}
 {'='*10} HTTP ERROR CODEs: {'='*10}
 {red}- 400 - The script was unable to parse the URL.
@@ -119,27 +119,38 @@ en_loc_reserve = {
 - 526 - Certificate blocking / ohm (rather different times, or parental control)
 {white}{'='*10} OTHER: {'='*10}
 {violet}- 101 - You are disconnected from the Internet.
-- 102 - Error processing URL.{white}""",
-    "1": "Time",
-    "2": "Operating system",
-    "3": "Version",
-    "4": "You have the latest version of the script installed!",
-    "5": "Failed to get working directory.",
-    "6": "Your OS is like Colab. All downloaded files will be downloaded to your Google Drive. Or rather, to the subfolder where this file is saved.",
-    "7": "RESTART THE SKIP RUNNING ENVIRONMENT.",
-    "8": "Base not found!",
-    "9": "You have an outdated version of the script installed!",
-    "10": "Install new version?",
-    "11": "Version check failed!",
-    "12": "Working directory",
-    "13": "Download to",
-    "14": "Number of images",
-    "15": "You aborted code execution",
-    "16": "Crop images in database?",
-    "17": "Directory",
-    "18": "Update version check failed!",
-    "19": "Reload the script.",
+- 102 - Error processing URL.{white}''',
+   '1': 'Time',
+   '2': 'Operating system',
+   '3': 'Version',
+   '4': 'You have the latest version of the script installed!',
+   '5': 'Failed to get working directory.',
+   '6':
+   'Your OS is like Colab. All downloaded files will be downloaded to your Google Drive. Or rather, to the subfolder where this file is saved.',
+   '7': 'RESTART THE SKIP RUNNING ENVIRONMENT.',
+   '8': 'Base not found!',
+   '9': 'You have an outdated version of the script installed!',
+   '10': 'Install new version?',
+   '11': 'Version check failed!',
+   '12': 'Working directory',
+   '13': 'Download to',
+   '14': 'Number of images',
+   '15': 'You aborted code execution',
+   '16': 'Crop images in database?',
+   '17': 'Directory',
+   '18': 'Update version check failed!',
+   "19": "Reload script.",
+   "20": "The text below triggers a script termination notification.",
+   "21": "Script completed",
+   "22": "Done!",
+   "23": "Start an endless loop",
+   "24": "Downloading additional data",
+   "25": "Main Script Version",
+   "26": "Data Baze Version",
+   "27": "Not Found",
+
 }
+
 
 # <------------------------->
 
@@ -290,75 +301,56 @@ class ForcedRebootException(Exception):
 
 
 conf_file = []
+
+
 try:
     with open("config.json", "r") as file:
         data = json.loads(file.read())
         localization = data[0]['localization']
 
 
-        conf_file.append({"localization" : f'{localization}'})
+        #conf_file.append({"localization" : f'{localization}'})
         #localization = localization.upper()
 
 except Exception as err:
     print(err)
-    localization = input(
-        f"Выберите локализацию (ru) / Select localization (en) >>> "
-    ).upper()
-    if (localization != "RU") or (localization != "EN"):
-        localization = "EN"
+    localization = input(f"Выберите локализацию (ru) / Select localization (en) >>> ").upper()
+    print(localization)
+
+    if (localization != "RU"):
+        if (localization != "EN"):
+           localization = "EN"
 
     zn = str(localization).lower().replace(" ", "")
-    ebat = {"localization": zn}
-    qqwq = ebat  # = str(ebat)
+    print(conf_file,zn)
+    conf_file.append({'localization': zn})
+    print(conf_file,zn)
+    #ebat = {"localization": zn}
+    #qqwq = ebat  # = str(ebat)
 
-    conf_file.append(qqwq)
-
+    
 cls()
 
-localization = localization.upper()
+localization_val = localization.upper()
 
-if localization == "RU":
 
+if localization_val == "RU":
     try:
-        try:
-            from localization.RU import ru_loc as loc
-        except ModuleNotFoundError:
-            from RU import ru_loc as loc
-        # loc_tag = 'ru'
+        from localization.RU import ru_loc as loc
+        py_logger.info(f"localization for the Russian language was  found!")
     except ModuleNotFoundError:
-        py_logger.critical(f"localization for the Russian language was not found!")
-
-        try:
-            from localization.RU import ru_loc as loc
-
-            # loc_tag = 'ru'
-        except ModuleNotFoundError:
-            py_logger.warning(
-                f"Localization for the Russian language was not found. Trying to download Localization..."
-            )
-            posle = os.getcwd()
-            do_1212 = os.getcwd() + dir_pref + "localization" + dir_pref
-            os.chdir(do_1212)
-            check(1, "RU.py")
-            os.chdir(posle)
-            try:
-                try:
-                    from localization.RU import ru_loc as loc
-                except ModuleNotFoundError:
-                    from RU import ru_loc as loc
-            except:
-                loc = en_loc_reserve
+        loc = en_loc_reserve
 
 
-if localization == "EN":
+if localization_val == "EN":
     try:
-        from EN import en_loc as loc
+        from localization.EN import en_loc as loc
 
     except Exception as err:
         loc = en_loc_reserve
-        # print(err)
 
-cls()
+
+#cls()
 
 
 def logo():
@@ -472,22 +464,10 @@ except ModuleNotFoundError:
         os.chdir(do_1212)
         download_file_from_github(0, "random_neko_list.py")
         os.chdir(posle)
+
         try:
-            try:
-
-                sys.path.insert(1, "../Dand_Crop")
-                from random_neko_list import *
-
-                py_logger.info("The database has been successfully imported!")
-            except NameError:
-                try:
-
-                    from modules.random_neko_list import *
-
-                    py_logger.info("The database has been successfully imported!")
-                except:
-                    py_logger.critical(f"Database not found!")
-                    raise SystemExit(f'\n[!] {loc["8"]}')
+            from modules.random_neko_list import *
+            py_logger.info("The database has been successfully imported!")
         except ImportError:
             py_logger.critical(f"Database not found!")
             raise SystemExit(f'\n[!] {loc["8"]}')
@@ -511,11 +491,12 @@ print(
 
 def old(nversion):
     py_logger.warning(
-        f"An obsolete version of the script has been found (NEW-{nversion}, OLD-{s_version})!"
+        f"An obsolete version of the script has been found (NEW-{nversion}, OLD-{main_script_version})!"
     )
-    print(f"{violet}[*] OLD-VERSION: {s_version}, NEW-VERSION: {nversion}")
+    print(f"{violet}[*] OLD-VERSION: {main_script_version}, NEW-VERSION: {nversion}")
     print(f"""{yellow}[*] {loc["9"]}{white}""")
-    ch = input(f"{green}[!]{white} {loc['10']} (Y/N) >>> ")
+    ch = input(f"{green}[!] {loc['10']} (Y/N) >>> ")
+    print(white)
     if ch == "Y":
         check(0, "main.py")
         raise ForcedRebootException(loc["19"])
@@ -531,17 +512,14 @@ print(
 py_logger.info(f"""{'='*15}- OS -{'='*15}""")
 py_logger.info(f"""[*] OS Name: {os.name.upper()}""")
 
+from modules.random_neko_list import version_data_baze as random_neko_list_version
+
+print(f"""{'='*15}- {loc['3']} -{'='*15}""")
 
 def check_version(sversion):
-    print(f"""{'='*15}- {loc['3']} -{'='*15}""")
-    try:
-        nversion = json.loads(
-            requests.get(
-                "https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json"
-            ).text
-        )["ver"]
-    except:
-        nversion = None
+    
+    try:nversion = json.loads(requests.get("https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json").text)["ver"]
+    except:nversion = None
 
     if nversion != None:
         s1, s2, s3, n1, n2, n3 = (
@@ -556,11 +534,10 @@ def check_version(sversion):
         if s1 >= n1:
             if s2 >= n2:
                 if s3 >= n3:
-                    py_logger.info(
-                        f"The current version of the script has been found ({s_version})!"
-                    )
-                    print(f"""{violet}[*] {loc['3']}: {s_version}""")
-                    print(f"""{green}[*] {loc["4"]}{white}""")
+                    py_logger.info(f"The current version of the script has been found ({main_script_version})!")
+
+                    print(f"""{green}[*] {loc["25"]}: {main_script_version}{white}""")
+                    
 
                 else:
                     old(nversion)
@@ -570,13 +547,13 @@ def check_version(sversion):
             old(nversion)
     else:
         py_logger.warning(f"Version check failed.")
-        print(
-            f"""{red}[!] {loc['18']}
-{violet}[*] VERSION: {s_version}{white}"""
-        )
+        print(f"""{red}[!] {loc['18']}
+{violet}[*] {loc["25"]}: {main_script_version}{white}""")
 
 
-check_version(s_version)
+check_version(main_script_version)
+data_version = random_neko_list_version()
+print(f"""{green}[*] {loc["25"]}: {data_version}{white}""")
 
 name_dir = "data_2"
 one_path = os.getcwd()
@@ -649,16 +626,16 @@ _unc = []
 
 
 def download_function(url, name_file, err_dict, err_info, vk_403_err, pythonanywhere_key):
-    if 'imgs' in url:
-        pythonanywhere_key = False
+    if pythonanywhere_key == True:
+        pass
+    else:
+        if 'imgs' in url:
+            pythonanywhere_key = False
 
 
-    if 'imgs18' in url:
+        if 'imgs18' in url:
+            pythonanywhere_key = True
 
-        pythonanywhere_key = True
-    print(pythonanywhere_key)
-    #else:
-    #    pythonanywhere_key = False
 
     url = url.replace(" ", "%20")
 
@@ -721,12 +698,12 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err, pythonanyw
             status = f'526'
             
         if "[Errno 11001]" in str(err_code):
-            print(f"{red}[-] {red}000: {blue}{name_file}{white}  URL: {url[0:ind]}")
-            err_info.append({f"{name_file}": "000"})
+            print(f"{red}[-] {red}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
+            err_info.append({f"{name_file}": "101"})
             py_logger.warning(
                 f"""The file with name {name_file} and link ({url}) was NOT downloaded due not connected to Enternet."""
             )
-            status = f'000'
+            status = f'101'
             
         else:
             print(err_code)
@@ -775,8 +752,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err, pythonanyw
         status = f'___'
 
     return status, err_dict, err_info, vk_403_err, pythonanywhere_key
-    # finally:
-    #     return f"KAVO", err_dict, err_info, vk_403_err
+
 
 
 startTime = time.time()
@@ -841,9 +817,7 @@ def main(pythonanywhere_key):
                         while not os.path.exists(name_file):
                             try:
                                 status, err_dict, err_info, vk_403_err, pythonanywhere_key = (download_function(url, name_file, err_dict, err_info, vk_403_err, pythonanywhere_key))
-                                #    )
-                                #status = '000'
-                                #print((download_function(url, name_file, err_dict, err_info, vk_403_err)))
+
 
                                 if status == '200':
                                     _200.append({f'{name_file}' : f'{url}'})
@@ -876,11 +850,10 @@ def main(pythonanywhere_key):
 
                                 if status != "200":
                                     err_name_file = name_file
-                                    update_progress({'title': f'Последняя ошибка: {err_name_file}'})
                                     break
-                                else:
-                                    update_progress({'title': f'Последняя ошибка: {err_name_file}'})
+                                else: 
                                     pass
+                                update_progress({'title': f'Последняя ошибка: {err_name_file}'})
                             except Exception as err:
                                 print(err)
                                 break
@@ -1048,15 +1021,18 @@ try:
     err_count, vk_403_err, err_info,pythonanywhere_key  = main(pythonanywhere_key)
     if pythonanywhere_key == True:
         py_logger.info(f"""pythonanywhere_def = True""")
-        try:
-            from modules.pythonanywhere import pythonanywhere_def
-            pythonanywhere_def()
-            print('pythonanywhere_def успешно!')
-        except Exception as err:
-            print(f"""pythonanywhere_def не найдено ({err}).""")
-            py_logger.critical(f"""pythonanywhere_def не найдено ({err}).""")
+        if  (input(f"{loc['29']}? (Y/N) >>> ")== "Y"): 
+            try:
+                from modules.pythonanywhere import pythonanywhere_def
+                os.chdir(download_to)
+                print(f'''{'='*15}- {loc['24']} -{'='*15}''')
+                pythonanywhere_def(py_logger)
+                os.chdir(posle)
+            except ModuleNotFoundError:
+                py_logger.critical(f"""pythonanywhere_def not found ({err}).""")
+            except Exception as err:
+                py_logger.critical(f"""pythonanywhere_def = Error  ({err}).""")
     else:
-        print('pythonanywhere_def = False')
         py_logger.info(f"""pythonanywhere_def = False""")
 
     py_logger.info(f"""{'='*15}- Downloading OK -{'='*15}""")
@@ -1067,7 +1043,7 @@ except KeyboardInterrupt:
 
 endTime = time.time()
 
-print(f"Время выполнения скрипта / Script execution time: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}")
+print(f"{loc['28']}: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}")
 
 try:
     if len(err_count) != 0:
@@ -1108,23 +1084,19 @@ try:
 except KeyboardInterrupt:py_logger.info(f"""The user has canceled an image encoding call request (KeyboardInterrupt).""")
 except Exception as err:py_logger.info(f"""The script has canceled an image encoding call request ({err}).""")
 
-try:
-    from module_in_the_papka import in_the_papka
-    in_the_papka(dir_pref)
-except Exception as err:
-    pass
+
 
 
 
 if val_toast == True:
-    print(f'{blue}[.]{white} Текст снизу вызывает уведомление об завершении работы скрипта.')
-    toast('Готово!', 'Скрипт завершил работу...',buttons = [{'activationType': 'protocol', 'arguments': f'file:///{download_to}', 'content': 'Open Folder'}])
+    print(f'{blue}[.] {loc["20"]}{white}')
+    toast(f'{loc["22"]}', f'{loc["21"]}...',buttons = [{'activationType': 'protocol', 'arguments': f'file:///{download_to}', 'content': 'Open Folder'}])
 else:pass
 
-if (input("Скрипт завершил работу... Запустить бесконечный цикл выполнения? (Y/N) >>> ")== "Y"):
+if (input(f"{loc['22']}... {loc['23']}? (Y/N) >>> ")== "Y"):
     while True:
         cls()
         main()
 else:pass
 
-sleep(30)
+#sleep(30)

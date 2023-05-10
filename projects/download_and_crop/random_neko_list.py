@@ -1,8 +1,10 @@
-version= '1.1.0'
 
-### https://github.com/Basefilespython/pydiscbot/tree/main/projects/download_and_crop   https://clck.ru/34LH9n
+def version_data_baze():
+    return '1.1.0'
+
 
 imgs = [
+    "imgs"
     "https://cdn.donmai.us/sample/df/3c/__original_drawn_by_mathew_srmmk_mce__sample-df3c8647a59443b7634d09845c61bbb1.jpg",
     "https://cs10.pikabu.ru/post_img/big/2019/07/16/11/1563303250131147987.png",
     "https://cs13.pikabu.ru/post_img/2021/03/09/8/16152936791939656.webp",
@@ -15,7 +17,7 @@ imgs = [
     "https://sun9-57.userapi.com/impg/gD6xK70XwOK7b68eRN-u9SAqF9Q6_IKIHRuDwg/VM1McCY4K1M.jpg?size=1213x2050&quality=95&sign=835d6223ac44b095186bb15fd9871a23&type=album",
     "https://sun9-31.userapi.com/impg/zNvnPjA0UfM9EnsS4xkHK3roELxs7VLGXVx7xw/1EsDHToCc2Y.jpg?size=726x1378&quality=96&sign=3d8edc9ed326b1cb2fe78c7048d7f04d&type=album",
     "https://sun9-52.userapi.com/impg/2sZZRywT7CP-6xb4nclFvX9tVVH4Yg0K60zoyg/4x256XZBp58.jpg?size=1619x2160&quality=95&sign=f7545246980278103c7f01bac5670f14&type=album",
-    "https://sun9-72.userapi.com/impg/Ww-wVsSWDt9JvgVuJiDE0oOcpmAfcPTVQNvcxQ/WZeHTf4aBPI.jpg?size=1357x1920&quality=95&sign=f0b3037410fe12fb007687a818b69c61&type=album".
+    "https://sun9-72.userapi.com/impg/Ww-wVsSWDt9JvgVuJiDE0oOcpmAfcPTVQNvcxQ/WZeHTf4aBPI.jpg?size=1357x1920&quality=95&sign=f0b3037410fe12fb007687a818b69c61&type=album",
     "https://sun9-69.userapi.com/impg/D7SM72R0zOcWqXxs7CVKu-Pelg-7t84jNTH0uw/dIZHO82a-Fo.jpg?size=1280x1789&quality=96&sign=b2439bb9216bf0a7282923242c14042c&type=album",
     "https://sun9-64.userapi.com/impg/iCjQsdS6qrfopCOeVXMPQ9kfgzyZKmamTGeR0g/T-rPrpWRZZc.jpg?size=715x1200&quality=96&sign=87a5135bf9b094cb2b3d007e8363255c&type=album",
     "https://sun9-60.userapi.com/impg/Ug8Cj6Kuo72Ib0iYxROnMvhqQruje-4FG9cOIg/6DmCMq3XUG4.jpg?size=2560x1280&quality=95&sign=bd86a2183fd1c5952c4c91f96c1889f9&type=album",
@@ -528,6 +530,7 @@ imgs18 = [
                         }
                 }
     },
+    "imgs18",
     "https://cdn.donmai.us/original/0b/b0/0bb00bf9a6d9181402374a090a3df551.jpg",
     "https://cdn.donmai.us/original/0d/d6/0dd642fbf53398d0a0959fe4d96c06c0.jpg",
     "https://cdn.donmai.us/original/21/a1/21a1903cab934e6d63d921c713418106.jpg",
@@ -571,7 +574,6 @@ imgs18 = [
     "https://cdn.nekobot.xyz/c/c/b/df6312f6cc3ecbf960bd216dda6f5.png",
     "https://cdn.nekobot.xyz/e/1/f/027f8497e516371edda52bb46b446.jpg",
     "https://cdn.nekobot.xyz/f/4/5/96023ee1afc336f3f7e8f1e79c092.jpg",
-    "",
     "https://i.imgur.com/vFY5wkR.png",
     "https://i.pinimg.com/originals/bf/31/1f/bf311fe82c45ced428c10c2d052845ca.png",
     "https://i.redd.it/ky8aitu2ylz21.jpg",

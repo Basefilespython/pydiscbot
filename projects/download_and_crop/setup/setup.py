@@ -45,7 +45,7 @@ class SetupError(Exception):
 
 
 
-file_names      = ['random_neko_list.py', 'main.py', 'setup.py','exctensions_module.py']
+file_names      = ['random_neko_list.py', 'main.py', 'setup.py','exctensions_module.py','pythonanywhere.py']
 file_names_main = ['LICENSE', 'README.md', 'about_the_creator.md']
 file_names_loc  = ['EN.py', 'RU.py']
 
@@ -121,7 +121,7 @@ with os.scandir(os.getcwd()) as listOfEntries:
         if entry.is_file():
             if entry.name != 'main.py':
                 if (entry.name == 'about_the_creator.md') or (entry.name == 'README.md'):dir_name = 'about'
-                if (entry.name == 'random_neko_list.py') or (entry.name == 'setup.py') or (entry.name == 'exctensions_module.py'):dir_name = 'modules'
+                if (entry.name == 'random_neko_list.py') or (entry.name == 'setup.py') or (entry.name == 'exctensions_module.py') or (entry.name == 'pythonanywhere.py'):dir_name = 'modules'
                 if (entry.name =='EN.py') or (entry.name =='RU.py'):dir_name = 'localization'
                 if entry.name == 'LICENSE.txt':dir_name = 'LICENSE'
 

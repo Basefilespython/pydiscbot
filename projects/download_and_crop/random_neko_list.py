@@ -526,7 +526,8 @@ imgs = [
     "https://sun9-23.userapi.com/impg/44yC61Ty4W-DOJZOK-nP83jl2DINV63n3jBxNQ/gcVRlrsjdPM.jpg?size=811x1246&quality=95&sign=1e32c9ef300d9b34164f60454718854f&type=album",
     "https://sun9-38.userapi.com/impg/GOffbiRvj6b74OENj0gLytbA_sGH6jYdyEX5Ag/LTWG_Ig6WuM.jpg?size=800x1280&quality=95&sign=feeb4fb572e449334be5897703517fd1&type=album",
     "https://sun9-78.userapi.com/impg/RnOU-X13QA-Xl7WhU7yLFp9YrB6Dswp79-dqGw/vMkbJnTFGAA.jpg?size=782x1080&quality=95&sign=9b298e7679ef31cd95fb11e12ac67a8b&type=album",
-    "https://sun9-34.userapi.com/impg/OOlRnh2wsvuT8gbWIVYU8mpT2KwIDjSuYQezEQ/GHM9CNibhN0.jpg?size=905x1280&quality=95&sign=41d9edbe0bf63ef87038199f6f495282&type=album"
+    "https://sun9-34.userapi.com/impg/OOlRnh2wsvuT8gbWIVYU8mpT2KwIDjSuYQezEQ/GHM9CNibhN0.jpg?size=905x1280&quality=95&sign=41d9edbe0bf63ef87038199f6f495282&type=album",
+    "https://sun9-67.userapi.com/impg/Nwd7HRw2xfzwW1edGri2PHSRJVEPrGi-04Q2ww/PhvL8kPyR3A.jpg?size=428x604&quality=96&sign=b419a0c7a41cb848b22a76f6b52f85dd&type=album",
 
 ]
 
@@ -598,6 +599,8 @@ imgs18 = [
     "https://i0.nekobot.xyz/8/2/1/19f283635cbc3f478d5082d8dc0dd.jpg",
     "https://i0.nekobot.xyz/8/3/a/f78c46bda43765ffb313be7d1b166.gif",
     "https://i0.nekobot.xyz/8/c/9/c616ec74631d4244e7a9f9ccb83cc.jpeg",
+    "https://sun9-13.userapi.com/impg/uSvBCywUqZqCmqkOTP_XIpko3h2gCStxnjEsZg/PJ-W5UWv2sk.jpg?size=707x1000&quality=96&sign=356a41a5c54d1f3ee6bdda6cf4b139ce&type=album",
+    "https://sun9-64.userapi.com/impg/BItzuGEnwIaLGLIYPtbXt7EShUzYgHdJY8cpjQ/StdC5WRdXWw.jpg?size=1280x720&quality=96&sign=ff48db6fd96107cf469e399156e54deb&type=album",
     "https://sun9-35.userapi.com/impg/L8NWVjnT3v6hd_5KXpOjMoat_vvie38rICyVtQ/02iZwYixKeQ.jpg?size=915x1280&quality=95&sign=1b33ce0404bc6b662594066a59c7d7ce&type=album",
     "https://sun9-36.userapi.com/impg/hxNQfzBQWldmRWM5vDfW9h3wfsvTZ8G8Lxi1SQ/1nN1-atDwHg.jpg?size=798x1000&quality=95&sign=3f90988bef7280faf8b30e49aca2ed1b&type=album",
     "https://sun9-13.userapi.com/impg/CeHZmnlu3ZUVWe-IoiqVzpFGZLaEfSrDwp1-eA/BalsK90jdOs.jpg?size=1280x905&quality=95&sign=030b4c2371b5ef5e7bef576c8d33300b&type=album",

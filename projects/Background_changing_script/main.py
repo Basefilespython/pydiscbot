@@ -1,28 +1,20 @@
-###CODE by https://vk.com/id435600030
+from datetime import datetime
+import time
+from io import BytesIO
+import requests
+import os
+from os import system
 
+first_path = os.getcwd()
 
-
-REDIR_URL_NO_TOKEN = 'https://oauth.vk.com/authorize?client_id=51630220&scope=501198815&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'
-
-
-class InputURLError(Exception):
-     pass
-
-class VKresponseCodeEror(Exception):
-    def __init__(self, error_code, message):
-        self.error_code = error_code
-        self.message = message
-        super().__init__(self.message)
-    def __str__(self):
-        if self.error_code == 5:
-            self.message = 'Неправильный токен.'
-        elif self.error_code == 7:
-            self.message = 'Нет прав для выполнения этого действия.'
-        else:
-            pass
-        return f'''{inc('SERV')} SERVER OUT MESSAGE: {self.message}'''
-
-
+try:
+    import pytz
+except:
+    system("pip install pytz")
+    import pytz
+from datetime import datetime
+from PIL import Image, ImageDraw, ImageFont
+from module_py import module
 
 black = "\033[30m"
 red = "\033[31m"
@@ -34,390 +26,256 @@ turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
 
+import logging
 
-import requests, subprocess, webbrowser, json, socket
+logger = logging.getLogger(__name__)
 
+import logging
 
-phot = ''
-url = ''
-
-
-links_file_name = 'links.json'
-config_file_name= 'url_json.json'
-token_file = 'config.json'
+logging.basicConfig(filename='app.log', filemode='w',format='%(asctime)s - %(message)s', level=logging.INFO)
+logging.warning('This will get logged to a file')
 
 
-def inc(id):
-    if id == 'INF':
-        out = f'{yellow}[-]'
-    if id == 'INF2':
-        out = f'{turquoise}[-]'
-    if id == 'SERV':
-        out = f'{yellow}[-]'
-    if id == '?':
-        out = f'{red}[?]'
-    if id == '!':
-        out = f'{red}[!]'
-    return out
-
-def cls():
+def download_from_github(url):
     try:
-        subprocess.call("clear")
-    except:
-        subprocess.call("cls", shell=True)
+        #url = f"https://gist.githubusercontent.com/mjrulesamrat/0c1f7de951d3c508fb3a20b4b0b33a98/raw/f5f9db4f1b287804fd07ffb3296ed0036292bc7a/{name}"
 
+        def download_file(url):
+            local_filename = url.split('/')[-1]
+            with requests.get(url, stream=True, allow_redirects=True) as r:
+                r.raise_for_status()
+                with open(local_filename, 'wb') as f:
+                    for chunk in r.iter_content(chunk_size=8192):
+                        f.write(chunk)
+            return local_filename
 
-def is_connected():
-    #hostname = "www.google.com"
-    try:
-        socket.create_connection((socket.gethostbyname('www.google.com'), 80), 2)
-
-        return True
-    except Exception:
-        print(f"{inc('!')} Вы не подключены к интернету!")
-        return False
-    
-
-
-def bad_token():
-    
-    TOKEN_SPLIT = input(f'{violet}{inc("!")} Введите ваш актуальный токен {turquoise}>>> ')
-    VK_TOKEN  = TOKEN_SPLIT.split('#')[1].split('&expires_in')[0].replace('access_token=','')
-    member_id = TOKEN_SPLIT.split('#')[1].split('&user_id=')[1].split('&email')[0]
-    return VK_TOKEN,member_id
-
-def get_album_id(VK_TOKEN,phot_msg):
-        api = requests.get("https://api.vk.com/method/photos.getById", params={
-            'photos': phot_msg,
-            'extended' : 1,
-            'access_token': VK_TOKEN,
-            'offset': 0,
-            'count': 20,
-            'photo_sizes': 0,
-            'v': 5.103
-        })
-        return json.loads(api.text)
-
-
-cls()
-
-
-conf_file = []
-try:
-  with open(f"{token_file}", "r") as file:
-    data = json.loads(file.read())
-    VK_TOKEN,member_id = data[0]['vk_token'], data[1]['member_id']
-    print(f'{inc("INF2")} токен и member_id были успешно импортированы.{white}')
-except Exception as err:
-  print(f'{inc("!")} Конфигурационный файл не бы найден.{white}')
-  print(f'''{violet}[-] Ссылка должна быть в формате:
-https://oauth.vk.com/blank.html#access_token=[token]&expires_in=0&user_id=[user_id]&email=[email]{white}
-
-Ссылка на приложение доступа:
-{REDIR_URL_NO_TOKEN}
-
-{green}[!] Инструкция:
-    1. Перейдите по ссылке.
-    2. Скопируйте ссылку.
-    3. Введите её сюда.{white}''')
-  VK_TOKEN,member_id = bad_token()
-
-  conf_file.append({'vk_token': f'{VK_TOKEN}'})
-  conf_file.append({'member_id': f'{member_id}'})
-  with open(f"{token_file}", "w") as outfile:
-      json.dump(conf_file, outfile, indent=4)
-
-
-
-# VK_TOKEN,member_id = bad_token()
-
-
-
-def stop_token(VK_TOKEN,member_id):
-    while validable_token(VK_TOKEN,member_id,'0') != True:
-        print(f'''{inc('!')} Your TOKEN: {VK_TOKEN}
-{violet}[-] Ссылка должна быть в формате:
-https://oauth.vk.com/blank.html#access_token=[token]&expires_in=0&user_id=[user_id]&email=[email]{white}
-
-Ссылка на приложение доступа:
-{REDIR_URL_NO_TOKEN}
-
-{green}[!] Инструкция:
-    1. Перейдите по ссылке.
-    2. Скопируйте ссылку.
-    3. Введите её сюда.{white}''')
-        VK_TOKEN,member_id = bad_token()
-    print(f'STOP_TOKEN - VKTOKEN: {VK_TOKEN}')
-    return VK_TOKEN,member_id
-
-
-
-
-def validable_token(VK_TOKEN,member_id, id):
-    if is_connected() == True:
-
-
-        api = requests.get("https://api.vk.com/method/users.get", params={
-                    'user_ids': member_id,
-                    'access_token': VK_TOKEN,
-                    'v': 5.103
-                })
-        data = json.loads(api.text)
-        if list(data.keys())[0] == 'error':
-            code = data['error']['error_code']
-            descr = data['error']['error_msg']
-            cls()
-            if id != '1':
-                try:
-                    raise VKresponseCodeEror(error_code=code,message=descr)
-                except VKresponseCodeEror as err:
-                    print(err)
-                    pass
-            with open(f"{config_file_name}", "w") as outfile:
-                json.dump(data, outfile, indent=4)
-
-            return False
-
-        else:
-            if id != '1':
-                cls()
-                print(f'''{'='*10}- INFORMATION about USER -{'='*10}''')
-                print(f"{inc('INF')} Name: {data['response'][0]['first_name']}")
-                print(f"{inc('INF')} Surname: {data['response'][0]['last_name']}")
-
-            return True
-    else:
+        download_file(url)
         pass
+    except Exception as err:
+        print(err)
+download_from_github('https://gist.githubusercontent.com/mjrulesamrat/0c1f7de951d3c508fb3a20b4b0b33a98/raw/f5f9db4f1b287804fd07ffb3296ed0036292bc7a/countryinfo.py')
+
+
+def download_file_from_github(file_name):
+  try:
+
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/Background_changing_script/{file_name}"
+
+    def download_file(url):
+      local_filename = url.split('/')[-1]
+      with requests.get(url, stream=True, allow_redirects=True) as r:
+        r.raise_for_status()
+        with open(local_filename, 'wb') as f:
+          for chunk in r.iter_content(chunk_size=8192):
+            f.write(chunk)
+      return local_filename
+
+    file_name = download_file(url)
+    pass
+  except Exception as err:
+    return err
+
+
+def update():
+  file_names = ['main.py', 'setup.py', 'module_py.py']
+  er = ''
+  for file_name in file_names:
+    er = er + "\n" + file_name + "\n" + str(
+      download_file_from_github(file_name))
+    #er = download_file_from_github(file_name)
+  #print(er)
+  import time
+  time.sleep(2)
+
+
+update()
+
+
+def time_gh():
+    year = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[0]).replace("-", ".")).split(".")[0]
+    month  = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[0]).replace("-", ".")).split(".")[1]
+    day = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[0]).replace("-", ".")).split(".")[2]
+
+    s = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[1]).split(".")[0]).split(":")[2]
+    m = str(str((str(datetime.now(pytz.timezone(timezone)))).split()[1]).split(".")[0]).split(":")[1]
+    h =str(str((str(datetime.now(pytz.timezone(timezone)))).split()[1]).split(".")[0]).split(":")[0]
+    times = f"{s}s : {m}m : {h}h"
+    times2 = f"{day}.{month}.{year}"
+    return times,times2
+
+
+def changing(name_file):
+#   print(f'49 - {name_file}')
+  image = Image.open(name_file)
+  w, h = image.size
+  ####(w,h)
+  ft = 'fs-gravity.ttf'
+ # ft = 'Sprite_Graffiti.otf'
+  do = os.getcwd()
+  os.chdir(first_path)
+  font = ImageFont.truetype(f"{first_path}/fonts/{ft}", 50)
+  os.chdir(do)
+  #image.paste(Image.open("1676478803967.png"))
+  drawer = ImageDraw.Draw(image)
+  times,times2 = time_gh()
+  try:
+    import psutil
+    text =str (psutil.sensors_battery().percent)
+  except:
+    text = "[ERR]"
+  drawer.text((int((85 * w)/100),210), f"{text}%", font=font, fill='white')  
+  drawer.text((int((80 * w)/100),80), f"{times2}", font=font, fill='white')
+  drawer.text((int((80 * w)/100), 155), f"{times}", font=font, fill='white')
+  os.chdir(first_path)
+  try:
+    image.save('new_img.jpg')
+  except OSError:
+      pass
+  os.chdir(do)
+  path = first_path + '\\'+ "new_img.jpg"
+#   print(f'''66 - {path}''')
+  #ctypes.windll.user32.SystemParametersInfoW(20, 0, path , 3)
+  return 'new_img.jpg', name_file
+
+do = os.getcwd()
+os.chdir(first_path)
+
+#https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/fonts/Sprite_Graffiti.otf
+fonts_name = ['fs-gravity.ttf','Sprite_Graffiti.otf']
+if not os.path.exists(os.getcwd() + "/fonts"):
+    os.mkdir("fonts")
+    os.chdir(os.getcwd() + "/fonts")
+    for name in fonts_name:
+        download_from_github(f'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/fonts/{name}')
+else:
+    pass
+
+
+timezone = module(input('Введите ближайший к вам крупный город  по часовому поясу >>> '))
+
+
+import tkinter
+import tkinter.filedialog
+foldername = tkinter.filedialog.askdirectory()
+
+path = foldername
+import ctypes
+import os
+
+from ctypes  import *
+
+
+import random
+
+imgs = []
+do = os.getcwd()
+posle = path
+with os.scandir(path) as listOfEntries: 
+            for entry in  listOfEntries:
+                if entry.is_file():
+                    if (entry.name.endswith("jpg")) or (entry.name.endswith("png")) or (entry.name.endswith("gif")):
+                        os.chdir(posle)
+                        try:
+                            im = Image.open(entry.name)
+                            (width, height) = im.size
+                            height = int(height)
+                            width = int(width)
+                            im.close()
+                            if width > height:
+                                imgs.append(entry.name)
+                            else:
+                                pass
+                        except Exception as err:
+                           print(err)
+                           pass
+import PIL
+
+import time
+
+w = windll.user32.GetSystemMetrics(0)
+h = windll.user32.GetSystemMetrics(1)
+print(f'{"*"*80}\n\nПараметры экрана\nВысота:{w}\nШирина:{h}\n\n{"*"*80}')
+
+while True:
+
+        # imgs = []
+        # with os.scandir(path) as listOfEntries:
+        #     for entry in listOfEntries:
+        #         if entry.is_file():
+        #             if (entry.name.endswith("jpg")) or (entry.name.endswith("png")) or (entry.name.endswith("gif")):
+        #                 os.chdir(path)
+        #                 im = Image.open(entry.name)
+        #                 (width, height) = im.size
+        #                 height = int(height)
+        #                 width = int(width)
+        #                 im.close()
+        #                 if width > height:
+        #                     imgs.append(entry.name)
+        #                 else:
+        #                     pass
+
+        try:
+            name_file = random.choice(imgs)
+            os.chdir(posle)
+            with open('name_file.txt', "w") as file_file:
+                file_file.write(name_file)
 
 
 
+            #print(f"119 - {name_file}")
+            os.chdir(path)
+            im = Image.open(f'{name_file}')
+            (width, height) = im.size
+            height = int(height)
+            width = int(width)
+            im.close()
 
-if validable_token(VK_TOKEN,member_id, '1') != True:
-    webbrowser.open_new(REDIR_URL_NO_TOKEN)
-    VK_TOKEN,member_id = stop_token(VK_TOKEN,member_id)
+            if width > height:
+                global_file_name = name_file
+                for i in range(10):
+                    os.chdir(posle)
+                    with open('name_file.txt') as file_file:
+                        data = file_file.read()
 
-def valid_url(url):
-    if url == '':
-        return False
-    elif url == 'eblan':
-        return False
+                    os.chdir(do)
+                    try:
+                        os.chdir(posle)
+                        #print(f'Path = {os.getcwd()}, name_file = {name_file}, data  = {data}')
+                        if name_file != 'new_img.jpg':
+                            pass
+                        if name_file == 'new_img.jpg':
+                            name_file  = data
+                        os.chdir(posle)
+                        img = Image.open(str(name_file).split("'")[0])
 
-    elif url == 'ymnec':
-        return False   
-    
-    else:
-        try:       
-                phot = url.split('/')[3].split('photo')[1].split('%2')
+                        new_image = img.resize((int(w), int(h)))
 
-                short_id = url.split('/')[3].split('?z')[0]
-                owner_id = phot[0].split('_')[0]
-                wall_id = phot[1].replace('Fwall','').replace(owner_id,'').replace('_','')
-                phot_id = phot[0].split('_')[1]
+                        new_image.save(str(str(name_file).split("'")[0]))
+                        img.close()
+                        name_file, do_name_file = changing(name_file)
+                        path_img = str(first_path) + "\\"+ str(name_file)
 
-                return True
-        except IndexError:
-                print(f'''{inc("?")} Вы ввели не корректную ссылку ({url}).''')
-                return False
-        
+                        ctypes.windll.user32.SystemParametersInfoW(20, 0, path_img, 3)
 
-def main():
-    global VK_TOKEN
-    global member_id
-    url = ''
+                    except PIL.UnidentifiedImageError as err:
+                        logger.error(f'{do_name_file} - {err}')
 
-    print(f'''{white}{'='*10}- LINK -{'='*10}''')
-    #print(f'''{violet}>>> {url}{white}''')
+                        pass
+                    except PermissionError as err:
+                        logger.error(f'{do_name_file} - {err}')
 
-    print(f'''{violet}[-] Ссылка должна быть в формате:
-    https://vk.com/[giuld_sport_name]?z=photo-[guild_id]_[photo_id]%2Fwall-[guild_id]_[wall_id]{white}
+                        pass
+                    except OSError as err:
+                        logger.error(f'{do_name_file} - {err}')
 
-    {green}Инструкция:
-    1. Перейдите в нужную вам группу.
-    2. Выберите нужное вам изображение и откройте его.
-    3. Скопируйте ссылку и введите её сюда.{white}''')
+                        pass
+                    except Exception as err:
+                        logger.error(f'{do_name_file} - {err}')
 
-    print(f'''{'='*10}- INPUT -{'='*10}''')
-
-    while ('?z=photo-' not in url):
-            
-            url = input(f'{turquoise}>>> ')
-            if url == 'https://vk.com/[giuld_sport_name]?z=photo-[guild_id]_[photo_id]%2Fwall-[guild_id]_[wall_id]':
-                print(f'{inc("?")} Ты думаешь, что ты самый умный? Тебе трудно идти по инструкции?')
-                url = 'ymnec'
-    
-            if '?z=photo-' not in url:
-                url = 'eblan'
-            else:pass
-
-            if valid_url(url) == True:
-                pass
+                continue
             else:
-                url = ''
-
-
-
-    phot = url.split('/')[3].split('photo')[1].split('%2')
-    short_id = url.split('/')[3].split('?z')[0]
-
-    links_file_name = f'links_{short_id}.json'
-
-    owner_id = phot[0].split('_')[0]
-    wall_id = phot[1].replace('Fwall','').replace(owner_id,'').replace('_','')
-    phot_id = phot[0].split('_')[1]
-
-
-
-    if validable_token(VK_TOKEN,member_id, '1') != True:
-        VK_TOKEN,member_id = stop_token(VK_TOKEN,member_id)
-
-    api = requests.get("https://api.vk.com/method/groups.getById", params={
-                'group_id' : int(owner_id.replace('-','')),
-                'access_token': VK_TOKEN,
-                'offset': 0,
-                'count': 1000,
-                'photo_sizes': 0,
-                'v': 5.103
-            })
-    data = json.loads(api.text)
-
-
-
-    with open(f"{config_file_name}", "w") as outfile:
-        json.dump(data, outfile, indent=4)
-
-
-    print(f'''{white}{'='*10}- INFORMATION -{'='*10}''')
-    print(f"{inc('INF')} GuildName: {data['response'][0]['name']}")
-
-
-    if 2 == data['response'][0]['is_closed']:guild_type = 'частное'
-    else:
-        if 1 == data['response'][0]['is_closed']:
-            guild_type = 'закрытое'
-        else:guild_type = 'открытое'
-
-    print(f'{inc("INF")} GuildType: {guild_type}')
-    print(f'{inc("INF")} MemberShip: Вы подписаны.') if 1 == data['response'][0]['is_member'] else print(f'{inc("INF")} MemberShip: Вы не подписаны.  (пиздит фотокарточки и не стыдится)') 
-    print(f'{inc("INF")} Adminship: Вы являетесь руководителем.') if 1 == data['response'][0]['is_admin'] else print(f'{inc("INF")} Adminship: Вы не являетесь руководителем.') 
-    print(f'''{white}{'='*10}- INFORMATION -{'='*10}''')
-
-
-
-
-    phot_msg =f'{owner_id}_{phot_id}'
-
-
-
-
-
-
-    
-
-    if validable_token(VK_TOKEN,member_id, '1') != True:
-        VK_TOKEN,member_id = stop_token(VK_TOKEN,member_id)
-
-    eee= get_album_id(VK_TOKEN,phot_msg)
-    album_id = eee['response'][0]['album_id']
-
-    print(f'''{inc("INF2")} ID выбранного альбома: {album_id}''')
-
-
-
-    links = []
-
-    with open(f"{config_file_name}", "w") as outfile:
-        json.dump(eee, outfile, indent=4)
-
-    if validable_token(VK_TOKEN,member_id, '1') != True:
-        VK_TOKEN,member_id = stop_token(VK_TOKEN,member_id)
-
-    api = requests.get("https://api.vk.com/method/photos.get", params={
-                'owner_id': owner_id,
-                'album_id' : album_id,
-                'access_token': VK_TOKEN,
-                'offset': 1,
-                'count': 1000,
-                'photo_sizes': 0,
-                'v': 5.103
-            })
-    with open(f"ebal_url2.json", "w") as outfile:
-        json.dump(json.loads(api.text), outfile, indent=4)
-
-
-    count = json.loads(api.text)['response']['count']
-    print(f'''{inc("INF2")} Количество изображений: {count}''')
-
-    offset_ = []
-
-    if round(count/1000) != 1:
-        for off in range(1,round(count/1000)+2):
-            offset_.append(off)
-    else:
-        offset_.append(1)
-
-
-    print(f'''{white}{'='*10}- STARNING -{'='*10}''')
-
-
-
-    if validable_token(VK_TOKEN,member_id, '1') != True:
-        VK_TOKEN,member_id = stop_token(VK_TOKEN,member_id)
-
-
-    for offset in offset_:
-        
-        api = requests.get("https://api.vk.com/method/photos.get", params={
-                'owner_id': owner_id,
-                'album_id' : album_id,
-                'access_token': VK_TOKEN,
-                'offset': offset,
-                'count': 1000, #max 1000
-                'photo_sizes': 1,
-                'v': 5.103
-            })
-
-        eee = json.loads(api.text)
-
-
-
-
-
-    
-
-        
-
-        for i in range(len(eee['response']['items'])):
-
-            max_ = len(eee['response']['items'][i]['sizes']) - 1
-
-
-            h, w = eee['response']['items'][i]['sizes'][max_]['height'],eee['response']['items'][i]['sizes'][max_]['width']
-            url = eee['response']['items'][i]['sizes'][max_]['url']
-
-
-            links.append(url)
-
-
-
-    links = set(links)
-
-
-    print(f'''{inc("INF")} Количество полученных ссылок: {len(links)}''')
-
-
-    try:
-        with open(f"{links_file_name}", "w") as outfile:
-            json.dump(list(links), outfile, indent=4)
-        print(f'''{green}[.] Файл {links_file_name} был успешно создан.''')
-    except:
-        print(f'''{inc("!")} Файл {links_file_name} НЕ был создан!''')
-    print(f'''{white}{'='*10}- DONE -{'='*10}''')
-
-if __name__ == '__main__':
-    main()
-
-    ch = 'Y'
-    while ch != 'N':
-        ch = input('Скачать новую ссылку? (Y/N) >>> ')
-        if ch == 'Y':
-            main()
+                pass
+            pass
+
+        except IndexError:
+            print(f'{"*"*80}\n\nНе было найдено ни одного подходящего изображения!\nЧто скрипт смог найти: {imgs}\n\n{"*"*80}')

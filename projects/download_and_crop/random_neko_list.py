@@ -1324,6 +1324,7 @@ imgs18 = [
     "https://i0.nekobot.xyz/8/2/1/19f283635cbc3f478d5082d8dc0dd.jpg",
     "https://i0.nekobot.xyz/8/3/a/f78c46bda43765ffb313be7d1b166.gif",
     "https://i0.nekobot.xyz/8/c/9/c616ec74631d4244e7a9f9ccb83cc.jpeg",
+    "https://sun9-24.userapi.com/impg/2TgMRBY9g1hPleWgRzAG-NurCD1GbptcCDTfYw/MyjsswMvIcY.jpg?size=850x1411&quality=96&sign=ad2951bb758861f8ec9f985665f05917&type=album",
     "https://sun9-1.userapi.com/impg/BJdz-USWb9Aop5eaIuItIyzyACIZQ-26Ny2X6w/tVZrxfxaDmE.jpg?size=1587x2160&quality=96&sign=e61a72a3f4bdcccce5b9ed3b01467252&type=album",
     "https://sun9-74.userapi.com/impg/YCg-CPSHIZL67MPhyZpgPmdb5EMzhc84NCmRYg/cBHnUGDYNpc.jpg?size=1300x1900&quality=96&sign=e0067954467923936c56966b8c9bf922&type=album",
     "https://sun9-53.userapi.com/impg/KC12Ezh7uu_1yP4zgrm-zl_seHVz5ZqoQ16eGQ/2AWr8nujwz4.jpg?size=903x1280&quality=96&sign=0ca4446dd14425b1b6d67f1ab9b9f18b&type=album",

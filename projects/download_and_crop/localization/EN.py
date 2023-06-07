@@ -53,5 +53,6 @@ en_loc = {
    "26": "Data Baze Version",
    "27": "Not Found",
    "28": "Script execution time",
-   "29": "Start downloading additional data"
+   "29": "Start downloading additional data",
+   "30": "You have an outdated version of the database installed!"
 }

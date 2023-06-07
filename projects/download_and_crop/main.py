@@ -13,11 +13,11 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-main_script_version = "2.1.24"
+main_script_version = "2.1.25"
 
 # <---------------------->
 
-# The script was written ©https://vk.com/id435600030©
+# The script was written ©https://vk.com/id435600030
 # Download from https://github.com/Basefilespython/pydiscbot/tree/main
 
 black = "\033[30m"
@@ -68,21 +68,25 @@ do = os.getcwd()
 
 # <-------------------------->
 
+def downloading(url):
+  local_filename = url.split('/')[-1]
+  with requests.get(url, stream=True, allow_redirects=True) as r:
+      r.raise_for_status()
+      with open(local_filename, "wb") as f:
+        for chunk in r.iter_content(chunk_size=8192):
+          f.write(chunk)
+# <-------------------------->
 
 def download_file_from_github(ind, file_name):
   if ind == 0:
     url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
   if ind == 1:
     url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}"
-  local_filename = url.split("/")[-1]
+
 
   try:
     py_logger.info(f"[Downloading file] Name: {file_name}")
-    with requests.get(url, stream=True, allow_redirects=True) as r:
-      r.raise_for_status()
-      with open(local_filename, "wb") as f:
-        for chunk in r.iter_content(chunk_size=8192):
-          f.write(chunk)
+    downloading(url)
     return "ok"
 
   except requests.exceptions.HTTPError as err:
@@ -100,6 +104,13 @@ def check(ind, file_name):
     out = str(out).replace("err", "")
     er = er + f"{red}[-] DownloadingFileError ({out}): {file_name}{white}\n"
   print(er)
+
+
+def on_git_not_installed():
+  url = 'https://bootstrap.pypa.io/get-pip.py'
+  downloading(url)
+  if str(os.name) == 'nt':system('python get-pip.py')
+  else:system('python3 get-pip.py')
 
 
 # <-------------------------->
@@ -442,7 +453,7 @@ if "/content" in os.getcwd():
   system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
 
 try:
-  from random_neko_list import *
+  from modules.random_neko_list import *
 
   py_logger.info("The database has been successfully imported!")
 except ModuleNotFoundError:
@@ -568,6 +579,7 @@ chdir = input(f'''{red}[!]{yellow} Скачивание какой библио�
 {turquoise}[1] IMGS
 [2] IMGS18 (18+)
 [3] Своя
+
 {blue}>>> ''')
               
 while chdir != '1' or chdir != '2':
@@ -628,7 +640,6 @@ pythonanywhere_key = False
 # chosing_directory = ['lol']
 try:
   from modules.exctensions_module import sizing_dict
-
   dict_size = sizing_dict(chosing_directory)
 except:
   dict_size = None
@@ -652,32 +663,24 @@ _102 = []
 _unc = []
 
 
-def download_function(url, name_file, err_dict, err_info, vk_403_err,
-                      pythonanywhere_key):
-  if pythonanywhere_key == True:
-    pass
+def download_function(url, name_file,
+    err_dict, err_info, vk_403_err,pythonanywhere_key):
+  if pythonanywhere_key == True:pass
   else:
-    if 'imgs' in url:
-      pythonanywhere_key = False
-
-    if 'imgs18' in url:
-      pythonanywhere_key = True
+    if 'imgs' in url:pythonanywhere_key = False
+    if 'imgs18' in url:pythonanywhere_key = True
 
   url = url.replace(" ", "%20")
 
-  if "?size=" in url:
-    ind = url.find("?size=")
+  if "?size=" in url:ind = url.find("?size=")
   else:
-    if "?extra=" in url:
-      ind = url.find("?extra=")
-    else:
-      ind = len(url)
+    if "?extra=" in url:ind = url.find("?extra=")
+    else:ind = len(url)
 
-  print('\r', end='')
+  #print('\r', end='')
 
   try:
     urllib.request.urlretrieve(str(url), name_file)
-
     print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
     py_logger.info(
       f"""File with name {name_file} and link ({url}) was downloaded successfully."""
@@ -686,16 +689,11 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
 
   except HTTPError as err_code:
 
-    print(
-      f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}"
-    )
+    print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}")
     err_dict.append(f"{url}")
     err_info.append({f"{name_file}": f"{err_code.code}"})
-    if "userapi.com" in url and err_code.code == 403:
-      vk_403_err.append(f"{url}")
-    py_logger.warning(
-      f"""File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}"""
-    )
+    if "userapi.com" in url and err_code.code == 403:vk_403_err.append(f"{url}")
+    py_logger.warning(f"""File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}""")
     status = f'{err_code.code}'
 
   except urllib.error.URLError as err_code:
@@ -742,8 +740,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
       status = f'___'
 
   except http.client.RemoteDisconnected:
-    print(
-      f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
+    print(f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
     err_info.append({f"{name_file}": "101"})
     py_logger.warning(
       f"""The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet."""
@@ -751,8 +748,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
     status = f'101'
 
   except ConnectionResetError:
-    print(
-      f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
+    print(f"{violet}[-] {violet}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
     err_info.append({f"{name_file}": "101"})
     py_logger.warning(
       f"""The file with the name {name_file} and link ({url}) was NOT downloaded due to the user disconnecting from the Internet."""
@@ -782,10 +778,8 @@ startTime = time.time()
 
 
 def main(pythonanywhere_key):
-  if dict_size == None:
-    ur = chosing_directory
-  else:
-    ur = dict_size
+  if dict_size == None:ur = chosing_directory
+  else:ur = dict_size
 
   if val_toast == True:
     err_name_file = 'НЕ НАЙДЕНО'

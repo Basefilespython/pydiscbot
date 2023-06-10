@@ -144,8 +144,15 @@ def check_all_relevant_version(loc_val, print_val=True):
     main_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json'
     data_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/random_neko_list_v.json'
 
-    ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
-    ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
+    if print_val == True:
+      ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
+      ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
+    
+    if print_val == False:
+      while True:
+        ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
+        ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
+        time.sleep(1)
 
 
 

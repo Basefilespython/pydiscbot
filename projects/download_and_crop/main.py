@@ -46,6 +46,7 @@ from time import sleep
 import http
 import random
 from datetime import datetime, timedelta
+from threading import Thread
 
 if str(os.name) == "nt":
   dir_pref = "\\"
@@ -65,6 +66,113 @@ def cls():
 # <-------------------------->
 
 do = os.getcwd()
+
+# <-------------------------->
+
+
+def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
+  if val_toast == True:
+    print(f'{blue}[.] {loc["20"]}{white}')
+    toast(f'{loc["31"]} {sversion} --> {nversion}',
+          f'{loc_n}...',
+          buttons=[{
+            'activationType': 'protocol',
+            'arguments': check(0, name_file,redir),
+            'content': 'Download'
+          }])
+  else:
+    pass
+
+
+def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th= False):
+  if Th == False:
+    if name_file == 'random_neko_list_v.json':
+      name_file = name_file.replace('_v.json','.py')
+    py_logger.warning(f"An obsolete version of the script has been found (NEW-{nversion_}, OLD-{sversion_})!")
+    print(f"""{yellow}[*] {name_d_}{white}""")
+    print(f"{violet}[*] An old version: {sversion_}, A new version: {nversion_}")
+    ch = input(f"{green}[!] {loc['10']} (Y/N) >>> ")
+    print(white)
+    if ch == "Y":
+      check(0, name_file,redir_)
+      raise ForcedRebootException(loc["19"])
+    else:
+      pass
+  
+  if Th == True:
+    old_Thread(nversion_,sversion_, name_file, name_d_, loc_n_, redir=os.getcwd())
+
+
+
+
+
+
+
+def ch_version(url,sversion,loc_n,name_d,print_val):
+  redir_cd = os.getcwd() + dir_pref + 'modules'
+  name_file = url.split('/')[-1]
+  try:nversion = json.loads(requests.get(url).text)["ver"]
+  except Exception as err:nversion = None
+  if print_val == True: Th_val = False
+  else: Th_val = True
+
+  if nversion != None:
+    s1, s2, s3, n1, n2, n3 = (
+     str(sversion).split(".")[0],
+     str(sversion).split(".")[1],
+     str(sversion).split(".")[2],
+     str(nversion).split(".")[0],
+     str(nversion).split(".")[1],
+     str(nversion).split(".")[2])
+    if s1 >= n1:
+      if s2 >= n2:
+        if s3 >= n3:
+          if print_val == True:
+            py_logger.info(f"The current version of the script has been found ({sversion})!")
+            print(f"""{green}[*] {loc_n}: {sversion}{white}""")
+        else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
+      else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
+    else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
+  else:
+    py_logger.warning(f"Version check failed. Cause: {err}")
+    if print_val == True:print(f"""{red}[!] {loc['18']} Cause: {err}
+{violet}[*] {loc_n}: {sversion}{white}""")
+
+
+def check_all_relevant_version(loc_val, print_val=True):
+    loc = loc_val
+    main_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json'
+    data_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/random_neko_list_v.json'
+
+    ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
+    ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
+
+
+
+
+
+# <-------------------------->
+
+
+
+
+
+# def remind():
+#     # Спрашиваем текст напоминания, который нужно потом показать пользователю
+#     print("О чём вам напомнить?")
+#     # Ждём ответа пользователя и результат помещаем в строковую переменную text
+#     text = str(input())
+#     # Спрашиваем про время
+#     print("Через сколько минут?")
+#     # Тут будем хранить время, через которое нужно показать напоминание
+#     local_time = float(input())
+#     # Переводим минуты в секунды
+#     local_time = local_time * 60
+#     # Ждём нужное количество секунд, программа в это время ничего не делает
+#     time.sleep(local_time)
+#     # Показываем текст напоминания
+#     print(text)
+
 
 # <-------------------------->
 
@@ -89,7 +197,7 @@ def download_file_from_github(ind, file_name,redir=os.getcwd()):
     return "ok"
 
   except requests.exceptions.HTTPError as err:
-    # print(err)
+
     if "404" in str(err):
       return "errне найдено"
     return "err", err
@@ -281,75 +389,53 @@ except:
     print(f"{red}[!] ModuleNotFoundError: alive_progress.{white}")
     py_logger.info(f"[Import alive_bar from alive_progress] failed.")
 
+
+try:
+  from random_neko_list import *
+  from random_neko_list import version_data_baze as random_neko_list_version
+  py_logger.info("The database has been successfully imported!")
+except ModuleNotFoundError:
+  try:
+    from modules.random_neko_list import *
+    from modules.random_neko_list import version_data_baze as random_neko_list_version
+  except ModuleNotFoundError:
+    py_logger.warning(f"Database not found! Trying to download database...")
+    posle = os.getcwd()
+    do_1212 = os.getcwd(
+    ) + dir_pref + "modules" + dir_pref
+    os.chdir(do_1212)
+    download_file_from_github(0, "random_neko_list.py")
+    os.chdir(posle)
+
+    try:
+      from modules.random_neko_list import *
+      from modules.random_neko_list import version_data_baze as random_neko_list_version
+      py_logger.info("The database has been successfully imported!")
+    except ImportError:
+      py_logger.critical(f"Database not found!")
+      raise SystemExit(f'\n[!] {loc["8"]}')
+  
+
+
 # <-------------------------->
 
 # Forced reboot
 
 
 class ForcedRebootException(Exception):
-
   def __init__(self, *args):
-    if args:
-      self.message = args[0]
-    else:
-      self.message = None
+    if args:self.message = args[0]
+    else:self.message = None
 
   def __str__(self):
-    # print('calling str')
-    if self.message:
-      return self.message
-    else:
-      return "ForcedRebootException has been raised"
-
-
+    if self.message:return self.message
+    else:return "ForcedRebootException has been raised"
 conf_file = []
-
-try:
-  with open(f"{file_name_config}", "r") as file:
-    data = json.loads(file.read())
-    localization = data[0]['localization']
-
-    #conf_file.append({"localization" : f'{localization}'})
-    #localization = localization.upper()
-
-except Exception as err:
-  cls()
-  localization = input(
-    f"Выберите локализацию (ru) / Select localization (en) >>> ").upper()
-
-
-  if (localization != "RU"):
-    if (localization != "EN"):
-      localization = "EN"
-
-  zn = str(localization).lower().replace(" ", "")
-  conf_file.append({'localization': zn})
-
-
-
-cls()
-
-localization_val = localization.upper()
-
-if localization_val == "RU":
-  try:
-    from localization.RU import ru_loc as loc
-    py_logger.info(f"localization for the Russian language was  found!")
-  except ModuleNotFoundError:
-    loc = en_loc_reserve
-
-if localization_val == "EN":
-#  try:from localization.EN import en_loc as loc
-#  except Exception as err:
-    loc = en_loc_reserve
-
-#cls()
 
 
 def logo():
   try:
     from colorama import Fore
-
     colors = [
       Fore.RED,
       Fore.GREEN,
@@ -359,11 +445,13 @@ def logo():
       Fore.MAGENTA,
       Fore.WHITE,
     ]
+    py_logger.info(
+      f"[Import module from PIL] successfully."
+    )
   except:
     system("pip install colorama")
     try:
       from colorama import Fore
-
       colors = [
         Fore.RED,
         Fore.GREEN,
@@ -373,6 +461,9 @@ def logo():
         Fore.MAGENTA,
         Fore.WHITE,
       ]
+      py_logger.info(
+      f"[Import module from PIL] failed -> [Import module from PIL] successfully."
+    )
     except:
       print(f"{red}[!] ModuleImportError: colorama.{white}")
       colors = [red, green, yellow, blue, violet, turquoise, white]
@@ -397,7 +488,55 @@ def logo():
         )
 
 
+
+
+
+
+
+
+
+
+try:
+  with open(f"{file_name_config}", "r") as file:
+    data = json.loads(file.read())
+    localization = data[0]['localization']
+except Exception as err:
+  cls()
+  localization = input(
+    f"Выберите локализацию (ru) / Select localization (en) >>> ").upper()
+
+
+  if (localization != "RU"):
+    if (localization != "EN"):
+      localization = "EN"
+
+  zn = str(localization).lower().replace(" ", "")
+  conf_file.append({'localization': zn})
+
+
+
+cls()
+
+localization_val = localization.upper()
+py_logger.info(f"Localization: {localization_val}")
+if localization_val == "RU":
+  try:
+    from localization.RU import ru_loc as loc
+    py_logger.info(f"Localization for the Russian language was  found!")
+  except ModuleNotFoundError:
+    py_logger.warning(f"Localization for the Russian language was NOT found!")
+    loc = en_loc_reserve
+
+if localization_val == "EN":
+    loc = en_loc_reserve
+
 logo()
+
+
+
+th = Thread(target=check_all_relevant_version, args=(loc,False))
+th.start()
+
 
 try:
   do = os.getcwd()
@@ -414,19 +553,20 @@ if "/content" in os.getcwd():
   except:
     pass
   print(f"""{white}{'='*15}- {red}WARNING!{white} -{'='*15}""")
-  dd = loc["6"]
-  print(f"{red} {dd} {white}")
+  print(f'{red} {loc["6"]} {white}')
 
   from google.colab import drive
 
   try:
     print(f"""{white}{'='*15}- {green}Connecting...{white} -{'='*15}""")
     drive.mount("/content/MyDrive", force_remount=True)
+    py_logger.critical(f"Connect to Google Collab - OK")
   except:
     print(f"""{white}{'='*15}- {red}Connecting Failed...{white} -{'='*15}""")
     py_logger.critical(f"Unable to connect to Google Collab")
     raise SystemError(f"{red}[!] Error to connecting to drive...{white}")
   print(f"""{white}{'='*15}- {green}Connecting OK...{white} -{'='*15}""")
+
 
   try:
     per1 = os.getcwd()
@@ -443,28 +583,7 @@ if "/content" in os.getcwd():
 
   system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
 
-try:
-  from random_neko_list import *
 
-  py_logger.info("The database has been successfully imported!")
-except ModuleNotFoundError:
-  try:
-    from modules.random_neko_list import *
-  except ModuleNotFoundError:
-    py_logger.warning(f"Database not found! Trying to download database...")
-    posle = os.getcwd()
-    do_1212 = os.getcwd(
-    ) + dir_pref + "modules" + dir_pref + "random_neko_list.py"
-    os.chdir(do_1212)
-    download_file_from_github(0, "random_neko_list.py")
-    os.chdir(posle)
-
-    try:
-      from modules.random_neko_list import *
-      py_logger.info("The database has been successfully imported!")
-    except ImportError:
-      py_logger.critical(f"Database not found!")
-      raise SystemExit(f'\n[!] {loc["8"]}')
 
 # <------------------------->
 
@@ -481,19 +600,7 @@ print(f"""{'='*15}- {loc['1']} -{'='*15}{turquoise}
 {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}{white}""")
 
 
-def old(nversion,sversion, name_file,name_d,redir=os.getcwd()):
-  if name_file == 'random_neko_list_v.json':
-    name_file = name_file.replace('_v.json','.py')
-  py_logger.warning(f"An obsolete version of the script has been found (NEW-{nversion}, OLD-{sversion})!")
-  print(f"""{yellow}[*] {name_d}{white}""")
-  print(f"{violet}[*] An old version: {sversion}, A new version: {nversion}")
-  ch = input(f"{green}[!] {loc['10']} (Y/N) >>> ")
-  print(white)
-  if ch == "Y":
-    check(0, name_file,redir)
-    raise ForcedRebootException(loc["19"])
-  else:
-    pass
+check_all_relevant_version(loc,True)
 
 
 print(f"""{'='*15}- {loc['2']} -{'='*15}
@@ -502,47 +609,13 @@ print(f"""{'='*15}- {loc['2']} -{'='*15}
 py_logger.info(f"""{'='*15}- OS -{'='*15}""")
 py_logger.info(f"""[*] OS Name: {os.name.upper()}""")
 
-from modules.random_neko_list import version_data_baze as random_neko_list_version
+
 
 print(f"""{'='*15}- {loc['3']} -{'='*15}""")
 
 # <------------------------->
 
-def ch_version(url,sversion,loc_n,name_d):
-  redir_cd = os.getcwd() + dir_pref + 'modules'
-  name_file = url.split('/')[-1]
-  try:nversion = json.loads(requests.get(url).text)["ver"]
-  except Exception as err:nversion = None
 
-  if nversion != None:
-    s1, s2, s3, n1, n2, n3 = (
-     str(sversion).split(".")[0],
-     str(sversion).split(".")[1],
-     str(sversion).split(".")[2],
-     str(nversion).split(".")[0],
-     str(nversion).split(".")[1],
-     str(nversion).split(".")[2])
-    if s1 >= n1:
-      if s2 >= n2:
-        if s3 >= n3:
-          py_logger.info(f"The current version of the script has been found ({sversion})!")
-          print(f"""{green}[*] {loc_n}: {sversion}{white}""")
-        else:old(nversion,sversion, name_file, name_d,redir_cd)
-      else:old(nversion,sversion, name_file, name_d,redir_cd)
-    else:old(nversion,sversion, name_file, name_d,redir_cd)
-  else:
-    py_logger.warning(f"Version check failed. Cause: {err}")
-    print(f"""{red}[!] {loc['18']} Cause: {err}
-{violet}[*] {loc_n}: {sversion}{white}""")
-
-
-def check_all_relevant_version():
-    main_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json'
-    data_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/random_neko_list_v.json'
-
-    ch_version(main_version,main_script_version, loc['25'],loc['9'])
-    ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'])
-check_all_relevant_version()
 
 
 #def check_version(sversion):
@@ -839,6 +912,7 @@ def main(pythonanywhere_key):
   print(f"""{white}{'='*15}- {loc['14']} - {len(ur)} -{'='*15}""")
 
   py_logger.info(f"""{'='*15}- Downloading Info -{'='*15}""")
+  py_logger.info(f"""LEN objects - {len(ur)}""")
 
   err_dict = []
   vk_403_err = []
@@ -1090,7 +1164,7 @@ try:
         print(f'''{'='*15}- {loc['24']} -{'='*15}''')
         pythonanywhere_def(py_logger)
         os.chdir(posle)
-      except ModuleNotFoundError:
+      except ModuleNotFoundError as err:
         py_logger.critical(f"""pythonanywhere_def not found ({err}).""")
       except Exception as err:
         py_logger.critical(f"""pythonanywhere_def = Error  ({err}).""")

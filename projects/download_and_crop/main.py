@@ -13,7 +13,7 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-main_script_version = "2.1.25"
+main_script_version = "2.1.30"
 
 # <---------------------->
 
@@ -72,35 +72,50 @@ do = os.getcwd()
 
 def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
   if val_toast == True:
-    print(f'{blue}[.] {loc["20"]}{white}')
-    toast(f'{loc["31"]} {sversion} --> {nversion}',
-          f'{loc_n}...',
-          buttons=[{
-            'activationType': 'protocol',
-            'arguments': check(0, name_file,redir),
-            'content': 'Download'
-          }])
+    if name_file == 'version.json':
+       loc_n = loc['9']
+    else:
+      loc_n = loc['30']
+    tit = f'{loc_n}\n{sversion} --> {nversion}'
+    # toast(
+    #       #title = tit,
+    #       #loc_n, 
+    #       buttons=[{'activationType': 'protocol','arguments': check(0, name_file,redir),'content': 'Download'}],
+    #       icon = {'src': 'https://unsplash.it/64?image=669','placement': 'appLogoOverride'})
+    #toast('Hello', 'Hello from Python', button={'activationType': 'protocol', 'arguments': 'https://google.com', 'content': 'Open Google'})
+    toast(
+          title = tit,
+          icon = {'src': 'https://unsplash.it/64?image=669','placement': 'appLogoOverride'},
+          buttons=[{'activationType': 'protocol','arguments': 'https://github.com/Basefilespython/pydiscbot/tree/main/projects/download_and_crop/setup','content': 'Download'}],
+          #callback_on_click=check(0, name_file,redir)
+          )
+    # toast(tit,f'{loc_n}...',buttons=[
+    #       {
+    #         'activationType': 'protocol',
+    #         'arguments': check(0, name_file,redir),
+    #         'content': 'Download'
+    #       }])
   else:
     pass
 
 
 def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th= False):
   if Th == False:
-    if name_file == 'random_neko_list_v.json':
-      name_file = name_file.replace('_v.json','.py')
+    if name_file_ == 'random_neko_list_v.json':
+      name_file_ = name_file_.replace('_v.json','.py')
     py_logger.warning(f"An obsolete version of the script has been found (NEW-{nversion_}, OLD-{sversion_})!")
     print(f"""{yellow}[*] {name_d_}{white}""")
     print(f"{violet}[*] An old version: {sversion_}, A new version: {nversion_}")
     ch = input(f"{green}[!] {loc['10']} (Y/N) >>> ")
     print(white)
     if ch == "Y":
-      check(0, name_file,redir_)
+      check(0, name_file_,redir_)
       raise ForcedRebootException(loc["19"])
     else:
       pass
   
   if Th == True:
-    old_Thread(nversion_,sversion_, name_file, name_d_, loc_n_, redir=os.getcwd())
+    old_Thread(nversion_,sversion_, name_file_, name_d_, loc_n_, redir=os.getcwd())
 
 
 
@@ -130,6 +145,8 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
           if print_val == True:
             py_logger.info(f"The current version of the script has been found ({sversion})!")
             print(f"""{green}[*] {loc_n}: {sversion}{white}""")
+          # else:
+          #   print(f'АКТУАльная версия - {name_file} - {sversion} - {nversion}')
         else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
       else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
     else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
@@ -152,7 +169,7 @@ def check_all_relevant_version(loc_val, print_val=True):
       while True:
         ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
         ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
-        time.sleep(1)
+        time.sleep(10)
 
 
 

@@ -13,7 +13,7 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-main_script_version = "2.1.30"
+main_script_version = "2.1.25"
 
 # <---------------------->
 
@@ -103,6 +103,8 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
   if Th == False:
     if name_file_ == 'random_neko_list_v.json':
       name_file_ = name_file_.replace('_v.json','.py')
+    if name_file_ == 'version.json':
+      name_file_ =  'main.py'
     py_logger.warning(f"An obsolete version of the script has been found (NEW-{nversion_}, OLD-{sversion_})!")
     print(f"""{yellow}[*] {name_d_}{white}""")
     print(f"{violet}[*] An old version: {sversion_}, A new version: {nversion_}")

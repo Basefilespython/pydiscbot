@@ -47,6 +47,7 @@ import http
 import random
 from datetime import datetime, timedelta
 from threading import Thread
+import socket
 
 if str(os.name) == "nt":
   dir_pref = "\\"
@@ -77,24 +78,12 @@ def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
     else:
       loc_n = loc['30']
     tit = f'{loc_n}\n{sversion} --> {nversion}'
-    # toast(
-    #       #title = tit,
-    #       #loc_n, 
-    #       buttons=[{'activationType': 'protocol','arguments': check(0, name_file,redir),'content': 'Download'}],
-    #       icon = {'src': 'https://unsplash.it/64?image=669','placement': 'appLogoOverride'})
-    #toast('Hello', 'Hello from Python', button={'activationType': 'protocol', 'arguments': 'https://google.com', 'content': 'Open Google'})
     toast(
           title = tit,
-          icon = {'src': 'https://unsplash.it/64?image=669','placement': 'appLogoOverride'},
+          icon = {'src': 'https://opengraph.githubassets.com/2fb38cef00042d8b977103470ef6e7943a6229e01819c4f2b6a39ca8aba155e1/Basefilespython/pydiscbot','placement': 'appLogoOverride'},
           buttons=[{'activationType': 'protocol','arguments': 'https://github.com/Basefilespython/pydiscbot/tree/main/projects/download_and_crop/setup','content': 'Download'}],
-          #callback_on_click=check(0, name_file,redir)
           )
-    # toast(tit,f'{loc_n}...',buttons=[
-    #       {
-    #         'activationType': 'protocol',
-    #         'arguments': check(0, name_file,redir),
-    #         'content': 'Download'
-    #       }])
+
   else:
     pass
 
@@ -105,6 +94,7 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
       name_file_ = name_file_.replace('_v.json','.py')
     if name_file_ == 'version.json':
       name_file_ =  'main.py'
+
     py_logger.warning(f"An obsolete version of the script has been found (NEW-{nversion_}, OLD-{sversion_})!")
     print(f"""{yellow}[*] {name_d_}{white}""")
     print(f"{violet}[*] An old version: {sversion_}, A new version: {nversion_}")
@@ -123,13 +113,23 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
 
 
 
-
-
 def ch_version(url,sversion,loc_n,name_d,print_val):
-  redir_cd = os.getcwd() + dir_pref + 'modules'
+  
   name_file = url.split('/')[-1]
-  try:nversion = json.loads(requests.get(url).text)["ver"]
-  except Exception as err:nversion = None
+  if name_file != 'version.json':redir_cd = os.getcwd() + dir_pref + 'modules'
+
+
+  errs = ''
+  try:
+     nversion = json.loads(requests.get(url).text)["ver"]
+  except requests.exceptions.ConnectionError as err_code:
+    if "[Errno 11001]" in str(err_code):
+      errs = 'You are not connected to the Internet'
+    nversion = None
+  except Exception as err:
+    errs = err
+    nversion = None
+
   if print_val == True: Th_val = False
   else: Th_val = True
 
@@ -153,9 +153,13 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
       else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
     else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
   else:
-    py_logger.warning(f"Version check failed. Cause: {err}")
-    if print_val == True:print(f"""{red}[!] {loc['18']} Cause: {err}
-{violet}[*] {loc_n}: {sversion}{white}""")
+    py_logger.warning(f"Version check failed. Cause: {errs}") 
+    lens_simvolov = len(list(f'[*] {loc_n}: {sversion}'))
+    #print(lens_simvolov)
+    if print_val == True:print(f"""{violet}[*] {loc_n}: {sversion}{' '*(38-lens_simvolov)}{red}[!] Cause: {errs}{white}""")
+      
+# print(f"""{red}[!] {loc['18']} Cause: {errs}
+# {violet}[*] {loc_n}: {sversion}{white}""")
 
 
 def check_all_relevant_version(loc_val, print_val=True):
@@ -172,6 +176,27 @@ def check_all_relevant_version(loc_val, print_val=True):
         ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
         ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
         time.sleep(10)
+
+
+def check_internet():
+  host = 'www.google.com'
+  def is_connected(host):
+      try:
+          host = socket.gethostbyname(host)
+          socket.create_connection((host, 80), 2)
+          return True
+      except Exception:
+          return False
+      
+  if is_connected(host) == True:
+      pass
+  else:
+      cls()
+      print(f"{red}Подключитесь к Интернету!{white}")
+      while is_connected(host) == False:
+          pass
+
+
 
 
 
@@ -526,7 +551,7 @@ try:
   with open(f"{file_name_config}", "r") as file:
     data = json.loads(file.read())
     localization = data[0]['localization']
-except Exception as err:
+except:
   cls()
   localization = input(
     f"Выберите локализацию (ru) / Select localization (en) >>> ").upper()
@@ -538,6 +563,9 @@ except Exception as err:
 
   zn = str(localization).lower().replace(" ", "")
   conf_file.append({'localization': zn})
+  with open(f"{file_name_config}", "w") as outfile:
+    json.dump(conf_file, outfile, indent=4)
+    py_logger.info(f"""File created [{file_name_config}]""")
 
 
 
@@ -626,7 +654,7 @@ print(f"""{'='*15}- {loc['1']} -{'='*15}{turquoise}
 {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}{white}""")
 
 
-check_all_relevant_version(loc,True)
+# check_all_relevant_version(loc,True)
 
 
 print(f"""{'='*15}- {loc['2']} -{'='*15}
@@ -638,6 +666,8 @@ py_logger.info(f"""[*] OS Name: {os.name.upper()}""")
 
 
 print(f"""{'='*15}- {loc['3']} -{'='*15}""")
+
+check_all_relevant_version(loc,True)
 
 # <------------------------->
 
@@ -787,7 +817,7 @@ _102 = []
 _unc = []
 
 
-def download_function(url, name_file, err_dict, err_info, vk_403_err,
+def download_function(url, name_file, err_dict, err_info, site_403_err,
                       pythonanywhere_key):
   if pythonanywhere_key == True:
     pass
@@ -826,8 +856,9 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
     )
     err_dict.append(f"{url}")
     err_info.append({f"{name_file}": f"{err_code.code}"})
-    if "userapi.com" in url and err_code.code == 403:
-      vk_403_err.append(f"{url}")
+    if err_code.code == 403:
+      if "userapi.com" in url:
+        site_403_err.append(f"{url}")
     py_logger.warning(
       f"""File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}"""
     )
@@ -843,7 +874,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
       err_info.append({f"{name_file}": "522"})
       status = f'522'
 
-    if "[Errno 99]" in str(err_code):
+    elif "[Errno 99]" in str(err_code):
       print(f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}")
       err_info.append({f"{name_file}": "524"})
       py_logger.warning(
@@ -851,7 +882,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
       )
       status = f'524'
 
-    if "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
+    elif "[SSL: WRONG_VERSION_NUMBER]" in str(err_code):
       print(f"{red}[-] {red}526: {blue}{name_file}{white}  URL: {url[0:ind]}")
       err_info.append({f"{name_file}": "526"})
       py_logger.warning(
@@ -859,7 +890,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
       )
       status = f'526'
 
-    if "[Errno 11001]" in str(err_code):
+    elif "[Errno 11001]" in str(err_code):
       print(f"{red}[-] {red}101: {blue}{name_file}{white}  URL: {url[0:ind]}")
       err_info.append({f"{name_file}": "101"})
       py_logger.warning(
@@ -910,7 +941,7 @@ def download_function(url, name_file, err_dict, err_info, vk_403_err,
     )
     status = f'___'
 
-  return status, err_dict, err_info, vk_403_err, pythonanywhere_key
+  return status, err_dict, err_info, site_403_err, pythonanywhere_key
 
 
 startTime = time.time()
@@ -941,10 +972,11 @@ def main(pythonanywhere_key):
   py_logger.info(f"""LEN objects - {len(ur)}""")
 
   err_dict = []
-  vk_403_err = []
+  site_403_err = []
   err_info = []
 
   def download(err_name_file, pythonanywhere_key):
+
     i = 0
 
     if alive_a == True:
@@ -973,17 +1005,22 @@ def main(pythonanywhere_key):
                     else:
                       exten = f".png"
 
-          def ww1(i, url, err_dict, err_info, vk_403_err, exten, err_name_file,pythonanywhere_key):
+          def ww1(i, url, err_dict, err_info, site_403_err, exten, err_name_file,pythonanywhere_key):
             name_file = f"{i}{exten}"
+
+
+            for f in range(10):
+              if f'{(i-f)}{exten}' in str(_101):
+                  check_internet()
 
             if val_toast == True:update_progress({'value': f'{i}/{len(ur)}','valueStringOverride': f'{i}/{len(ur)} objects','title': f'Последняя ошибка: {err_name_file}'})
 
 
             while not os.path.exists(name_file):
               try:
-                status, err_dict, err_info, vk_403_err, pythonanywhere_key = (
+                status, err_dict, err_info, site_403_err, pythonanywhere_key = (
                   download_function(url, name_file, err_dict, err_info,
-                                    vk_403_err, pythonanywhere_key))
+                                    site_403_err, pythonanywhere_key))
 
                 if status == '200':
                   _200.append({f'{name_file}': f'{url}'})
@@ -1019,8 +1056,14 @@ def main(pythonanywhere_key):
                   break
                 else:
                   pass
+
+
+
+
+
                 if val_toast == True:update_progress({'title': f'Последняя ошибка: {err_name_file}'})
-              except Exception:
+              except Exception as err:
+                py_logger.error(f'IN 1013 - 1064: {err}')
                 break
 
             try:
@@ -1048,7 +1091,7 @@ def main(pythonanywhere_key):
             return err_name_file, pythonanywhere_key
 
           err_d, pythonanywhere_key = ww1(i, url, err_dict, err_info,
-                                          vk_403_err, exten, err_name_file,
+                                          site_403_err, exten, err_name_file,
                                           pythonanywhere_key)
           err_name_file = err_d
           i = i + 1
@@ -1078,15 +1121,15 @@ def main(pythonanywhere_key):
                   else:
                     exten = f".png"
 
-        def ww2(i, url, err_dict, err_info, vk_403_err, exten):
+        def ww2(i, url, err_dict, err_info, site_403_err, exten):
           name_file = f"{i}{exten}"
           if val_toast == True:update_progress({'value': f'{i}/{len(ur)}','valueStringOverride': f'{i}/{len(ur)} videos'})
 
 
           while not os.path.exists(name_file):
             try:
-              status, err_dict, err_info, vk_403_err = download_function(
-                url, name_file, err_dict, err_info, vk_403_err)
+              status, err_dict, err_info, site_403_err = download_function(
+                url, name_file, err_dict, err_info, site_403_err)
 
               if status == '200':
                 _200.append({f'{name_file}': f'{url}'})
@@ -1142,7 +1185,7 @@ def main(pythonanywhere_key):
             pass
           # bar()
 
-        ww2(i, url, err_dict, err_info, vk_403_err, exten)
+        ww2(i, url, err_dict, err_info, site_403_err, exten)
         i = i + 1
 
     if len(_000) != 0:
@@ -1175,12 +1218,11 @@ def main(pythonanywhere_key):
     return pythonanywhere_key
 
   pythonanywhere_key = download(err_name_file, pythonanywhere_key)
-  return err_dict, vk_403_err, err_info, pythonanywhere_key
+  return err_dict, site_403_err, err_info, pythonanywhere_key
 
 
 try:
-  err_count, vk_403_err, err_info, pythonanywhere_key = main(
-    pythonanywhere_key)
+  err_count, site_403_err, err_info, pythonanywhere_key = main(pythonanywhere_key)
   if pythonanywhere_key == True:
     py_logger.info(f"""pythonanywhere_def = True""")
     if (input(f"{loc['29']}? (Y/N) >>> ") == "Y"):
@@ -1188,7 +1230,7 @@ try:
         from modules.pythonanywhere import pythonanywhere_def
         os.chdir(download_to)
         print(f'''{'='*15}- {loc['24']} -{'='*15}''')
-        pythonanywhere_def(py_logger)
+        print(pythonanywhere_def(py_logger))
         os.chdir(posle)
       except ModuleNotFoundError as err:
         py_logger.critical(f"""pythonanywhere_def not found ({err}).""")
@@ -1215,9 +1257,9 @@ try:
       json.dump(err_count, outfile, indent=4)
     py_logger.info(f"""File created [{file_name_errors}]""")
 
-  if len(vk_403_err) != 0:
+  if len(site_403_err) != 0:
     with open(f"{file_name_vk403}", "w") as outfile:
-      json.dump(vk_403_err, outfile, indent=4)
+      json.dump(site_403_err, outfile, indent=4)
     py_logger.info(f"""File created [{file_name_vk403}]""")
 
   if len(err_info) != 0:
@@ -1233,9 +1275,6 @@ try:
 except NameError:
   pass
 
-with open(f"{file_name_config}", "w") as outfile:
-  json.dump(conf_file, outfile, indent=4)
-  py_logger.info(f"""File created [{file_name_config}]""")
 
 py_logger.info(f"""The database download was completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]""")
 

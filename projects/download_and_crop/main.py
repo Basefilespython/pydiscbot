@@ -80,8 +80,10 @@ def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
     tit = f'{loc_n}\n{sversion} --> {nversion}'
     toast(
           title = tit,
-          icon = {'src': 'https://opengraph.githubassets.com/2fb38cef00042d8b977103470ef6e7943a6229e01819c4f2b6a39ca8aba155e1/Basefilespython/pydiscbot','placement': 'appLogoOverride'},
+          image='https://opengraph.githubassets.com/2fb38cef00042d8b977103470ef6e7943a6229e01819c4f2b6a39ca8aba155e1/Basefilespython/pydiscbot',
+          icon = 'https://avatars.githubusercontent.com/u/123670499?v=4',
           buttons=[{'activationType': 'protocol','arguments': 'https://github.com/Basefilespython/pydiscbot/tree/main/projects/download_and_crop/setup','content': 'Download'}],
+          
           )
 
   else:
@@ -116,8 +118,11 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
 def ch_version(url,sversion,loc_n,name_d,print_val):
   
   name_file = url.split('/')[-1]
-  if name_file != 'version.json':redir_cd = os.getcwd() + dir_pref + 'modules'
-
+  if name_file != 'version.json':
+    redir_cd = os.getcwd() + dir_pref + 'modules'
+  else:
+    redir_cd = os.getcwd()
+  
 
   errs = ''
   try:
@@ -168,7 +173,7 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
     if print_val == True:print(f"""{violet}[*] {loc_n}: {sversion}{' '*(38-lens_simvolov)}{red}[!] Cause: {errs}{white}""")
       
 
-
+val = False
 
 def check_all_relevant_version(loc_val, print_val=True):
     loc = loc_val
@@ -184,6 +189,8 @@ def check_all_relevant_version(loc_val, print_val=True):
         ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
         ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
         time.sleep(10)
+        if val == True:
+          break
 
 
 def check_internet():
@@ -1185,7 +1192,7 @@ try:
         from modules.pythonanywhere import pythonanywhere_def
         os.chdir(download_to)
         print(f'''{'='*15}- {loc['24']} -{'='*15}''')
-        print(pythonanywhere_def(py_logger))
+        pythonanywhere_def(py_logger)
         os.chdir(posle)
       except ModuleNotFoundError as err:
         py_logger.critical(f"""pythonanywhere_def not found ({err}).""")
@@ -1260,11 +1267,13 @@ if val_toast == True:
 else:
   pass
 
-if (input(f"{loc['22']}... {loc['23']}? (Y/N) >>> ") == "Y"):
-  while True:
-    cls()
-    main()
-else:
-  pass
+# if (input(f"{loc['22']}... {loc['23']}? (Y/N) >>> ") == "Y"):
+#   while True:
+#     cls()
+#     main()
+# else:
+#   pass
+
+val = True
 
   #sleep(30)

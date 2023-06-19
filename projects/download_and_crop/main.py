@@ -13,7 +13,7 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-main_script_version = "2.1.32"
+main_script_version = "2.2.0"
 
 # <---------------------->
 
@@ -121,14 +121,26 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
 
   errs = ''
   try:
-     nversion = json.loads(requests.get(url).text)["ver"]
-  except requests.exceptions.ConnectionError as err_code:
-    if "[Errno 11001]" in str(err_code):
-      errs = 'You are not connected to the Internet'
-    nversion = None
-  except Exception as err:
-    errs = err
-    nversion = None
+    try:
+      nversion = json.loads(requests.get(url).text)["ver"]
+    except requests.exceptions.ConnectionError as err_code:
+      if "[Errno 11001]" in str(err_code):
+        errs = 'You are not connected to the Internet'
+      nversion = None
+    except Exception as err:
+      errs = err
+      nversion = None
+  except NameError:
+    print(pip_not_installed())
+    try:
+      nversion = json.loads(requests.get(url).text)["ver"]
+    except requests.exceptions.ConnectionError as err_code:
+      if "[Errno 11001]" in str(err_code):
+        errs = 'You are not connected to the Internet'
+      nversion = None
+    except Exception as err:
+      errs = err
+      nversion = None
 
   if print_val == True: Th_val = False
   else: Th_val = True
@@ -147,19 +159,15 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
           if print_val == True:
             py_logger.info(f"The current version of the script has been found ({sversion})!")
             print(f"""{green}[*] {loc_n}: {sversion}{white}""")
-          # else:
-          #   print(f'АКТУАльная версия - {name_file} - {sversion} - {nversion}')
         else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
       else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
     else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
   else:
     py_logger.warning(f"Version check failed. Cause: {errs}") 
     lens_simvolov = len(list(f'[*] {loc_n}: {sversion}'))
-    #print(lens_simvolov)
     if print_val == True:print(f"""{violet}[*] {loc_n}: {sversion}{' '*(38-lens_simvolov)}{red}[!] Cause: {errs}{white}""")
       
-# print(f"""{red}[!] {loc['18']} Cause: {errs}
-# {violet}[*] {loc_n}: {sversion}{white}""")
+
 
 
 def check_all_relevant_version(loc_val, print_val=True):
@@ -191,38 +199,11 @@ def check_internet():
   if is_connected(host) == True:
       pass
   else:
-      cls()
+      print('\r', end='')
       print(f"{red}Подключитесь к Интернету!{white}")
       while is_connected(host) == False:
           pass
 
-
-
-
-
-
-
-# <-------------------------->
-
-
-
-
-
-# def remind():
-#     # Спрашиваем текст напоминания, который нужно потом показать пользователю
-#     print("О чём вам напомнить?")
-#     # Ждём ответа пользователя и результат помещаем в строковую переменную text
-#     text = str(input())
-#     # Спрашиваем про время
-#     print("Через сколько минут?")
-#     # Тут будем хранить время, через которое нужно показать напоминание
-#     local_time = float(input())
-#     # Переводим минуты в секунды
-#     local_time = local_time * 60
-#     # Ждём нужное количество секунд, программа в это время ничего не делает
-#     time.sleep(local_time)
-#     # Показываем текст напоминания
-#     print(text)
 
 
 # <-------------------------->
@@ -268,7 +249,7 @@ def check(ind, file_name,redir_r):
 # <-------------------------->
 
 en_loc_reserve = {
-  '0': f'''{'='*15}- Connection statuses -{'='*15}
+   '0': f'''{'='*15}- Connection statuses -{'='*15}
 {green}- 200 - Success!{white}
 {'='*10} HTTP ERROR CODEs: {'='*10}
 {red}- 400 - The script was unable to parse the URL.
@@ -283,40 +264,56 @@ en_loc_reserve = {
 {white}{'='*10} OTHER: {'='*10}
 {violet}- 101 - You are disconnected from the Internet.
 - 102 - Error processing URL.{white}''',
-  '1': 'Time',
-  '2': 'Operating system',
-  '3': 'Version',
-  '4': 'You have the latest version of the script installed!',
-  '5': 'Failed to get working directory.',
-  '6':
-  'Your OS is like Colab. All downloaded files will be downloaded to your Google Drive. Or rather, to the subfolder where this file is saved.',
-  '7': 'RESTART THE SKIP RUNNING ENVIRONMENT.',
-  '8': 'Base not found!',
-  '9': 'You have an outdated version of the script installed!',
-  '10': 'Install new version?',
-  '11': 'Version check failed!',
-  '12': 'Working directory',
-  '13': 'Download to',
-  '14': 'Number of images',
-  '15': 'You aborted code execution',
-  '16': 'Crop images in database?',
-  '17': 'Directory',
-  '18': 'Update version check failed!',
-  "19": "Reload script.",
-  "20": "The text below triggers a script termination notification.",
-  "21": "Script completed",
-  "22": "Done!",
-  "23": "Start an endless loop",
-  "24": "Downloading additional data",
-  "25": "Main Script Version",
-  "26": "Data Baze Version",
-  "27": "Not Found",
+      "1": 'Time',
+      "2": "Operating system",
+      "3": "Version",
+      "4": "You have the latest version of the script installed!",
+      "5": "Unable to get working directory.",
+      "6": "Your OS is similar to Colab. All uploaded files will be uploaded to your Google Drive. Or rather, to the subfolder where this file is saved.",
+      "7": "RESTART THE SKIP RUNNING ENVIRONMENT.",
+      "8": "Base not found!",
+      "9": "You have an outdated version of the script installed!",
+      "10": "Install new version?",
+      "11": "Version check failed!",
+      "12": "Working directory",
+      "13": "Upload to",
+      "14": "Number of images",
+      "15": "You aborted code execution",
+      "16": "Crop images in database?",
+      "17": "Directory",
+      "18": "Update version check failed!",
+      "19": "Reload script.",
+      "20": "The text below triggers a script termination notification.",
+      "21": "Script completed",
+      "22": "Done!",
+      "23": "Start an endless loop",
+      "24": "Download additional data",
+      "25": "Main script version",
+      "26": "Database version",
+      "27": "Not found",
+      "28": "Script execution time",
+      "29": "Start downloading additional data",
+      "30": "You have an outdated version of the database installed!",
+      "31": "Old software version",
 }
+
+
+
+def pip_not_installed():
+  import os
+  os.system('python3 get-pip.py')
+  return 'OKEY NAXYI'
+
+
+
+
+
+
 
 # <------------------------->
 
 file_name_errors = "errors.json"
-file_name_vk403 = "vk403.json"
+file_name_site = "vk403.json"
 file_name_err_info = "err_info.json"
 file_name_config = "config.json"
 
@@ -470,7 +467,6 @@ except ModuleNotFoundError:
 
 # <-------------------------->
 
-# Forced reboot
 
 
 class ForcedRebootException(Exception):
@@ -541,7 +537,7 @@ def logo():
 
 
 
-
+# <-------------------------->
 
 
 
@@ -641,20 +637,12 @@ if "/content" in os.getcwd():
 
 # <------------------------->
 
-# def update():
-#   file_names = ["random_neko_list.py", "main.py"]
-#   for file_name in file_names:
-#     check(0, file_name)
-#   import time
-
-#   time.sleep(2)
-
 
 print(f"""{'='*15}- {loc['1']} -{'='*15}{turquoise}
 {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}{white}""")
 
 
-# check_all_relevant_version(loc,True)
+
 
 
 print(f"""{'='*15}- {loc['2']} -{'='*15}
@@ -674,52 +662,6 @@ check_all_relevant_version(loc,True)
 
 
 
-#def check_version(sversion):
-#  try:
-#    nversion = json.loads(
-#      requests.get(
-#        "https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json"
-#      ).text)["ver"]
-#  except:
-#    nversion = None
-#
-#  if nversion != None:
-#    s1, s2, s3, n1, n2, n3 = (
-#      str(sversion).split(".")[0],
-#      str(sversion).split(".")[1],
-#      str(sversion).split(".")[2],
-#      str(nversion).split(".")[0],
-#      str(nversion).split(".")[1],
-#      str(nversion).split(".")[2],
-#    )
-#    if s1 >= n1:
-#      if s2 >= n2:
-#        if s3 >= n3:
-#          py_logger.info(
-#            f"The current version of the script has been found ({main_script_version})!"
-#          )
-#
-#          print(f"""{green}[*] {loc["25"]}: {main_script_version}{white}""")
-#
-#        else:
-#          old(nversion)
-#      else:
-#        old(nversion)
-#    else:
-#      old(nversion)
-#  else:
-#    py_logger.warning(f"Version check failed.")
-#    print(f"""{red}[!] {loc['18']}
-#{violet}[*] {loc["25"]}: {main_script_version}{white}""")
-
-# <------------------------->
-
-#check_version(main_script_version)
-#data_version = random_neko_list_version()
-#print(f"""{green}[*] {loc["26"]}: {data_version}{white}""")
-
-# <------------------------->
-
 one_path = os.getcwd()
 ext_list = list()
 
@@ -734,9 +676,22 @@ chdir = input(f'''{red}[!]{yellow} Скачивание какой библио�
 [2] IMGS18 (18+)
 [3] Своя
 {blue}>>> ''')
+
+ch = input('Выделить какой-либо сайт из списка? (Y/N) >>>')
+if ch == 'Y':
+  ch = input('Введите нужный вам сайт >>>')
+  aaa = 'N'
+  while aaa != 'Y':
+    aaa = input('Вы ввели правильный текст? (Y/N) >>>')
+    if aaa  == 'Y':
+      site_zametka = ch
+      file_name_site = site_zametka.replace('.','_')
+    else:
+      ch = input('Введите нужный вам сайт >>>')
+else:
+  site_zametka = 'donmai.us'
               
 while chdir != '1' or chdir != '2':
-    #print(chdir)
     if chdir == '1':
         chosing_directory = imgs
         name_dir = 'DataDir'
@@ -817,7 +772,7 @@ _102 = []
 _unc = []
 
 
-def download_function(url, name_file, err_dict, err_info, site_403_err,
+def download_function(url, name_file, err_dict, err_info, site_,
                       pythonanywhere_key):
   if pythonanywhere_key == True:
     pass
@@ -857,8 +812,8 @@ def download_function(url, name_file, err_dict, err_info, site_403_err,
     err_dict.append(f"{url}")
     err_info.append({f"{name_file}": f"{err_code.code}"})
     if err_code.code == 403:
-      if "userapi.com" in url:
-        site_403_err.append(f"{url}")
+      if site_zametka in url:
+        site_.append(f"{url}")
     py_logger.warning(
       f"""File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}"""
     )
@@ -941,7 +896,7 @@ def download_function(url, name_file, err_dict, err_info, site_403_err,
     )
     status = f'___'
 
-  return status, err_dict, err_info, site_403_err, pythonanywhere_key
+  return status, err_dict, err_info, site_, pythonanywhere_key
 
 
 startTime = time.time()
@@ -972,7 +927,7 @@ def main(pythonanywhere_key):
   py_logger.info(f"""LEN objects - {len(ur)}""")
 
   err_dict = []
-  site_403_err = []
+  site_ = []
   err_info = []
 
   def download(err_name_file, pythonanywhere_key):
@@ -1005,11 +960,11 @@ def main(pythonanywhere_key):
                     else:
                       exten = f".png"
 
-          def ww1(i, url, err_dict, err_info, site_403_err, exten, err_name_file,pythonanywhere_key):
+          def ww1(i, url, err_dict, err_info, site_, exten, err_name_file,pythonanywhere_key):
             name_file = f"{i}{exten}"
 
-
-            for f in range(10):
+            
+            for f in range(5):
               if f'{(i-f)}{exten}' in str(_101):
                   check_internet()
 
@@ -1018,9 +973,9 @@ def main(pythonanywhere_key):
 
             while not os.path.exists(name_file):
               try:
-                status, err_dict, err_info, site_403_err, pythonanywhere_key = (
+                status, err_dict, err_info, site_, pythonanywhere_key = (
                   download_function(url, name_file, err_dict, err_info,
-                                    site_403_err, pythonanywhere_key))
+                                    site_, pythonanywhere_key))
 
                 if status == '200':
                   _200.append({f'{name_file}': f'{url}'})
@@ -1062,8 +1017,8 @@ def main(pythonanywhere_key):
 
 
                 if val_toast == True:update_progress({'title': f'Последняя ошибка: {err_name_file}'})
-              except Exception as err:
-                py_logger.error(f'IN 1013 - 1064: {err}')
+              except Exception as err_:
+                py_logger.error(f'IN 1013 - 1064: {err_}')
                 break
 
             try:
@@ -1091,7 +1046,7 @@ def main(pythonanywhere_key):
             return err_name_file, pythonanywhere_key
 
           err_d, pythonanywhere_key = ww1(i, url, err_dict, err_info,
-                                          site_403_err, exten, err_name_file,
+                                          site_, exten, err_name_file,
                                           pythonanywhere_key)
           err_name_file = err_d
           i = i + 1
@@ -1121,15 +1076,15 @@ def main(pythonanywhere_key):
                   else:
                     exten = f".png"
 
-        def ww2(i, url, err_dict, err_info, site_403_err, exten):
+        def ww2(i, url, err_dict, err_info, site_, exten):
           name_file = f"{i}{exten}"
           if val_toast == True:update_progress({'value': f'{i}/{len(ur)}','valueStringOverride': f'{i}/{len(ur)} videos'})
 
 
           while not os.path.exists(name_file):
             try:
-              status, err_dict, err_info, site_403_err = download_function(
-                url, name_file, err_dict, err_info, site_403_err)
+              status, err_dict, err_info, site_ = download_function(
+                url, name_file, err_dict, err_info, site_)
 
               if status == '200':
                 _200.append({f'{name_file}': f'{url}'})
@@ -1185,7 +1140,7 @@ def main(pythonanywhere_key):
             pass
           # bar()
 
-        ww2(i, url, err_dict, err_info, site_403_err, exten)
+        ww2(i, url, err_dict, err_info, site_, exten)
         i = i + 1
 
     if len(_000) != 0:
@@ -1218,11 +1173,11 @@ def main(pythonanywhere_key):
     return pythonanywhere_key
 
   pythonanywhere_key = download(err_name_file, pythonanywhere_key)
-  return err_dict, site_403_err, err_info, pythonanywhere_key
+  return err_dict, site_, err_info, pythonanywhere_key
 
 
 try:
-  err_count, site_403_err, err_info, pythonanywhere_key = main(pythonanywhere_key)
+  err_count, site_, err_info, pythonanywhere_key = main(pythonanywhere_key)
   if pythonanywhere_key == True:
     py_logger.info(f"""pythonanywhere_def = True""")
     if (input(f"{loc['29']}? (Y/N) >>> ") == "Y"):
@@ -1257,10 +1212,10 @@ try:
       json.dump(err_count, outfile, indent=4)
     py_logger.info(f"""File created [{file_name_errors}]""")
 
-  if len(site_403_err) != 0:
-    with open(f"{file_name_vk403}", "w") as outfile:
-      json.dump(site_403_err, outfile, indent=4)
-    py_logger.info(f"""File created [{file_name_vk403}]""")
+  if len(site_) != 0:
+    with open(f"{file_name_site}", "w") as outfile:
+      json.dump(site_, outfile, indent=4)
+    py_logger.info(f"""File created [{file_name_site}]""")
 
   if len(err_info) != 0:
     with open(f"{file_name_err_info}", "w") as outfile:

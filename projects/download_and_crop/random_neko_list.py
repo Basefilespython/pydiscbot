@@ -1,6 +1,6 @@
 
 def version_data_baze():
-    return '1.5.8'
+    return '1.6.0'
 
 
 imgs = [
@@ -11,6 +11,9 @@ imgs = [
     "https://i.imgur.com/ZELgqPi.jpg",
     "https://i.pinimg.com/originals/95/d8/01/95d801c5ce2ece2f4c695c5d16ea99fb.jpg",
     "https://pbs.twimg.com/media/FChe868VQAELrtF.jpg",
+    "https://i0.nekobot.xyz/5/0/f/1677b1e562b6b9aa958a4910d7fcb.png",
+    "https://cdn.nekobot.xyz/c/e/1/283a82f97d84fe28c4187cf4073f8.png",
+    "https://cdn.nekobot.xyz/d/3/9/a8834f366c864c80d7dde8c16b724.png",
     "https://cdn.donmai.us/original/9b/24/9b240b026e2af1a0a8679768fa2272ec.jpg",
     "https://cdn.donmai.us/original/41/b5/41b58f8ea3bbd620ab9c9a9def2a3905.jpg",
     "https://cdn.donmai.us/original/08/bf/08bf1c06afb0d9f0c4225256d61039cb.jpg",
@@ -1417,7 +1420,12 @@ imgs = [
     "https://sun9-21.userapi.com/impg/oyiHx2yHW5RTmfr5NjnPw7JKd-2hTOwPizGOXQ/Bwbj3YCrGME.jpg?size=1440x2160&quality=95&sign=c478d48d85b4dbd17cc71934be9ffb18&type=album",
     "https://sun1-15.userapi.com/impg/T9mbCuVGhGRcr5K5Kyf3Q_LcOQGp5PRVFzC9PA/xNaNCdgGF20.jpg?size=2560x1960&quality=96&sign=d0f9f31821b317b8b3fe415b3d7c49a1&type=album",
     "https://sun9-12.userapi.com/impg/NnAC_Dl1kI3UXyic9evXw-2Qo0v4sdjTeomuYQ/Hux77WVS9Bk.jpg?size=600x800&quality=95&sign=eb9bd78d9244dd0043fd5495efda9f8b&type=album"
+    "https://i0.nekobot.xyz/0/3/e/6d0f9d139549b7be36179883aa2d6.jpg",
+    "https://cdn.nekobot.xyz/f/0/e/d66b90fd17791e0af8fe4ada7e468.png",
+    "https://i0.nekobot.xyz/0/b/2/0f029f736013b9063473d0955e1d2.png",
+    "https://i0.nekobot.xyz/6/1/3/07874b28736bd2413943508cf7d37.png"
 
+    
 ]
 
 
@@ -1429,6 +1437,23 @@ imgs18 = [
                 }
     },
     "imgs18",
+    "https://i0.nekobot.xyz/2/d/8/16c893e1255d0381773bf1041c101.png",
+    "https://i0.nekobot.xyz/4/5/8/9354f76d5ee0a2799d4280ccf2635.png",
+    "https://cdn.nekobot.xyz/b/b/9/b1560cdd1be2a1a3d66634b820f0c.jpeg",
+    "https://cdn.nekobot.xyz/9/6/4/d6a6d5dac9d35f0da6459365ef1f8.png",
+    "https://cdn.nekobot.xyz/d/c/c/7511aae1788dfe64c2c0d2a6d528f.png",
+    "https://cdn.nekobot.xyz/9/a/a/023c7c0d1d5b5f5323d8494a1a05e.png",
+    "https://i0.nekobot.xyz/6/3/0/f569acc8682ab814b8ed3a874b798.jpeg",
+    "https://i0.nekobot.xyz/0/7/8/e8bbd9ed840ea41a142533ab5c8c6.png",
+    "https://i0.nekobot.xyz/5/5/6/a5320795f13dd27340693c56d59d0.jpg",
+    "https://cdn.nekobot.xyz/a/1/6/2f81e7c166fed563d7ce5dbb1b5a0.png",
+    "https://cdn.nekobot.xyz/a/2/4/21f581e637a33b5b3cceda25a86a2.png",
+    "https://cdn.nekobot.xyz/a/2/d/9c335197ba9ce4d36dd9a21cb35c9.png",
+    "https://i0.nekobot.xyz/1/f/f/a7ece0cdb607c394dca37c535ade7.jpg",
+    "https://cdn.nekobot.xyz/d/9/6/6eecf8ed4ea6ebebd6605daf6c393.png",
+    "https://cdn.nekobot.xyz/e/1/f/a0b34eb589ccd2a492baa68cdfe07.jpg",
+    "https://cdn.nekobot.xyz/f/3/2/b4fb5cc45c49a06f59b18e4ec5e06.jpg",
+    "https://cdn.nekobot.xyz/a/6/6/d06c5859c847d9418721bf5cab2ef.jpeg",
     "https://sun9-2.userapi.com/impg/_wo41ORRxPiZCKdy_V04hNC0rfbGSQJMhH43-A/R5wUQmC0bEk.jpg?size=1100x1747&quality=95&sign=92e895ef04cb42948ffbf55850ea3a7e&type=album",
     "https://sun1-83.userapi.com/impg/ecX_6V4aV-mXvrzgY7_nVY7HSzl_Hw_JZ3ZoRQ/SDprAzFrvdc.jpg?size=1054x1500&quality=96&sign=37282121cdee20b8c9a72d1d9456557b&type=album",
     "https://sun1-47.userapi.com/impg/ZDO3eL64OkwvGu_GAYVEzVthGP8O8nS3KmW9hw/il3CbwgomC8.jpg?size=850x1197&quality=96&sign=46869ba2186082ec022c35e28dea186e&type=album",

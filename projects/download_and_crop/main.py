@@ -159,8 +159,11 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
      str(nversion).split(".")[1],
      str(nversion).split(".")[2])
     if s1 >= n1:
+      #print(f'{s1},{n1},{name_file}')
       if s2 >= n2:
+        #print(f'{s2},{n2},{name_file}')
         if s3 >= n3:
+          #print(f'{s3},{n3},{name_file}')
           if print_val == True:
             py_logger.info(f"The current version of the script has been found ({sversion})!")
             print(f"""{green}[*] {loc_n}: {sversion}{white}""")
@@ -224,7 +227,8 @@ def download_file_from_github(ind, file_name,redir=os.getcwd()):
   local_filename = url.split("/")[-1]
 
   try:
-    py_logger.info(f"[Downloading file] Name: {file_name}")
+    if redir != os.getcwd():py_logger.info(f"[Downloading file] Name: {file_name} [REDIRECT]: {redir}")
+    else:py_logger.info(f"[Downloading file] Name: {file_name}")
     orig = os.getcwd()
     os.chdir(redir)
     with requests.get(url, stream=True, allow_redirects=True) as r:
@@ -349,6 +353,14 @@ def set_logger_settings():
 
 # <------------------------->
 
+for name in ['localization','modules']:
+    if not os.path.exists(name):
+      os.mkdir(name)
+
+
+
+
+
 
 try:
   os.mkdir("logging")
@@ -361,6 +373,52 @@ except FileExistsError:
 except PermissionError:
   py_logger = set_logger_settings()
   pass
+
+
+# try:
+#   with open(f"{file_name_config}", "r") as file:
+#     data = json.loads(file.read())
+#     localization = data[0]['localization']
+# except:
+#   cls()
+#   localization = input(
+#     f"Выберите локализацию (ru) / Select localization (en) >>> ").upper()
+
+
+#   if (localization != "RU"):
+#     if (localization != "EN"):
+#       localization = "EN"
+#   conf_file = []
+#   zn = str(localization).lower().replace(" ", "")
+#   conf_file.append({'localization': zn})
+#   with open(f"{file_name_config}", "w") as outfile:
+#     json.dump(conf_file, outfile, indent=4)
+#     py_logger.info(f"""File created [{file_name_config}]""")
+
+# localization_val = localization.upper()
+# py_logger.info(f"Localization: {localization_val}")
+# if localization_val == "RU":
+#   try:
+#     from localization.RU import ru_loc as loc
+#     py_logger.info(f"Localization for the Russian language was  found!")
+#   except ModuleNotFoundError as err:
+#     py_logger.error(err)
+#     py_logger.warning(f"Localization for the Russian language was NOT found!")
+
+
+#     posle = os.getcwd()
+#     do_1212 = os.getcwd() + dir_pref + "localization"# + dir_pref
+#     os.chdir(do_1212)
+#     check(1, 'RU.py', do_1212)
+#     os.chdir(posle)
+
+
+#     loc = en_loc_reserve
+# if localization_val == "EN":
+#     loc = en_loc_reserve
+
+
+
 
 try:
   import requests
@@ -376,6 +434,58 @@ except:
     )
   except ModuleNotFoundError:
     py_logger.error("Import module [requests] failed.")
+
+
+
+
+try:
+  with open(f"{file_name_config}", "r") as file:
+    data = json.loads(file.read())
+    localization = data[0]['localization']
+except:
+  cls()
+  localization = input(
+    f"Выберите локализацию (ru) / Select localization (en) >>> ").upper()
+
+
+  if (localization != "RU"):
+    if (localization != "EN"):
+      localization = "EN"
+  conf_file = []
+  zn = str(localization).lower().replace(" ", "")
+  conf_file.append({'localization': zn})
+  with open(f"{file_name_config}", "w") as outfile:
+    json.dump(conf_file, outfile, indent=4)
+    py_logger.info(f"""File created [{file_name_config}]""")
+
+localization_val = localization.upper()
+py_logger.info(f"Localization: {localization_val}")
+if localization_val == "RU":
+  try:
+    from localization.RU import ru_loc as loc
+    py_logger.info(f"Localization for the Russian language was  found!")
+  except ModuleNotFoundError as err:
+    py_logger.error(err)
+    py_logger.warning(f"Localization for the Russian language was NOT found!")
+
+
+    posle = os.getcwd()
+    do_1212 = os.getcwd() + dir_pref + "localization"# + dir_pref
+    os.chdir(do_1212)
+    check(1, 'RU.py', do_1212)
+    os.chdir(posle)
+    try:
+      from localization.RU import ru_loc as loc
+      py_logger.info(f"Localization for the Russian language was  found!")
+    except:
+      loc = en_loc_reserve
+      
+if localization_val == "EN":
+    loc = en_loc_reserve
+
+
+
+
 
 try:
   from win11toast import notify, update_progress, toast
@@ -412,7 +522,6 @@ except:
 
 try:
   from PIL import Image
-
   py_logger.info(f"[Import module from PIL] successfully.")
 except ModuleNotFoundError:
   system("pip install Pillow")
@@ -444,22 +553,58 @@ except:
     print(f"{red}[!] ModuleNotFoundError: alive_progress.{white}")
     py_logger.info(f"[Import alive_bar from alive_progress] failed.")
 
+try:
+    from colorama import Fore
+    colors = [Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.WHITE]
+    py_logger.info(f"[Import module from PIL] successfully.")
+except:
+    system("pip install colorama")
+    try:
+      from colorama import Fore
+      colors = [Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.WHITE]
+      py_logger.info(f"[Import module from PIL] failed -> [Import module from PIL] successfully.")
+    except:
+      print(f"{red}[!] ModuleImportError: colorama.{white}")
+      colors = [red, green, yellow, blue, violet, turquoise, white]
+      py_logger.info(f"[Import Fore from colorama] failed.")
+
+py_logger.info(f"{'='*15}- Script Components -{'='*15}")
+
 
 try:
   from random_neko_list import *
   from random_neko_list import version_data_baze as random_neko_list_version
   py_logger.info("The database has been successfully imported!")
+  raise ModuleNotFoundError
 except ModuleNotFoundError:
+  #Installed folder (modules) not found. Trying to create a folder...
+
+  if not os.path.exists('modules'):
+      py_logger.warning('Installed folder (modules) not found. Trying to create a folder...')
+      try:
+        os.mkdir("modules")
+        py_logger.info('Folder creation (modules) completed successfully.')
+      except FileExistsError:
+        py_logger.warning('Installed folder (modules) was found. Finding an error.')
+        pass
+      except PermissionError:
+        py_logger.error('An attempt to create a folder failed due to lack of permissions.')
+        pass
+
+  else:
+        py_logger.warning('Installed folder (modules) was found. Finding an error.')
+
+
   try:
     from modules.random_neko_list import *
     from modules.random_neko_list import version_data_baze as random_neko_list_version
   except ModuleNotFoundError:
+
     py_logger.warning(f"Database not found! Trying to download database...")
     posle = os.getcwd()
-    do_1212 = os.getcwd(
-    ) + dir_pref + "modules" + dir_pref
+    do_1212 = os.getcwd() + dir_pref + "modules"# + dir_pref
     os.chdir(do_1212)
-    download_file_from_github(0, "random_neko_list.py")
+    check(0, "random_neko_list.py", do_1212)
     os.chdir(posle)
 
     try:
@@ -468,7 +613,7 @@ except ModuleNotFoundError:
       py_logger.info("The database has been successfully imported!")
     except ImportError:
       py_logger.critical(f"Database not found!")
-      raise SystemExit(f'\n[!] {loc["8"]}')
+      raise SystemExit(f'[!] {loc["8"]}')
   
 
 
@@ -488,40 +633,6 @@ conf_file = []
 
 
 def logo():
-  try:
-    from colorama import Fore
-    colors = [
-      Fore.RED,
-      Fore.GREEN,
-      Fore.YELLOW,
-      Fore.BLUE,
-      Fore.CYAN,
-      Fore.MAGENTA,
-      Fore.WHITE,
-    ]
-    py_logger.info(
-      f"[Import module from PIL] successfully."
-    )
-  except:
-    system("pip install colorama")
-    try:
-      from colorama import Fore
-      colors = [
-        Fore.RED,
-        Fore.GREEN,
-        Fore.YELLOW,
-        Fore.BLUE,
-        Fore.CYAN,
-        Fore.MAGENTA,
-        Fore.WHITE,
-      ]
-      py_logger.info(
-      f"[Import module from PIL] failed -> [Import module from PIL] successfully."
-    )
-    except:
-      print(f"{red}[!] ModuleImportError: colorama.{white}")
-      colors = [red, green, yellow, blue, violet, turquoise, white]
-      py_logger.info(f"[Import Fore from colorama] failed.")
 
   color1 = random.choice(colors)
   colors.remove(color1)
@@ -550,49 +661,18 @@ def logo():
 
 
 
-try:
-  with open(f"{file_name_config}", "r") as file:
-    data = json.loads(file.read())
-    localization = data[0]['localization']
-except:
-  cls()
-  localization = input(
-    f"Выберите локализацию (ru) / Select localization (en) >>> ").upper()
 
 
-  if (localization != "RU"):
-    if (localization != "EN"):
-      localization = "EN"
-
-  zn = str(localization).lower().replace(" ", "")
-  conf_file.append({'localization': zn})
-  with open(f"{file_name_config}", "w") as outfile:
-    json.dump(conf_file, outfile, indent=4)
-    py_logger.info(f"""File created [{file_name_config}]""")
 
 
 
 cls()
-
-localization_val = localization.upper()
-py_logger.info(f"Localization: {localization_val}")
-if localization_val == "RU":
-  try:
-    from localization.RU import ru_loc as loc
-    py_logger.info(f"Localization for the Russian language was  found!")
-  except ModuleNotFoundError:
-    py_logger.warning(f"Localization for the Russian language was NOT found!")
-    loc = en_loc_reserve
-
-if localization_val == "EN":
-    loc = en_loc_reserve
-
 logo()
 
 
 
-th = Thread(target=check_all_relevant_version, args=(loc,False))
-th.start()
+th = Thread(target=check_all_relevant_version, args=(loc,False)).start()
+#th.start()
 
 
 try:
@@ -601,14 +681,9 @@ except OSError:
   py_logger.critical(f"Unable to get a working directory.")
   raise OSError(f'{red}[!] {loc["7"]}')
 
+
 if "/content" in os.getcwd():
   py_logger.info(f"Colab platform found.")
-  try:
-    system(
-      "!mkdir data && wget https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/setup.py"
-    )
-  except:
-    pass
   print(f"""{white}{'='*15}- {red}WARNING!{white} -{'='*15}""")
   print(f'{red} {loc["6"]} {white}')
 
@@ -638,7 +713,7 @@ if "/content" in os.getcwd():
     pass
   os.chdir(os.getcwd() + "/" + "Dand_Crop")
 
-  system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
+  # system('!touch "/content/MyDrive/Colab Notebooks/setup.py"')
 
 
 
@@ -677,27 +752,52 @@ print(f'''{white} {'='*15} Выберите скачиваемую библио�
 
 # <------------------------->
 
-
-chdir = input(f'''{red}[!]{yellow} Скачивание какой библиотеки вы бы хотели совершить?
+try:
+  chdir = input(f'''{red}[!]{yellow} Скачивание какой библиотеки вы бы хотели совершить?
 {turquoise}[1] IMGS
 [2] IMGS18 (18+)
 [3] Своя
 {blue}>>> ''')
 
-ch = input('Выделить какой-либо сайт из списка? (Y/N) >>>')
-if ch == 'Y':
-  ch = input('Введите нужный вам сайт >>>')
-  aaa = 'N'
-  while aaa != 'Y':
-    aaa = input('Вы ввели правильный текст? (Y/N) >>>')
-    if aaa  == 'Y':
-      site_zametka = ch
-      file_name_site = site_zametka.replace('.','_')
-    else:
-      ch = input('Введите нужный вам сайт >>>')
-else:
-  site_zametka = 'donmai.us'
-              
+  ch = input('Выделить какой-либо сайт из списка? (Y/N) >>> ')
+  if ch == 'Y':
+    ch = input('Введите нужный вам сайт >>> ')
+    aaa = 'N'
+    while aaa != 'Y':
+      aaa = input('Вы ввели правильный текст? (Y/N) >>> ')
+      if aaa  == 'Y':
+        site_zametka = ch
+        file_name_site = site_zametka.replace('.','_').replace('-','_')
+      else:
+        ch = input('Введите нужный вам сайт >>> ')
+  else:
+    site_zametka = 'donmai.us'
+except KeyboardInterrupt:
+      py_logger.info(f"""{'='*15}- Downloading KeyboardInterrupt -{'='*15}""")
+      py_logger.critical(f"""The user aborted code execution.""")
+      print('\r', end='')
+      
+      print('The selection of the library to download was interrupted by the user. Terminate permanently?')
+      che = input('Terminate? (Y/N) >>> ')
+      if che == 'Y':
+        val = True
+        raise SystemExit
+      else:
+        print(f'''{white} {'='*15} Выберите скачиваемую библиотеку {'='*15}''')
+        chdir = input(f'''{red}[!]{yellow} Скачивание какой библиотеки вы бы хотели совершить?
+{turquoise}[1] IMGS
+[2] IMGS18 (18+)
+[3] Своя
+{blue}>>> ''')
+except Exception as err:
+     py_logger.error(f'[ERROR] {err} p.s блять что?)')
+      
+
+
+
+
+
+
 while chdir != '1' or chdir != '2':
     if chdir == '1':
         chosing_directory = imgs
@@ -727,8 +827,7 @@ try:
   os.mkdir(name_dir)
   name_dir = name_dir
   perm_error = False
-  py_logger.info(
-    f"Created a new directory named [{name_dir}], perm_error = False.")
+  py_logger.info(f"Created a new directory named [{name_dir}], perm_error = False.")
 except FileExistsError:
   py_logger.warning(f"A directory with the same name [{name_dir}] was found.")
   pass
@@ -752,7 +851,7 @@ py_logger.info(
 pythonanywhere_key = False
 
 
-# chosing_directory = ['lol']
+
 try:
   from modules.exctensions_module import sizing_dict
 
@@ -806,33 +905,24 @@ def download_function(url, name_file, err_dict, err_info, site_,
     urllib.request.urlretrieve(str(url), name_file)
 
     print(f"{green}[+] 200: {blue}{name_file}{white}  URL: {url[0:ind]}")
-    py_logger.info(
-      f"""File with name {name_file} and link ({url}) was downloaded successfully."""
-    )
+    py_logger.info(f"""File with name {name_file} and link ({url}) was downloaded successfully.""")
     status = '200'
 
   except HTTPError as err_code:
 
-    print(
-      f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}"
-    )
+    print(f"{red}[-] {red}{err_code.code}: {blue}{name_file}{white}  URL: {url[0:ind]}")
     err_dict.append(f"{url}")
     err_info.append({f"{name_file}": f"{err_code.code}"})
     if err_code.code == 403:
-      if site_zametka in url:
-        site_.append(f"{url}")
-    py_logger.warning(
-      f"""File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}"""
-    )
+      if site_zametka in url:site_.append(f"{url}")
+    py_logger.warning(f"""File named {name_file} and link ({url}) was NOT downloaded and returned code: {err_code.code}""")
     status = f'{err_code.code}'
 
   except urllib.error.URLError as err_code:
     err_dict.append(f"{url}")
     if "[WinError 10054]" in str(err_code):
       print(f"{red}[-] {red}522: {blue}{name_file}{white}  URL: {url[0:ind]}")
-      py_logger.warning(
-        f"""File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response."""
-      )
+      py_logger.warning(f"""File with name {name_file} and link ({url}) was NOT downloaded due to lack of server response.""")
       err_info.append({f"{name_file}": "522"})
       status = f'522'
 
@@ -860,14 +950,23 @@ def download_function(url, name_file, err_dict, err_info, site_,
       )
       status = f'101'
 
+    elif "[WinError 10060]" in str(err_code):
+      print(f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}")
+      err_info.append({f"{name_file}": "524"})
+      py_logger.warning(
+        f"""The file with name {name_file} and link ({url}) was NOT downloaded due not connected to Enternet."""
+      )
+      status = f'524'    
+
+
     else:
-      #print(err_code)
-      print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
+      err_code = str(err_code).replace('<','').replace('>','').replace('urlopen error ','')
+      print(f"{violet}[?] ___ ({err_code}): {blue}{name_file}{white}  URL: {url[0:ind]}")
       err_info.append({f"{name_file}": f"{err}"})
       py_logger.warning(
         f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
       )
-      status = f'___'
+      status = f'___ ({err_code})'
 
   except http.client.RemoteDisconnected:
     print(
@@ -896,17 +995,18 @@ def download_function(url, name_file, err_dict, err_info, site_,
     status = f'102'
 
   except Exception as err:
-    print(f"{violet}[?] ___: {blue}{name_file}{white}  URL: {url[0:ind]}")
+    print(f"{violet}[?] ___  ({err_code}): {blue}{name_file}{white}  URL: {url[0:ind]}")
     err_info.append({f"{name_file}": f"{err}"})
     py_logger.warning(
       f"""File with name {name_file} and link ({url}) was NOT loaded due to unknown error: {err}."""
     )
-    status = f'___'
+    status = f'___ ({err_code})'
 
   return status, err_dict, err_info, site_, pythonanywhere_key
 
 
 startTime = time.time()
+
 
 
 def main(pythonanywhere_key):
@@ -1018,9 +1118,6 @@ def main(pythonanywhere_key):
                   break
                 else:
                   pass
-
-
-
 
 
                 if val_toast == True:update_progress({'title': f'Последняя ошибка: {err_name_file}'})
@@ -1209,11 +1306,13 @@ except KeyboardInterrupt:
 
 endTime = time.time()
 
-print(
-  f"{loc['28']}: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}"
-)
+print(f"{loc['28']}: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}")
 
 try:
+  ff = os.getcwd()
+  d = os.getcwd().split(dir_pref)[-1]
+  os.chdir(os.getcwd().replace(d,''))
+  #print(f'ff = {ff},{os.getcwd()}')
   if len(err_count) != 0:
     with open(f"{file_name_errors}", "w") as outfile:
       json.dump(err_count, outfile, indent=4)
@@ -1233,9 +1332,12 @@ try:
     with open('info.json', 'w') as file:
       json.dump(ext_list, file, indent=4)
     py_logger.info(f"""File created [info.json]""")
-
+  os.chdir(ff)
 except NameError:
   pass
+
+
+
 
 
 py_logger.info(f"""The database download was completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]""")

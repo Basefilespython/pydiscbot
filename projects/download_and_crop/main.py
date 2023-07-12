@@ -35,6 +35,9 @@ st = "\033[37"
 
 import subprocess
 import os
+
+working_directory = os.getcwd()
+
 from os import system
 import time
 import logging
@@ -104,6 +107,7 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
     print(white)
     if ch == "Y":
       check(0, name_file_,redir_)
+      val = True
       raise ForcedRebootException(loc["19"])
     else:
       pass
@@ -345,15 +349,16 @@ def set_logger_settings():
     logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
   py_logger.addHandler(py_handler)
   os.chdir(do)
+  starting_script_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
   py_logger.info(
-    f"{'='*15}- STARTing script in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}] -{'='*15}"
+    f"{'='*15}- STARTing script in [{starting_script_time}] -{'='*15}"
   )
-  return py_logger
+  return py_logger,starting_script_time
 
 
 # <------------------------->
 
-for name in ['localization','modules']:
+for name in ['localization','modules','Statistics']:
     if not os.path.exists(name):
       os.mkdir(name)
 
@@ -365,13 +370,13 @@ for name in ['localization','modules']:
 try:
   os.mkdir("logging")
   os.chdir(f'{do + dir_pref + "logging"}')
-  py_logger = set_logger_settings()
+  py_logger, starting_script_time = set_logger_settings()
 except FileExistsError:
   os.chdir(f'{do + dir_pref + "logging"}')
-  py_logger = set_logger_settings()
+  py_logger, starting_script_time = set_logger_settings()
   pass
 except PermissionError:
-  py_logger = set_logger_settings()
+  py_logger, starting_script_time = set_logger_settings()
   pass
 
 
@@ -406,11 +411,11 @@ except PermissionError:
 #     py_logger.warning(f"Localization for the Russian language was NOT found!")
 
 
-#     posle = os.getcwd()
+#     working_directory = os.getcwd()
 #     do_1212 = os.getcwd() + dir_pref + "localization"# + dir_pref
 #     os.chdir(do_1212)
 #     check(1, 'RU.py', do_1212)
-#     os.chdir(posle)
+#     os.chdir(working_directory)
 
 
 #     loc = en_loc_reserve
@@ -436,7 +441,7 @@ except:
     py_logger.error("Import module [requests] failed.")
 
 
-
+py_logger.info(f"""{'='*15}- LOCALIZATION -{'='*15}""")
 
 try:
   with open(f"{file_name_config}", "r") as file:
@@ -469,11 +474,11 @@ if localization_val == "RU":
     py_logger.warning(f"Localization for the Russian language was NOT found!")
 
 
-    posle = os.getcwd()
+
     do_1212 = os.getcwd() + dir_pref + "localization"# + dir_pref
     os.chdir(do_1212)
     check(1, 'RU.py', do_1212)
-    os.chdir(posle)
+    os.chdir(working_directory)
     try:
       from localization.RU import ru_loc as loc
       py_logger.info(f"Localization for the Russian language was  found!")
@@ -484,27 +489,31 @@ if localization_val == "EN":
     loc = en_loc_reserve
 
 
+py_logger.info(f"""{'='*15}- Modules -{'='*15}""")
 
 
-
-try:
-  from win11toast import notify, update_progress, toast
-
-  py_logger.info(f"Import module [win11toast] successfully.")
-  val_toast = True
-except:
-  system("pip install win11toast")
+if str(os.name) == "nt":
   try:
     from win11toast import notify, update_progress, toast
 
-    py_logger.info(
-      f"[Import notify, update_progress, toast from win11toast] failed -> [Import notify, update_progress, toast from win11toast] successfully."
-    )
+    py_logger.info(f"Import module [win11toast] successfully.")
     val_toast = True
-  except ModuleNotFoundError:
-    py_logger.error(
-      "[Import notify, update_progress, toast from win11toast] failed.")
-    val_toast = False
+  except:
+    system("pip install win11toast")
+    try:
+      from win11toast import notify, update_progress, toast
+
+      py_logger.info(
+        f"[Import notify, update_progress, toast from win11toast] failed -> [Import notify, update_progress, toast from win11toast] successfully."
+      )
+      val_toast = True
+    except ModuleNotFoundError:
+      py_logger.error(
+        "[Import notify, update_progress, toast from win11toast] failed.")
+      val_toast = False
+else:
+  py_logger.error("[Import notify, update_progress, toast from win11toast] failed. (NOT WIN)")
+  val_toast = False
 
 try:
   import PIL
@@ -575,7 +584,6 @@ try:
   from random_neko_list import *
   from random_neko_list import version_data_baze as random_neko_list_version
   py_logger.info("The database has been successfully imported!")
-  raise ModuleNotFoundError
 except ModuleNotFoundError:
   #Installed folder (modules) not found. Trying to create a folder...
 
@@ -601,11 +609,10 @@ except ModuleNotFoundError:
   except ModuleNotFoundError:
 
     py_logger.warning(f"Database not found! Trying to download database...")
-    posle = os.getcwd()
     do_1212 = os.getcwd() + dir_pref + "modules"# + dir_pref
     os.chdir(do_1212)
     check(0, "random_neko_list.py", do_1212)
-    os.chdir(posle)
+    os.chdir(working_directory)
 
     try:
       from modules.random_neko_list import *
@@ -781,6 +788,7 @@ except KeyboardInterrupt:
       che = input('Terminate? (Y/N) >>> ')
       if che == 'Y':
         val = True
+        py_logger.info(f"""The script has been completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]""")
         raise SystemExit
       else:
         print(f'''{white} {'='*15} Выберите скачиваемую библиотеку {'='*15}''')
@@ -845,8 +853,8 @@ print(f"""{white}{'='*15}- {loc['17']} -{'='*15}
 
 py_logger.info(f"""{'='*15}- PATH -{'='*15}""")
 py_logger.info(f"[*] Working Directory: {os.getcwd()}")
-py_logger.info(
-  f"""[*] Download in:      {os.getcwd() + dir_pref +str(name_dir)}""")
+download_in = os.getcwd() + dir_pref +str(name_dir)
+py_logger.info(f"""[*] Download in:      {download_in}""")
 
 pythonanywhere_key = False
 
@@ -957,6 +965,15 @@ def download_function(url, name_file, err_dict, err_info, site_,
         f"""The file with name {name_file} and link ({url}) was NOT downloaded due not connected to Enternet."""
       )
       status = f'524'    
+
+    elif "[Errno 104]" in str(err_code):
+      print(f"{red}[-] {red}524: {blue}{name_file}{white}  URL: {url[0:ind]}")
+      err_info.append({f"{name_file}": "524"})
+      py_logger.warning(
+        f"""The file with name {name_file} and link ({url}) was NOT downloaded due not connected to Enternet."""
+      )
+      status = f'524' 
+
 
 
     else:
@@ -1282,6 +1299,7 @@ def main(pythonanywhere_key):
 
 try:
   err_count, site_, err_info, pythonanywhere_key = main(pythonanywhere_key)
+  py_logger.info(f"""{'='*15}- Downloading OK -{'='*15}""")
   if pythonanywhere_key == True:
     py_logger.info(f"""pythonanywhere_def = True""")
     if (input(f"{loc['29']}? (Y/N) >>> ") == "Y"):
@@ -1289,73 +1307,129 @@ try:
         from modules.pythonanywhere import pythonanywhere_def
         os.chdir(download_to)
         print(f'''{'='*15}- {loc['24']} -{'='*15}''')
-        pythonanywhere_def(py_logger)
-        os.chdir(posle)
+
+        try:
+          os.mkdir('addition')
+          perm_error = False
+          py_logger.info(f"Created a new directory named [addition], perm_error = False.")
+        except FileExistsError:
+          perm_error == False
+          py_logger.warning(f"A directory with the same name [addition] was found.")
+          pass
+        except PermissionError:
+          py_logger.warning(f"An error occurred while creating a new directory [addition].")
+          perm_error = True
+          name_dir = ""
+          pass
+
+
+        
+        if perm_error == False:d = download_in  + dir_pref + 'addition'
+        else:d = download_in   + dir_pref + ''
+        os.chdir(d)
+        outp= pythonanywhere_def()
+        if outp != 'OK':
+            py_logger.error(f"""[Modules.pythonanywhere] {outp}""")
+
+        os.chdir(download_in)
       except ModuleNotFoundError as err:
         py_logger.critical(f"""pythonanywhere_def not found ({err}).""")
-      except Exception as err:
-        py_logger.critical(f"""pythonanywhere_def = Error  ({err}).""")
+      # except Exception as err:
+      #   py_logger.critical(f"""pythonanywhere_def = Error  ({err}).""")
   else:
     py_logger.info(f"""pythonanywhere_def = False""")
 
-  py_logger.info(f"""{'='*15}- Downloading OK -{'='*15}""")
+  
 except KeyboardInterrupt:
   py_logger.info(f"""{'='*15}- Downloading KeyboardInterrupt -{'='*15}""")
   py_logger.critical(f"""The user aborted code execution.""")
   print(f'{red}[!] {loc["15"]}...')
 
+
+
+
 endTime = time.time()
 
 print(f"{loc['28']}: {str(timedelta(seconds = (endTime - startTime))).split('.')[0]}")
 
+
+py_logger.info(f"""{'='*15}- Files Statistics -{'='*15}""")
+# ff = os.getcwd()
+# d = os.getcwd()#.split(dir_pref)[-1]
+starting_script_time2 = starting_script_time.replace('-','_').replace(' ','_').replace(':','_')
+# os.mkdir(starting_script_time2)
+os.chdir(working_directory + dir_pref + 'Statistics')
 try:
-  ff = os.getcwd()
-  d = os.getcwd().split(dir_pref)[-1]
-  os.chdir(os.getcwd().replace(d,''))
-  #print(f'ff = {ff},{os.getcwd()}')
-  if len(err_count) != 0:
+  os.mkdir(starting_script_time2)
+  perm_error = False
+  py_logger.info(f"Created a new directory named [{starting_script_time2}], perm_error = False.")
+except FileExistsError:
+  py_logger.warning(f"A directory with the same name [{starting_script_time2}] was found.")
+  pass
+except PermissionError:
+  py_logger.warning(f"An error occurred while creating a new directory [{starting_script_time2}].")
+  perm_error = True
+  name_dir = ""
+  pass
+
+if perm_error == False:d = working_directory + dir_pref + 'Statistics'  + dir_pref + starting_script_time2
+else:d = working_directory + dir_pref + 'Statistics'  + dir_pref + ''
+os.chdir(d)
+
+#print(os.getcwd(), d)
+
+if len(err_count) != 0:
     with open(f"{file_name_errors}", "w") as outfile:
       json.dump(err_count, outfile, indent=4)
     py_logger.info(f"""File created [{file_name_errors}]""")
 
-  if len(site_) != 0:
+if len(site_) != 0:
     with open(f"{file_name_site}", "w") as outfile:
       json.dump(site_, outfile, indent=4)
     py_logger.info(f"""File created [{file_name_site}]""")
 
-  if len(err_info) != 0:
+if len(err_info) != 0:
     with open(f"{file_name_err_info}", "w") as outfile:
       json.dump(err_info, outfile, indent=4)
     py_logger.info(f"""File created [{file_name_err_info}]""")
 
-  if len(ext_list) != 0:
+if len(ext_list) != 0:
     with open('info.json', 'w') as file:
       json.dump(ext_list, file, indent=4)
     py_logger.info(f"""File created [info.json]""")
-  os.chdir(ff)
-except NameError:
-  pass
 
+py_logger.info(f"""Catalog: {os.getcwd()}""")
+
+os.chdir(working_directory)
+# except NameError as err:
+#   print(err)
+#   pass
+# except Exception as err:
+#   print(err)
 
 
 
 
 py_logger.info(f"""The database download was completed in [{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}]""")
+print(f"""{'='*15}- Скачивание Завершено -{'='*15}""")
 
-try:
-  from module_res_def import res_def
-  ch = input(f'\n{red}[!] {loc["16"]} (Y/n) >>> {white}')
-  py_logger.info(
-    f"""The meaning of calling the image processing function:  {ch}.""")
-  if ch == "Y": res_def(name_dir)
-  else: pass
-except KeyboardInterrupt:
-  py_logger.info(
-    f"""The user has canceled an image encoding call request (KeyboardInterrupt)."""
-  )
-except Exception as err:
-  py_logger.info(
-    f"""The script has canceled an image encoding call request ({err}).""")
+# try:
+#   from module_res_def import res_def
+#   ch = input(f'\n{red}[!] {loc["16"]} (Y/n) >>> {white}')
+#   py_logger.info(
+#     f"""The meaning of calling the image processing function:  {ch}.""")
+#   if ch == "Y": res_def(name_dir)
+#   else: pass
+# except KeyboardInterrupt:
+#   py_logger.info(
+#     f"""The user has canceled an image encoding call request (KeyboardInterrupt)."""
+#   )
+# except Exception as err:
+#   py_logger.info(
+#     f"""The script has canceled an image encoding call request ({err}).""")
+
+
+
 
 if val_toast == True:
   print(f'{blue}[.] {loc["20"]}{white}')
@@ -1369,13 +1443,6 @@ if val_toast == True:
 else:
   pass
 
-# if (input(f"{loc['22']}... {loc['23']}? (Y/N) >>> ") == "Y"):
-#   while True:
-#     cls()
-#     main()
-# else:
-#   pass
+
 
 val = True
-
-  #sleep(30)

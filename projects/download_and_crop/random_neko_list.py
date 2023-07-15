@@ -5,6 +5,10 @@ def version_data_baze():
 
 imgs = [
     "imgs",
+    "https://sun1-27.userapi.com/impg/kHCVFflQ8KAvE48mxVTkOYrJYQERsQ7jNJYitA/67WJ_Jtzmlo.jpg?size=1045x1500&quality=96&sign=a8b3937dbae2193630b7aff1c0a8c243&type=album",
+    "https://sun1-84.userapi.com/impg/-n8IVtJiO5VWCN6lSiXZgJEDXXXSg5wVvSI-Nw/B9TyFuheT6Q.jpg?size=1543x2160&quality=95&sign=9046a46cf1782ef95ad464fe6e6f84c3&type=album",
+    "https://sun9-71.userapi.com/impg/9_NDY0jepbLc3WoXSGyRIr6y3SLsYGJv5V_S7Q/AGky3k6c7uA.jpg?size=2000x1125&quality=95&sign=afd480a2a92feb2370dda99e8c4ee7de&type=album",
+    "https://sun9-23.userapi.com/impg/nSY6gm4a_dGKY0Wt3RVGG6I37nHAs6zwP6DVHQ/kp8LHL6xG1Y.jpg?size=1416x1920&quality=96&sign=88763ef298414cbfabb32b7a85272f82&type=album",
     "https://sun9-45.userapi.com/impg/_Fu6KSTzODEkn1SVkMws1g8xjl90_sqjykplAA/orjYdO-NYFA.jpg?size=850x1715&quality=96&sign=45a3303778f6aaff71e7625a58e21d09&type=album",
     "https://cs10.pikabu.ru/post_img/big/2019/07/16/11/1563303250131147987.png",
     "https://cs13.pikabu.ru/post_img/2021/03/09/8/16152936791939656.webp",

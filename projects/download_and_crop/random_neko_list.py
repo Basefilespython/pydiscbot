@@ -962,6 +962,7 @@ imgs = [
     "https://sun9-40.userapi.com/impg/Qp9fHXLGjE6t0DgFp0Z7i87JjDC5P9t6FfcUkg/GpeGVA4nrxM.jpg?size=1432x2160&quality=95&sign=7bfe6770434f88742f3e6155fba76d1b&type=album",
     "https://sun1-95.userapi.com/impg/m0Yk_9LXwRjiWRNbMG79uWqWH5YhBUALaVo0BQ/tI73KSte_cE.jpg?size=850x1518&quality=95&sign=2551bee6f81668cfd30a76fac537e771&type=album",
     "https://sun9-54.userapi.com/impg/56cf11kue3nPIjnMoQ04Ljjk9f_HrVnpBFdPeQ/2BCYtNAhM_0.jpg?size=849x1200&quality=95&sign=300e1f58585d3110be2d5bf22d1dbb12&type=album",
+    "https://sun9-33.userapi.com/impg/3RU1V9oeKqX2N2oIPkxleOkRa0foKPWeLnDKVw/2LQbHCgMrnw.jpg?size=735x889&quality=95&sign=c6590e822752ce77a6133849fad237ae&type=album",
     "https://i0.nekobot.xyz/4/d/4/f8e971ddbd70ccec023ff33c46e96.jpg"
 ]
 
@@ -984,7 +985,7 @@ imgs18 = [
     "https://sun9-49.userapi.com/impg/dPrs6pkuEe2tLQEAjfQ6C0niIpu01jrHK0FNtw/dnh5rGEx8kk.jpg?size=750x1000&quality=96&sign=d0808de8b6787cd0df04089a8a657f76&type=album",
     "https://sun9-78.userapi.com/impg/YUsVUVDHsrR_INpvr6pm7dVA5oWxp5hwWzS2jw/HQxQyy9Fl1g.jpg?size=1414x2000&quality=96&sign=9078650e2972fedce47b22412a39a22d&type=album",
     "https://sun9-48.userapi.com/impg/iULXXD0ElVq8ZKDNJiNF04Lu3T4xz4DLzCWGQA/_LsZ8Sndjoo.jpg?size=1080x1440&quality=96&sign=f5d60306557e12ac248e55dd9758148b&type=album",
-    "https://cdn.dogehls.xyz/galleries/1546408/12.jpg",
+    "https://sun9-49.userapi.com/impg/Cas_c6NMYemY__QagbfwSeAIFD5CNwT0oOIkRw/MDqmlNRxJS4.jpg?size=1280x1805&quality=96&sign=86a85ce292e511134d6cbb03e4beedee&type=album",
     "https://sun9-35.userapi.com/impg/l5SPM9Gr6N5wRwrMZTUotnLBPk1h3uCTTizeQw/S-ZFLrlIpb4.jpg?size=1346x1926&quality=96&sign=c94d309441b477b721b558ad5160270c&type=album",
     "https://sun9-56.userapi.com/impg/BXP0mlfMOr6JsgxvbVeJiy6SoSx4bUsaJMRa8g/8i5RDJG8oyk.jpg?size=1476x2160&quality=96&sign=2a4bfe610807d66e9843f2dbec17fac2&type=album",
     "https://sun9-50.userapi.com/impg/6pl_N3oFl7uTkizH5FJVQmv2hvM4-5se4A2FiA/Pm9dQZllks4.jpg?size=727x800&quality=96&sign=535464b854b244f29c419a23ca3dd9d6&type=album",
@@ -1022,11 +1023,11 @@ imgs18 = [
     "https://cdn.nekobot.xyz/f/2/f/76eb79a175e999ff8e5adb1e16154.png",
 
 
-    "https://cdn.donmai.us/original/7b/7c/7b7cbbe0b8780f0140462c617bb1a330.jpg",
-    "https://cdn.donmai.us/original/05/7d/057d147c8d0a5909714d425d55b80ecb.png",
-    "https://cdn.donmai.us/original/ee/65/ee650b229c18fd666fb4ae00275c552e.jpg",
-    "https://cdn.donmai.us/original/da/ad/daad068c683d1a3799a6636762d43d89.png",
-    "https://cdn.donmai.us/original/d3/ed/d3ed60bcc7fc53437ea151ec878b2a9e.png",
+    "https://sun9-68.userapi.com/impg/LkEZlclbNy1KdckkceH74WJrZDuIgxDi9TIqOw/L7CfQP0ccgw.jpg?size=1191x1684&quality=96&sign=f2efde2cbb84e2d6ad9023c1d06bfbed&type=album",
+    "https://sun9-32.userapi.com/impg/F89kLpPp9mgz84HqmODpeoW2x-iwJLgaMY0sow/IeXYlUA0IVM.jpg?size=2560x1814&quality=96&sign=4e6f4e5607abdb1446bc1342580f2f17&type=album",
+    "https://sun9-28.userapi.com/impg/6ATUSEkHsRunOp17UARf3UUGTOf1brAlglg4tg/gpYy905e3O4.jpg?size=2560x1630&quality=96&sign=0741b8796ad7cc21ac3ecd1c7047fc44&type=album",
+    "https://sun9-52.userapi.com/impg/xHKeyi-z9z8q9yG1URBqslfYoZhJYyrKdCDVRQ/yVCtbqgx-EM.jpg?size=1527x2160&quality=96&sign=b457bb320d983631b02934021ccb8fa3&type=album",
+    "https://sun9-51.userapi.com/impg/mr_YdrdazoHxeudm7iXB4D26FDNJgrhCnnhnIg/7Jevl2V0JTU.jpg?size=880x1478&quality=96&sign=371092bf0f74b8a3c5b0c8aaae10dbbf&type=album",
     "https://i0.nekobot.xyz/2/2/a/32bde498da5f7d1b5352e5d9497f0.jpg",
     "https://cdn.nekobot.xyz/e/9/6/a8b4d2ab814171fcc883c74c68ca2.jpg",
     "https://cdn.nekobot.xyz/9/1/9/2911dfeb85569ad032f20e7791bb5.jpg",

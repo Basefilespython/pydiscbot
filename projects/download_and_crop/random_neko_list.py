@@ -1,6 +1,6 @@
 
 def version_data_baze():
-    return '1.9.3'
+    return '1.9.4'
 
 
 imgs = [

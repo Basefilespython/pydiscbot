@@ -13,12 +13,12 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-main_script_version = "2.2.4"
+INFO_script_version = "2.2.4"
 
 # <---------------------->
 
 # The script was written ©https://vk.com/id435600030©
-# Download from https://github.com/Basefilespython/pydiscbot/tree/main
+# Download from https://github.com/Basefilespython/pydiscbot/tree/INFO
 
 black = "\033[30m"
 red = "\033[31m"
@@ -29,6 +29,9 @@ violet = "\033[35m"
 turquoise = "\033[36m"
 white = "\033[37m"
 st = "\033[37"
+
+
+
 
 
 # <-------------------------->
@@ -51,6 +54,7 @@ import random
 from datetime import datetime, timedelta
 from threading import Thread
 import socket
+import traceback
 
 if str(os.name) == "nt":
   dir_pref = "\\"
@@ -74,6 +78,22 @@ debugVal = False
 
 # <-------------------------->
 
+err_count = []
+site_ = [] 
+err_info = []
+
+# <-------------------------->
+
+
+if os.path.exists('Traceback.txt'):
+   os.remove('Traceback.txt')
+
+
+   
+
+
+
+# <-------------------------->
 
 def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
   if val_toast == True:
@@ -86,7 +106,7 @@ def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
           title = tit,
           image='https://opengraph.githubassets.com/2fb38cef00042d8b977103470ef6e7943a6229e01819c4f2b6a39ca8aba155e1/Basefilespython/pydiscbot',
           icon = 'https://avatars.githubusercontent.com/u/123670499?v=4',
-          buttons=[{'activationType': 'protocol','arguments': 'https://github.com/Basefilespython/pydiscbot/tree/main/projects/download_and_crop/setup','content': 'Download'}],
+          buttons=[{'activationType': 'protocol','arguments': 'https://github.com/Basefilespython/pydiscbot/tree/nain/projects/download_and_crop/setup','content': 'Download'}],
           
           )
 
@@ -99,7 +119,7 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
     if name_file_ == 'random_neko_list_v.json':
       name_file_ = name_file_.replace('_v.json','.py')
     if name_file_ == 'version.json':
-      name_file_ =  'main.py'
+      name_file_ =  'INFO.py'
 
     py_logger.warning(f"An obsolete version of the script has been found (NEW-{nversion_}, OLD-{sversion_})!")
     print(f"""{yellow}[*] {name_d_}{white}""")
@@ -120,7 +140,7 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
 
 
 
-def ch_version(url,sversion,loc_n,name_d,print_val):
+def ch_version(url,sversion,loc_n,name_d,print_val, result = False):
   
   name_file = url.split('/')[-1]
   if name_file != 'version.json':
@@ -132,12 +152,37 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
   errs = ''
   try:
     try:
-      nversion = json.loads(requests.get(url).text)["ver"]
+
+      nversion = requests.get(url).text
+      try:
+        nversion = json.loads(nversion)["ver"]
+      except json.decoder.JSONDecodeError as err_code:
+        nversion = None
+        val = True
+        errs = err_code
+        if 'Extra data: line 1 column 4 (char 3)' in str(err_code):
+          errs = 'It is not possible to get information about the latest versions.'
+        elif '404' in nversion:
+          errs = 'It is not possible to get information about the latest versions.'
+
+        py_logger.warning(f"Version check failed. Cause: {errs}, URL: {url}") 
     except requests.exceptions.ConnectionError as err_code:
+      val = True
+      errs = err_code
       if "[Errno 11001]" in str(err_code):
         errs = 'You are not connected to the Internet'
       nversion = None
+      py_logger.warning(f"Version check failed. Cause: {errs}, URL: {url}")  
+    except json.decoder.JSONDecodeError as err_code:
+      val = True
+      errs = err_code
+      if 'Extra data: line 1 column 4 (char 3)' in str(err_code):
+        errs = 'It is not possible to get information about the latest versions.' 
+      py_logger.warning(f"Version check failed. Cause: {errs}, URL: {url}")  
     except Exception as err:
+      val = True
+      with open('Traceback.txt', 'a') as fp:
+         traceback.print_exc(file=fp)
       errs = err
       nversion = None
   except NameError:
@@ -145,10 +190,14 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
     try:
       nversion = json.loads(requests.get(url).text)["ver"]
     except requests.exceptions.ConnectionError as err_code:
+      val = True
       if "[Errno 11001]" in str(err_code):
         errs = 'You are not connected to the Internet'
       nversion = None
     except Exception as err:
+      val = True
+      with open('Traceback.txt', 'a') as fp:
+         traceback.print_exc(file=fp)
       errs = err
       nversion = None
 
@@ -171,30 +220,34 @@ def ch_version(url,sversion,loc_n,name_d,print_val):
           if print_val == True:
             py_logger.info(f"The current version of the script has been found ({sversion})!")
             print(f"""{green}[*] {loc_n}: {sversion}{white}""")
+            if old_instaled == True:
+                if str(result) != '[]':
+                      print(result)
         else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
       else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
     else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
   else:
-    py_logger.warning(f"Version check failed. Cause: {errs}") 
+    val = True
+    py_logger.warning(f"Version check failed. Cause: {errs}, URL: {url}")  
     lens_simvolov = len(list(f'[*] {loc_n}: {sversion}'))
     if print_val == True:print(f"""{violet}[*] {loc_n}: {sversion}{' '*(38-lens_simvolov)}{red}[!] Cause: {errs}{white}""")
       
 
 val = False
 
-def check_all_relevant_version(loc_val, print_val=True):
+def check_all_relevant_version(loc_val, print_val=True, result= False):
     loc = loc_val
-    main_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json'
+    INFO_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/version.json'
     data_version = 'https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/random_neko_list_v.json'
 
     if print_val == True:
-      ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
-      ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
+      ch_version(INFO_version,INFO_script_version, loc['25'],loc['9'],print_val, result)
+      ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val, result)
     
     if print_val == False:
       while True:
-        ch_version(main_version,main_script_version, loc['25'],loc['9'],print_val)
-        ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val)
+        ch_version(INFO_version,INFO_script_version, loc['25'],loc['9'],print_val, result)
+        ch_version(data_version,random_neko_list_version(),loc['26'],loc['30'],print_val, result)
         time.sleep(10)
         if val == True:
           break
@@ -223,11 +276,12 @@ def check_internet():
 # <-------------------------->
 
 
+
 def download_file_from_github(ind, file_name,redir=os.getcwd()):
   if ind == 0:
-    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/INFO/projects/download_and_crop/{file_name}"
   if ind == 1:
-    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}"
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/INFO/projects/download_and_crop/localization/{file_name}"
   local_filename = url.split("/")[-1]
 
   try:
@@ -271,6 +325,41 @@ def debDEF(text, debugVal, py_logger, py_log_num, exc_info=False):
   elif py_log_num == 3:py_logger.error(text)
   elif py_log_num == 4:py_logger.critical(text)
   else: py_logger.debug(text)
+
+
+def serialize_sets(obj):
+    if isinstance(obj, set):
+        return list(obj)
+
+    return obj
+
+
+def innovations(name):
+      if not os.path.exists(name):
+        data = []
+        for i in imgs:data.append(i)
+        for i in imgs18:data.append(i)
+        with open(name, 'w') as file:json.dump(list(data), file, indent=4, default=list)
+        result= []
+        old_instaled = False
+      else:
+        with open(name, 'r') as j:
+          data_load = json.load(j)
+          data = []
+          for i in imgs:data.append(i)
+          for i in imgs18:data.append(i)
+          #with open('innovations2.json', 'w') as file:json.dump(list(data), file, indent=4, default=list)
+          result= []
+          for i in data_load:
+            if i not in data:
+              if type(i) != dict:result.append(i)
+            else:pass
+
+          if len(result) == 0:old_instaled = True
+          else:
+            result =[]
+            old_instaled = False
+      return result, old_instaled
 
 
 
@@ -322,7 +411,7 @@ en_loc_reserve = {
 "22": "Done!",
 "23": "Start an endless loop",
 "24": "Download additional data",
-"25": "Main script version",
+"25": "INFO script version",
 "26": "Database version",
 "27": "Not found",
 "28": "Script execution time",
@@ -613,10 +702,19 @@ except ModuleNotFoundError:
       from modules.random_neko_list import *
       from modules.random_neko_list import version_data_baze as random_neko_list_version
 
-      debDEF("The database has been successfully imported!", debugVal, py_logger, 1)
+      # debDEF("The database has been successfully imported!", debugVal, py_logger, 1)
     except ImportError:
       debDEF(f"Database not found!", debugVal, py_logger, 4)
       raise SystemExit(f'[!] {loc["8"]}')
+    except Exception as err:
+      debDEF(f"Database not found! ({err})", debugVal, py_logger, 4)
+      raise SystemExit(f'[!] {loc["8"]}')
+  else:
+      debDEF("The database has been successfully imported!", debugVal, py_logger, 1)
+      result, old_instaled = innovations('innovations.json')
+
+        
+
   
 
 
@@ -740,7 +838,7 @@ debDEF(f"""[*] OS Name: {os.name.upper()}""", debugVal, py_logger, 1)
 
 print(f"""{'='*15}- {loc['3']} -{'='*15}""")
 
-check_all_relevant_version(loc,True)
+check_all_relevant_version(loc,True, result)
 
 # <------------------------->
 
@@ -1022,7 +1120,7 @@ startTime = time.time()
 
 
 
-def main(pythonanywhere_key):
+def INFO(pythonanywhere_key):
   if dict_size == None:
     ur = chosing_directory
   else:
@@ -1300,7 +1398,7 @@ def main(pythonanywhere_key):
 
 
 try:
-  err_count, site_, err_info, pythonanywhere_key = main(pythonanywhere_key)
+  err_count, site_, err_info, pythonanywhere_key = INFO(pythonanywhere_key)
   debDEF(f"""{'='*15}- Downloading OK -{'='*15}""", debugVal, py_logger, 2)
   if pythonanywhere_key == True:
     debDEF(f"""[Modules.pythonanywhere] -> True""", debugVal, py_logger, 1)
@@ -1347,18 +1445,24 @@ try:
 
   
 except KeyboardInterrupt:
-  err_count = [].append({'Downloading KeyboardInterrupt'})
-  site_ = [].append({'Downloading KeyboardInterrupt'})
-  err_info = [].append({'Downloading KeyboardInterrupt'})
+  err_count = []
+  err_count.append({'Downloading KeyboardInterrupt'})
+  site_ = []
+  site_.append({'Downloading KeyboardInterrupt'})
+  err_info = []
+  err_info.append({'Downloading KeyboardInterrupt'})
 
   debDEF(f"""{'='*15}- Downloading KeyboardInterrupt -{'='*15}""", debugVal, py_logger, 1)
   debDEF(f"""The user aborted code execution.""", debugVal, py_logger, 4)
   print(f'{red}[!] {loc["15"]}...')
 except Exception as err:
-  err_count = [].append({'Downloading KeyboardInterrupt'})
-  site_ = [].append({'Downloading KeyboardInterrupt'})
-  err_info = [].append({'Downloading KeyboardInterrupt'})
-  debDEF(f"""[Main] Error: {err}""", debugVal, py_logger, 4)
+  err_count = []
+  err_count.append({'Downloading KeyboardInterrupt'})
+  site_ = []
+  site_.append({'Downloading KeyboardInterrupt'})
+  err_info = []
+  err_info.append({'Downloading KeyboardInterrupt'})
+  debDEF(f"""[INFO] Error: {err}""", debugVal, py_logger, 4)
 
 print(white)
 
@@ -1391,46 +1495,58 @@ else:d = working_directory + dir_pref + 'Statistics'  + dir_pref + ''
 os.chdir(d)
 
 #print(os.getcwd(), d)
+try:
+  if len(err_count) != 0:
+      try:
+        with open(f"{file_name_errors}", "w") as outfile:
+          json.dump(err_count, outfile, indent=4)
+        debDEF(f"""File created [{file_name_errors}]""", debugVal, py_logger, 1)
+      except TypeError as err:
+        debDEF(f"""TypeError: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+      except Exception as err:
+        debDEF(f"""Exception: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+except Exception as err:
+        debDEF(f"""Exception: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
 
-if len(err_count) != 0:
-    try:
-      with open(f"{file_name_errors}", "w") as outfile:
-        json.dump(err_count, outfile, indent=4)
-      debDEF(f"""File created [{file_name_errors}]""", debugVal, py_logger, 1)
-    except TypeError as err:
-      debDEF(f"""TypeError: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
-    except Exception as err:
-      debDEF(f"""Exception: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
 
-if len(site_) != 0:
-    try:
-      with open(f"{file_name_site}", "w") as outfile:
-        json.dump(site_, outfile, indent=4)
-      debDEF(f"""File created [{file_name_site}]""", debugVal, py_logger, 1)
-    except TypeError as err:
-      debDEF(f"""TypeError: The file [{file_name_site}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
-    except Exception as err:
-      debDEF(f"""Exception: The file [{file_name_site}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+try:
+  if len(site_) != 0:
+      try:
+        with open(f"{file_name_site}", "w") as outfile:
+          json.dump(site_, outfile, indent=4)
+        debDEF(f"""File created [{file_name_site}]""", debugVal, py_logger, 1)
+      except TypeError as err:
+        debDEF(f"""TypeError: The file [{file_name_site}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+      except Exception as err:
+        debDEF(f"""Exception: The file [{file_name_site}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+except Exception as err:
+        debDEF(f"""Exception: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
 
-if len(err_info) != 0:
-    try:
-      with open(f"{file_name_err_info}", "w") as outfile:
-        json.dump(err_info, outfile, indent=4)
-      debDEF(f"""File created [{file_name_err_info}]""", debugVal, py_logger, 1)
-    except TypeError as err:
-      debDEF(f"""TypeError: The file [{file_name_err_info}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
-    except Exception as err:
-      debDEF(f"""Exception: The file [{file_name_err_info}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+try:
+  if len(err_info) != 0:
+      try:
+        with open(f"{file_name_err_info}", "w") as outfile:
+          json.dump(err_info, outfile, indent=4)
+        debDEF(f"""File created [{file_name_err_info}]""", debugVal, py_logger, 1)
+      except TypeError as err:
+        debDEF(f"""TypeError: The file [{file_name_err_info}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+      except Exception as err:
+        debDEF(f"""Exception: The file [{file_name_err_info}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+except Exception as err:
+        debDEF(f"""Exception: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
 
-if len(ext_list) != 0:
-    try:  
-      with open('info.json', 'w') as file:
-        json.dump(ext_list, file, indent=4)
-      debDEF(f"""File created [info.json]""", debugVal, py_logger, 1)
-    except TypeError as err:
-      debDEF(f"""TypeError: The file [info.json] would not be created for a reason: {err}""", debugVal, py_logger, 3)
-    except Exception as err:
-      debDEF(f"""Exception: The file [info.json] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+try:
+  if len(ext_list) != 0:
+      try:  
+        with open('info.json', 'w') as file:
+          json.dump(ext_list, file, indent=4)
+        debDEF(f"""File created [info.json]""", debugVal, py_logger, 1)
+      except TypeError as err:
+        debDEF(f"""TypeError: The file [info.json] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+      except Exception as err:
+        debDEF(f"""Exception: The file [info.json] would not be created for a reason: {err}""", debugVal, py_logger, 3)
+except Exception as err:
+        debDEF(f"""Exception: The file [{file_name_errors}] would not be created for a reason: {err}""", debugVal, py_logger, 3)
 
 debDEF(f"""Catalog: {os.getcwd()}""", debugVal, py_logger, 1)
 

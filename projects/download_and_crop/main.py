@@ -13,7 +13,7 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-INFO_script_version = "2.2.6"
+INFO_script_version = "2.2.4"
 
 # <---------------------->
 
@@ -119,7 +119,7 @@ def old(loc_n_, nversion_,sversion_, name_file_, name_d_, redir_=os.getcwd(), Th
     if name_file_ == 'random_neko_list_v.json':
       name_file_ = name_file_.replace('_v.json','.py')
     if name_file_ == 'version.json':
-      name_file_ =  'INFO.py'
+      name_file_ =  'main.py'
 
     py_logger.warning(f"An obsolete version of the script has been found (NEW-{nversion_}, OLD-{sversion_})!")
     print(f"""{yellow}[*] {name_d_}{white}""")
@@ -279,9 +279,9 @@ def check_internet():
 
 def download_file_from_github(ind, file_name,redir=os.getcwd()):
   if ind == 0:
-    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/INFO/projects/download_and_crop/{file_name}"
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/{file_name}"
   if ind == 1:
-    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/INFO/projects/download_and_crop/localization/{file_name}"
+    url = f"https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/localization/{file_name}"
   local_filename = url.split("/")[-1]
 
   try:

@@ -1,0 +1,20 @@
+{
+    "innv": {
+        "add": {
+            "imgs": [
+                "TEST1"
+            ],
+            "imgs18": [
+                "TEST2"
+            ]
+        },
+        "del": {
+            "imgs": [
+                "TEST3"
+            ],
+            "imgs18": [
+                "TEST4"
+            ]
+        }
+    }
+}

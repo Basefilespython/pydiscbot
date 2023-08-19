@@ -13,7 +13,7 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-INFO_script_version = "2.2.6"
+INFO_script_version = "2.3.0"
 
 # <---------------------->
 
@@ -106,7 +106,7 @@ def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
           title = tit,
           image='https://opengraph.githubassets.com/2fb38cef00042d8b977103470ef6e7943a6229e01819c4f2b6a39ca8aba155e1/Basefilespython/pydiscbot',
           icon = 'https://avatars.githubusercontent.com/u/123670499?v=4',
-          buttons=[{'activationType': 'protocol','arguments': 'https://github.com/Basefilespython/pydiscbot/tree/nain/projects/download_and_crop/setup','content': 'Download'}],
+          buttons=[{'activationType': 'protocol','arguments': 'https://github.com/Basefilespython/pydiscbot/tree/main/projects/download_and_crop/setup','content': 'Download'}],
           
           )
 
@@ -220,9 +220,10 @@ def ch_version(url,sversion,loc_n,name_d,print_val, result = False):
           if print_val == True:
             py_logger.info(f"The current version of the script has been found ({sversion})!")
             print(f"""{green}[*] {loc_n}: {sversion}{white}""")
-            if old_instaled == True:
-                if str(result) != '[]':
-                      print(result)
+            if name_file == 'random_neko_list_v.json':
+            # if old_instaled == True:
+              if str(result) != '[]':
+                print(f'Has been added {result}')
         else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
       else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
     else:old(nversion_=nversion, sversion_= sversion, name_file_= name_file, name_d_ = name_d, redir_ = redir_cd,Th=Th_val ,loc_n_=loc_n)
@@ -267,9 +268,11 @@ def check_internet():
       pass
   else:
       print('\r', end='')
-      print(f"{red}Подключитесь к Интернету!{white}")
+      print(f"{red}[/] Подключитесь к Интернету!{white}")
       while is_connected(host) == False:
           pass
+      print('\r', end='')
+      print(f"{green}[/] Подключение установлено!{white}")
 
 
 
@@ -840,6 +843,13 @@ print(f"""{'='*15}- {loc['3']} -{'='*15}""")
 
 check_all_relevant_version(loc,True, result)
 
+try:
+  from modules.inn import Getting_innovations as ann
+  print(f"""{'='*15}- {loc['33']} -{'='*15}""")
+  print(f"""{white}{ann()}""")
+except ModuleNotFoundError:
+  debDEF(f"""[!] {loc['32']} Getting_innovations """, debugVal, py_logger, 1)
+
 # <------------------------->
 
 
@@ -852,6 +862,21 @@ print(f"{loc['0']}")
 print(f'''{white} {'='*15} Выберите скачиваемую библиотеку {'='*15}''')
 
 # <------------------------->
+
+try:
+  test = json.loads(requests.get('https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/innovations.json').text)["innv"]
+except requests.exceptions.ConnectionError as err_code:
+  errs = err_code
+  if "[Errno 11001]" in str(err_code):
+    errs = 'You are not connected to the Internet'
+    check_internet()
+  test = None
+
+
+
+
+
+
 
 try:
   chdir = input(f'''{red}[!]{yellow} Скачивание какой библиотеки вы бы хотели совершить?

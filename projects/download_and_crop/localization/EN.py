@@ -54,5 +54,8 @@ en_loc = {
    "27": "Not Found",
    "28": "Script execution time",
    "29": "Start downloading additional data",
-   "30": "You have an outdated version of the database installed!"
+   "30": "You have an outdated version of the database installed!",
+   "31": "Old software version",
+   "32": "The previously installed module was not found.",
+   "33": "Innovations"
 }

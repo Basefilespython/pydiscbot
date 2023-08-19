@@ -1,6 +1,6 @@
 
 def version_data_baze():
-    return '1.9.4'
+    return '1.2.0'
 
 
 imgs = [
@@ -11,8 +11,6 @@ imgs = [
     "https://i.pinimg.com/originals/95/d8/01/95d801c5ce2ece2f4c695c5d16ea99fb.jpg",
     "https://i0.nekobot.xyz/0/b/2/0f029f736013b9063473d0955e1d2.png",
     "https://i0.nekobot.xyz/6/1/3/07874b28736bd2413943508cf7d37.png",
-    "https://sun6-22.userapi.com/impg/mQ3YjjafUqa2UBmFu3hlniY1mqOmtHwC7bh0fA/c4Yyj-1t9K8.jpg?size=1015x1500&quality=96&sign=4119e7e42f6eb201c20ff3dd2ca99b65&type=album",
-    "https://sun9-37.userapi.com/impg/1K6huU5LW3ps_1pmDo3EQmGJc4tEfDK5C8wCMg/a8c96gf7QZ8.jpg?size=1350x2000&quality=95&sign=d2016681b6275beb88231f68a01b6407&type=album",
     "https://sun9-1.userapi.com/impg/yJnMlB7d2FSbjeqH7CF6lqw6dYx8p6XLOqkB6g/MjHCj29T6Qg.jpg?size=1594x2160&quality=95&sign=8147418f62d4a0cd12c3e05ebd98f693&type=album",
     "https://sun1-56.userapi.com/impg/Z0z1SPKr-QVP13vaxCHRiucrQ3TfvytwzMJn1Q/OZevjUDngJk.jpg?size=562x807&quality=95&sign=c01bcd14e49698ae8081521a6107e652&type=album",
     "https://sun1-14.userapi.com/impg/zmZLHMpCO1v3JBCbTNTvm-d6IW-n1CqKncrBgw/M_JI8KVbJvY.jpg?size=840x1120&quality=95&sign=e84cc0b5a403e652fb00fca752cc18db&type=album",
@@ -24,12 +22,6 @@ imgs = [
     "https://sun9-14.userapi.com/impg/HmvVUmBFGqhyBSDV9zWSdUmQiaZv-PBx6hAlrw/zIfOtxN0y2w.jpg?size=1357x1920&quality=96&sign=dd13e0128d9819bff8f6728987562c1f&type=album",
     "https://sun9-54.userapi.com/impg/RJzMGV4boINmSS6jAp7a9X3DDAKNcpRXlP5rvA/imhZBrbNfRM.jpg?size=1061x1500&quality=96&sign=b232ceda52eae6833e614a80e386b687&type=album",
     "https://sun1-85.userapi.com/impg/Z4d91Jz2gc1H1jcH-breWIN5ogH77QfKtYDIsQ/84DBTfN9yd0.jpg?size=1500x1056&quality=96&sign=1fdb2eb43811a0efba2103bbe9021703&type=album",
-    "https://sun9-35.userapi.com/impg/HD_ERDLzxyj_lb_BgO9mDvdbDjo1GrfmaqMn4g/x7fF0_vta5I.jpg?size=1280x841&quality=96&sign=46d23631956730bdaf55bf5e5810dfc7&type=album",
-    "https://sun9-73.userapi.com/impg/Jzd63qSo4hasP8gwJGqZss-BjzBe-WAEbwG3Aw/THJvzH9DOg4.jpg?size=1280x957&quality=96&sign=669839e57383fb00ac1d7c40873ea769&type=album",
-    "https://media-cdn2.lawlietbot.xyz/media/danbooru/d4/5c/d45c774a10945f36bf43ecd6a39e72f3.mp4?s=cdn",
-    "https://media-cdn2.lawlietbot.xyz/media/danbooru/df/1f/df1fc345f0bd1da57591a7f2eedd2120.mp4?s=cdn",
-    "https://media-cdn3.lawlietbot.xyz/media/danbooru/d0/d9/d0d92863aacb066ef7fb31282ad9c097.mp4?s=cdn",
-    "https://psv4.userapi.com/c240331/u393960466/docs/d24/9598fefc4ca9/illust_101838628_20230718_133652.png?extra=EVVvvkoBEmfFnat8BtleM5UGmPNULJi7hxL1YHEYuqxGDD_LAwgW2X0WovPIuit_eUfQe8aL7KURvsn7Ot_44POqnduv0xnzYqAx0ku85x2eoQaxVJPlfFZXiZY4ci6l0ZzUwgFd0V3xYZgpASrfwnY",
     "https://sun1-57.userapi.com/impg/HyBP8khUYE6WNDCbrFBS6O-WrgMnq4FvCCCKbg/jVugaetW_w4.jpg?size=1200x1698&quality=96&sign=07dbe84617208d5a2cc5140df19226c9&type=album",
     "https://sun1-25.userapi.com/impg/UV-PVmxVQT-4FrNHbYoA26yIz_232sgjNoVwQg/Gv1lijRmDP8.jpg?size=2560x1762&quality=96&sign=df83246984d542c035b8a11cbc8ca476&type=album",
     "https://sun9-26.userapi.com/impg/SDr_E4IO0xLr_NuZcvv6dFgSF0Jtuy0BPoWuPA/ff9LJ0H0SJA.jpg?size=850x1010&quality=96&sign=5ea15faf47e3615613eed3f5919e7a35&type=album",
@@ -981,6 +973,7 @@ imgs = [
     "https://sun9-17.userapi.com/impg/b3-6eknECdr3Viv6teJxephtRsn3HvFHzFAX-g/gZCLksDNIBs.jpg?size=585x1080&quality=96&sign=8bbac8e1ef0700a7f9b31b8161a9c649&type=album",
     "https://sun9-62.userapi.com/impg/hw5Y6s3Khlqf-n2M5Ivyn_UJ4cl7xsLU-9No6w/XRjT3J4ZdAk.jpg?size=540x1080&quality=96&sign=0fa1f9d494746607ac35e4e2bc3a6bc8&type=album",
     "https://sun9-17.userapi.com/impg/FnqW3AnqLs7KfKIS1fDup8MT9rqa0lL40VxYJQ/FF8Uaeo9d5k.jpg?size=797x1080&quality=96&sign=fefa9160ed29cc0d196dd8d74573f36a&type=album",
+    "https://sun9-30.userapi.com/impg/ONwLMKye7mePc9UOEHN8iX1j7lxT1a08fGI9UA/JDG8FQucpQQ.jpg?size=1061x1500&quality=96&sign=ec2bdcda5c9c591713b4efa12a548d95&type=album",
     "https://i0.nekobot.xyz/4/d/4/f8e971ddbd70ccec023ff33c46e96.jpg"
 ]
 
@@ -997,8 +990,6 @@ imgs18 = [
     "imgs18",
     "https://i.pximg.net/img-original/img/2023/07/28/20/01/40/110314318_p0.jpg",
     "https://media-cdn2.lawlietbot.xyz/media/danbooru/d4/5c/d45c774a10945f36bf43ecd6a39e72f3.mp4?s=cdn",
-    "https://media-cdn2.lawlietbot.xyz/media/danbooru/df/1f/df1fc345f0bd1da57591a7f2eedd2120.mp4?s=cdn",
-    "https://media-cdn3.lawlietbot.xyz/media/danbooru/d0/d9/d0d92863aacb066ef7fb31282ad9c097.mp4?s=cdn",
     "https://sun9-73.userapi.com/impg/Jzd63qSo4hasP8gwJGqZss-BjzBe-WAEbwG3Aw/THJvzH9DOg4.jpg?size=1280x957&quality=96&sign=669839e57383fb00ac1d7c40873ea769&type=album",
     "https://sun9-35.userapi.com/impg/HD_ERDLzxyj_lb_BgO9mDvdbDjo1GrfmaqMn4g/x7fF0_vta5I.jpg?size=1280x841&quality=96&sign=46d23631956730bdaf55bf5e5810dfc7&type=album",
     "https://sun9-32.userapi.com/impg/F89kLpPp9mgz84HqmODpeoW2x-iwJLgaMY0sow/IeXYlUA0IVM.jpg?size=1280x907&quality=96&sign=2adebdcd1e7ab7c9f58eae4a805f331f&type=album",
@@ -1050,7 +1041,8 @@ imgs18 = [
     "https://i.redd.it/ky8aitu2ylz21.jpg",
     "https://i.redd.it/rg09gauu4ke61.jpg",
     "https://cdn.nekobot.xyz/f/2/f/76eb79a175e999ff8e5adb1e16154.png",
-
+    "https://sun9-37.userapi.com/impg/1K6huU5LW3ps_1pmDo3EQmGJc4tEfDK5C8wCMg/a8c96gf7QZ8.jpg?size=1350x2000&quality=95&sign=d2016681b6275beb88231f68a01b6407&type=album",
+    "https://sun6-22.userapi.com/impg/mQ3YjjafUqa2UBmFu3hlniY1mqOmtHwC7bh0fA/c4Yyj-1t9K8.jpg?size=1015x1500&quality=96&sign=4119e7e42f6eb201c20ff3dd2ca99b65&type=album",
     "https://sun9-10.userapi.com/impg/hdPN3mJnjs34HMNw8qH4jSXy45tCscsNUMXDPg/8Otpp5IriqY.jpg?size=960x1280&quality=95&sign=de05aad2ea44a8a47f29a839ac2cbd1a&type=album",
     "https://sun9-68.userapi.com/impg/LkEZlclbNy1KdckkceH74WJrZDuIgxDi9TIqOw/L7CfQP0ccgw.jpg?size=1191x1684&quality=96&sign=f2efde2cbb84e2d6ad9023c1d06bfbed&type=album",
     "https://sun9-32.userapi.com/impg/F89kLpPp9mgz84HqmODpeoW2x-iwJLgaMY0sow/IeXYlUA0IVM.jpg?size=2560x1814&quality=96&sign=4e6f4e5607abdb1446bc1342580f2f17&type=album",
@@ -1086,7 +1078,6 @@ imgs18 = [
     "https://media-cdn.lawlietbot.xyz/media/danbooru/07/93/07934b2903a44886d150fe6498aa970e.mp4?s=cdn",
     "https://media-cdn.lawlietbot.xyz/media/danbooru/e7/13/e713de898692e6f7a3c68549260fbe46.webm?s=cdn",
     "https://media-cdn2.lawlietbot.xyz/media/danbooru/8b/8c/8b8c21e149ae5ffa8e1821cf347328b9.mp4?s=cdn",
-    "https://media-cdn2.lawlietbot.xyz/media/danbooru/d4/5c/d45c774a10945f36bf43ecd6a39e72f3.mp4?s=cdn",
     "https://media-cdn2.lawlietbot.xyz/media/danbooru/df/1f/df1fc345f0bd1da57591a7f2eedd2120.mp4?s=cdn",
     "https://media-cdn3.lawlietbot.xyz/media/danbooru/4c/93/4c93ac4870f33f6bea191160886b134e.mp4?s=cdn",
     "https://media-cdn3.lawlietbot.xyz/media/danbooru/d0/d9/d0d92863aacb066ef7fb31282ad9c097.mp4?s=cdn",

@@ -14,7 +14,7 @@
 # ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
 # ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 
-INFO_script_version = "2.3.0"
+INFO_script_version = "2.3.1"
 
 # <---------------------->
 
@@ -92,7 +92,41 @@ if os.path.exists('Traceback.txt'):
    os.remove('Traceback.txt')
 
 
-   
+def check_files():
+
+  def check():
+      not_found = []
+      try:
+          
+          for name in ['modules','localization']:
+            if not os.path.exists(name):
+              if name == 'localization':
+                os.chdir(name)
+                for name in ['RU.py', 'EN.py']:
+                  if not os.path.exists(name):not_found.append(name)
+
+
+              if not os.path.exists('modules'):
+                for name in ['pythonanywhere.py', 'random_neko_list.py', 'inn.py']:
+                  if not os.path.exists(name):not_found.append(name)
+                  
+              
+          return True, not_found
+      except Exception:
+          return False, not_found
+  
+  val, not_found = check()
+  if val == True:
+      pass
+  else:
+      print('\r', end='')
+      print(f"{red}[/] Нужные файлы не были найдены! Скачайте их...  {str(not_found).replace('[','').replace(']','')}\n[/] После скачивания программа продолжит работу автоматически.{white}")
+      while val == False:
+          val, not_found = check()
+          pass
+      print('\r', end='')
+      print(f"{green}[/] Продолжение работы программы!{white}")
+check_files()
 
 
 

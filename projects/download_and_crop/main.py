@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # <---------------------->
 
 # ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
@@ -38,6 +39,8 @@ st = "\033[37"
 
 import subprocess
 import os
+import sys
+
 
 working_directory = os.getcwd()
 
@@ -74,7 +77,7 @@ def cls():
 # <-------------------------->
 
 do = os.getcwd()
-debugVal = False
+debugVal = True
 
 # <-------------------------->
 
@@ -101,7 +104,7 @@ def old_Thread(nversion,sversion, name_file,name_d,loc_n,redir=os.getcwd()):
        loc_n = loc['9']
     else:
       loc_n = loc['30']
-    tit = f'{loc_n}\n{sversion} --> {nversion}'
+    tit = f'''{loc_n}\n{sversion} --> {nversion}'''
     toast(
           title = tit,
           image='https://opengraph.githubassets.com/2fb38cef00042d8b977103470ef6e7943a6229e01819c4f2b6a39ca8aba155e1/Basefilespython/pydiscbot',
@@ -571,6 +574,7 @@ if str(os.name) == "nt":
   try:
     from win11toast import notify, update_progress, toast
     debDEF(f"Import module [win11toast] successfully.", debugVal, py_logger, 1)
+    print(f"{green}[!] ModuleImportSuccess: Import module [PIL] successfully.{white}")
     val_toast = True
   except:
     system("pip install win11toast")
@@ -589,6 +593,7 @@ else:
 try:
   from tqdm import tqdm
   debDEF(f"[Import tqdm from tqdm] successfully.", debugVal, py_logger, 1)
+  print(f"{green}[!] ModuleImportSuccess: Import module [PIL] successfully.{white}")
 except:
   system("pip install tqdm")
   try:
@@ -605,6 +610,7 @@ try:
   import PIL
 
   py_logger.info(f"Import module [PIL] successfully.")
+  print(f"{green}[!] ModuleImportSuccess: Import module [PIL] successfully.{white}")
 except:
   system("pip install Pillow")
   try:
@@ -614,35 +620,37 @@ except:
       f"Import module [PIL] failed -> Import module [PIL] successfully.")
   except ModuleNotFoundError:
     py_logger.error("Import module [PIL] failed.")
+    print(f"{red}[!] ModuleNotFoundError: Import module [PIL] failed.")
 
 try:
   from PIL import Image
   py_logger.info(f"[Import module from PIL] successfully.")
+  print(f"{green}[!] ModuleImportSuccess: [Import module from PIL] successfully.{white}")
 except ModuleNotFoundError:
   system("pip install Pillow")
   try:
     from PIL import Image
 
-    py_logger.info(
-      f"[Import module from PIL] failed -> [Import module from PIL] successfully."
-    )
+    py_logger.info(f"[Import module from PIL] failed -> [Import module from PIL] successfully.")
+    print(f"{violet}[!] ModuleNotFoundError: [Import module from PIL] failed -> {green}[!] ModuleImportSuccess: [Import module from PIL] successfully.{white}")
   except ModuleNotFoundError:
     py_logger.error("[Import module from PIL] failed.")
+    print(f"{red}[!] ModuleNotFoundError: [Import module from PIL] failed.")
 
 try:
   from alive_progress import alive_bar
 
   alive_a = True
   py_logger.info(f"[Import alive_bar from alive_progress] successfully.")
+  print(f"{green}[!] ModuleImportSuccess: [Import alive_bar from alive_progress] successfully.{white}")
 except:
   system("pip install alive-progress")
   try:
     from alive_progress import alive_bar
 
     alive_a = True
-    py_logger.info(
-      f"[Import module from PIL] failed -> [Import module from PIL] successfully."
-    )
+    py_logger.info(f"[Import alive_bar from alive_progress] failed. -> [Import alive_bar from alive_progress] successfully.")
+    print(f"{violet}[!] ModuleNotFoundError: [Import alive_bar from alive_progress] failed.  -> {green}[!] ModuleImportSuccess: [Import alive_bar from alive_progress] successfully.{white}")
   except ModuleNotFoundError:
     alive_a = False
     print(f"{red}[!] ModuleNotFoundError: alive_progress.{white}")
@@ -652,12 +660,14 @@ try:
     from colorama import Fore
     colors = [Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.WHITE]
     py_logger.info(f"[Import module from PIL] successfully.")
+    print(f"{green}[!] ModuleImportSuccess: colorama.{white}")
 except:
     system("pip install colorama")
     try:
       from colorama import Fore
       colors = [Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.WHITE]
       py_logger.info(f"[Import module from PIL] failed -> [Import module from PIL] successfully.")
+      print(f"{violet}[!] ModuleNotFoundError: [Import module from PIL] failed -> {green}[!] ModuleImportSuccess: [Import module from PIL] successfully.{white}")
     except:
       print(f"{red}[!] ModuleImportError: colorama.{white}")
       colors = [red, green, yellow, blue, violet, turquoise, white]
@@ -737,11 +747,10 @@ conf_file = []
 
 
 def logo():
-
   color1 = random.choice(colors)
   colors.remove(color1)
   color2 = random.choice(colors)
-  print(f"""{color1}
+  text = str(f"""{color1}
 {color2}▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
 {color2}▐{color1}░░{color2}███{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}████{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}▌
 {color2}▐{color1}░{color2}█{color1}░░░{color2}█{color1}░░░░░░░░░░░░░░░░░░░░░{color2}█{color1}░░░░░░░░░░{color2}█{color1}░░░░{color2}█{color1}░░░░░░░░░░░░░░░░░░░░░░░░░{color2}▌
@@ -753,8 +762,8 @@ def logo():
 {color2}▐{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}█{color1}░░░░░░{color2}▌
 {color2}▐{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}█{color1}░░░░░░{color2}▌
 {color2}▐{color1}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{color2}▌
-{color2}▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌{white}"""
-        )
+{color2}▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌{white}""").encode(encoding='UTF-8')
+  print(text)
 
 
 
@@ -1299,95 +1308,121 @@ def INFO(pythonanywhere_key):
 
     if alive_a == False:
 
-      for zn in ur:
-        try:
-          url = list(zn.keys())[0]
-          exten = zn[f"{list(zn.keys())[0]}"]
-        except AttributeError:
-          url = zn
-          if "mp4" in url:
-            exten = f".mp4"
-          else:
-            if "gif" in url:
-              exten = f".gif"
-            else:
-              if "jpg" in url:
-                exten = f".jpg"
-              else:
-                if "webp" in url:
-                  exten = f".webp"
-                else:
-                  if "webm" in url:
-                    exten = f".webm"
-                  else:
-                    exten = f".png"
-
-        def ww2(i, url, err_dict, err_info, site_, exten):
-          name_file = f"{i}{exten}"
-          if val_toast == True:update_progress({'value': f'{i}/{len(ur)}','valueStringOverride': f'{i}/{len(ur)} videos'})
-
-
-          while not os.path.exists(name_file):
-            try:
-              status, err_dict, err_info, site_ = download_function(
-                url, name_file, err_dict, err_info, site_)
-
-              if status == '200':
-                _200.append({f'{name_file}': f'{url}'})
-              elif status == '101':
-                _101.append({f'{name_file}': f'{url}'})
-              elif status == '102':
-                _102.append({f'{name_file}': f'{url}'})
-              elif status == '400':
-                _400.append({f'{name_file}': f'{url}'})
-              elif status == '401':
-                _401.append({f'{name_file}': f'{url}'})
-              elif status == '402':
-                _102.append({f'{name_file}': f'{url}'})
-              elif status == '403':
-                _403.append({f'{name_file}': f'{url}'})
-              elif status == '404':
-                _404.append({f'{name_file}': f'{url}'})
-              elif status == '522':
-                _522.append({f'{name_file}': f'{url}'})
-              elif status == '524':
-                _524.append({f'{name_file}': f'{url}'})
-              elif status == '526':
-                _526.append({f'{name_file}': f'{url}'})
-              elif status == '___':
-                _unc.append({f'{name_file}': f'{url}'})
-              else:
-                _unc.append({f'{name_file}': f'{url}'})
-                pass
-
-              if status != "200":
-                break
-              else:
-                pass
-              if val_toast == True:update_progress({'title': f'Последняя ошибка: {err_name_file}'})
-            except:
-              break
-
+        for zn in ur:
           try:
-            if url not in err_dict:
-              src = one_path + dir_pref + name_file
-              os.chdir(one_path)
-              dest = f"{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}"
-              try:
-                os.rename(src, dest)
-              except FileExistsError:
-                os.chdir(f"{os.getcwd()}{dir_pref}{name_dir}{dir_pref}")
-                os.remove(name_file)
-                os.chdir(one_path)
-                os.rename(src, dest)
-              except FileNotFoundError:
-                pass
-          except:
-            pass
-          # bar()
+            url = list(zn.keys())[0]
+            exten = zn[f"{list(zn.keys())[0]}"]
+          except AttributeError:
+            url = zn
+            if "mp4" in url:
+              exten = f".mp4"
+            else:
+              if "gif" in url:
+                exten = f".gif"
+              else:
+                if "jpg" in url:
+                  exten = f".jpg"
+                else:
+                  if "webp" in url:
+                    exten = f".webp"
+                  else:
+                    if "webm" in url:
+                      exten = f".webm"
+                    else:
+                      exten = f".png"
 
-        ww2(i, url, err_dict, err_info, site_, exten)
-        i = i + 1
+          def ww2(i, url, err_dict, err_info, site_, exten, err_name_file,pythonanywhere_key):
+            name_file = f"{i}{exten}"
+
+            
+            for f in range(5):
+              if f'{(i-f)}{exten}' in str(_101):
+                  check_internet()
+
+            if val_toast == True:update_progress({'value': f'{i}/{len(ur)}','valueStringOverride': f'{i}/{len(ur)} objects','title': f'Последняя ошибка: {err_name_file}'})
+
+
+            while not os.path.exists(name_file):
+              try:
+                status, err_dict, err_info, site_, pythonanywhere_key = (download_function(url, name_file, err_dict, err_info,site_, pythonanywhere_key))
+
+                if status == '200':
+                  _200.append({f'{name_file}': f'{url}'})
+                elif status == '000':
+                  _000.append({f'{name_file}': f'{url}'})
+                elif status == '101':
+                  _101.append({f'{name_file}': f'{url}'})
+                elif status == '102':
+                  _102.append({f'{name_file}': f'{url}'})
+                elif status == '103':
+                  _103.append({f'{name_file}': f'{url}'})
+                elif status == '400':
+                  _400.append({f'{name_file}': f'{url}'})
+                elif status == '401':
+                  _401.append({f'{name_file}': f'{url}'})
+                elif status == '402':
+                  _402.append({f'{name_file}': f'{url}'})
+                elif status == '403':
+                  _403.append({f'{name_file}': f'{url}'})
+                elif status == '404':
+                  _404.append({f'{name_file}': f'{url}'})
+                elif status == '522':
+                  _522.append({f'{name_file}': f'{url}'})
+                elif status == '524':
+                  _524.append({f'{name_file}': f'{url}'})
+                elif status == '526':
+                  _526.append({f'{name_file}': f'{url}'})
+                elif status == '___':
+                  _unc.append({f'{name_file}': f'{url}'})
+                else:
+                  pass
+
+                if status != "200":
+                    if status == '103':
+                        sleep(5)
+                        status, err_dict, err_info, site_, pythonanywhere_key = (download_function(url, name_file, err_dict, err_info,site_, pythonanywhere_key))
+                        if status != "200":
+                          err_name_file = name_file
+                          break
+                    else:
+                      err_name_file = name_file
+                      break
+                else:pass
+
+
+                if val_toast == True:update_progress({'title': f'Последняя ошибка: {err_name_file}'})
+              except Exception as err_:
+                debDEF(f'PON: {err_}', debugVal, py_logger, 3)
+                break
+
+            try:
+              if url not in err_dict:
+                src = one_path + dir_pref + name_file
+                os.chdir(one_path)
+                dest = f"{os.getcwd()}{dir_pref}{name_dir}{dir_pref}{name_file}"
+                try:
+                  os.rename(src, dest)
+                except FileExistsError:
+                  os.chdir(f"{os.getcwd()}{dir_pref}{name_dir}{dir_pref}")
+                  os.remove(name_file)
+                  os.chdir(one_path)
+                  os.rename(src, dest)
+
+              else:
+                pass
+
+            except FileNotFoundError:
+              pass
+            except:
+              pass
+
+            return err_name_file, pythonanywhere_key
+
+          err_d, pythonanywhere_key = ww2(i, url, err_dict, err_info,
+                                          site_, exten, err_name_file,
+                                          pythonanywhere_key)
+          err_name_file = err_d
+          i = i + 1
 
     if len(_000) != 0:
       ext_list.append({f'000': _000})

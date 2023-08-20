@@ -19,7 +19,7 @@ INFO_script_version = "2.3.0"
 # <---------------------->
 
 # The script was written ©https://vk.com/id435600030©
-# Download from https://github.com/Basefilespython/pydiscbot/tree/INFO
+# Download from https://github.com/Basefilespython/pydiscbot/tree/main
 
 black = "\033[30m"
 red = "\033[31m"

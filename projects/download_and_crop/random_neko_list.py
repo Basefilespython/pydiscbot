@@ -1019,13 +1019,16 @@ imgs = [
 ]
 
 
-imgs18 = [ 
-    {"imgs" : { 
-                "gif": {"None",
-                        "None"},
-                "mp4": {"None",
-                        "None"}
-                }
+imgs18 = [
+    {
+        "imgs": {
+            "gif": [
+                "None"
+            ],
+            "mp4": [
+                "None"
+            ]
+        }
     },
     "https://cdn.nekobot.xyz/9/0/b/2058151a8e9f77f62af7d9d709db7.gif",
     "https://cdn.nekobot.xyz/9/1/9/2911dfeb85569ad032f20e7791bb5.jpg",

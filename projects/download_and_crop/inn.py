@@ -21,7 +21,7 @@ def d1(data):
             qq = qq + ' и было добавлено '
             if '18' in list(data["add"].keys()):qq = qq + f'{len(list(data["add"]["18"]))} ссылок в imgs18.'
         else:
-            if '18' in list(data["add"].keys()):ee = ee + f'{len(list(data["add"]["18"]))} из imgs18'
+            if '18' in list(data["add"].keys()):qq = qq + f'{len(list(data["add"]["18"]))} из imgs18'
             qq = qq + '.'
         return qq
 
@@ -44,20 +44,27 @@ def d2(data):
 
 def Getting_innovations(data=None):
     if data == None:
-        data = json.loads(requests.get('https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/innovations.json').text)["innv"]
-    else:
-         data= dict(data)["innv"]
+        try:
+            data = json.loads(requests.get('https://raw.githubusercontent.com/Basefilespython/pydiscbot/main/projects/download_and_crop/ver/innovations.json').text)["innv"]
+        except requests.exceptions.ConnectionError as err_code:
 
-    
-    text = ''
-    
-    try:text = text + d1(data) + '\n' + d2(data) + white
-    except:pass
+            errs = err_code
+            if "[Errno 11001]" in str(err_code):
+                errs = 'You are not connected to the Internet'
+            data = None
+            
+    else:
+        data= dict(data)["innv"]
+
+    if data is not None:
+        text = ''
+        try:text = text + d1(data) + '\n' + d2(data) + white
+        except Exception as err:print(err)
+    else:return f'{red}[!] Cause: You are not connected to the Internet.{white}'
+         
         
 
-
     if text == '':return f'{red}[-] Failed: Innovation output failure.{white}'
-    
     return text
 
 

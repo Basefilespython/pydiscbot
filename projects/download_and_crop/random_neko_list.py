@@ -1,5 +1,5 @@
 def version_data_baze():
-    return '1.2.4'
+    return '1.2.5'
 
 imgs = [
     "https://cdn.nekobot.xyz/f/0/e/d66b90fd17791e0af8fe4ada7e468.png",

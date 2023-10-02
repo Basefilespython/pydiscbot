@@ -1094,7 +1094,6 @@ imgs18 = [
     "https://cdn.nekobot.xyz/f/7/f/e23b60c563801fa9b810a1deaa35b.jpeg",
     "https://cdn.nekobot.xyz/f/b/5/ef7a45ad3926d6680c07c18fea068.jpeg",
     "https://i.pinimg.com/originals/bf/31/1f/bf311fe82c45ced428c10c2d052845ca.png",
-    "https://i.pximg.net/img-original/img/2023/07/28/20/01/40/110314318_p0.jpg",
     "https://i.redd.it/ky8aitu2ylz21.jpg",
     "https://i.redd.it/rg09gauu4ke61.jpg",
     "https://i0.nekobot.xyz/0/0/9/81baa13937411bb9f3825cb52adf8.jpg",

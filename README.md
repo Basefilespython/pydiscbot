@@ -11,8 +11,7 @@
 
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FBasefilespython%2Fpydiscbot?ref=badge_large)
-
-
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Basefilespython_pydiscbot)](https://sonarcloud.io/summary/new_code?id=Basefilespython_pydiscbot)
 
 
 ## 🚀 Установка

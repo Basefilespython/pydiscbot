@@ -1,5 +1,5 @@
 def version_data_baze():
-    return '1.2.6'
+    return '1.2.7
 
 imgs = [
     "https://cdn.nekobot.xyz/f/0/e/d66b90fd17791e0af8fe4ada7e468.png",
@@ -9,6 +9,10 @@ imgs = [
     "https://i0.nekobot.xyz/0/b/2/0f029f736013b9063473d0955e1d2.png",
     "https://i0.nekobot.xyz/4/d/4/f8e971ddbd70ccec023ff33c46e96.jpg",
     "https://i0.nekobot.xyz/6/1/3/07874b28736bd2413943508cf7d37.png",
+    "https://sun9-65.userapi.com/impg/nftb3kgaXoXg_nGtfro8hrOQh4C94mRVU3iWNw/4aAD_qAkFf0.jpg?size=1450x2160&quality=95&sign=3e124ac78dfac87066b385f7eb74e379&type=album",
+    "https://sun1-22.userapi.com/impg/V3hwle06B7QvRgScSxEzf1fDOHL2r8MR5k_LJA/TzNwh_6QtiY.jpg?size=1210x1606&quality=96&sign=6fc21c19db47015bab66d648e0e39b2e&type=album",
+    "https://sun1-28.userapi.com/impg/qrlXd20ZaMP9s5EB0roA5NNds3M_PmDbz2Vhaw/j-F2lbH0Up8.jpg?size=1626x2160&quality=96&sign=d22a38e2099ed3198bacd821ad983e71&type=album",
+    "https://sun1-16.userapi.com/impg/hgKEOJNjnqFATh2L1ZbIrhjJDIvMSHVAw-H-Wg/1SSpEvhL04o.jpg?size=839x1200&quality=96&sign=b8f4cdd3051a42b65183f5a00bc2d9f3&type=album",
     "https://s3.eu-central-1.amazonaws.com/telegram.sendpulse.prod/attachments/f31fa1d35b6854a9ff0f620a944c4825/601bf3ae-0bbc-4006-bd4f-6b3793fc412c.jpg",
     "https://sun1-13.userapi.com/impg/8x4gXayTDiwelmcKZElY6-9aTil-U-CbYdHSDA/flI_M4aDu6g.jpg?size=800x1200&quality=95&sign=97a4db6372d580ee4f2df7fedf742ff6&type=album",
     "https://sun1-13.userapi.com/impg/DMkbLRcmidp8S2ymgkvwfCxYVHfsl-sOx_VxLw/74Wb60XFqPg.jpg?size=1526x2160&quality=95&sign=9b621103b4344ecd2e18e2cacacf9124&type=album",

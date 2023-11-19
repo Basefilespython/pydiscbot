@@ -3,6 +3,7 @@ def version_data_baze():
 
 
 imgs = [
+    "https://sun9-28.userapi.com/impg/cLWVyzSLmaFgSOrHS2riaLWAEUsFp9GwUd5K0g/a5NTVgyPST4.jpg?size=736x1309&quality=96&sign=16bf031f7605c6018eb3f55a146a8977&type=album",
     "https://sun9-19.userapi.com/impg/dr6jDH5TibWSb2wg2NHqRnBiH24qDa6OK4o63g/AEpT9Hl9iBk.jpg?size=1100x1692&quality=96&sign=1a7f96f70f1b970e12b69ddcb4c6bf29&type=album",
     "https://sun9-71.userapi.com/impg/r0i4tSPGB90NXowFLC4y9nPWd0hoMYANzooaLA/Fy0rEafuhcw.jpg?size=463x750&quality=96&sign=88e8e35bba7a35cd2d507f767b066f65&type=album",
     "https://sun9-50.userapi.com/impg/htwtGnMg5cb81I-Az91ZU8SRYDprEJ9Pw8XI3w/NJY8EqPQPq0.jpg?size=1430x2000&quality=96&sign=83f9e3563b25a4bcbba8e797da5bc2da&type=album",

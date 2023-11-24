@@ -39,7 +39,7 @@ def download(path):
 
 def pythonanywhere_def():
     response = requests.get(f'https://www.pythonanywhere.com//api/v0/user/{username}/files/tree/?path={path}',headers={'Authorization': f'Token {token}'})
-
+    response.text
     eee = (response.content).decode("utf-8").replace('[','').replace(']','').replace(' ','').replace('''"''','''''')
     for url_file in eee.split(','):
 

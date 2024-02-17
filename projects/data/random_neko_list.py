@@ -14,6 +14,7 @@ imgs = [
     "https://sun9-39.userapi.com/impg/gBYCgSOqj2lmXaau2BFk7vTqrsSE4nT9NIf2Ew/kQhVVFLkSkk.jpg?size=1636x1920&quality=96&sign=b1350c474bcb755a3f28709442361682&type=album",
     "https://sun9-11.userapi.com/impg/mYL9wbfdy1jnoJsZmnQalxGNSBS10dRINILl4g/Vubl1vK4Dl4.jpg?size=1780x2048&quality=95&sign=75c67c557473c2c7ccffb1ce32b87405&type=album",
     "https://sun9-16.userapi.com/impg/1qONiyYcOIzAMtH1BUZjT-ixYGh3VIbwplOnHw/JLaEwCZss9M.jpg?size=1342x2160&quality=95&sign=aa4689b03e2935b96c0ccd1b804e57c9&type=album",
+    "https://sun9-27.userapi.com/impg/FA1y30Kp-Zb_rjRVdVGycvdiTxhggYO1iUfcYg/8RwT9om4DaM.jpg?size=1347x2160&quality=96&sign=68899a6dc0a140789bee8229d749a54c&type=album",
     "https://sun1-24.userapi.com/impg/or4IRMP18ceaSsYX6rRHZ0yCk_lAxkThKSZYHw/nWD1mtxqEFE.jpg?size=497x807&quality=95&sign=8f4b4e71c8fffad88aad15875ccbaa97&c_uniq_tag=XDBD8Q6rz3OVq03Xv1kcxPyoBzvZjTka9hAjuuhRjas&type=album",
     "https://sun1-95.userapi.com/impg/IQ_KsW-MYipYXnsZ2-i6kaIjiS5icZpIMPfj1A/w1htAvIbySM.jpg?size=538x807&quality=95&sign=a7962d459cbe337331c1d996e82e0d42&c_uniq_tag=kBw9JfSuqtiiniomwNl8v4svKe1Kn9hqdP8z4H97hn4&type=album",
     "https://sun1-91.userapi.com/impg/sGFS0Q4lAHB9M5YvQy88Sy65BgqhcxbJx5pAQw/wmHl5bPXEqY.jpg?size=1463x2160&quality=95&sign=270ec3cec44f94cc3189d0b9137919c9&type=album",

@@ -1,5 +1,5 @@
 def version_data_baze():
-    return '1.3.5'
+    return '1.3.7'
 
 
 imgs = [
@@ -10,6 +10,17 @@ imgs = [
     "https://i0.nekobot.xyz/0/b/2/0f029f736013b9063473d0955e1d2.png",
     "https://i0.nekobot.xyz/4/d/4/f8e971ddbd70ccec023ff33c46e96.jpg",
     "https://i0.nekobot.xyz/6/1/3/07874b28736bd2413943508cf7d37.png",
+    "https://sun9-22.userapi.com/impg/0cR3kFlgNwdXJcw2C970RckvBP0OcvkYZQSlhg/8bAIvMwrnno.jpg?size=1280x1920&quality=95&sign=415c4b34bfe45b799db643f05b8fdf41&type=album",
+    "https://sun1-87.userapi.com/impg/Bazf1eCdcRukg-fFxzlSRRHjXx3ga6YDVA0M_g/nL7VRdbPKXk.jpg?size=1770x2160&quality=96&sign=933a5e6480404768c8fb51c85a4f13a0&type=album",
+    "https://sun1-16.userapi.com/impg/1Ba7mzhvrzIJa74lku9iPEWeb-t-7u3H9Oqoaw/4b6P5pm9FK0.jpg?size=736x1593&quality=95&sign=d180559af092402281ed92e25ed0fe0e&type=album",
+    "https://sun1-87.userapi.com/impg/DCwZo-61PZvSzbKvMVrrGnC7lYlyfw2OmrOxrA/8l3KujfTgrM.jpg?size=736x621&quality=95&sign=b90477a62afbe7f40f82d138b4d9cae3&type=album",
+    "https://sun1-27.userapi.com/impg/IBHpg7M21y5PgnYpYwXuMKUtghP74pLYOCyLdA/Mp39HkEWzQ0.jpg?size=960x1280&quality=95&sign=8ce2d6928c131957d0f286e8fbdabaf5&type=album",
+    "https://sun9-5.userapi.com/impg/ZQ5B8CZOVpAohIXAwwSwoUqCPVWXUN4F5VMTkw/9ckDyRzQQC8.jpg?size=1528x2160&quality=96&sign=c498e40b0e25bcae1cd42ce8ee35eb67&type=album",
+    "https://sun9-8.userapi.com/impg/No_QB_dE7M-5GrFYBaxL8eH5igB0lBOOZCHIiA/tKsQQhrcR_o.jpg?size=564x946&quality=96&sign=27dd9990bef65147bbf99f513fb02a86&type=album",
+    "https://sun9-12.userapi.com/impg/19Ck1cUF9O7YU1dPkCdasu6Ja9FewJ7hVw7yAQ/_5BQDdFu5kE.jpg?size=850x1133&quality=96&sign=86464fa6ed20272d80a9b252691cfa51&type=album",
+    "https://sun9-75.userapi.com/impg/pdEiS23z5xQlhMX58NkiUd6EHn7gHVc97H05GQ/jsC24ShCY_c.jpg?size=2049x2160&quality=95&sign=4a186f158547cac6a1402bc8d6081856&type=album",
+    "https://sun9-51.userapi.com/impg/L-Nzn43Fjq6HwhSt2KZNHUBGTvxUqukYbhzcBQ/vpNqvcuZRPU.jpg?size=1582x1582&quality=95&sign=43dde1125b5820568ce99d5286df0fc6&type=album",
+    "https://sun1-18.userapi.com/impg/_O2wSWj5eQDo1LeoB6gVA4JLwWQJqVhH2elWgw/wNImXizcxxI.jpg?size=696x1000&quality=96&sign=525849f33c1d2f7c3d46a41f556a4b53&type=album",
     "https://s3.eu-central-1.amazonaws.com/telegram.sendpulse.prod/attachments/f31fa1d35b6854a9ff0f620a944c4825/601bf3ae-0bbc-4006-bd4f-6b3793fc412c.jpg",
     "https://sun9-63.userapi.com/impf/c849532/v849532204/e3125/TuEwn8Kz99Y.jpg?size=1620x2160&quality=96&sign=8ae356730f7321ae773e1cc9f8a04725&type=album",
     "https://sun1-21.userapi.com/impg/AQgP6bhSmbMy_EDBmeEZ6LTOofCpgiUZVMW9gA/XfsnSlX4Gn4.jpg?size=1400x2000&quality=95&sign=8955a882e2a776336a8bb0f32f16ee59&type=album",
